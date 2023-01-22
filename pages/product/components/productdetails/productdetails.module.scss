@@ -1,0 +1,123 @@
+@use 'sass/var' as var;
+@use 'sass/mixins/paragraph' as *;
+@use 'sass/mixins/mediaquery' as *;
+
+.productDetailsWrapper {
+    margin-top: 30px;
+
+    @include mediaquery(var.$mediumscreen) {
+        margin-top: 0px;
+    }
+
+    .productName {
+        color: #222;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+    }
+
+    .priceWrapper {
+        gap: 7px;
+
+        .price {
+            color: var.$accentcolor;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .oldPrice {
+            color: #918a8b;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: line-through;
+            margin-top: 5px;
+        }
+
+        .discountPercentage {
+            color: var(--bs-green);
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+    }
+
+    .shortDescription {
+        @include paragraph();
+
+    }
+
+    .listDetails {
+        padding: 0px 0px 10px;
+        margin-top: 0.9rem;
+        border-bottom: 1px solid #e3e3e3;
+
+        .item {
+            margin-bottom: 9px;
+            color: var.$softblack;
+        }
+
+        .icon {
+            color: var.$softblack;
+        }
+
+        .text {
+            color: #6a6a6a;
+            margin-right: 11px;
+            font-weight: 500;
+            font-size: 15px;
+        }
+    }
+
+    .labelText {
+        color: #6a6a6a;
+        margin-left: 14px;
+        font-size: 15px;
+        font-weight: 600;
+        width: 100px
+    }
+
+    .option {
+        padding: 5px 15px;
+        color: #939393;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 14px;
+        user-select: none;
+
+        &:hover {
+            background: #e6e6e6;
+        }
+    }
+
+    .addCartbtn {
+        background: var.$accentcolor;
+        border: none;
+        height: 45px;
+        width: 160px;
+        margin-left: 12px;
+
+        &:hover {
+            background-color: #db002b;
+        }
+    }
+
+    .addFavouritebtn {
+        color: var.$softblack;
+        background-color: transparent;
+        border: 1px solid #ccc;
+        box-shadow: none;
+
+        &:hover {
+            background: var.$secondarycolor;
+            color: #fff;
+            border: 1px solid transparent
+        }
+    }
+
+    .listProductDetails {
+        padding: 0px;
+        margin-top: 15px;
+        color: var.$softblack;
+
+    }
+}

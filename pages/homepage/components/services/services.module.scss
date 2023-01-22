@@ -1,0 +1,23 @@
+@use 'sass/var' as var;
+
+.services {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    .serviceIcon {
+        color: var.$primarycolor;
+        font-size: 3rem;
+        margin-left: 10px;
+    }
+
+    .title {
+        color: #353535;
+        font-weight: 700;
+    }
+
+    .subTitle {
+        color: #6c6666;
+        font-size: 13px;
+        font-weight: 600;
+    }
+}

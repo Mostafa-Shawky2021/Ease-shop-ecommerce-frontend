@@ -1,0 +1,37 @@
+@use 'sass/var' as var;
+
+.productQuantity {
+    .quantity {
+        background: var.$backgroundcolor;
+        border: none;
+        border-radius: 50%;
+        color: var.$softblack;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        padding: 0px;
+        margin-left: 12px;
+        user-select: none;
+        transition: all 0.2s;
+
+        &:hover {
+            box-shadow: none;
+            background: var.$secondarycolor;
+            color: #fff;
+        }
+    }
+
+    .content {
+        width: 60px;
+        height: 40px;
+        border-radius: 5px;
+        color: var.$hardblack;
+        text-align: center;
+        border: 1px solid #ccc;
+        font-weight: 500;
+        font-family: var.$poppinsfont;
+        line-height: 40px;
+        margin-left: 12px;
+        user-select: none;
+    }
+}

@@ -1,0 +1,1 @@
+export { useLatestProducs } from './useLatestProducts';

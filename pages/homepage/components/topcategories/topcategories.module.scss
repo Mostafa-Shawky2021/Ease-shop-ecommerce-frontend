@@ -1,0 +1,67 @@
+@use 'sass/mixins/overlay' as *;
+@use 'sass/var' as var;
+@use 'sass/mixins/mediaquery' as *;
+
+.topcategories {
+    z-index: 99;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    user-select: none;
+
+    @include mediaquery(var.$mediumscreen) {
+        position: relative;
+        top: -100px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .imageWrapper {
+        margin-bottom: 22px;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        @include overlay(#000, 0.5);
+
+    }
+
+    .imageWrapper:hover img {
+        transform: scale(1.125, 1.125);
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        transition: all 0.9s ease-in-out;
+        cursor: pointer;
+        object-fit: cover;
+    }
+
+    .viewMore {
+        background: var.$primarycolor;
+        height: 52px;
+        width: 130px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        border: none;
+        font-weight: 600;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition-delay: 0.3s;
+        font-size: 17px;
+        transition: all 0.4s;
+
+        &:hover {
+            background-color: var.$secondarycolor;
+        }
+
+    }
+
+    .imageWrapper:hover .viewMore {
+        opacity: 1;
+
+    }
+
+}

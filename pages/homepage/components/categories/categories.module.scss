@@ -1,0 +1,53 @@
+@use 'sass/var' as var;
+
+.categories {
+    position: relative;
+
+    .catWrapper {
+        padding-bottom: 30px;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .catImageWrapper {
+        overflow: hidden;
+        position: relative;
+        height: 187px;
+        border-radius: 50%;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: #b7e5ff;
+            z-index: -1;
+        }
+
+        &:hover .catImage {
+            transform: scale(1.1);
+        }
+    }
+
+    .catImage {
+        width: 88%;
+        height: 100%;
+        object-fit: contain;
+        transition: all 0.9s ease;
+        cursor: pointer;
+
+    }
+
+    .catName {
+        color: #636363;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 10px;
+
+    }
+
+}

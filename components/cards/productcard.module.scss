@@ -1,0 +1,166 @@
+@use 'sass/var' as var;
+
+.productCard {
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    height: 410px;
+    transition: all 0.4s;
+    border: 1px solid rgb(199 199 199 / 51%);
+    border-radius: 4px;
+
+    &:hover .addProduct {
+        bottom: 20px;
+    }
+
+    &:hover .productCardImage {
+        transform: scale(1.1);
+    }
+
+    .productDiscount {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background: var.$accentcolor;
+        color: #fff;
+        width: 50px;
+        padding: 3px;
+        text-align: center;
+        font-size: 0.9rem;
+        z-index: 1;
+        font-weight: 500;
+        font-family: var.$poppinsfont;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 1px;
+            top: 25px;
+            border-width: 12px 3px;
+            border-color: var.$accentcolor transparent transparent;
+            border-style: solid;
+            transform: rotate(13deg) translateX(-4px);
+            z-index: 1;
+
+        }
+
+    }
+
+    .productAction {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 1;
+
+        .favourite {
+            background: #efefef;
+            color: #212224;
+            padding: 4px 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+
+            &:hover {
+                background: var.$primarycolor;
+                color: #fff;
+            }
+        }
+
+    }
+
+    .productCardImageWrapper {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        transition: all 0.5s;
+        height: 220px;
+        padding-top: 2.5rem;
+        background-color: #efefef;
+
+        .productCardImage {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            user-select: none;
+            object-fit: contain;
+            transition: all 0.6s ease-in-out;
+        }
+
+    }
+
+    .productRatingWrapper {
+        color: #fec348;
+        margin-top: 9px;
+
+        .productRating {
+            font-size: 18px;
+        }
+    }
+
+    .productName {
+        color: #202020;
+        font-weight: 600;
+        margin-top: 7px;
+        margin-bottom: 0px;
+    }
+
+    .productDescription {
+        color: #767373;
+        font-size: 0.9rem;
+        margin-top: 4px;
+        margin-bottom: 3px;
+        font-weight: 500;
+        max-width: 90%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: auto;
+    }
+
+    .productPrice {
+        color: var.$accentcolor;
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin: 0px 5px;
+    }
+
+    .oldPrice {
+        color: #939090;
+        font-weight: 500;
+        position: relative;
+        font-size: 0.9rem;
+        margin-top: 6px;
+        text-decoration: line-through;
+    }
+
+    .addProduct {
+        position: absolute;
+        bottom: -40px;
+        transform: translateX(50%);
+        width: 75%;
+        padding: 5px;
+        background-color: #ff8722;
+        color: #202020;
+        box-shadow: none !important;
+        border: none;
+        border-radius: 0px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease-in-out;
+        font-weight: 600;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: none;
+        }
+
+
+        .text {
+            margin-left: 5px;
+            display: inline;
+            vertical-align: middle;
+        }
+
+
+
+
+    }
+}

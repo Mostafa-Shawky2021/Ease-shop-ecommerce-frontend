@@ -1,0 +1,57 @@
+@use 'sass/var' as var;
+@use 'sass/mixins/mediaquery' as *;
+
+.sectionLayout {
+    margin-top: 1.8rem;
+    position: relative;
+
+    .title {
+        font-weight: 600;
+        margin-bottom: 2.5rem;
+        font-size: 1.2rem;
+        position: relative;
+        padding-bottom: 1.8rem;
+        border-bottom: 1px solid #e1e1e1;
+
+        @include mediaquery(var.$tabletscreen) {
+            font-size: 1.5rem;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0px;
+            bottom: -1px;
+            background: var.$ternarycolor;
+            width: 135px;
+            height: 2px;
+        }
+
+    }
+
+    .arrowWrapper {
+        position: absolute;
+        left: 18px;
+        top: 0px;
+        z-index: 99;
+        gap: 12px;
+        line-height: 35px;
+
+        .arrow {
+            border: 1px solid #e6e6e6;
+            border-radius: 50%;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #8c8c8c;
+
+            &:hover {
+                background-color: var.$primarycolor;
+                color: #fff;
+            }
+        }
+
+    }
+}

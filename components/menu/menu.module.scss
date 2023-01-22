@@ -1,0 +1,18 @@
+@use "sass/var" as var;
+
+.menuWrapper {
+    background-color: var.$secondarycolor;
+
+    .item {
+        color: #000;
+        font-family: var.$cairofont;
+        margin-left: 4rem;
+        transition: all 0.3s;
+        padding: 1rem 0px;
+        font-weight: 500;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+@use 'sass/mixins/overlay' as *;
+
+.carouselWrapper {
+    .sliderImage {
+        position: relative;
+        @include overlay();
+
+    }
+
+    .image {
+        height: 600px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+}

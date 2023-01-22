@@ -1,0 +1,83 @@
+@use "sass/var" as var;
+
+.header {
+    background: var.$primarycolor;
+    // position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+    width: 100%;
+
+    .container {
+        padding-top: 17px;
+        padding-bottom: 17px
+    }
+
+    .logo {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-family: var.$poppinsfont;
+
+    }
+
+    .searchInput {
+        height: 37px;
+        border: 1px solid transparent;
+    }
+
+    .btnSearch {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        color: #212224;
+        width: 41px;
+        height: 100%;
+        border: none;
+        background-color: transparent;
+        border-right: 1px solid #cfcfcf
+    }
+
+    .actionWrapper {
+        position: relative;
+        margin-left: 1.3rem;
+        color: #f3e1e1;
+    }
+
+    .actionName {
+        width: 100px;
+    }
+
+    .actionName .title {
+        font-size: 12px;
+        color: #c4c4c4;
+        display: block;
+    }
+
+    .actionName .subTitle {
+        font-size: 14px;
+        margin-top: -3px;
+        display: block;
+        color: #fff;
+    }
+
+    .count {
+        position: absolute;
+        right: 21px;
+        top: -9px;
+        background-color: var.$accentcolor;
+        color: #fff;
+        border-radius: 50%;
+        width: 17px;
+        text-align: center;
+        height: 17px;
+        line-height: 18px;
+        font-size: 12px;
+        font-weight: 400;
+
+    }
+
+
+}

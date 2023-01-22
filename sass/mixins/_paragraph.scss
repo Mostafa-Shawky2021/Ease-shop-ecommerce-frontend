@@ -1,0 +1,5 @@
+@mixin paragraph($color: #626262, $lineHeight: 1.7, $marginTop: 0.9rem) {
+    color: $color;
+    line-height: $lineHeight;
+    margin-top: $marginTop;
+}
