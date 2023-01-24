@@ -16,7 +16,7 @@ const SelectedBox = ({ children, onChange }) => {
             const selectedValue = event.target.getAttribute('value')
             setChosenText(selectedText)
             setChosenValue(selectedValue);
-            onChange && onChange(chosenValue)
+
         }
     }
     useEffect(() => {
@@ -28,7 +28,9 @@ const SelectedBox = ({ children, onChange }) => {
 
         }
     }, [menuOpen])
-
+    useEffect(() => {
+        onChange && onChange(chosenValue)
+    }, [chosenValue])
     useEffect(() => {
         const initialText = optionsWrapperRef.current.children[0].innerText
         setChosenText(initialText)

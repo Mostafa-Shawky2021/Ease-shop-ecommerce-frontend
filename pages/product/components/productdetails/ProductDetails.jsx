@@ -26,23 +26,11 @@ const ProductDetails = ({ productDetails }) => {
     const [color, setColor] = useState('')
     const [size, setSize] = useState('');
     const [quantity, setQuantity] = useState(1);
-    const [productAdded, setProductAdded] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
 
-    const { mutate: addCartMutation } = useAddCartData(
-        setIsLoading,
-        setProductAdded);
+    const { mutate: addCartMutation } = useAddCartData(setIsLoading);
 
-    const { mutate: incrementProductMutation } = useIncrementProductData(
-        setIsLoading,
-        setQuantity,
-        setProductAdded);
-
-    const { mutate: decrementProductMutation } = useDecremenetProductData(
-        setIsLoading,
-        setQuantity,
-        quantity,
-        setProductAdded);
+    const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading, setQuantity);
 
     const { carts } = useContext(CartContext)
 
@@ -56,15 +44,6 @@ const ProductDetails = ({ productDetails }) => {
 
     }, [productDetails])
 
-    useEffect(() => {
-
-        const product = carts?.find(product => product.product_id === productDetails.id);
-        if (product) {
-            setProductAdded(true);
-        } else {
-            setProductAdded(false);
-        }
-    }, [carts])
 
     const renderProductColor = () => {
         const colorsArr = productDetails?.color?.split(',');
@@ -81,16 +60,7 @@ const ProductDetails = ({ productDetails }) => {
         return sizeElements;
     }
 
-    const handleProductIncrement = () => {
-        const userId = JSON.parse(window.localStorage.getItem('guest'))
-        incrementProductMutation({ userId, productId: productDetails.id });
 
-    }
-    const handleProductDecrement = () => {
-        const userId = JSON.parse(window.localStorage.getItem('guest'))
-        decrementProductMutation({ userId, productId: productDetails.id });
-
-    }
     const handleAddtoCart = () => {
 
         const randomId = generateRandomId();
@@ -103,7 +73,28 @@ const ProductDetails = ({ productDetails }) => {
             unit_price: productDetails.price_discount && productDetails.price,
             total_price: 2500
         }
-        addCartMutation(cartData)
+        // check if product contain color or size
+        if (productDetails.color || productDetails.size) {
+            // check if cart has already been added
+            const cartExistWithSamedata = carts.find(product => {
+                if (cartData.size == product.size && cartData.color == product.color) {
+                    return product;
+                }
+            });
+            if (cartExistWithSamedata) {
+                incrementProductMutation({ cartId: cartExistWithSamedata.id, quantity })
+            } else {
+                addCartMutation(cartData)
+            }
+        } else {
+            // check if cart has already been added
+            const cartExist = carts.find(product => product.product_id === cartData.product_id)
+            if (cartExist) {
+                incrementProductMutation({ cartId: cartExist.id, quantity });
+            } else {
+                addCartMutation(cartData)
+            }
+        }
     }
 
     return (
@@ -149,25 +140,22 @@ const ProductDetails = ({ productDetails }) => {
             </div>)}
 
             <div className={`${style.addCartDetails} d-flex`} style={{ borderBottom: '1px solid #eee', paddingBottom: "20px" }}>
-                {productAdded ? (
-                    <div className={style.quantity}>
-                        <ProductQuantity
-                            isLoading={isLoading}
-                            quantity={quantity}
-                            handleProductIncrement={handleProductIncrement}
-                            handleProductDecrement={handleProductDecrement}
-                        />
-                    </div>
-                ) : (
-                    <div className={style.addCartBtnWrapper} style={{ width: '100%' }}>
-                        {isLoading ? (<CircularProgress className={style.iconLoading} size={25} />) : (
-                            <Button className={style.addCartbtn} onClick={handleAddtoCart}>
-                                اضافة الي السلة
-                                <ShoppingCartOutlinedIcon fontSize="small" />
-                            </Button>
-                        )}
-                    </div>
-                )}
+                <div className={style.quantity}>
+                    <ProductQuantity
+                        isLoading={isLoading}
+                        quantity={quantity}
+                        setQuantity={setQuantity}
+                    />
+                </div>
+                <div className={style.addCartBtnWrapper} style={{ width: '100%' }}>
+                    {isLoading ? (<CircularProgress className={style.iconLoading} size={25} />) : (
+                        <Button className={style.addCartbtn} onClick={handleAddtoCart}>
+                            اضافة الي السلة
+                            <ShoppingCartOutlinedIcon fontSize="small" />
+                        </Button>
+                    )}
+                </div>
+
 
                 {/* <Button className={style.addFavouritebtn}>
                     <FavoriteBorderOutlinedIcon fontSize="small" />

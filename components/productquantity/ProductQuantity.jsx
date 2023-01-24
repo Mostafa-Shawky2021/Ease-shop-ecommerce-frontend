@@ -10,27 +10,24 @@ import style from './productquantity.module.scss';
 
 const ProductQuantity = ({
     quantity,
-    handleProductIncrement,
-    handleProductDecrement,
-    isLoading,
-    productExist
+    setQuantity
+
 }) => {
 
     return (
         <div className={`${style.productQuantity} d-flex align-items-center`}>
             <Button
                 className={style.quantity}
-                onClick={handleProductIncrement}
-                disabled={isLoading}>
+                onClick={() => setQuantity(quantity + 1)}
+            >
                 <AddIcon className={style.icon} fontSize="small" />
             </Button>
             <div className={style.content}>
-                {isLoading ? <CircularProgress className={style.iconLoading} size={25} /> : quantity}
+                {quantity}
             </div>
             <Button
                 className={style.quantity}
-                onClick={handleProductDecrement}
-                disabled={isLoading}
+                onClick={() => quantity > 1 && setQuantity(quantity - 1)}
             >
                 <RemoveIcon className={style.icon} fontSize="small" />
             </Button>

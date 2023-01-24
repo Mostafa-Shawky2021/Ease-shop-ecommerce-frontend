@@ -21,7 +21,8 @@ const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
         if (event.target.nodeName === "IMG") {
             const imageSrc = event.target.src
             const imageIndex = event.target.getAttribute('data-image-index');
-            setSelectedImage({ index: imageIndex, imageUrl: imageSrc })
+            console.log(imagesThumbnails[imageIndex].url);
+            setSelectedImage({ index: imageIndex, imageUrl: imagesThumbnails[imageIndex].url })
         }
     }
 
@@ -39,24 +40,20 @@ const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
             <div
                 className={`${style.thumbnailsImageWrapper} d-flex`}
                 ref={thumbnailsImagesWrapperRef}
-                onClick={handleImageView} >
+                onClick={handleImageView}>
+
                 {imagesThumbnails?.map((img, index) => (
 
                     <div className={`${style.imageThumbnail} ${selectedImage.index == index ? style.active : ''}`} key={img.id}>
                         <Image
                             fill
-                            src={img.url || FirstImage}
+                            src={img.url}
                             alt={imageAlt || ''}
                             data-image-index={index} />
                     </div>
                 ))}
-
-
-
-
-
             </div>
-        </div >
+        </div>
     )
 }
 export default ProductView

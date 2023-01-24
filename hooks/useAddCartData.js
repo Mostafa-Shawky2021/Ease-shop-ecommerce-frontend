@@ -3,7 +3,7 @@ import { queryKeys } from "data";
 import { addCart } from "queries"
 import { toast } from "react-toastify";
 
-const useAddCartData = (setIsLoading, setProductAdded) => {
+const useAddCartData = (setIsLoading) => {
 
     const queryClient = useQueryClient();
     return useMutation(addCart, {
@@ -12,11 +12,13 @@ const useAddCartData = (setIsLoading, setProductAdded) => {
         },
         onSuccess: () => {
             setIsLoading(false);
-            setProductAdded(true)
             toast.success("تم اضافة المنتج بنجاح");
-            const userId = JSON.parse(window.localStorage.getItem('guest')) || null
-            queryClient.invalidateQueries(queryKeys.USER_CARTS(userId))
-
+            const userId = JSON.parse(window.localStorage.getItem('guest')) || null;
+            queryClient.invalidateQueries(queryKeys.USER_CARTS(userId));
+        },
+        onError: () => {
+            setIsLoading(false)
+            toast.error('يوجد مشكله بالسيرفر')
         }
     })
 }

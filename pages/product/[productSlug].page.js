@@ -36,7 +36,7 @@ export const getStaticProps = async ({ params }) => {
     const productSlug = params.productSlug;
     await queryClient.prefetchQuery(
         queryKeys.PRODUCT_DETAILS(productSlug),
-        (productSlug) => fetchProductDetails(productSlug))
+        () => fetchProductDetails(productSlug))
 
     return {
         props: {
@@ -51,6 +51,7 @@ export default function ProductDetailsPage() {
 
     return (
         <>
+
             <Header />
             <Container style={{ marginTop: "2.8rem" }}>
                 <Row>
