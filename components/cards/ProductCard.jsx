@@ -2,11 +2,11 @@ import Image from 'next/image'
 import React from 'react'
 
 import StarIcon from '@mui/icons-material/Star';
-
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
+import FirstImage from "@assets/images/categories/laptop.png";
 import { Button } from 'react-bootstrap';
 
 import { calcPriceDiscount } from 'utils';
@@ -48,7 +48,7 @@ const ProductCard = ({ product }) => {
                 </div> */}
             </div>
             <div className={style.productCardImageWrapper}>
-                <Image width="300" height="200" src={product?.image} className={style.productCardImage} alt="product-image" />
+                <Image width="300" height="200" src={product?.image || FirstImage} className={style.productCardImage} alt="product-image" />
             </div>
             <div className={style.productCardDescription}>
                 <div className={`${style.productRatingWrapper}`}>

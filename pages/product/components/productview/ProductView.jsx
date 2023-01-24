@@ -6,7 +6,7 @@ import SecondImage from '@assets/images/categories/1.jpg';
 
 import style from './productview.module.scss'
 
-const ProductView = ({ image, imagesThumbnails }) => {
+const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
 
     const [selectedImage, setSelectedImage] = useState({ index: 0, imageUrl: '' });
     const imagePresentationRef = useRef(null)
@@ -32,7 +32,7 @@ const ProductView = ({ image, imagesThumbnails }) => {
                     fill
                     style={{ paddingLeft: '15px', paddingRight: '15px' }}
                     src={selectedImage?.imageUrl || FirstImage}
-                    alt="presentation-product-image"
+                    alt={imageAlt || ''}
                     ref={imagePresentationRef}
                 />
             </div>
@@ -46,7 +46,7 @@ const ProductView = ({ image, imagesThumbnails }) => {
                         <Image
                             fill
                             src={img.url || FirstImage}
-                            alt="product-thumbnails-image"
+                            alt={imageAlt || ''}
                             data-image-index={index} />
                     </div>
                 ))}

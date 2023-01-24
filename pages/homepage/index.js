@@ -11,7 +11,7 @@ import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 
 import { fetchLatestProducts } from './queries'
 import { queryKeys } from './data'
-import { useLatestProducs } from './hooks/useLatestProducts'
+import { useLatestProductsData } from './hooks'
 
 import { CartContext } from 'context'
 
@@ -27,9 +27,9 @@ export async function getServerSideProps() {
     }
 }
 export default function HomePage() {
-    const { data } = useLatestProducs();
-    const mydata = useContext(CartContext);
-    console.log(mydata.dispatch({ type: '' }))
+
+    const { data } = useLatestProductsData();
+
     return (
         <>
             <Header />

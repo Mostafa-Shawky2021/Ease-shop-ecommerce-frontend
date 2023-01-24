@@ -89,16 +89,25 @@
         }
     }
 
+    .addCartBtnWrapper {
+        width: 100%;
+        text-align: center;
+    }
+
     .addCartbtn {
         background: var.$accentcolor;
         border: none;
         height: 45px;
-        width: 160px;
+        width: 100%;
         margin-left: 12px;
 
         &:hover {
             background-color: #db002b;
         }
+    }
+
+    .iconLoading {
+        color: var.$secondarycolor;
     }
 
     .addFavouritebtn {

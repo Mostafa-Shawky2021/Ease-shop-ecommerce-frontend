@@ -1,2 +1,1 @@
-export { default as useProductDetails } from './useProductDetails';
-export { default as useAddCart } from './useAddCart'
+export { default as useProductDetailsData } from './useProductDetailsData';

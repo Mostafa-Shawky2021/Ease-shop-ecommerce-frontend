@@ -1,1 +1,1 @@
-export { useLatestProducs } from './useLatestProducts';
+export { default as useLatestProductsData } from './useLatestProductsData';

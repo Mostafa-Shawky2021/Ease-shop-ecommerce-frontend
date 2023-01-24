@@ -33,5 +33,14 @@
         line-height: 40px;
         margin-left: 12px;
         user-select: none;
+        position: relative;
+    }
+
+    .iconLoading {
+        color: var.$secondarycolor;
+        position: absolute;
+        top: 6px;
+        left: 35%;
+
     }
 }

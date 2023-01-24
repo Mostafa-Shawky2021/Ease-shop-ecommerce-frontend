@@ -1,10 +1,11 @@
-import { v4 as uuidv4 } from 'uuid'
 function randomId() {
 
     if (window.localStorage.getItem('guest')) {
         return JSON.parse(window.localStorage.getItem('guest'));
     }
-    const randomId = uuidv4().toString()
+    const randomNumber = Math.round(Math.random() * Number.MAX_SAFE_INTEGER);
+    const timeStamp = new Date().getTime();
+    const randomId = randomNumber + timeStamp;
     window.localStorage.setItem('guest', JSON.stringify(randomId));
     return randomId;
 }

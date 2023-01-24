@@ -1,16 +1,24 @@
-import React, { createContext, useReducer } from 'react';
-
-import { cartReducer } from 'reducer';
+import React, { createContext, useState, useEffect } from 'react';
+import { useCartsData } from 'hooks';
 
 export const CartContext = createContext();
 
-const initialState = [];
+
 
 export const CartProvider = ({ children }) => {
-    const [carts, dispatch] = useReducer(cartReducer, initialState)
+    const [userId, setUserId] = useState(null)
+    const { data } = useCartsData(userId)
+
+    useEffect(() => {
+        const userId = JSON.parse(window.localStorage.getItem('guest')) || null;
+        if (userId) {
+            setUserId(userId);
+        }
+
+    }, [])
 
     return (
-        <CartContext.Provider value={{ carts, dispatch }}>
+        <CartContext.Provider value={{ carts: data || [] }}>
             {children}
         </CartContext.Provider>
     )

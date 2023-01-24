@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Hydrate,
@@ -12,11 +12,14 @@ import { CartProvider } from 'context'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'swiper/css';
+import 'react-toastify/dist/ReactToastify.css';
 import "@root/sass/_reset.scss";
 import "@root/sass/_typo.scss";
 
+
 export default function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient())
+
 
   return (
     <QueryClientProvider client={queryClient}>

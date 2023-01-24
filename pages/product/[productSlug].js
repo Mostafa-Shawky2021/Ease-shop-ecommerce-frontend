@@ -12,8 +12,9 @@ import { ProductDescription } from './components/productdescription';
 import { RelatedProduct } from './components/relatedproduct';
 
 import { queryKeys } from './data';
+
 import { fetchProductDetails } from './queries';
-import { useProductDetails } from './hooks';
+import { useProductDetailsData } from './hooks';
 
 export const getStaticPaths = async () => {
 
@@ -46,7 +47,7 @@ export const getStaticProps = async ({ params }) => {
 export default function ProductDetailsPage() {
 
     const { query: { productSlug } } = useRouter();
-    const { data } = useProductDetails(productSlug)
+    const { data } = useProductDetailsData(productSlug)
 
     return (
         <>
@@ -54,7 +55,11 @@ export default function ProductDetailsPage() {
             <Container style={{ marginTop: "2.8rem" }}>
                 <Row>
                     <Col xs={12} md={6}>
-                        <ProductView image={data?.image} imagesThumbnails={data?.images} />
+                        <ProductView
+                            image={data?.image}
+                            imagesThumbnails={data?.images}
+                            imageAlt={data?.product_name}
+                        />
                     </Col>
                     <Col xs={12} md={6}>
                         <ProductDetails productDetails={data} />
