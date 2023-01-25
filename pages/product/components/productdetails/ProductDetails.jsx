@@ -64,14 +64,21 @@ const ProductDetails = ({ productDetails }) => {
     const handleAddtoCart = () => {
 
         const randomId = generateRandomId();
+        let calcTotalPrice = 1;
+        if (productDetails.price_discount) {
+            calcTotalPrice = productDetails.price_discount * quantity;
+        } else {
+            calcTotalPrice = productDetails.price * quantity;
+        }
+        console.log({ calcTotalPrice, priceDiscount: productDetails.price_discount });
         const cartData = {
             user_id: randomId,
             product_id: productDetails.id,
             size,
             color,
             quantity,
-            unit_price: productDetails.price_discount && productDetails.price,
-            total_price: 2500
+            unit_price: productDetails.price_discount || productDetails.price,
+            total_price: calcTotalPrice
         }
         // check if product contain color or size
         if (productDetails.color || productDetails.size) {

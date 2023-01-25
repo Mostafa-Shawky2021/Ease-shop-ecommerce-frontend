@@ -23,27 +23,14 @@
         top: 10px;
         background: var.$accentcolor;
         color: #fff;
-        width: 50px;
-        padding: 3px;
+        width: 51px;
+        padding: 2px 0px;
         text-align: center;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         z-index: 1;
         font-weight: 500;
-        font-family: var.$poppinsfont;
-
-        &::after {
-            content: "";
-            position: absolute;
-            left: 1px;
-            top: 25px;
-            border-width: 12px 3px;
-            border-color: var.$accentcolor transparent transparent;
-            border-style: solid;
-            transform: rotate(13deg) translateX(-4px);
-            z-index: 1;
-
-        }
-
+        font-family: Poppins, sans-serif;
+        height: 22px;
     }
 
     .productAction {

@@ -9,8 +9,19 @@ import { Menu } from '@root/components/menu';
 import { InputWithIcon } from '@root/components/inputs'
 
 import style from './header.module.scss';
+import { useContext } from 'react';
+import { CartContext } from 'context';
 
 const Header = () => {
+    const { carts } = useContext(CartContext);
+
+    const shoppingItemCount = () => {
+        let count = 0;
+        for (const product of carts) {
+            count += product.quantity;
+        }
+        return count;
+    }
 
     return (
         <div className={`${style.header} align-items-center`}>
@@ -46,7 +57,7 @@ const Header = () => {
                                     <span className={style.title}>عربة التسوق</span>
                                     <span className={style.subTitle}>مشترياتي</span>
                                 </div>
-                                <span className={style.count}>5</span>
+                                {!!(carts.length > 0) && <span className={style.count}>{shoppingItemCount()}</span>}
                             </Link>
                         </div>
                     </Col>
