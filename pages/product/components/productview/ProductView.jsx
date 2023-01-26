@@ -28,7 +28,7 @@ const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
                 <Image
                     fill
                     style={{ paddingLeft: '15px', paddingRight: '15px' }}
-                    src={selectedImage?.imageUrl || image}
+                    src={selectedImage?.imageUrl || image || ''}
                     alt={imageAlt}
                     ref={imagePresentationRef}
                 />
@@ -40,7 +40,7 @@ const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
                 <div className={`${style.imageThumbnail} ${selectedImage.imageIndex == 0 ? style.active : ''} `}>
                     <Image
                         fill
-                        src={image}
+                        src={image || ''}
                         alt={imageAlt}
                         data-image-index={0}
                     />

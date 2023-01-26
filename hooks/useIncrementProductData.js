@@ -20,11 +20,18 @@ const useIncrementProductData = (setIsLoading, setQuantity) => {
             queryClient.setQueryData(queryKeys.USER_CARTS(userId), (carts) => {
                 return carts.map(cart => {
                     if (cartDataResponse.id === cart.id) {
-                        return { ...cart, quantity: cartDataResponse.quantity }
+                        return {
+                            ...cart,
+                            quantity: cartDataResponse.quantity,
+                            total_price: cartDataResponse.total_price
+                        }
                     } else {
                         return { ...cart }
                     }
                 })
+                console.log(x)
+                return x;
+
             })
             setQuantity && setQuantity(1);
             toast.success('تم زيادة عدد الكمية')

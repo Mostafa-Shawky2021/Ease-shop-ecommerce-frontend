@@ -20,7 +20,11 @@ const useDecremenetProductData = (setIsLoading) => {
                 if (cartDataResponse) {
                     return carts.map(cart => {
                         if (cartDataResponse.id === cart.id) {
-                            return { ...cart, quantity: cartDataResponse.quantity }
+                            return {
+                                ...cart,
+                                quantity: cartDataResponse.quantity,
+                                total_price: cartDataResponse.total_price
+                            }
                         } else {
                             return { ...cart }
                         }
