@@ -12,12 +12,24 @@ const useIncrementProductData = (setIsLoading, setQuantity) => {
         onMutate: () => {
             setIsLoading(true);
         },
-        onSuccess: (data) => {
-            setIsLoading(false);
-            setQuantity(1);
-            toast.success('تم زيادة عدد الكمية')
+        onSuccess: (res) => {
+
             const userId = JSON.parse(window.localStorage.getItem('guest')) || null
-            queryClient.invalidateQueries(queryKeys.USER_CARTS(userId))
+            const cartDataResponse = res.data;
+            setIsLoading(false);
+            queryClient.setQueryData(queryKeys.USER_CARTS(userId), (carts) => {
+                return carts.map(cart => {
+                    if (cartDataResponse.id === cart.id) {
+                        return { ...cart, quantity: cartDataResponse.quantity }
+                    } else {
+                        return { ...cart }
+                    }
+                })
+            })
+            setQuantity && setQuantity(1);
+            toast.success('تم زيادة عدد الكمية')
+
+
         },
         onError: () => {
             setIsLoading(false)

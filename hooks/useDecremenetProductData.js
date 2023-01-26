@@ -12,11 +12,26 @@ const useDecremenetProductData = (setIsLoading) => {
         onMutate: () => {
             setIsLoading(true)
         },
-        onSuccess: () => {
-            const userId = JSON.parse(window.localStorage.getItem('guest')) || null;
+        onSuccess: (res) => {
+            const userId = JSON.parse(window.localStorage.getItem('guest')) || null
+            const cartDataResponse = res.data;
             setIsLoading(false);
-            toast.success('تم تقليل عدد الكمية');
-            queryClient.invalidateQueries(queryKeys.USER_CARTS(userId))
+            queryClient.setQueryData(queryKeys.USER_CARTS(userId), (carts) => {
+                if (cartDataResponse) {
+                    return carts.map(cart => {
+                        if (cartDataResponse.id === cart.id) {
+                            return { ...cart, quantity: cartDataResponse.quantity }
+                        } else {
+                            return { ...cart }
+                        }
+                    })
+                }
+                else {
+                    queryClient.invalidateQueries(queryKeys.USER_CARTS(userId));
+                }
+
+            })
+            toast.success('تم تقليل عدد الكمية')
         },
         onError: () => {
             setIsLoading(false)

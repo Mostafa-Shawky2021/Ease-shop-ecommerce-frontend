@@ -40,17 +40,17 @@
 
         .quantityContent {
             position: absolute;
-            top: 50%;
+            top: 51%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
+
+            .iconLoading {
+                color: var.$secondarycolor;
+            }
         }
-    }
-
-    .iconLoading {
-        color: var.$secondarycolor;
-        position: absolute;
-        top: 6px;
-        left: 35%;
 
     }
+
+
 }

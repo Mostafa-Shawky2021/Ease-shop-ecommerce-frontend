@@ -1,7 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import MyImage from '@assets/images/categories/laptop.png';
+
+import {
+    useDecremenetProductData,
+    useIncrementProductData,
+    useDeleteProductData
+} from 'hooks';
 
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,6 +19,12 @@ import { CartContext } from 'context';
 import style from './cartlist.module.scss';
 
 const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading);
+    const { mutate: decrementProductMutation } = useDecremenetProductData(setIsLoading);
+    const { mutate: deleteProductMutation } = useDeleteProductData();
 
     const { carts } = useContext(CartContext);
 
@@ -33,7 +44,22 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
         return sum
     }
 
+    const handleProductIncrement = (event) => {
+        const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+        incrementProductMutation({ cartId })
 
+    }
+
+    const handleProductDecrement = (event) => {
+        const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+        decrementProductMutation(cartId);
+
+    }
+
+    const handleProductDelete = (event) => {
+        const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+        deleteProductMutation(cartId);
+    }
     return (
         <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''}`}>
             <header className={style.header}>
@@ -60,9 +86,20 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
                                 <div className={style.productPrice}>{cart.total_price} <span className={style.currency}>جنية</span></div>
                                 <div className="d-flex align-items-center">
                                     <div className={style.productQuantity}>
-                                        <ProductQuantity quantity={cart.quantity} />
+                                        <ProductQuantity
+                                            handleProductIncrement={handleProductIncrement}
+                                            handleProductDecrement={handleProductDecrement}
+                                            quantity={cart.quantity}
+                                            cartId={cart.id}
+                                            isLoading={isLoading}
+
+                                        />
                                     </div>
-                                    <Button className={style.btnDelete}>
+                                    <Button
+                                        className={style.btnDelete}
+                                        onClick={handleProductDelete}
+                                        data-cart-id={cart.id}
+                                    >
                                         <DeleteOutlineIcon fontSize="small" />
                                     </Button>
                                 </div>

@@ -11,7 +11,9 @@ import style from './productquantity.module.scss';
 const ProductQuantity = ({
     quantity,
     handleProductIncrement,
-    handleProductDecrement
+    handleProductDecrement,
+    cartId,
+    isLoading
 
 }) => {
 
@@ -20,15 +22,24 @@ const ProductQuantity = ({
             <Button
                 className={style.quantity}
                 onClick={handleProductIncrement}
+                data-cart-id={cartId}
             >
                 <AddIcon className={style.icon} fontSize="small" />
             </Button>
             <div className={style.content}>
-                <span className={style.quantityContent}>{quantity}</span>
+                <span className={style.quantityContent}>
+                    {isLoading ?
+                        <CircularProgress
+                            className={style.iconLoading}
+                            size={18} /> :
+                        quantity}
+
+                </span>
             </div>
             <Button
                 className={style.quantity}
                 onClick={handleProductDecrement}
+                data-cart-id={cartId}
             >
                 <RemoveIcon className={style.icon} fontSize="small" />
             </Button>
