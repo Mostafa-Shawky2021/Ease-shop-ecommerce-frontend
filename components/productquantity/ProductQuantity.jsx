@@ -10,7 +10,8 @@ import style from './productquantity.module.scss';
 
 const ProductQuantity = ({
     quantity,
-    setQuantity
+    handleProductIncrement,
+    handleProductDecrement
 
 }) => {
 
@@ -18,16 +19,16 @@ const ProductQuantity = ({
         <div className={`${style.productQuantity} d-flex align-items-center`}>
             <Button
                 className={style.quantity}
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={handleProductIncrement}
             >
                 <AddIcon className={style.icon} fontSize="small" />
             </Button>
             <div className={style.content}>
-                {quantity}
+                <span className={style.quantityContent}>{quantity}</span>
             </div>
             <Button
                 className={style.quantity}
-                onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+                onClick={handleProductDecrement}
             >
                 <RemoveIcon className={style.icon} fontSize="small" />
             </Button>

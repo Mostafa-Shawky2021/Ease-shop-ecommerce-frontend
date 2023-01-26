@@ -89,17 +89,13 @@
         }
     }
 
-    .addCartBtnWrapper {
-        width: 100%;
-        text-align: center;
-    }
-
     .addCartbtn {
         background: var.$accentcolor;
         border: none;
-        height: 45px;
-        width: 100%;
-        margin-left: 12px;
+        height: 40px;
+        width: 90%;
+        margin-right: 12px;
+        font-size: 15px;
 
         &:hover {
             background-color: #db002b;

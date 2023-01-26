@@ -1,0 +1,135 @@
+@use 'sass/var' as var;
+
+.listWrapper {
+    position: fixed;
+    background-color: #fff;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    z-index: 99;
+    width: 362px;
+    padding: 1.3rem 1.4rem;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 8px;
+    }
+
+    .title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .closeIcon {
+        color: var(--bs-danger);
+        cursor: pointer;
+    }
+
+    .list {
+        padding: 15px 0px;
+        overflow: hidden;
+    }
+
+    .item {
+        margin-bottom: 5px;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .productImage {
+        width: 50px;
+        height: 50px;
+        display: block;
+        position: relative;
+        margin-top: 3px;
+        max-width: 20%;
+    }
+
+    .productDetails {
+        max-width: 80%;
+        margin-right: 10px;
+    }
+
+    .productName {
+        color: #000000;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+
+    .productPrice {
+        font-family: var.$robotofont;
+        color: var.$softblack;
+        font-family: var.$robotofont;
+        margin-top: 0.2rem;
+        font-size: 0.9rem;
+
+        .currency {
+            font-weight: 600;
+            font-family: var.$cairofont;
+        }
+    }
+
+    .productQuantity {
+        margin-top: 0.7rem;
+    }
+
+    .btnDelete {
+        background-color: transparent;
+        border: none;
+        height: 30px;
+        color: var.$softblack;
+        margin-right: 1rem;
+
+        &:hover,
+        &:focus {
+            color: var.$accentcolor;
+            background-color: transparent;
+        }
+    }
+
+    .footer {
+        margin-top: 0.5rem;
+    }
+
+    .cost {
+        color: #000;
+        font-weight: 600;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 15px;
+    }
+
+    .totalPrice {
+        font-family: var.$poppinsfont;
+    }
+
+    .currency {
+        font-family: var.$cairofont
+    }
+
+    .checkoutWrapper {
+        margin-top: 1rem;
+
+        .btn {
+            background-color: var.$accentcolor;
+            padding: 8px;
+            margin-left: 10px;
+            width: 50%;
+            text-align: center;
+            color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s;
+
+            &:hover {
+                background-color: #e1002c;
+            }
+        }
+    }
+
+
+}

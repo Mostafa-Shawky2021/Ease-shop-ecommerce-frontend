@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Col, Container, Button } from 'react-bootstrap'
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -11,6 +11,7 @@ import { InputWithIcon } from '@root/components/inputs'
 import style from './header.module.scss';
 import { useContext } from 'react';
 import { CartContext } from 'context';
+import { CartList } from '@root/components/cartlist';
 
 const Header = () => {
     const { carts } = useContext(CartContext);
@@ -51,19 +52,21 @@ const Header = () => {
                                 </div>
                                 <span className={style.count}>5</span>
                             </Link>
-                            <Link href="/" className={`${style.actionWrapper} d-flex align-items-center`} >
+                            <div className={`${style.actionWrapper} d-flex align-items-center text-end`} >
                                 <LocalMallOutlinedIcon fontSize="large" sx={{ marginLeft: '8px' }} />
                                 <div className={style.actionName}>
                                     <span className={style.title}>عربة التسوق</span>
                                     <span className={style.subTitle}>مشترياتي</span>
                                 </div>
                                 {!!(carts.length > 0) && <span className={style.count}>{shoppingItemCount()}</span>}
-                            </Link>
+                                <CartList />
+                            </div>
                         </div>
                     </Col>
                 </Row>
             </Container>
-            {/* <Menu /> */}
+
+            <Menu />
         </div>
     )
 }

@@ -103,6 +103,8 @@ const ProductDetails = ({ productDetails }) => {
             }
         }
     }
+    const handleProductIncrement = () => setQuantity(quantity + 1)
+    const handleProductDecrement = () => quantity > 1 && setQuantity(quantity - 1)
 
     return (
         <div className={style.productDetailsWrapper}>
@@ -149,9 +151,9 @@ const ProductDetails = ({ productDetails }) => {
             <div className={`${style.addCartDetails} d-flex`} style={{ borderBottom: '1px solid #eee', paddingBottom: "20px" }}>
                 <div className={style.quantity}>
                     <ProductQuantity
-                        isLoading={isLoading}
                         quantity={quantity}
-                        setQuantity={setQuantity}
+                        handleProductIncrement={handleProductIncrement}
+                        handleProductDecrement={handleProductDecrement}
                     />
                 </div>
                 <div className={style.addCartBtnWrapper} style={{ width: '100%' }}>
@@ -162,7 +164,6 @@ const ProductDetails = ({ productDetails }) => {
                         </Button>
                     )}
                 </div>
-
 
                 {/* <Button className={style.addFavouritebtn}>
                     <FavoriteBorderOutlinedIcon fontSize="small" />
