@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import style from './latestproducts.module.scss';
 
 const LatestProducts = ({ data }) => {
-    console.log(data)
+
     const [swiper, setSwiper] = useState(null)
 
     return (

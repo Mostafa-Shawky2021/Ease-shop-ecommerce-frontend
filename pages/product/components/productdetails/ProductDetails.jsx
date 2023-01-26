@@ -66,11 +66,11 @@ const ProductDetails = ({ productDetails }) => {
         const randomId = generateRandomId();
         let calcTotalPrice = 1;
         if (productDetails.price_discount) {
-            calcTotalPrice = productDetails.price_discount * quantity;
+            calcTotalPrice = (productDetails.price_discount * quantity);
         } else {
-            calcTotalPrice = productDetails.price * quantity;
+            calcTotalPrice = (productDetails.price * quantity);
         }
-        console.log({ calcTotalPrice, priceDiscount: productDetails.price_discount });
+
         const cartData = {
             user_id: randomId,
             product_id: productDetails.id,
@@ -95,7 +95,7 @@ const ProductDetails = ({ productDetails }) => {
             }
         } else {
             // check if cart has already been added
-            const cartExist = carts.find(product => product.product_id === cartData.product_id)
+            const cartExist = carts.find(cart => cart.product_id === cartData.product_id)
             if (cartExist) {
                 incrementProductMutation({ cartId: cartExist.id, quantity });
             } else {
@@ -156,13 +156,14 @@ const ProductDetails = ({ productDetails }) => {
                         handleProductDecrement={handleProductDecrement}
                     />
                 </div>
-                <div className={style.addCartBtnWrapper} style={{ width: '100%' }}>
-                    {isLoading ? (<CircularProgress className={style.iconLoading} size={25} />) : (
-                        <Button className={style.addCartbtn} onClick={handleAddtoCart}>
+                <div style={{ position: 'relative', width: '100%' }}>
+                    {isLoading ?
+                        (<CircularProgress className={style.iconLoading} size={25} />) :
+                        (<Button className={style.addCartbtn} onClick={handleAddtoCart}>
                             اضافة الي السلة
                             <ShoppingCartOutlinedIcon fontSize="small" />
                         </Button>
-                    )}
+                        )}
                 </div>
 
                 {/* <Button className={style.addFavouritebtn}>

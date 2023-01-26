@@ -1,19 +1,24 @@
+
+import React, { useState, useContext } from 'react';
 import Link from 'next/link'
-import { Row, Col, Container, Button } from 'react-bootstrap'
+
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 
+import { Row, Col, Container, Button } from 'react-bootstrap'
 import { Menu } from '@root/components/menu';
 import { InputWithIcon } from '@root/components/inputs'
 
-import style from './header.module.scss';
-import { useContext } from 'react';
 import { CartContext } from 'context';
 import { CartList } from '@root/components/cartlist';
 
+import style from './header.module.scss';
+
 const Header = () => {
+    const [isOpenCartList, setIsOpenCartList] = useState(false)
+
     const { carts } = useContext(CartContext);
 
     const shoppingItemCount = () => {
@@ -44,7 +49,7 @@ const Header = () => {
                     </Col>
                     <Col xs={12} lg={4}>
                         <div className="d-flex align-items-center my-3 my-lg-0">
-                            <Link href="/" className={`${style.actionWrapper} d-flex align-items-center`}>
+                            <Link href="#" className={`${style.actionWrapper} d-flex align-items-center`}>
                                 <FavoriteBorderIcon fontSize="large" sx={{ marginLeft: '8px' }} />
                                 <div className={style.actionName}>
                                     <span className={style.title}>القائمة البيضاء</span>
@@ -52,21 +57,23 @@ const Header = () => {
                                 </div>
                                 <span className={style.count}>5</span>
                             </Link>
-                            <div className={`${style.actionWrapper} d-flex align-items-center text-end`} >
+                            <Button
+                                className={`${style.actionWrapper} d-flex align-items-center text-end`}
+                                onClick={() => setIsOpenCartList(!isOpenCartList)}
+                            >
                                 <LocalMallOutlinedIcon fontSize="large" sx={{ marginLeft: '8px' }} />
                                 <div className={style.actionName}>
                                     <span className={style.title}>عربة التسوق</span>
                                     <span className={style.subTitle}>مشترياتي</span>
                                 </div>
                                 {!!(carts.length > 0) && <span className={style.count}>{shoppingItemCount()}</span>}
-                                <CartList />
-                            </div>
+                            </Button>
                         </div>
                     </Col>
                 </Row>
             </Container>
-
             <Menu />
+            <CartList isOpenCartList={isOpenCartList} setIsOpenCartList={setIsOpenCartList} />
         </div>
     )
 }

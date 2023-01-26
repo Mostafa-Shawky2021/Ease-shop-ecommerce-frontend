@@ -1,8 +1,9 @@
 import React from 'react'
 
-function List({ renderItem, data }) {
+function ListItem({ renderItem, data }) {
+
     return data?.map(item => renderItem(item))
 }
 
-export default List;
+export default ListItem;
 
