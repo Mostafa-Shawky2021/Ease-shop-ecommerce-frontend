@@ -8,13 +8,19 @@ const useAddCartData = (setIsLoading) => {
     const queryClient = useQueryClient();
     return useMutation(addCart, {
         onMutate: () => {
-            setIsLoading(true)
+            setIsLoading && setIsLoading(true)
         },
-        onSuccess: () => {
-            setIsLoading(false);
+        onSuccess: (res) => {
+            setIsLoading && setIsLoading(false);
             toast.success("تم اضافة المنتج بنجاح");
             const userId = JSON.parse(window.localStorage.getItem('guest')) || null;
-            queryClient.invalidateQueries(queryKeys.USER_CARTS(userId));
+            const cartDataResponse = res.data;
+            console.log(cartDataResponse)
+            console.log(cartDataResponse);
+            queryClient.setQueriesData(
+                queryKeys.USER_CARTS(userId),
+                (carts) => [...carts, cartDataResponse])
+
         },
         onError: () => {
             setIsLoading(false)

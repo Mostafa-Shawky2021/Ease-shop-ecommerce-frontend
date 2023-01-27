@@ -10,13 +10,13 @@ const useIncrementProductData = (setIsLoading, setQuantity) => {
     const queryClient = useQueryClient();
     return useMutation(incrementProduct, {
         onMutate: () => {
-            setIsLoading(true);
+            setIsLoading && setIsLoading(true);
         },
         onSuccess: (res) => {
 
             const userId = JSON.parse(window.localStorage.getItem('guest')) || null
             const cartDataResponse = res.data;
-            setIsLoading(false);
+            setIsLoading && setIsLoading(false);
             queryClient.setQueryData(queryKeys.USER_CARTS(userId), (carts) => {
                 return carts.map(cart => {
                     if (cartDataResponse.id === cart.id) {
@@ -29,8 +29,7 @@ const useIncrementProductData = (setIsLoading, setQuantity) => {
                         return { ...cart }
                     }
                 })
-                console.log(x)
-                return x;
+
 
             })
             setQuantity && setQuantity(1);

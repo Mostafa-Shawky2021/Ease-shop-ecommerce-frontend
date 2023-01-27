@@ -4,17 +4,13 @@
     position: relative;
     background-color: #fff;
     overflow: hidden;
-    height: 410px;
+
     transition: all 0.4s;
-    border: 1px solid rgb(199 199 199 / 51%);
+    border: 1px solid rgb(199 199 199 / 31%);
     border-radius: 4px;
 
-    &:hover .addProduct {
-        bottom: 20px;
-    }
-
     &:hover .productCardImage {
-        transform: scale(1.1);
+        transform: scale(1.025);
     }
 
     .productDiscount {
@@ -23,32 +19,32 @@
         top: 10px;
         background: var.$accentcolor;
         color: #fff;
-        width: 51px;
+        width: 38px;
         padding: 2px 0px;
         text-align: center;
-        font-size: 0.8rem;
+        font-size: 12px;
         z-index: 1;
         font-weight: 500;
-        font-family: Poppins, sans-serif;
-        height: 22px;
+        font-family: var.$oswaldfont;
+        height: 24px;
+        line-height: 19px;
     }
 
     .productAction {
         position: absolute;
-        right: 10px;
+        left: 10px;
         top: 10px;
         z-index: 1;
 
         .favourite {
-            background: #efefef;
-            color: #212224;
+            color: var.$softblack;
             padding: 4px 6px;
             cursor: pointer;
             transition: all 0.3s;
 
             &:hover {
-                background: var.$primarycolor;
-                color: #fff;
+                transform: scale(1.1);
+                color: var.$accentcolor;
             }
         }
 
@@ -59,17 +55,15 @@
         overflow: hidden;
         text-align: center;
         transition: all 0.5s;
-        height: 220px;
+        height: 270px;
         padding-top: 2.5rem;
-        background-color: #efefef;
+        background-color: #f8f8f8;
 
         .productCardImage {
-            width: 100%;
-            height: 100%;
             cursor: pointer;
             user-select: none;
-            object-fit: contain;
             transition: all 0.6s ease-in-out;
+
         }
 
     }
@@ -85,9 +79,10 @@
 
     .productName {
         color: #202020;
-        font-weight: 600;
+        font-weight: 400;
         margin-top: 7px;
         margin-bottom: 0px;
+        font-family: var.$oswaldfont;
     }
 
     .productDescription {
@@ -108,45 +103,70 @@
         font-size: 1.125rem;
         font-weight: 600;
         margin: 0px 5px;
+        font-family: var.$oswaldfont;
     }
 
     .oldPrice {
-        color: #939090;
-        font-weight: 500;
+        font-weight: 600;
+        color: #888;
         position: relative;
-        font-size: 0.9rem;
-        margin-top: 6px;
+        font-size: 12px;
+        margin-top: 5px;
         text-decoration: line-through;
+        font-family: var.$oswaldfont;
     }
 
     .addProduct {
-        position: absolute;
-        bottom: -40px;
-        transform: translateX(50%);
+
         width: 75%;
-        padding: 5px;
-        background-color: #ff8722;
-        color: #202020;
+        // padding: 7px;
+        margin: 20px auto;
+        background-color: var(--bs-primary);
+        color: #fff;
         box-shadow: none !important;
         border: none;
         border-radius: 0px;
-        font-size: 0.9rem;
+        font-size: 0.875rem;
         transition: all 0.3s ease-in-out;
         font-weight: 600;
         border-radius: 4px;
+        position: relative;
+        height: 38px;
+        overflow: hidden;
 
-        &:hover {
-            background-color: none;
+        .contentWrapper {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 99;
         }
 
+        &::after {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0px;
+            width: 0px;
+            height: 100%;
+            background-color: var.$secondarycolor;
+            color: #fff;
+            transition: all 0.3s;
+            border-radius: 4px;
+            border: 1px solid var.$secondarycolor;
+
+        }
+
+        &:hover::after {
+            width: 102%
+        }
 
         .text {
             margin-left: 5px;
             display: inline;
             vertical-align: middle;
         }
-
-
 
 
     }

@@ -73,24 +73,30 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
                 <ListItem
                     data={carts}
                     renderItem={(cart) => (
-                        <div className={`${style.item} d-flex flex-wrap`} key={cart.product.id}>
+                        <div className={`${style.item} d-flex flex-wrap`} key={cart?.product?.id}>
                             <Link href="" className={style.productImage}>
                                 <Image
-                                    src={cart.product.image}
-                                    alt={cart.product.image}
+                                    src={cart?.product?.image}
+                                    alt={cart?.product?.image}
                                     fill
                                 />
                             </Link>
                             <div className={style.productDetails}>
-                                <div className={style.productName}>{cart.product.product_name}</div>
-                                <div className={style.productPrice}>{cart.total_price} <span className={style.currency}>جنية</span></div>
+                                <div className={style.productName}>{cart?.product?.product_name}</div>
+                                <div className={style.productMeta}>
+                                    {cart.color &&
+                                        (<span className={style.meta}>{cart?.color}</span>)}
+                                    {cart.size &&
+                                        (<span className={style.meta}>{cart?.size}</span>)}
+                                </div>
+                                <div className={style.productPrice}>{cart?.total_price} <span className={style.currency}>جنية</span></div>
                                 <div className="d-flex align-items-center">
                                     <div className={style.productQuantity}>
                                         <ProductQuantity
                                             handleProductIncrement={handleProductIncrement}
                                             handleProductDecrement={handleProductDecrement}
-                                            quantity={cart.quantity}
-                                            cartId={cart.id}
+                                            quantity={cart?.quantity}
+                                            cartId={cart?.id}
                                             isLoading={isLoading}
 
                                         />

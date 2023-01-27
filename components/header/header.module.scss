@@ -2,11 +2,14 @@
 
 .header {
     background: var.$primarycolor;
-    // position: fixed;
     left: 0px;
     top: 0px;
     z-index: 999;
     width: 100%;
+
+    &.fixed {
+        position: fixed;
+    }
 
     .container {
         padding-top: 17px;
@@ -20,6 +23,7 @@
         margin-top: 10px;
         margin-bottom: 10px;
         font-family: var.$poppinsfont;
+        user-select: none;
 
     }
 

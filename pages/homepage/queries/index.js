@@ -1,7 +1,3 @@
-import { axiosInstance } from "lib";
-
-// this file contains fetcher function for homepage data
-export const fetchLatestProducts = async () => {
-    const { data } = await axiosInstance.get('/api/products/latestproducts');
-    return data;
-} 
+export { default as fetchLatestProducts } from './fetchLatestProducts';
+export { default as fetchRandomCategoriesProducts } from './fetchRandomCategoriesProducts';
+export { default as fetchCategories } from './fetchCategories'

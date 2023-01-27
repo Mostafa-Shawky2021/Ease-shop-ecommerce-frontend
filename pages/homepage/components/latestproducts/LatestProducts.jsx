@@ -11,13 +11,13 @@ import "swiper/css/navigation";
 
 import style from './latestproducts.module.scss';
 
-const LatestProducts = ({ data }) => {
+const LatestProducts = ({ latestProductsData }) => {
 
     const [swiper, setSwiper] = useState(null)
 
     return (
         <div className={style.latestProducts}>
-            <SectionLayout title="احدث المنتجات">
+            <SectionLayout title="احدث المنتجات" isSwiper={true}>
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
                         modules={[Pagination, Navigation]}
@@ -29,7 +29,7 @@ const LatestProducts = ({ data }) => {
                         }}
                         breakpoints={{
                             0: { slidesPerView: 1 },
-                            480: { slidesPerView: 2 },
+                            550: { slidesPerView: 2 },
                             768: { slidesPerView: 3 },
                             992: { slidesPerView: 4 },
                         }}
@@ -37,14 +37,13 @@ const LatestProducts = ({ data }) => {
                         spaceBetween={18}
                         onSwiper={setSwiper}
                     >
-                        {data?.map(product => (
+                        {latestProductsData?.map(product => (
                             <SwiperSlide key={product.id}>
                                 <ProductCard product={product} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 )}
-
             </SectionLayout>
 
         </div >

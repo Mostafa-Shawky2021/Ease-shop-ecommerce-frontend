@@ -15,12 +15,20 @@ import { CartContext } from 'context';
 import { CartList } from '@root/components/cartlist';
 
 import style from './header.module.scss';
+import { useEffect } from 'react';
 
-const Header = () => {
+const Header = ({ menu }) => {
     const [isOpenCartList, setIsOpenCartList] = useState(false)
+    const [isFixedHeader, setIsFixedHeader] = useState(false);
 
     const { carts } = useContext(CartContext);
 
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            let scrollValue = document.documentElement.scrollTop;
+            scrollValue > 300 ? setIsFixedHeader(true) : setIsFixedHeader(false);
+        })
+    }, [])
     const shoppingItemCount = () => {
         let count = 0;
         for (const product of carts) {
@@ -30,12 +38,12 @@ const Header = () => {
     }
 
     return (
-        <div className={`${style.header} align-items-center`}>
+        <div className={`${style.header} ${isFixedHeader ? style.fixed : ''} align-items-center`}>
             <Container className={style.container}>
                 <Row className="align-items-center">
                     <Col xs={12} lg={2}>
                         <div className={`${style.logo} text-center text-lg-end`}>
-                            <Link href="/">NotifyShop</Link>
+                            <Link href="/homepage">NotifyShop</Link>
                         </div>
                     </Col>
                     <Col xs={12} lg={6}>
@@ -72,7 +80,7 @@ const Header = () => {
                     </Col>
                 </Row>
             </Container>
-            <Menu />
+            {menu}
             <CartList isOpenCartList={isOpenCartList} setIsOpenCartList={setIsOpenCartList} />
         </div>
     )

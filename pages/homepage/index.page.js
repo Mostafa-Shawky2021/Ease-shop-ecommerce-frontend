@@ -1,25 +1,46 @@
-import { useContext } from 'react'
 
 import { Header } from '@root/components/header'
+import { Menu } from '@root/components/menu'
 import { Carousel } from './components/carousel'
 import { Services } from './components/services'
 import { TopCategories } from './components/topcategories'
 import { Categories } from './components/categories'
 import { LatestProducts } from './components/latestproducts'
 
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-import { fetchLatestProducts } from './queries'
+import {
+    fetchLatestProducts,
+    fetchRandomCategoriesProducts,
+    fetchCategories
+} from './queries'
 import { queryKeys } from './data'
-import { useLatestProductsData } from './hooks'
+import {
+    useCategoriesData,
+    useLatestProductsData,
+    useRandomCategoriesProductsData
+} from './hooks'
 
-import { CartContext } from 'context'
+import RandomCategoriesProducts from './components/randomcategoriesproducts/RandomCategoriesPrdoducts'
+import { ToastContainer } from 'react-toastify'
 
 
 
 export async function getServerSideProps() {
     const queryClient = new QueryClient()
-    await queryClient.prefetchQuery(queryKeys.LATEST_PRODUCTS, fetchLatestProducts)
+    await Promise.all(
+        [
+            queryClient.prefetchQuery(
+                queryKeys.LATEST_PRODUCTS,
+                fetchLatestProducts),
+            queryClient.prefetchQuery(
+                queryKeys.RANDOM_CATEGORIES_PRODUCTS,
+                fetchRandomCategoriesProducts),
+            queryClient.prefetchQuery(
+                queryKeys.CATEGORIES,
+                fetchCategories),
+        ]);
+
     return {
         props: {
             dehydratedState: dehydrate(queryClient)
@@ -28,16 +49,22 @@ export async function getServerSideProps() {
 }
 export default function HomePage() {
 
-    const { data } = useLatestProductsData();
+    const { data: latestProducts } = useLatestProductsData();
+    const { data: randomCategoriesProducts } = useRandomCategoriesProductsData();
+    const { data: categories } = useCategoriesData();
 
     return (
         <>
-            <Header />
+            <Header
+                menu={<Menu categoriesData={categories} />}
+            />
             <Carousel />
             <TopCategories />
-            <Categories />
-            <LatestProducts data={data} />
+            <Categories categoriesData={categories} />
+            <LatestProducts latestProductsData={latestProducts} />
+            <RandomCategoriesProducts randomCategoriesProductsData={randomCategoriesProducts} />
             <Services />
+            <ToastContainer />
         </>
     )
 }

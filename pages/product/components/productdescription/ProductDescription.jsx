@@ -1,8 +1,8 @@
 import React from 'react';
 
 import style from './productdescription.module.scss';
-const ProductDescription = ({ productDescription }) => {
 
+const ProductDescription = ({ productDescription }) => {
     return (
         <div className={style.productDescriptionWrapper}>
             <p className={style.productDescription}>

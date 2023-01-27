@@ -10,11 +10,11 @@
         margin-bottom: 2.5rem;
         font-size: 1.2rem;
         position: relative;
-        padding-bottom: 1.8rem;
+        padding-bottom: 1.5rem;
         border-bottom: 1px solid #e1e1e1;
 
         @include mediaquery(var.$tabletscreen) {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
         &::after {
@@ -22,7 +22,7 @@
             position: absolute;
             right: 0px;
             bottom: -1px;
-            background: var.$ternarycolor;
+            background: var.$secondarycolor;
             width: 135px;
             height: 2px;
         }
@@ -41,16 +41,22 @@
             border: 1px solid #e6e6e6;
             border-radius: 50%;
             text-align: center;
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             cursor: pointer;
             transition: all 0.3s;
             color: #8c8c8c;
 
-            &:hover {
-                background-color: var.$primarycolor;
-                color: #fff;
+            .arrowIcon {
+                margin-top: -7px;
             }
+
+            &:hover {
+                background-color: var.$secondarycolor;
+                color: #fff;
+                border: 1px solid var.$secondarycolor;
+            }
+
         }
 
     }

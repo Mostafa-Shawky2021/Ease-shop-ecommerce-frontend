@@ -11,3 +11,13 @@ a {
 span {
     display: inline-block;
 }
+
+body::-webkit-scrollbar {
+    width: 13px;
+    background-color: #212224;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #666666;
+    border-radius: 5px;
+}

@@ -2,17 +2,113 @@
 
 .menuWrapper {
     background-color: var.$secondarycolor;
+    padding: 7px;
 
-    .item {
+    .listMenu {
+        display: flex;
+        align-items: center;
+        padding: 0px;
+        margin: 0px;
+
+    }
+
+    .listMenu>.item {
         color: #000;
         font-family: var.$cairofont;
-        margin-left: 4rem;
+        margin-left: 2rem;
         transition: all 0.3s;
         padding: 1rem 0px;
-        font-weight: 500;
+        font-weight: 600;
 
-        &:hover {
+        >&:hover {
             color: #fff;
         }
     }
+
+    .categoryWrapper {
+        width: 260px;
+        position: relative;
+        margin-left: 10px;
+
+    }
+
+    .buttonCategories {
+        background-color: #fff;
+        border: none;
+        padding: 10px 17px;
+        font-weight: 600;
+        position: relative;
+        width: 95%;
+        border-radius: 0px;
+        font-weight: bold;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        outline: 0px;
+        box-shadow: none;
+        margin-left: 10px;
+
+        &:focus,
+        &:hover {
+            background-color: #fff;
+            color: var.$softblack;
+
+        }
+
+        .barIconWrapper {
+            margin-right: 22px;
+            margin-top: 6px;
+
+            .barIcon {
+                width: 25px;
+                height: 2px;
+                background-color: #888;
+                display: block;
+                margin-bottom: 5px;
+            }
+        }
+
+    }
+
+    .listCategories {
+        position: absolute;
+        box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+        padding: 0px;
+        background-color: #fff;
+        width: 95%;
+        z-index: 99;
+        top: 49px;
+        border: 1px solid #ccc;
+        border-top: 0px;
+        padding-right: 15px;
+        padding-top: 8px;
+        max-height: 70vh;
+        overflow: auto;
+        direction: ltr;
+        transform: scale(1, 0);
+        transition: all 0.3s;
+        transform-origin: 50% 0%;
+
+        &.openCategoryList {
+            transform: scale(1)
+        }
+
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var.$ternarycolor;
+            border-radius: 5px;
+        }
+
+        .item {
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            color: var.$softblack;
+        }
+    }
+
 }
