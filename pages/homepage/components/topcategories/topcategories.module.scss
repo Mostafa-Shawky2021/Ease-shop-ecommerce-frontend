@@ -8,13 +8,6 @@
     margin-bottom: 2rem;
     user-select: none;
 
-    @include mediaquery(var.$mediumscreen) {
-        position: relative;
-        top: -100px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-
     .imageWrapper {
         margin-bottom: 22px;
         height: 300px;

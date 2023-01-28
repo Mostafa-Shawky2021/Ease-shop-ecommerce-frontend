@@ -4,6 +4,7 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
+  reactStrictMode: false,
   sassOptions: {
     includePaths: [path.join(__dirname, 'sass')],
   },

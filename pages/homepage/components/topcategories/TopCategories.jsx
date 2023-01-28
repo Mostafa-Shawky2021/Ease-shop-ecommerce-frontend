@@ -5,13 +5,13 @@ import FirstImage from "@assets/images/topcategories/cat1.jpg"
 import SecondImage from "@assets/images/topcategories/cat2.jpg"
 import ThirdImage from "@assets/images/topcategories/cat3.jpg"
 
-
 import style from './topcategories.module.scss'
+
 const TopCategories = () => {
     return (
         <div className={style.topcategories}>
             <Container>
-                <Row className="g-0">
+                <Row>
                     <Col xs={12} md={4} >
                         <div className={style.imageWrapper}>
                             <Image src={FirstImage} className="img-fluid" alt="category-image" />

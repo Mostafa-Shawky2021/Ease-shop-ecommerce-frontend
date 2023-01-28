@@ -2,13 +2,15 @@
 
 .header {
     background: var.$primarycolor;
-    left: 0px;
-    top: 0px;
     z-index: 999;
     width: 100%;
+    transition: all 1s;
+    top: -170px;
 
     &.fixed {
         position: fixed;
+        top: 0px;
+        transition: all 1s;
     }
 
     .container {
@@ -19,12 +21,15 @@
     .logo {
         color: #ffffff;
         font-weight: 600;
-        font-size: 1.5rem;
+        font-size: 1.9rem;
         margin-top: 10px;
         margin-bottom: 10px;
-        font-family: var.$poppinsfont;
+        font-family: var.$oswaldfont;
         user-select: none;
 
+        .special {
+            color: var.$accentcolor;
+        }
     }
 
     .searchInput {

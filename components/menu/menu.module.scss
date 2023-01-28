@@ -22,6 +22,7 @@
 
         >&:hover {
             color: #fff;
+
         }
     }
 
@@ -77,22 +78,15 @@
         padding: 0px;
         background-color: #fff;
         width: 95%;
-        z-index: 99;
+        z-index: 999;
         top: 49px;
         border: 1px solid #ccc;
-        border-top: 0px;
-        padding-right: 15px;
-        padding-top: 8px;
-        max-height: 70vh;
-        overflow: auto;
-        direction: ltr;
+        padding-bottom: 10px;
         transform: scale(1, 0);
         transition: all 0.3s;
         transform-origin: 50% 0%;
-
-        &.openCategoryList {
-            transform: scale(1)
-        }
+        max-height: 70vh;
+        overflow: auto;
 
         &::-webkit-scrollbar {
             background-color: transparent;
@@ -105,9 +99,75 @@
         }
 
         .item {
-            margin-bottom: 5px;
-            padding-bottom: 5px;
+            color: var.$hardblack;
+            font-weight: bold;
+
+            .collapseButton {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                cursor: pointer;
+                padding: 10px 15px 0px;
+                background-color: transparent;
+                color: var.$hardblack;
+                font-weight: bold;
+                border: none;
+                width: 100%;
+            }
+
+            .subCategoriesIcon {
+                color: var.$softblack;
+                transition: all 0.3s;
+            }
+
+        }
+
+        &.openCategoryList {
+            transform: scale(1)
+        }
+
+    }
+
+    .listSubCategories {
+        color: #000;
+        padding: 0px;
+        padding-right: 30px;
+        position: relative;
+        margin-top: 8px;
+        transition: all 0.3s;
+        height: 0px;
+        overflow: hidden;
+
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0px;
+            height: 100%;
+            width: 2px;
+            background-color: var.$primarycolor;
+            top: 0px;
+            right: 20px;
+        }
+
+        .subcategoryItem {
             color: var.$softblack;
+            margin-bottom: 5px;
+
+            a {
+                color: #727272;
+                font-size: 0.9rem;
+                padding: 0px;
+                width: 100%;
+
+                &:hover {
+                    background: none !important;
+                    color: #000;
+                }
+
+            }
+
+
         }
     }
 

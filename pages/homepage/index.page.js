@@ -23,10 +23,11 @@ import {
 
 import RandomCategoriesProducts from './components/randomcategoriesproducts/RandomCategoriesPrdoducts'
 import { ToastContainer } from 'react-toastify'
+import { useEffect } from 'react'
 
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const queryClient = new QueryClient()
     await Promise.all(
         [
@@ -53,18 +54,22 @@ export default function HomePage() {
     const { data: randomCategoriesProducts } = useRandomCategoriesProductsData();
     const { data: categories } = useCategoriesData();
 
+
     return (
         <>
-            <Header
-                menu={<Menu categoriesData={categories} />}
-            />
-            <Carousel />
-            <TopCategories />
-            <Categories categoriesData={categories} />
-            <LatestProducts latestProductsData={latestProducts} />
-            <RandomCategoriesProducts randomCategoriesProductsData={randomCategoriesProducts} />
-            <Services />
-            <ToastContainer />
+            <div style={{ overflow: 'hidden' }}>
+                <Header
+                    menu={<Menu categoriesData={categories} />}
+                />
+                <Carousel />
+                <TopCategories />
+                <Categories categoriesData={categories} />
+                <LatestProducts latestProductsData={latestProducts} />
+                <RandomCategoriesProducts randomCategoriesProductsData={randomCategoriesProducts} />
+                <Services />
+                <ToastContainer />
+            </div>
+
         </>
     )
 }

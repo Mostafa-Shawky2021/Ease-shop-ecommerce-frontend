@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import Link from 'next/link'
 
 
@@ -18,15 +18,22 @@ import style from './header.module.scss';
 import { useEffect } from 'react';
 
 const Header = ({ menu }) => {
-    const [isOpenCartList, setIsOpenCartList] = useState(false)
     const [isFixedHeader, setIsFixedHeader] = useState(false);
+    const [isOpenCartList, setIsOpenCartList] = useState(false)
+
+    const headerRef = useRef();
+
 
     const { carts } = useContext(CartContext);
 
+
     useEffect(() => {
+        console.log('from header comp');
+        const headerHeight = headerRef.current.clientHeight;
         window.addEventListener('scroll', () => {
             let scrollValue = document.documentElement.scrollTop;
-            scrollValue > 300 ? setIsFixedHeader(true) : setIsFixedHeader(false);
+
+            scrollValue > 400 ? setIsFixedHeader(true) : setIsFixedHeader(false);
         })
     }, [])
     const shoppingItemCount = () => {
@@ -38,12 +45,16 @@ const Header = ({ menu }) => {
     }
 
     return (
-        <div className={`${style.header} ${isFixedHeader ? style.fixed : ''} align-items-center`}>
+        <div
+            className={`${style.header} ${isFixedHeader ? style.fixed : ''} align-items-center`}
+            ref={headerRef}
+        >
+
             <Container className={style.container}>
                 <Row className="align-items-center">
                     <Col xs={12} lg={2}>
                         <div className={`${style.logo} text-center text-lg-end`}>
-                            <Link href="/homepage">NotifyShop</Link>
+                            <Link href="/homepage">Notify<span className={style.special}>Shop</span></Link>
                         </div>
                     </Col>
                     <Col xs={12} lg={6}>

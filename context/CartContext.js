@@ -4,7 +4,6 @@ import { useCartsData } from 'hooks';
 export const CartContext = createContext();
 
 
-
 export const CartProvider = ({ children }) => {
     const [userId, setUserId] = useState(null)
     const { data } = useCartsData(userId)

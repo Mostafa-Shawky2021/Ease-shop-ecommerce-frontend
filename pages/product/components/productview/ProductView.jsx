@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
-import FirstImage from '@assets/images/categories/laptop.png';
-import SecondImage from '@assets/images/categories/1.jpg';
-
 import style from './productview.module.scss'
 
 const ProductView = ({ image, imagesThumbnails, imageAlt }) => {

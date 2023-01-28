@@ -30,6 +30,7 @@ export default function App({ Component, pageProps }) {
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,700&display=swap" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" />
+
           </Head>
           <Component {...pageProps} />
           <ReactQueryDevtools />

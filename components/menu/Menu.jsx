@@ -1,18 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 import { Button, Container } from 'react-bootstrap';
 import { ListItem } from '@root/components/listitem';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+
 import style from './menu.module.scss';
 
 const Menu = ({ categoriesData }) => {
+
     const [categoryListIsOpen, setCategoryListIsOpen] = useState(false)
 
     useEffect(() => {
+
         const closeCategoryList = (event) => event.key === 'Escape' ? setCategoryListIsOpen(false) : '';
+        const collapsesButton = Array.from(document.querySelectorAll('.collapses-button'));
+
+        collapsesButton.forEach(collapseButton => {
+
+            collapseButton.addEventListener('click', function () {
+
+                const subCategory = this.nextElementSibling;
+                const chevronIcon = this.children[0];
+
+                if (subCategory && chevronIcon) {
+                    chevronIcon.style.transform = 'rotate(-90deg)';
+                    subCategory.classList.toggle('open');
+
+                    if (subCategory.classList.contains('open')) {
+
+                        subCategory.style.height = `${subCategory.scrollHeight}px`;
+                    } else {
+                        chevronIcon.style.transform = 'rotate(0deg)';
+                        subCategory.style.height = '0px'
+                    }
+                }
+
+            })
+        })
+
         document.addEventListener('keydown', closeCategoryList);
+
         return () => document.removeEventListener('keydown', closeCategoryList);
     }, [])
+
     return (
         <div className={style.menuWrapper}>
             <Container>
@@ -31,7 +62,40 @@ const Menu = ({ categoriesData }) => {
                                 <ListItem
                                     data={categoriesData}
                                     renderItem={(category) => (
-                                        <li key={category.id} className={style.item}>{category.cat_name}</li>
+                                        <li
+                                            key={category.id}
+                                            className={style.item}
+                                        >
+                                            <Button className={`${style.collapseButton} collapses-button`} >
+                                                {category.cat_name}
+                                                {!!category.sub_categories.length &&
+                                                    <ChevronLeftIcon
+                                                        className={style.subCategoriesIcon}
+                                                        fontSize="small"
+                                                    />}
+                                            </Button>
+                                            {!!category.sub_categories.length && (
+                                                <>
+                                                    <ul
+                                                        className={`${style.listSubCategories} list-unstyled`}
+
+                                                    >
+                                                        <ListItem
+                                                            data={category.sub_categories}
+                                                            renderItem={(subcategory) => (
+                                                                <li className={style.subcategoryItem} key={subcategory.id}>
+                                                                    <Link href="">
+                                                                        {subcategory.cat_name}
+                                                                    </Link>
+
+                                                                </li>
+                                                            )}
+                                                        />
+                                                    </ul>
+                                                </>
+                                            )}
+
+                                        </li>
                                     )}
                                 />
                             </ul>
