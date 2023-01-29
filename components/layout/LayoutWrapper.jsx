@@ -1,10 +1,15 @@
 import React from "react";
-import Header from "./Header";
+import { useCategoriesData } from "pages/homepage/hooks";
+import { Header } from "@root/components/header";
+import { Menu } from "@root/components/menu";
 
 const LayoutWrapper = ({ children }) => {
+	const { data: categories } = useCategoriesData();
 	return (
 		<>
-			<Header />
+			<Header
+				menu={<Menu categoriesData={categories} />}
+			/>
 			{children}
 		</>
 	);

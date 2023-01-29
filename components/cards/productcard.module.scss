@@ -82,6 +82,9 @@
         margin-top: 7px;
         margin-bottom: 0px;
         font-family: var.$oswaldfont;
+        max-width: 98%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .productDescription {
@@ -149,7 +152,6 @@
             width: 0px;
             height: 100%;
             background-color: var.$secondarycolor;
-            color: #fff;
             transition: all 0.3s;
             border-radius: 4px;
             border: 1px solid var.$secondarycolor;
@@ -160,10 +162,15 @@
             width: 102%
         }
 
+        &:hover .text {
+            color: #000;
+        }
+
         .text {
             margin-left: 5px;
             display: inline;
             vertical-align: middle;
+            transition: all 0.3s;
         }
 
 

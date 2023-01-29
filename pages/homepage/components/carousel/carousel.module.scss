@@ -1,35 +1,67 @@
 @use 'sass/mixins/overlay' as *;
+@use 'sass/mixins/mediaquery' as *;
 @use 'sass/mixins/paragraph' as *;
 @use 'sass/var' as var;
 
 .carouselWrapper {
     position: relative;
     transition: all 1s;
-    @include overlay(#000, 0.7);
+    height: 680px;
+    @include overlay(#000, 0.5);
 
     .intro {
         position: absolute;
         z-index: 99;
-        top: 15%;
-        right: 10%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        right: 50%;
+        padding-right: 10px;
+        padding-left: 10px;
+        text-align: center;
+        width: 98%;
 
+        @include mediaquery(var.$mediumscreen) {
+            text-align: right;
+            padding: 0px;
+            right: 30px;
+            top: 24%;
+            transform: none;
+
+        }
 
         .title {
             color: #fff;
             font-weight: bold;
-            font-size: 3.5rem;
+            font-size: 1.7rem;
+
+            .discount {
+                color: #f00;
+            }
+
+            @include mediaquery(var.$tabletscreen) {
+                font-size: 2.7rem;
+            }
+
+            @include mediaquery(var.$mediumscreen) {
+                font-size: 3.5rem;
+            }
         }
 
         .description {
-            max-width: 640px;
-            font-size: 1.2rem;
-            @include paragraph(#b7b6b6);
+
+            @include paragraph(#cfcfcf);
+            font-size: 1rem;
+
+            @include mediaquery(var.$mediumscreen) {
+                max-width: 640px;
+                font-size: 1.1rem
+            }
         }
 
         .buttonShopNow {
             background-color: var.$secondarycolor;
             border: none;
-            padding: 15px 0px;
+            padding: 9px 0px;
             width: 200px;
             font-size: 1.3rem;
             color: #000;
@@ -38,10 +70,8 @@
             isolation: isolate;
             border-radius: 0px;
 
-            .text {
-                position: relative;
-                z-index: 2;
-                transition: all 0.3s;
+            @include mediaquery(var.$tabletscreen) {
+                padding: 15px 0px;
             }
 
             &::after {
@@ -62,20 +92,38 @@
                 background-position: 100%;
             }
 
-            &:hover .text {
-                color: #fff;
+        }
+
+        .buttonShopNow .text {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            font-weight: 600;
+
+            @include mediaquery(var.$tabletscreen) {
+                font-size: 1.4rem;
             }
+        }
 
-
+        .buttonShopNow:hover .text {
+            color: #fff;
         }
     }
 
-    .sliderImage {}
+    .swiper {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
 
     .image {
-        height: 750px;
+        height: 100%;
         width: 100%;
         object-fit: cover;
+
     }
 
 }

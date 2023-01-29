@@ -1,0 +1,24 @@
+@use "sass/var" as var;
+
+.offerWrapper {
+    background-image: url('/images/offer/img1.jpg');
+    background-size: cover;
+    height: 400px;
+    display: flex;
+    align-items: center;
+
+    .offer {
+        font-size: 5rem;
+        font-weight: bold;
+    }
+
+    .more {
+        background: var.$accentcolor;
+        color: #fff;
+        width: 169px;
+        height: 50px;
+        border-radius: 0px;
+        border: none;
+        margin-right: 50px;
+    }
+}

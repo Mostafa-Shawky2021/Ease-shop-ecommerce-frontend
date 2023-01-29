@@ -51,8 +51,6 @@ export default function ProductDetailsPage() {
 
     return (
         <>
-
-            <Header />
             <Container style={{ marginTop: "2.8rem" }}>
                 <Row>
                     <Col xs={12} md={6}>
@@ -72,7 +70,7 @@ export default function ProductDetailsPage() {
                     </Col>
                 </Row>
             </Container>
-            {/* <RelatedProduct /> */}
+            <RelatedProduct />
         </>
     )
 }

@@ -31,11 +31,12 @@ const Header = ({ menu }) => {
         console.log('from header comp');
         const headerHeight = headerRef.current.clientHeight;
         window.addEventListener('scroll', () => {
-            let scrollValue = document.documentElement.scrollTop;
+            // let scrollValue = document.documentElement.scrollTop;
 
-            scrollValue > 400 ? setIsFixedHeader(true) : setIsFixedHeader(false);
+            // scrollValue > 400 ? setIsFixedHeader(true) : setIsFixedHeader(false);
         })
     }, [])
+
     const shoppingItemCount = () => {
         let count = 0;
         for (const product of carts) {
@@ -50,14 +51,14 @@ const Header = ({ menu }) => {
             ref={headerRef}
         >
 
-            <Container className={style.container}>
+            <Container fluid="xl" className={style.container}>
                 <Row className="align-items-center">
-                    <Col xs={12} lg={2}>
+                    <Col xs={12} md={3} lg={2}>
                         <div className={`${style.logo} text-center text-lg-end`}>
                             <Link href="/homepage">Notify<span className={style.special}>Shop</span></Link>
                         </div>
                     </Col>
-                    <Col xs={12} lg={6}>
+                    <Col xs={12} md={6} lg={6}>
                         <div>
                             <InputWithIcon placeholder="عن ماذا تبحث؟" className={style.searchInput}>
                                 <button className={style.btnSearch}>
@@ -66,8 +67,8 @@ const Header = ({ menu }) => {
                             </InputWithIcon>
                         </div>
                     </Col>
-                    <Col xs={12} lg={4}>
-                        <div className="d-flex align-items-center my-3 my-lg-0">
+                    <Col xs={12} md={3} lg={4}>
+                        <div className="d-flex flex-wrap align-items-center my-3 my-lg-0">
                             <Link href="#" className={`${style.actionWrapper} d-flex align-items-center`}>
                                 <FavoriteBorderIcon fontSize="large" sx={{ marginLeft: '8px' }} />
                                 <div className={style.actionName}>

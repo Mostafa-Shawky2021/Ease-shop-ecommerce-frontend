@@ -1,45 +1,34 @@
 @use "sass/var" as var;
+@use "sass/mixins/mediaquery" as *;
 
 .menuWrapper {
     background-color: var.$secondarycolor;
-    padding: 7px;
+    padding: 15px;
+    top: -86px;
+    transition: all 1s;
 
-    .listMenu {
-        display: flex;
-        align-items: center;
-        padding: 0px;
-        margin: 0px;
-
-    }
-
-    .listMenu>.item {
-        color: #000;
-        font-family: var.$cairofont;
-        margin-left: 2rem;
-        transition: all 0.3s;
-        padding: 1rem 0px;
-        font-weight: 600;
-
-        >&:hover {
-            color: #fff;
-
-        }
+    &.fixed {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 999;
+        padding: 10px
     }
 
     .categoryWrapper {
         width: 260px;
         position: relative;
         margin-left: 10px;
-
     }
 
     .buttonCategories {
         background-color: #fff;
         border: none;
-        padding: 10px 17px;
+        padding: 5px 17px;
         font-weight: 600;
         position: relative;
-        width: 95%;
+        width: 76%;
         border-radius: 0px;
         font-weight: bold;
         color: #000;
@@ -50,6 +39,11 @@
         box-shadow: none;
         margin-left: 10px;
 
+        @include mediaquery(var.$tabletscreen) {
+            width: 90%;
+            padding: 10px 17px;
+        }
+
         &:focus,
         &:hover {
             background-color: #fff;
@@ -57,27 +51,28 @@
 
         }
 
-        .barIconWrapper {
-            margin-right: 22px;
-            margin-top: 6px;
+    }
 
-            .barIcon {
-                width: 25px;
-                height: 2px;
-                background-color: #888;
-                display: block;
-                margin-bottom: 5px;
-            }
-        }
+    .barIconWrapper {
+        margin-right: 22px;
+        margin-top: 6px;
 
+    }
+
+    .barIcon {
+        width: 25px;
+        height: 2px;
+        background-color: #888;
+        display: block;
+        margin-bottom: 5px;
     }
 
     .listCategories {
         position: absolute;
         box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
-        padding: 0px;
+        padding: 0px 7px;
         background-color: #fff;
-        width: 95%;
+        width: 77%;
         z-index: 999;
         top: 49px;
         border: 1px solid #ccc;
@@ -88,19 +83,26 @@
         max-height: 70vh;
         overflow: auto;
 
+        @include mediaquery(var.$tabletscreen) {
+            width: 90%;
+        }
+
         &::-webkit-scrollbar {
             background-color: transparent;
             width: 3px;
+            opacity: 0;
         }
 
         &::-webkit-scrollbar-thumb {
             background-color: var.$ternarycolor;
-            border-radius: 5px;
+            border-radius: 8px;
+
         }
 
         .item {
             color: var.$hardblack;
             font-weight: bold;
+            border-bottom: 1px solid #e9e9e9;
 
             .collapseButton {
                 display: flex;
@@ -133,11 +135,9 @@
         padding: 0px;
         padding-right: 30px;
         position: relative;
-        margin-top: 8px;
         transition: all 0.3s;
         height: 0px;
         overflow: hidden;
-
 
         &::after {
             content: "";
@@ -153,22 +153,88 @@
         .subcategoryItem {
             color: var.$softblack;
             margin-bottom: 5px;
+            color: #727272;
+            font-size: 0.9rem;
+            padding: 5px 0px;
 
-            a {
-                color: #727272;
-                font-size: 0.9rem;
-                padding: 0px;
-                width: 100%;
-
-                &:hover {
-                    background: none !important;
-                    color: #000;
-                }
-
+            &:hover {
+                color: #000;
             }
+        }
+    }
 
+    .listMenu {
+        padding: 0px;
+        margin: 0px;
+        position: fixed;
+        right: -250px;
+        top: 0px;
+        width: 250px;
+        height: 100vh;
+        background: #fff;
+        z-index: 9999;
+        padding-right: 10px;
+        transition: all 0.3s;
+
+        &.openMenuMobile {
+            right: 0px;
+
+        }
+
+        .iconMenuMobileCloseWrapper {
+            position: absolute;
+            left: 10px;
+            top: 5px;
+            color: var(--bs-danger);
+            cursor: pointer;
+
+            @include mediaquery(var.$largescreen) {
+                display: none;
+            }
+        }
+
+        @include mediaquery(var.$largescreen) {
+            display: flex;
+            align-items: center;
+            position: static;
+            height: auto;
+            background-color: transparent;
+            width: auto;
+        }
+    }
+
+    .listMenu>.item {
+        color: #000;
+        font-family: var.$cairofont;
+        margin-left: 2rem;
+        transition: all 0.3s;
+        padding: 1rem 0px;
+        font-weight: 600;
+
+
+        s>&:hover {
+            color: var.$secondarycolor;
+
+            @include mediaquery(var.$largescreen) {
+                color: #fff;
+            }
 
         }
     }
 
+    .iconMobileWrapper {
+
+        width: 40px;
+        height: 33px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        color: #505050;
+        border-radius: 5px;
+        margin-right: auto;
+
+        @include mediaquery(var.$largescreen) {
+            display: none;
+        }
+    }
 }

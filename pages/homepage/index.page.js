@@ -23,7 +23,7 @@ import {
 
 import RandomCategoriesProducts from './components/randomcategoriesproducts/RandomCategoriesPrdoducts'
 import { ToastContainer } from 'react-toastify'
-import { useEffect } from 'react'
+import { Offer } from './components/offer'
 
 
 
@@ -57,18 +57,15 @@ export default function HomePage() {
 
     return (
         <>
-            <div style={{ overflow: 'hidden' }}>
-                <Header
-                    menu={<Menu categoriesData={categories} />}
-                />
-                <Carousel />
-                <TopCategories />
-                <Categories categoriesData={categories} />
-                <LatestProducts latestProductsData={latestProducts} />
-                <RandomCategoriesProducts randomCategoriesProductsData={randomCategoriesProducts} />
-                <Services />
-                <ToastContainer />
-            </div>
+            <Carousel />
+            <TopCategories />
+            <Offer />
+            <Categories categoriesData={categories} />
+            <LatestProducts latestProductsData={latestProducts} />
+            <RandomCategoriesProducts randomCategoriesProductsData={randomCategoriesProducts} />
+            <Services />
+            <ToastContainer />
+
 
         </>
     )

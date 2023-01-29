@@ -100,7 +100,7 @@ const ProductCard = ({ product }) => {
                         alt="product-image" />
                 </Link>
             </div>
-            <div className={style.productCardDescription}>
+            <div style={{ paddingLeft: '5px', paddingRight: '5px' }}>
                 <div className={`${style.productRatingWrapper}`}>
                     <StarIcon className={style.productRating} />
                     <StarIcon className={style.productRating} />

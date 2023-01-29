@@ -22,7 +22,7 @@ const Categories = () => {
 
     return (
         <div className={style.categories}>
-            <SectionLayout title="التسوق عن طريق الاقسام">
+            <SectionLayout title="التسوق عن طريق الاقسام" isSwiper={true}>
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
                         modules={[Pagination, Navigation]}

@@ -1,23 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import { Button, Container } from 'react-bootstrap';
 import { ListItem } from '@root/components/listitem';
+
+import DehazeIcon from '@mui/icons-material/Dehaze';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import CloseIcon from '@mui/icons-material/Close';
 
 import style from './menu.module.scss';
 
 const Menu = ({ categoriesData }) => {
 
     const [categoryListIsOpen, setCategoryListIsOpen] = useState(false)
+    const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
+    const [fixedMenu, setFixedMenu] = useState(false);
 
     useEffect(() => {
+        const closeCategoryListMenuList = (event) => {
+            if (event.key === 'Escape') {
+                setCategoryListIsOpen(false);
+                setMobileMenuIsOpen(false);
+            }
+        };
 
-        const closeCategoryList = (event) => event.key === 'Escape' ? setCategoryListIsOpen(false) : '';
+        document.addEventListener('keydown', closeCategoryListMenuList);
+        return () => document.removeEventListener('keydown', closeCategoryListMenuList);
+    }, [])
+
+    useEffect(() => {
         const collapsesButton = Array.from(document.querySelectorAll('.collapses-button'));
-
         collapsesButton.forEach(collapseButton => {
-
             collapseButton.addEventListener('click', function () {
 
                 const subCategory = this.nextElementSibling;
@@ -38,69 +51,82 @@ const Menu = ({ categoriesData }) => {
 
             })
         })
-
-        document.addEventListener('keydown', closeCategoryList);
-
-        return () => document.removeEventListener('keydown', closeCategoryList);
     }, [])
 
+
+
+    useEffect(() => {
+
+        window.addEventListener('scroll', () => {
+            let scrollValue = document.documentElement.scrollTop;
+            (scrollValue > 400) ? setFixedMenu(true) : setFixedMenu(false);
+        })
+
+    }, [setFixedMenu])
     return (
-        <div className={style.menuWrapper}>
-            <Container>
-                <ul className={`${style.listMenu} list-unstyled`}>
-                    <li className={style.categoryWrapper}>
-                        <Button className={style.buttonCategories} onClick={() => setCategoryListIsOpen(!categoryListIsOpen)}>
-                            <span className={style.text}>جميع الاقسام</span>
-                            <div className={style.barIconWrapper}>
-                                <span className={style.barIcon}></span>
-                                <span className={style.barIcon}></span>
-                                <span className={style.barIcon}></span>
-                            </div>
-                        </Button>
-                        {categoriesData && (
-                            <ul className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
-                                <ListItem
-                                    data={categoriesData}
-                                    renderItem={(category) => (
-                                        <li
-                                            key={category.id}
-                                            className={style.item}
-                                        >
-                                            <Button className={`${style.collapseButton} collapses-button`} >
-                                                {category.cat_name}
-                                                {!!category.sub_categories.length &&
-                                                    <ChevronLeftIcon
-                                                        className={style.subCategoriesIcon}
-                                                        fontSize="small"
-                                                    />}
-                                            </Button>
-                                            {!!category.sub_categories.length && (
-                                                <>
-                                                    <ul
-                                                        className={`${style.listSubCategories} list-unstyled`}
+        <div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ''}`}>
+            <Container fluid="xl" className="d-flex align-items-center">
+                <div className={style.categoryWrapper}>
+                    <Button
+                        className={style.buttonCategories}
+                        onClick={() => setCategoryListIsOpen(!categoryListIsOpen)}
+                    >
+                        <span className={style.text}>جميع الاقسام</span>
+                        <div className={style.barIconWrapper}>
+                            <span className={style.barIcon}></span>
+                            <span className={style.barIcon}></span>
+                            <span className={style.barIcon}></span>
+                        </div>
+                    </Button>
+                    {categoriesData && (
+                        <ul className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
+                            <ListItem
+                                data={categoriesData}
+                                renderItem={(category) => (
+                                    <li
+                                        key={category.id}
+                                        className={style.item}
+                                    >
+                                        <Button className={`${style.collapseButton} collapses-button`} >
+                                            {category.cat_name}
+                                            {!!category.sub_categories.length &&
+                                                <ChevronLeftIcon
+                                                    className={style.subCategoriesIcon}
+                                                    fontSize="small"
+                                                />}
+                                        </Button>
+                                        {!!category.sub_categories.length && (
+                                            <>
+                                                <ul
+                                                    className={`${style.listSubCategories} list-unstyled`}
 
-                                                    >
-                                                        <ListItem
-                                                            data={category.sub_categories}
-                                                            renderItem={(subcategory) => (
-                                                                <li className={style.subcategoryItem} key={subcategory.id}>
-                                                                    <Link href="">
-                                                                        {subcategory.cat_name}
-                                                                    </Link>
+                                                >
+                                                    <ListItem
+                                                        data={category.sub_categories}
+                                                        renderItem={(subcategory) => (
+                                                            <li className={style.subcategoryItem} key={subcategory.id}>
+                                                                <Link href="">
+                                                                    {subcategory.cat_name}
+                                                                </Link>
 
-                                                                </li>
-                                                            )}
-                                                        />
-                                                    </ul>
-                                                </>
-                                            )}
+                                                            </li>
+                                                        )}
+                                                    />
+                                                </ul>
+                                            </>
+                                        )}
+                                    </li>
+                                )}
+                            />
+                        </ul>
+                    )}
+                </div>
 
-                                        </li>
-                                    )}
-                                />
-                            </ul>
-
-                        )}
+                <ul className={`${style.listMenu} ${mobileMenuIsOpen ? style.openMenuMobile : ''} list-unstyled`}>
+                    <li
+                        className={style.iconMenuMobileCloseWrapper}
+                        onClick={() => setMobileMenuIsOpen(false)}>
+                        <CloseIcon fontSize="small" className={style.icon} />
                     </li>
                     <li className={style.item}>
                         <Link href="#">الصفحة الرئيسية</Link>
@@ -117,10 +143,12 @@ const Menu = ({ categoriesData }) => {
                     <li className={style.item}>
                         <Link href="#">التواصل معنا</Link>
                     </li>
-
                 </ul>
+                <div className={style.iconMobileWrapper} onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}>
+                    <DehazeIcon fontSize="large" />
+                </div>
             </Container>
-        </div >
+        </div>
     )
 }
 export default Menu
