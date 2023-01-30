@@ -1,7 +1,7 @@
 @use 'sass/var' as var;
 
 .productQuantity {
-    height: 40px;
+    height: 34px;
 
     .quantity {
         background: transparent;
@@ -37,20 +37,17 @@
         user-select: none;
         position: relative;
         font-size: 14px;
-
-        .quantityContent {
-            position: absolute;
-            top: 51%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-
-            .iconLoading {
-                color: var.$secondarycolor;
-            }
-        }
-
     }
 
+    .content .quantityContent {
+        position: absolute;
+        top: 51%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
 
+    .content .iconLoading {
+        color: var.$secondarycolor;
+    }
 }

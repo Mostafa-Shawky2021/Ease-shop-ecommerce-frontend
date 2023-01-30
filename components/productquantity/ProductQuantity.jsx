@@ -13,7 +13,8 @@ const ProductQuantity = ({
     handleProductIncrement,
     handleProductDecrement,
     cartId,
-    isLoading
+    isLoading,
+    currentCart,
 
 }) => {
 
@@ -23,12 +24,13 @@ const ProductQuantity = ({
                 className={style.quantity}
                 onClick={handleProductIncrement}
                 data-cart-id={cartId}
+                disabled={isLoading && currentCart === cartId}
             >
                 <AddIcon className={style.icon} fontSize="small" />
             </Button>
             <div className={style.content}>
                 <span className={style.quantityContent}>
-                    {isLoading ?
+                    {isLoading && currentCart == cartId ?
                         <CircularProgress
                             className={style.iconLoading}
                             size={18} /> :
@@ -40,6 +42,7 @@ const ProductQuantity = ({
                 className={style.quantity}
                 onClick={handleProductDecrement}
                 data-cart-id={cartId}
+                disabled={isLoading && currentCart === cartId}
             >
                 <RemoveIcon className={style.icon} fontSize="small" />
             </Button>

@@ -1,13 +1,15 @@
 @use 'sass/mixins/overlay' as *;
 @use 'sass/mixins/mediaquery' as *;
 @use 'sass/mixins/paragraph' as *;
+@use 'sass/mixins/animationbutton' as *;
 @use 'sass/var' as var;
 
 .carouselWrapper {
     position: relative;
     transition: all 1s;
     height: 680px;
-    @include overlay(#000, 0.5);
+    isolation: isolate;
+    @include overlay(#000, 0.4);
 
     .intro {
         position: absolute;
@@ -61,8 +63,8 @@
         .buttonShopNow {
             background-color: var.$secondarycolor;
             border: none;
-            padding: 9px 0px;
             width: 200px;
+            height: 45px;
             font-size: 1.3rem;
             color: #000;
             margin-top: 1rem;
@@ -71,26 +73,10 @@
             border-radius: 0px;
 
             @include mediaquery(var.$tabletscreen) {
-                padding: 15px 0px;
+                height: 65px;
             }
 
-            &::after {
-                content: "";
-                position: absolute;
-                right: 0px;
-                top: 0px;
-                z-index: -1;
-                height: 100%;
-                width: 100%;
-                background-image: linear-gradient(120deg, transparent 50%, var.$accentcolor 50%);
-                background-size: 220%;
-                transition: all 0.3s;
-
-            }
-
-            &:hover::after {
-                background-position: 100%;
-            }
+            @include animationbutton();
 
         }
 

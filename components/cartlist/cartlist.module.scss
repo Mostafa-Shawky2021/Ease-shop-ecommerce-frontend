@@ -6,7 +6,7 @@
     background-color: #fff;
     top: 0px;
     height: 100vh;
-    z-index: 99;
+    z-index: 10;
     width: 362px;
     padding: 1.3rem 1.4rem;
     left: -362px;
@@ -51,7 +51,7 @@
         cursor: pointer;
     }
 
-    .list {
+    .cartList {
         padding: 15px 0px;
         overflow: hidden;
     }
@@ -69,41 +69,54 @@
         position: relative;
         margin-top: 3px;
         max-width: 20%;
+        user-select: none;
     }
 
     .productDetails {
-        max-width: 80%;
+        max-width: 78%;
         margin-right: 14px;
     }
 
     .productName {
         color: #000000;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 1.125rem;
         line-height: 1.6;
+
+        .unitPrice {
+            margin-right: 5px;
+            margin-top: 5px;
+            font-size: 1rem
+        }
     }
 
     .productMeta {
-        color: #7a7a7a;
+        color: #919191;
 
         .meta {
             margin-left: 5px;
             font-weight: 600;
-            font-size: 15px;
+            text-transform: capitalize;
         }
     }
 
     .productPrice {
-        font-family: var.$robotofont;
-        color: var.$softblack;
-        font-family: var.$robotofont;
+        color: #646262;
+        font-family: var.$oswaldfont;
         margin-top: 0.2rem;
         font-size: 0.9rem;
+        font-weight: bold;
 
-        .currency {
-            font-weight: 600;
-            font-family: var.$cairofont;
-        }
+    }
+
+    .productPrice .currency {
+        margin-right: 5px;
+    }
+
+    .productPrice .quantity {
+        margin-right: 1rem;
+        color: #000;
+        font-weight: 500;
     }
 
     .productQuantity {
@@ -145,20 +158,23 @@
 
     .checkoutWrapper {
         margin-top: 1rem;
+    }
 
-        .btn {
-            background-color: var.$accentcolor;
-            padding: 8px;
-            margin-left: 10px;
-            width: 50%;
-            text-align: center;
+    .checkoutWrapper .btn {
+        background-color: var.$secondarycolor;
+        padding: 8px;
+        margin-left: 10px;
+        width: 50%;
+        text-align: center;
+        color: #fff;
+        border-radius: 3px;
+        transition: all 0.3s;
+        color: #000;
+        font-weight: 600;
+
+        &:hover {
+            background-color: #e1002c;
             color: #fff;
-            border-radius: 3px;
-            transition: all 0.3s;
-
-            &:hover {
-                background-color: #e1002c;
-            }
         }
     }
 

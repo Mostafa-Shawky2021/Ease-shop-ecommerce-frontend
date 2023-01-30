@@ -64,7 +64,8 @@ const ProductDetails = ({ productDetails }) => {
     const handleAddtoCart = () => {
 
         const randomId = generateRandomId();
-        let calcTotalPrice = 1;
+
+        let calcTotalPrice = 0;
         if (productDetails.price_discount) {
             calcTotalPrice = (productDetails.price_discount * quantity);
         } else {

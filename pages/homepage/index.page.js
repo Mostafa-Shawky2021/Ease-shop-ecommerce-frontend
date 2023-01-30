@@ -59,7 +59,7 @@ export default function HomePage() {
         <>
             <Carousel />
             <TopCategories />
-            <Offer />
+            {/* <Offer /> */}
             <Categories categoriesData={categories} />
             <LatestProducts latestProductsData={latestProducts} />
             <RandomCategoriesProducts randomCategoriesProductsData={randomCategoriesProducts} />

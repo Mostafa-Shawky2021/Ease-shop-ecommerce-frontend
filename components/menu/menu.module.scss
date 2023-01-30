@@ -12,7 +12,7 @@
         top: 0px;
         left: 0px;
         width: 100%;
-        z-index: 999;
+        z-index: 9;
         padding: 10px
     }
 
@@ -220,6 +220,35 @@
             }
 
         }
+    }
+
+    .cartListBtn {
+        position: relative;
+        background: transparent;
+        color: var.$hardblack;
+        border: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background: transparent !important;
+            color: #000;
+        }
+    }
+
+    .cartListBtn .cartCount {
+        position: absolute;
+        right: 28px;
+        top: 0px;
+        background-color: #FF0032;
+        color: #fff;
+        border-radius: 50%;
+        width: 17px;
+        text-align: center;
+        height: 17px;
+        line-height: 18px;
+        font-size: 12px;
+        font-weight: 400;
     }
 
     .iconMobileWrapper {

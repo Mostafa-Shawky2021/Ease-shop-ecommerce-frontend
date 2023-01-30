@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 
 import { Button, Container } from 'react-bootstrap';
@@ -7,14 +7,19 @@ import { ListItem } from '@root/components/listitem';
 import DehazeIcon from '@mui/icons-material/Dehaze';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloseIcon from '@mui/icons-material/Close';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import style from './menu.module.scss';
+import { CartContext } from 'context';
+import { calcCartsCount } from 'utils';
 
-const Menu = ({ categoriesData }) => {
+const Menu = ({ categoriesData, setIsOpenCartList }) => {
 
     const [categoryListIsOpen, setCategoryListIsOpen] = useState(false)
     const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
     const [fixedMenu, setFixedMenu] = useState(false);
+
+    const { carts } = useContext(CartContext);
 
     useEffect(() => {
         const closeCategoryListMenuList = (event) => {
@@ -52,8 +57,6 @@ const Menu = ({ categoriesData }) => {
             })
         })
     }, [])
-
-
 
     useEffect(() => {
 
@@ -144,6 +147,14 @@ const Menu = ({ categoriesData }) => {
                         <Link href="#">التواصل معنا</Link>
                     </li>
                 </ul>
+                {fixedMenu && (
+                    <Button className={style.cartListBtn} onClick={() => setIsOpenCartList((prevOpenCartList) => !prevOpenCartList)}>
+                        {!!carts.length && (<span className={style.cartCount}>{calcCartsCount(carts)}</span>)}
+                        <ShoppingCartOutlinedIcon fontSize="medium" />
+                    </Button>
+                )}
+
+                {/* display in mobile screen  */}
                 <div className={style.iconMobileWrapper} onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}>
                     <DehazeIcon fontSize="large" />
                 </div>

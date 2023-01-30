@@ -1,15 +1,37 @@
 @use "sass/var" as var;
+@use 'sass/mixins/animationbutton' as *;
+@use 'sass/mixins/mediaquery' as *;
 
 .offerWrapper {
-    background-image: url('/images/offer/img1.jpg');
+    background: #f8f8f8;
     background-size: cover;
     height: 400px;
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    @include mediaquery(var.$largescreen) {
+        background-image: url('/images/offer/img1.jpg');
+    }
+
+    .contentWrapper {
+
+        max-width: 367px;
+        text-align: center;
+        margin: auto;
+
+        @include mediaquery(var.$largescreen) {
+            margin-right: 100px;
+        }
+    }
 
     .offer {
-        font-size: 5rem;
+        font-size: 2rem;
         font-weight: bold;
+
+        @include mediaquery(var.$mediumscreen) {
+            font-size: 5rem;
+        }
     }
 
     .more {
@@ -19,6 +41,17 @@
         height: 50px;
         border-radius: 0px;
         border: none;
-        margin-right: 50px;
+        position: relative;
+        isolation: isolate;
+        @include animationbutton(var.$secondarycolor);
+
+        .text {
+            transition: all 0.5s;
+            font-weight: 600;
+        }
+
+        &:hover .text {
+            color: #000;
+        }
     }
 }

@@ -92,7 +92,7 @@ const ProductCard = ({ product }) => {
                 </div>
             </div>
             <div className={style.productCardImageWrapper}>
-                <Link href={`product/${product.product_slug}`}>
+                <Link href={`product/${product?.product_slug}`}>
                     <Image
                         fill
                         src={product?.image}
@@ -108,7 +108,7 @@ const ProductCard = ({ product }) => {
                     <StarOutlineIcon className={style.productRating} />
                     <StarOutlineIcon className={style.productRating} />
                 </div>
-                <Link href={`product/${product.product_slug}`}>
+                <Link href={`product/${product?.product_slug}`}>
                     <p className={style.productName}>{product?.product_name}</p>
                 </Link>
 

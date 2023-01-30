@@ -21,6 +21,7 @@ import style from './cartlist.module.scss';
 const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
     const [isLoading, setIsLoading] = useState(false);
+    const [currentCart, setCurrentCart] = useState(0);
 
     const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading);
     const { mutate: decrementProductMutation } = useDecremenetProductData(setIsLoading);
@@ -36,6 +37,7 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
         return () => document.body.removeEventListener('keydown', closeCartList)
     }, [])
 
+
     const totalCartPrice = () => {
         let sum = 0;
         for (const cart of carts) {
@@ -46,13 +48,15 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
     const handleProductIncrement = (event) => {
         const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+        setCurrentCart(cartId);
         incrementProductMutation({ cartId })
 
     }
 
     const handleProductDecrement = (event) => {
         const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
-        decrementProductMutation(cartId);
+        setCurrentCart(cartId)
+        decrementProductMutation({ cartId });
 
     }
 
@@ -60,6 +64,7 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
         const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
         deleteProductMutation(cartId);
     }
+
     return (
         <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''}`}>
             <header className={style.header}>
@@ -69,35 +74,46 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
                     fontSize="small"
                     className={style.closeIcon} />
             </header>
-            <div className={`${style.list} list-unstyled`} >
+            <div className={`${style.cartList}`} >
+
                 <ListItem
                     data={carts}
                     renderItem={(cart) => (
-                        <div className={`${style.item} d-flex flex-wrap`} key={cart?.product?.id}>
-                            <Link href="" className={style.productImage}>
+                        <div className={`${style.item} d-flex flex-wrap`} key={cart?.id}>
+                            <div className={style.productImage}>
                                 <Image
                                     src={cart?.product?.image}
                                     alt={cart?.product?.image}
                                     fill
                                 />
-                            </Link>
+                            </div>
                             <div className={style.productDetails}>
-                                <div className={style.productName}>{cart?.product?.product_name}</div>
+                                <div className={style.productName}>
+                                    {cart?.product?.product_name} |
+                                    <span className={style.unitPrice}>
+                                        {cart?.unit_price} جنية
+                                    </span>
+                                </div>
                                 <div className={style.productMeta}>
                                     {cart.color &&
                                         (<span className={style.meta}>{cart?.color}</span>)}
                                     {cart.size &&
-                                        (<span className={style.meta}>{cart?.size}</span>)}
+                                        (<span className={style.meta}>- {cart?.size}</span>)}
                                 </div>
-                                <div className={style.productPrice}>{cart?.total_price} <span className={style.currency}>جنية</span></div>
+                                <div className={style.productPrice}>
+                                    {cart?.total_price}
+                                    <span className={style.currency}>جنية</span>
+                                    <span className={style.quantity}> x{cart.quantity}</span>
+                                </div>
                                 <div className="d-flex align-items-center">
                                     <div className={style.productQuantity}>
                                         <ProductQuantity
                                             handleProductIncrement={handleProductIncrement}
                                             handleProductDecrement={handleProductDecrement}
                                             quantity={cart?.quantity}
-                                            cartId={cart?.id}
                                             isLoading={isLoading}
+                                            cartId={cart?.id}
+                                            currentCart={currentCart}
 
                                         />
                                     </div>
@@ -126,7 +142,7 @@ const CartList = ({ isOpenCartList, setIsOpenCartList }) => {
                     <Link href="#" className={style.btn}>سلة التسوق</Link>
                 </div>
             </div>
-        </div>
+        </div >
     )
 
 }

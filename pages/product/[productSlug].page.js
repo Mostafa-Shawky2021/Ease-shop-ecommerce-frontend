@@ -13,8 +13,8 @@ import { RelatedProduct } from './components/relatedproduct';
 
 import { queryKeys } from './data';
 
-import { fetchProductDetails } from './queries';
-import { useProductDetailsData } from './hooks';
+import { fetchProductDetails, fetchProductsRelated } from './queries';
+import { useProductDetailsData, useRelatedProductsData } from './hooks';
 
 export const getStaticPaths = async () => {
 
@@ -34,9 +34,14 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
     const queryClient = new QueryClient();
     const productSlug = params.productSlug;
-    await queryClient.prefetchQuery(
-        queryKeys.PRODUCT_DETAILS(productSlug),
-        () => fetchProductDetails(productSlug))
+    await Promise.all([
+        queryClient.prefetchQuery(
+            queryKeys.PRODUCT_DETAILS(productSlug),
+            () => fetchProductDetails(productSlug)),
+        queryClient.prefetchQuery(
+            queryKeys.PRODUCT_RELATED(productSlug),
+            () => fetchProductsRelated(productSlug)),
+    ])
 
     return {
         props: {
@@ -47,30 +52,31 @@ export const getStaticProps = async ({ params }) => {
 export default function ProductDetailsPage() {
 
     const { query: { productSlug } } = useRouter();
-    const { data } = useProductDetailsData(productSlug)
-
+    console.log(encodeURI(productSlug));
+    const { data: productDetails } = useProductDetailsData(productSlug)
+    const { data: relatedProducts } = useRelatedProductsData(productSlug)
     return (
         <>
             <Container style={{ marginTop: "2.8rem" }}>
                 <Row>
                     <Col xs={12} md={6}>
                         <ProductView
-                            image={data?.image}
-                            imagesThumbnails={data?.images}
-                            imageAlt={data?.product_name}
+                            image={productDetails?.image}
+                            imagesThumbnails={productDetails?.images}
+                            imageAlt={productDetails?.product_name}
                         />
                     </Col>
                     <Col xs={12} md={6}>
-                        <ProductDetails productDetails={data} />
+                        <ProductDetails productDetails={productDetails} />
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12}>
-                        <ProductDescription productDescription={data?.long_description} />
+                        <ProductDescription productDescription={productDetails?.long_description} />
                     </Col>
                 </Row>
             </Container>
-            <RelatedProduct />
+            <RelatedProduct relatedProductsData={relatedProducts} />
         </>
     )
 }

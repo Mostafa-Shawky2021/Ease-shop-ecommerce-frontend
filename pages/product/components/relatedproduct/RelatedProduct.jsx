@@ -10,8 +10,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import style from './relatedproduct.module.scss';
+import { ListItem } from '@root/components/listitem';
 
-const RelatedProduct = () => {
+const RelatedProduct = ({ relatedProductsData }) => {
 
     const [swiper, setSwiper] = useState(null);
     return (
@@ -37,15 +38,11 @@ const RelatedProduct = () => {
                         spaceBetween={18}
                         onSwiper={setSwiper}
                     >
-                        <SwiperSlide>
-                            <ProductCard />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ProductCard />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ProductCard />
-                        </SwiperSlide>
+                        {relatedProductsData?.map(product => (
+                            <SwiperSlide key={product.id}>
+                                <ProductCard product={product} />
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 )}
 

@@ -49,7 +49,7 @@ function Carousel() {
           <Image className={style.image} src={ThirdImage} alt="slider" />
         </SwiperSlide>
       </Swiper>
-    </div >
+    </div>
 
   )
 }

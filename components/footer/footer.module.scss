@@ -1,0 +1,116 @@
+@use 'sass/var' as var;
+@use 'sass/mixins/paragraph' as *;
+@use 'sass/mixins/mediaquery' as *;
+
+.footerWrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #202325;
+    color: #fff;
+    overflow: hidden;
+
+    .logo {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: bold;
+
+        .special {
+            color: var.$secondarycolor;
+        }
+    }
+
+    .description {
+
+        @include paragraph(#bfbfbf);
+        font-size: 0.9375rem;
+        margin-top: 5px;
+    }
+
+    .social {
+        display: flex;
+        gap: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #5c5c5c;
+        margin-bottom: 10px;
+
+        @include mediaquery(var.$tabletscreen) {
+            border-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        .link {
+            transition: all 0.6s;
+        }
+
+        .link:hover {
+            color: var.$secondarycolor;
+        }
+    }
+
+    .subtitle {
+        color: #fff;
+        font-size: 1.0625rem;
+        margin-top: 10px;
+    }
+
+    .usefullink {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #5c5c5c;
+        margin-bottom: 10px;
+
+        @include mediaquery(var.$tabletscreen) {
+            border-bottom: 0px;
+            margin-bottom: 0px;
+        }
+    }
+
+    .usefullink .linkslist .item {
+        padding: 0px;
+        @include paragraph(#bfbfbf);
+        font-size: 0.9375rem;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var.$secondarycolor;
+        }
+    }
+
+    .listProducts {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #5c5c5c;
+        margin-bottom: 10px;
+
+        @include mediaquery(var.$tabletscreen) {
+            border-bottom: 0px;
+            margin-bottom: 0px;
+        }
+    }
+
+
+
+    .listProducts .item {
+        @include paragraph(#bfbfbf);
+        padding: 0px;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var.$secondarycolor;
+        }
+    }
+
+    .contactList .item {
+        @include paragraph(#bfbfbf);
+        padding: 0px;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var.$secondarycolor;
+        }
+
+        .link {
+            margin-right: 14px;
+        }
+    }
+
+
+}

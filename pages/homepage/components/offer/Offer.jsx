@@ -4,12 +4,13 @@ const Offer = () => {
     return (
         <div className={style.offerWrapper}>
             <Container fluid="lg">
-                <div style={{ marginRight: '50px' }}>
+                <div className={style.contentWrapper}>
                     <p className={style.offer}>
                         50% خصم
                     </p>
-                    <Button className={style.more}>اكتشف المزيد</Button>
-
+                    <Button className={style.more}>
+                        <span className={style.text}>عرض المزيد</span>
+                    </Button>
                 </div>
             </Container>
 
