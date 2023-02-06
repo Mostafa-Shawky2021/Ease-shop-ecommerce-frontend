@@ -4,19 +4,15 @@ import {
   Hydrate,
   QueryClient,
   QueryClientProvider
-} from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
-import { CartProvider } from 'context'
-
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { LayoutWrapper } from '@root/components/layout';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'swiper/css';
 import 'react-toastify/dist/ReactToastify.css';
 import "@root/sass/_reset.scss";
 import "@root/sass/_typo.scss";
-
-import { LayoutWrapper } from '@root/components/layout';
 
 
 export default function App({ Component, pageProps }) {
@@ -25,12 +21,10 @@ export default function App({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <CartProvider>
-          <LayoutWrapper>
-            <Component {...pageProps} />
-          </LayoutWrapper>
-          <ReactQueryDevtools />
-        </CartProvider>
+        <LayoutWrapper>
+          <Component {...pageProps} />
+        </LayoutWrapper>
+        <ReactQueryDevtools />
       </Hydrate>
     </QueryClientProvider>
   )

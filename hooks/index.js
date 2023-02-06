@@ -5,3 +5,4 @@ export { default as useIncrementProductData } from './useIncrementProductData';
 export { default as useDecremenetProductData } from './useDecremenetProductData';
 export { default as useDeleteProductData } from './useDeleteProductData';
 export { default as useCategoriesData } from './useCategoriesData';
+export { default as useGuest } from './useGuest';

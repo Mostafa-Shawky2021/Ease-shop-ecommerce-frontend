@@ -1,10 +1,13 @@
 import Image from 'next/image'
-import FirstImage from "@assets/images/homeslider/img1.jpg"
-import SecondImage from "@assets/images/homeslider/img2.jpg"
-import ThirdImage from "@assets/images/homeslider/img3.jpg"
+import Link from 'next/link';
+
 import { Autoplay, EffectFade, Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button, Container } from 'react-bootstrap';
+
+import FirstImage from "@assets/images/homeslider/img1.jpg"
+import SecondImage from "@assets/images/homeslider/img2.jpg"
+import ThirdImage from "@assets/images/homeslider/img3.jpg"
 
 import "swiper/css/effect-fade";
 import style from './carousel.module.scss'
@@ -23,9 +26,9 @@ function Carousel() {
           <p className={style.description}>
             تسوق معنا الأن حيث نقدم افضل المنتجات باسعار تنافسية مع وخصومات تصل الي 40%واكثر مما يجعلنا متميزين في مجالنا فراحة العميل هي من اهم اولاوياتنا
           </p>
-          <Button className={style.buttonShopNow}>
+          <Link href="/store" className={style.buttonShopNow} style={{ display: 'block' }}>
             <span className={style.text}>تسوق الأن</span>
-          </Button>
+          </Link>
         </div>
       </Container>
 

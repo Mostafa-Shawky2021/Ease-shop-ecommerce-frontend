@@ -1,24 +1,26 @@
 
-import React, { useContext } from 'react';
 import Link from 'next/link'
+
+import { useCartsData, useGuest } from '@root/hooks';
+
+import { calcCartsCount } from '@root/utils';
+
+import { Row, Col, Container, Button } from 'react-bootstrap';
+import { InputWithIcon } from '@root/components/inputs';
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 
-import { Row, Col, Container, Button } from 'react-bootstrap'
-import { InputWithIcon } from '@root/components/inputs'
-
-import { CartContext } from 'context';
-
-import { calcCartsCount } from 'utils';
-
 import style from './header.module.scss';
 
 const Header = ({ setIsOpenCartList }) => {
 
-    const { carts } = useContext(CartContext);
+    const { guestId } = useGuest();
 
+    const { data: carts } = useCartsData(guestId);
+
+    console.log(carts?.length);
     return (
         <div className={`${style.header} align-items-center`}>
 
@@ -59,7 +61,7 @@ const Header = ({ setIsOpenCartList }) => {
                                     <span className={style.title}>عربة التسوق</span>
                                     <span className={style.subTitle}>مشترياتي</span>
                                 </div>
-                                {!!(carts.length > 0) && <span className={style.count}>{calcCartsCount(carts)}</span>}
+                                {!!(carts?.length) && <span className={style.count}>{calcCartsCount(carts)}</span>}
                             </Button>
                         </div>
                     </Col>

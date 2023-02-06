@@ -1,9 +1,11 @@
 const calcCartsCount = (carts) => {
     let count = 0;
-    for (const product of carts) {
-        count += product.quantity;
+    if (Array.isArray(carts)) {
+        for (const product of carts) {
+            count += product.quantity;
+        }
+        return count;
     }
-    return count;
 }
 
 export default calcCartsCount;

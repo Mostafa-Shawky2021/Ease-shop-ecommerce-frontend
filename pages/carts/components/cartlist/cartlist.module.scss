@@ -1,0 +1,60 @@
+@use 'sass/var' as var;
+
+.cartListWrapper {
+    margin-top: 2.5rem;
+    padding: 1rem;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+
+    .header {
+        border-bottom: 1px solid #dedede;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+
+    .title {
+        color: var.$softblack;
+        font-weight: 500;
+    }
+
+    .list {
+        padding: 0px;
+    }
+
+    .cartListBody {
+        margin-top: 1rem;
+        padding-bottom: 0.95rem;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #dedede;
+        }
+    }
+
+
+    .listItem {
+        margin-bottom: 0.7rem;
+    }
+
+    .productImageWraper {
+        background-color: #f8f8f8;
+        margin-left: 0.7rem;
+        width: 140px;
+        height: 120px;
+    }
+
+    .productControl {
+        width: 100%;
+        gap: 5px;
+    }
+
+    .deleteProduct {
+        cursor: pointer;
+        color: var.$softblack;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var(--bs-danger);
+        }
+    }
+
+}

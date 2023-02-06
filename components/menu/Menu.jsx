@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+
+
+import { useCartsData, useGuest } from '@root/hooks';
+
+import { calcCartsCount } from '@root/utils';
+
 import { Button, Container } from 'react-bootstrap';
+import { CategoriesMenu } from './categoriesmenu';
 
 import DehazeIcon from '@mui/icons-material/Dehaze';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
-import { CartContext } from 'context';
-import { calcCartsCount } from '@root/utils';
-import { CategoriesMenu } from './categoriesmenu';
 
 import style from './menu.module.scss';
 
@@ -19,7 +21,9 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
     const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
     const [fixedMenu, setFixedMenu] = useState(false);
 
-    const { carts } = useContext(CartContext);
+    const { guestId } = useGuest();
+
+    const { data: carts } = useCartsData(guestId);
 
     useEffect(() => {
         const closeCategoryListMenuList = (event) => {
@@ -66,7 +70,7 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
                 </ul>
                 {fixedMenu && (
                     <Button className={style.cartListBtn} onClick={() => setIsOpenCartList((prevOpenCartList) => !prevOpenCartList)}>
-                        {!!carts.length && (<span className={style.cartCount}>{calcCartsCount(carts)}</span>)}
+                        {!!carts?.length && (<span className={style.cartCount}>{calcCartsCount(carts)}</span>)}
                         <ShoppingCartOutlinedIcon fontSize="medium" />
                     </Button>
                 )}

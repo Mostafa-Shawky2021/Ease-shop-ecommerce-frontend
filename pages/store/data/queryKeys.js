@@ -1,4 +1,4 @@
 const queryKeys = {
-    PRODUCTS: ['products'],
+    PRODUCTS: (pageNumber) => ['products', pageNumber],
 }
 export default queryKeys;

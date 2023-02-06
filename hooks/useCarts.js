@@ -6,7 +6,6 @@ const useCarts = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-
     const {
         mutate: addCartMutation,
         isSuccess: isCartSuccessfully } = useAddCartData(setIsLoading)

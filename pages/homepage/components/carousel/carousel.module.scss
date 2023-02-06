@@ -71,9 +71,13 @@
             position: relative;
             isolation: isolate;
             border-radius: 0px;
+            display: block;
+            text-align: center;
+            line-height: 45px;
 
             @include mediaquery(var.$tabletscreen) {
                 height: 65px;
+                line-height: 65px;
             }
 
             @include animationbutton();

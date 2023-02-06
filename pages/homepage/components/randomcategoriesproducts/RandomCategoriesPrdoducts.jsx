@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { ProductCard } from '@root/components/cards';
 
-import { SectionLayout } from '@root/components/layout';
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { SectionLayout } from '@root/components/layout';
+import { ProductCard } from '@root/components/cards';
+
+
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import style from './randomcategoriesproducts.module.scss';
 
 const RandomCategoriesProducts = ({ randomCategoriesProductsData }) => {
@@ -33,6 +34,7 @@ const RandomCategoriesProducts = ({ randomCategoriesProductsData }) => {
                                 prevEl: nextElementRef.current,
                                 nextEl: prevElementRef.current,
                             }}
+                            autoplay={{ delay: 4000 }}
                             centeredSlides={true}
                             breakpoints={{
                                 0: { slidesPerView: 2 },
@@ -51,9 +53,7 @@ const RandomCategoriesProducts = ({ randomCategoriesProductsData }) => {
                         </Swiper>
                     )}
                 </SectionLayout>
-
             ))}
-
         </div>
     )
 }

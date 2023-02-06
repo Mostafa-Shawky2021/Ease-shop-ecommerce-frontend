@@ -3,7 +3,7 @@ import { useCategoriesData } from "pages/homepage/hooks";
 import { Header } from "@root/components/header";
 import { Menu } from "@root/components/menu";
 import { Footer } from "@root/components/footer";
-import { CartList } from "@root/components/cartlist";
+import { SidebarCartList } from "@root/components/sidebarcartlist";
 
 const LayoutWrapper = ({ children }) => {
 	const [isOpenCartList, setIsOpenCartList] = useState(false);
@@ -14,7 +14,7 @@ const LayoutWrapper = ({ children }) => {
 		<>
 			<Header setIsOpenCartList={setIsOpenCartList} />
 			<Menu categoriesData={categories} setIsOpenCartList={setIsOpenCartList} />
-			<CartList isOpenCartList={isOpenCartList} setIsOpenCartList={setIsOpenCartList} />
+			<SidebarCartList isOpenCartList={isOpenCartList} setIsOpenCartList={setIsOpenCartList} />
 			{children}
 			<Footer />
 		</>

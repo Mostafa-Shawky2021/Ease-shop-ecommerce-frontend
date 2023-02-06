@@ -8,9 +8,13 @@ import { Products } from "./component/products";
 import { Sidebar } from "@root/components/sidebar";
 
 
+
 export async function getStaticProps() {
     const queryClient = new QueryClient();
-    await queryClient.prefetchQuery(queryKeys.PRODUCTS, fetchProducts);
+    await queryClient.prefetchQuery(
+        queryKeys.PRODUCTS(1),
+        () => fetchProducts(1));
+
     return {
         props: {
             dehydratedState: dehydrate(queryClient)
@@ -20,17 +24,9 @@ export async function getStaticProps() {
 
 
 const StorePage = () => {
+
     return (
         <>
-            <Breadcrumb>
-                <Container style={{ display: 'flex' }}>
-                    <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-                        Library
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item active>Data</Breadcrumb.Item>
-                </Container>
-            </Breadcrumb>
             <Container fluid="xl" style={{ marginTop: "2.8rem" }}>
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >

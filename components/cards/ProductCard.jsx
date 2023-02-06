@@ -1,29 +1,33 @@
-import React, { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
 
-import { CartContext } from 'context';
+import {
+    useCartsData,
+    useAddCartData,
+    useIncrementProductData,
+    useGuest
+} from '@root/hooks';
+
+import { calcPriceDiscount } from '@root/utils';
+
+import { Button } from 'react-bootstrap';
 
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
-import { useAddCartData, useIncrementProductData } from '@root/hooks';
-
-import { calcPriceDiscount, generateRandomId } from '@root/utils';
-
-import { Button } from 'react-bootstrap';
-
 import style from './productcard.module.scss'
-
 
 const ProductCard = ({ product, ...props }) => {
 
-    const { carts } = useContext(CartContext);
-
     const { mutate: addCartMutation } = useAddCartData();
-    const { mutate: incrementProductMutation } = useIncrementProductData()
+    const { mutate: incrementProductMutation } = useIncrementProductData();
+
+    const { guestId } = useGuest();
+
+    const { data: carts } = useCartsData(guestId);
+
     const renderPrice = () => {
         if (product?.price_discount) {
             return (
@@ -49,10 +53,9 @@ const ProductCard = ({ product, ...props }) => {
     }
 
     const handleAddProduct = () => {
-        const randomId = generateRandomId();
 
         const cartData = {
-            user_id: randomId,
+            user_id: guestId,
             product_id: product.id,
             size: product?.size?.split(',')[0] || null,
             color: product?.color?.split(',')[0] || null,
@@ -76,7 +79,7 @@ const ProductCard = ({ product, ...props }) => {
             }
         } else {
             // check if cart has already been added
-            const cartExist = carts.find(cart => cart.product_id === cartData.product_id)
+            const cartExist = carts?.find(cart => cart.product_id === cartData.product_id)
             if (cartExist) {
                 incrementProductMutation({ cartId: cartExist.id });
             } else {
