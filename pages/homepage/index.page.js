@@ -21,11 +21,9 @@ import {
     useRandomCategoriesProductsData
 } from './hooks'
 
-import RandomCategoriesProducts from './components/randomcategoriesproducts/RandomCategoriesPrdoducts'
-import { ToastContainer } from 'react-toastify'
-import { Offer } from './components/offer'
-
-
+import { RandomCategoriesProducts } from './components/randomcategoriesproducts';
+import { ToastContainer } from 'react-toastify';
+import { Offer } from './components/offer';
 
 export async function getStaticProps() {
     const queryClient = new QueryClient()
@@ -54,19 +52,16 @@ export default function HomePage() {
     const { data: randomCategoriesProducts } = useRandomCategoriesProductsData();
     const { data: categories } = useCategoriesData();
 
-
     return (
         <>
             <Carousel />
+            <Services />
             <TopCategories />
-            {/* <Offer /> */}
+            <Offer />
             <Categories categoriesData={categories} />
             <LatestProducts latestProductsData={latestProducts} />
             <RandomCategoriesProducts randomCategoriesProductsData={randomCategoriesProducts} />
-            <Services />
             <ToastContainer />
-
-
         </>
     )
 }

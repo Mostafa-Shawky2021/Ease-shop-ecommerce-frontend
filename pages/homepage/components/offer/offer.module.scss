@@ -3,55 +3,65 @@
 @use 'sass/mixins/mediaquery' as *;
 
 .offerWrapper {
-    background: #f8f8f8;
-    background-size: cover;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    @include mediaquery(var.$largescreen) {
+    .banner {
+        width: 100%;
+        height: 300px;
+        background-size: cover;
+        position: relative;
+    }
+
+    .banner.firstBanner {
         background-image: url('/images/offer/img1.jpg');
     }
 
-    .contentWrapper {
-
-        max-width: 367px;
-        text-align: center;
-        margin: auto;
-
-        @include mediaquery(var.$largescreen) {
-            margin-right: 100px;
-        }
+    .banner.secondBanner {
+        background-image: url('/images/offer/img2.jpg');
     }
 
-    .offer {
-        font-size: 2rem;
+    .intro {
+        position: absolute;
+        left: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .intro .title {
+        font-size: 1.6rem;
         font-weight: bold;
-
-        @include mediaquery(var.$mediumscreen) {
-            font-size: 5rem;
-        }
     }
 
-    .more {
-        background: var.$accentcolor;
-        color: #fff;
-        width: 169px;
-        height: 50px;
-        border-radius: 0px;
-        border: none;
+    .intro .description {
+        color: var.$softblack;
+        font-weight: 600;
+    }
+
+    .intro .offer {
+        color: var.$accentcolor;
+        font-weight: bold;
+        font-family: var.$oswaldfont;
+    }
+
+    .intro .shopNow {
+        margin-right: 20px;
+        width: 155px;
+        height: 42px;
         position: relative;
         isolation: isolate;
-        @include animationbutton(var.$secondarycolor);
+        border: none;
+        border-radius: 0px;
+        background: var.$secondarycolor;
+        color: #000;
+        font-weight: 600;
+        @include animationbutton(var.$accentcolor);
 
         .text {
-            transition: all 0.5s;
-            font-weight: 600;
+            transition: all 0.3s;
         }
 
         &:hover .text {
-            color: #000;
+            color: #fff;
         }
     }
+
 }

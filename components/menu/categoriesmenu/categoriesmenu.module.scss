@@ -1,0 +1,155 @@
+@use 'sass/var' as var;
+@use 'sass/mixins/mediaquery' as *;
+
+.categoryWrapperMenu {
+
+    .buttonCategories {
+        background-color: #fff;
+        border: none;
+        padding: 5px 17px;
+        font-weight: 600;
+        position: relative;
+        width: 76%;
+        border-radius: 0px;
+        font-weight: bold;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        outline: 0px;
+        box-shadow: none;
+        margin-left: 10px;
+
+        @include mediaquery(var.$tabletscreen) {
+            width: 90%;
+            padding: 10px 17px;
+        }
+    }
+
+    .buttonCategories:focus,
+    .buttonCategories:hover {
+        background-color: #fff;
+        color: var.$softblack;
+
+    }
+
+    .barIconWrapper {
+        margin-right: 22px;
+        margin-top: 6px;
+
+    }
+
+    .barIcon {
+        width: 25px;
+        height: 2px;
+        background-color: #888;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .listCategories {
+        position: absolute;
+        box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+        padding: 0px 14px;
+        background-color: #fff;
+        width: 77%;
+        z-index: 999;
+        top: 49px;
+        border: 1px solid #e9e6e6;
+        padding-bottom: 10px;
+        transform: scale(1, 0);
+        transition: all 0.3s;
+        transform-origin: 50% 0%;
+        max-height: 70vh;
+        overflow: auto;
+
+        &.openCategoryList {
+            transform: scale(1)
+        }
+
+        @include mediaquery(var.$tabletscreen) {
+            width: 90%;
+        }
+
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            width: 3px;
+            opacity: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var.$ternarycolor;
+            border-radius: 8px;
+
+        }
+
+        .itemCategory {
+            color: #222;
+            font-weight: bold;
+            margin-bottom: 10px;
+
+        }
+
+        .itemCategory .collapseButton {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 10px 7px 10px;
+            background-color: transparent;
+            color: #101010;
+            font-weight: 600;
+            border: none;
+            width: 100%;
+        }
+
+        .categoryLink {
+            cursor: pointer;
+            padding: 2px 7px 6px;
+            display: block;
+            background-color: transparent;
+            color: #101010;
+            font-weight: 600;
+            border: none;
+            width: 100%;
+        }
+
+        .itemCategory .subCategoriesIcon {
+            color: var.$softblack;
+            transition: all 0.3s;
+        }
+
+    }
+
+    .listSubCategories {
+        color: #000;
+        padding: 0px;
+        padding-right: 16px;
+        position: relative;
+        transition: all 0.3s;
+        height: 0px;
+        overflow: hidden;
+
+        &::after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background-color: var.$primarycolor;
+            top: 0px;
+            right: 10px;
+        }
+
+        .subcategoryItem {
+            color: var.$softblack;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            padding: 2px 0px;
+            font-weight: normal;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}

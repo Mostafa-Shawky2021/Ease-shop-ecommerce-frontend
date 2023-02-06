@@ -1,17 +1,33 @@
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import style from './offer.module.scss';
 const Offer = () => {
     return (
         <div className={style.offerWrapper}>
             <Container fluid="lg">
-                <div className={style.contentWrapper}>
-                    <p className={style.offer}>
-                        50% خصم
-                    </p>
-                    <Button className={style.more}>
-                        <span className={style.text}>عرض المزيد</span>
-                    </Button>
-                </div>
+                <Row>
+                    <Col xs={12} sm={6}>
+                        <div className={`${style.banner} ${style.firstBanner}`}>
+                            <div className={style.intro}>
+                                <h3 className={style.title}>منتجات  الموسم الجديد</h3>
+                                <p className={style.description}>خصومات تصل الي <span className={style.offer}>40%</span></p>
+                                <Button className={style.shopNow}>
+                                    <span className={style.text}>تسوق الأن</span>
+                                </Button>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xs={12} sm={6}>
+                        <div className={`${style.banner} ${style.secondBanner}`}>
+                            <div className={style.intro}>
+                                <h3 className={style.title}>افضل تشكيلات للملابس</h3>
+                                <p className={style.description}>افضل المنتجات باسعار مناسبة</p>
+                                <Button className={style.shopNow}>
+                                    <span className={style.text}>تسوق الأن</span>
+                                </Button>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
             </Container>
 
         </div>

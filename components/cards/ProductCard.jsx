@@ -1,22 +1,24 @@
+import React, { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
-import React, { useContext } from 'react'
+
+import { CartContext } from 'context';
 
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
-import FirstImage from "@assets/images/categories/laptop.png";
+import { useAddCartData, useIncrementProductData } from '@root/hooks';
+
+import { calcPriceDiscount, generateRandomId } from '@root/utils';
+
 import { Button } from 'react-bootstrap';
 
-import { calcPriceDiscount, generateRandomId } from 'utils';
-import { CartContext } from 'context';
-
 import style from './productcard.module.scss'
-import { useAddCartData, useIncrementProductData } from 'hooks';
 
-const ProductCard = ({ product }) => {
+
+const ProductCard = ({ product, ...props }) => {
 
     const { carts } = useContext(CartContext);
 
@@ -84,7 +86,9 @@ const ProductCard = ({ product }) => {
 
     }
     return (
-        <div className={`${style.productCard} text-center`}>
+        <div className={`${style.productCard}  text-center`}
+            {...props}
+        >
             {renderDicountPrecentage()}
             <div className={style.productAction}>
                 <div className={style.favourite}>
@@ -92,7 +96,7 @@ const ProductCard = ({ product }) => {
                 </div>
             </div>
             <div className={style.productCardImageWrapper}>
-                <Link href={`product/${product?.product_slug}`}>
+                <Link href={`product/${product?.product_slug} `}>
                     <Image
                         fill
                         src={product?.image}
@@ -101,17 +105,16 @@ const ProductCard = ({ product }) => {
                 </Link>
             </div>
             <div style={{ paddingLeft: '5px', paddingRight: '5px' }}>
-                <div className={`${style.productRatingWrapper}`}>
+                <div className={`${style.productRatingWrapper} `}>
                     <StarIcon className={style.productRating} />
                     <StarIcon className={style.productRating} />
                     <StarIcon className={style.productRating} />
                     <StarOutlineIcon className={style.productRating} />
                     <StarOutlineIcon className={style.productRating} />
                 </div>
-                <Link href={`product/${product?.product_slug}`}>
+                <Link href={`product / ${product?.product_slug} `}>
                     <p className={style.productName}>{product?.product_name}</p>
                 </Link>
-
                 <p className={style.productDescription}>{product?.short_description}</p>
                 <div className='d-flex align-items-center justify-content-center'>
                     {renderPrice()}

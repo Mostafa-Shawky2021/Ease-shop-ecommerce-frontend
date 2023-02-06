@@ -1,4 +1,5 @@
 @use 'sass/var' as var;
+@use 'sass/mixins/mediaquery' as *;
 
 .productCard {
     position: relative;
@@ -54,9 +55,13 @@
         overflow: hidden;
         text-align: center;
         transition: all 0.5s;
-        height: 270px;
+        height: 239px;
         padding-top: 2.5rem;
         background-color: #f8f8f8;
+
+        @include mediaquery(var.$mediumscreen) {
+            height: 270px;
+        }
 
         .productCardImage {
             cursor: pointer;
@@ -86,6 +91,7 @@
         max-width: 98%;
         text-overflow: ellipsis;
         white-space: nowrap;
+        overflow: hidden;
     }
 
     .productDescription {
@@ -120,15 +126,14 @@
     }
 
     .addProduct {
-
-        width: 75%;
+        width: 170px;
         margin: 20px auto;
         background-color: var(--bs-primary);
         color: #fff;
         box-shadow: none !important;
         border: none;
         border-radius: 0px;
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         transition: all 0.3s ease-in-out;
         font-weight: 600;
         border-radius: 4px;
@@ -142,7 +147,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 99;
+            z-index: 5;
         }
 
         &::after {

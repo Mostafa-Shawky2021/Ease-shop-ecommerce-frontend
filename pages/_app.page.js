@@ -15,8 +15,8 @@ import 'swiper/css';
 import 'react-toastify/dist/ReactToastify.css';
 import "@root/sass/_reset.scss";
 import "@root/sass/_typo.scss";
-import Head from 'next/head';
-import LayoutWrapper from '@root/components/layout/LayoutWrapper';
+
+import { LayoutWrapper } from '@root/components/layout';
 
 
 export default function App({ Component, pageProps }) {

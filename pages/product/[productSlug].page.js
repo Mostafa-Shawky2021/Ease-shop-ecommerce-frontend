@@ -18,8 +18,8 @@ import { useProductDetailsData, useRelatedProductsData } from './hooks';
 
 export const getStaticPaths = async () => {
 
-    const { data } = await axiosInstance.get('/api/products');
-    const paths = data.map(product =>
+    const { data: products } = await axiosInstance.get('/api/products');
+    const paths = products.map(product =>
     ({
         params:
             { productSlug: product.product_slug.toString() }
@@ -52,7 +52,7 @@ export const getStaticProps = async ({ params }) => {
 export default function ProductDetailsPage() {
 
     const { query: { productSlug } } = useRouter();
-    console.log(encodeURI(productSlug));
+
     const { data: productDetails } = useProductDetailsData(productSlug)
     const { data: relatedProducts } = useRelatedProductsData(productSlug)
     return (

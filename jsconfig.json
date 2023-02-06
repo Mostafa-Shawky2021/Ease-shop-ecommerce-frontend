@@ -2,15 +2,26 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            "@root/hooks": [
+                "hooks/index",
+            ],
+            "@root/queries": [
+                "queries/index"
+            ],
+            "@root/utils": [
+                "utils/index"
+            ],
             "@root/components/*": [
                 "components/*"
             ],
-            "@root/sass/*": [
-                "sass/*"
-            ],
             "@assets/*": [
                 "assets/*"
+            ],
+            "@root/sass/*": [
+                "sass/*"
             ]
         }
-    }
+    },
+    "target": "es6",
+    "module": "es6"
 }

@@ -1,0 +1,36 @@
+@use 'sass/var' as var;
+
+.categoryProductsWrapper {
+
+    .paginationWrapper {
+        margin-top: 1.5rem;
+        display: flex;
+        list-style-type: none;
+        margin-right: 0px;
+        padding: 0px;
+    }
+
+    .firstItem,
+    .lastItem {
+        display: none;
+    }
+
+    .pageItem {
+        margin-left: 8px;
+        border: 1px solid #d1d1d1;
+        padding: 5px 16px;
+
+        &:hover {
+            z-index: 2;
+            color: #fff;
+            background: var.$secondarycolor;
+            border: 1px solid var.$secondarycolor;
+        }
+    }
+
+    .activePage {
+        background-color: var.$secondarycolor;
+        color: #fff;
+        border: 1px solid var.$secondarycolor !important;
+    }
+}

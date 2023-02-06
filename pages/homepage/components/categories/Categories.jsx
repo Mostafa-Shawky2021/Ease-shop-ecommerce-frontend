@@ -1,22 +1,20 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
+import Link from 'next/link';
 import Image from 'next/image';
 
-import { Container } from 'react-bootstrap'
-import { Navigation, Pagination } from 'swiper';
+import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { SectionLayout } from '@root/components/layout';
 
-import FirstImage from "@assets/images/categories/laptop.png"
-import SecondImage from "@assets/images/categories/watch2.jpg"
-import ThirdImage from "@assets/images/categories/mobile.jpg"
-import FourthImage from "@assets/images/categories/watch.jpg"
+import DefaultImage from "@assets/images/default/image.jpg"
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import style from './categories.module.scss'
 
-const Categories = () => {
+
+const Categories = ({ categoriesData }) => {
 
     const [swiper, setSwiper] = useState();
 
@@ -25,9 +23,13 @@ const Categories = () => {
             <SectionLayout title="التسوق عن طريق الاقسام" isSwiper={true}>
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
-                        modules={[Pagination, Navigation]}
+                        style={{ direction: 'rtl' }}
+                        modules={[Autoplay, Navigation]}
+                        pagination={{ clickable: true }}
                         className={style.swiperWrapper}
-                        slidesPerView="auto"
+                        autoplay={{ delay: 4000 }}
+                        slidesPerView={"auto"}
+                        allowTouchMove={false}
                         navigation={{
                             prevEl: prevElementRef.current,
                             nextEl: nextElementRef.current,
@@ -41,73 +43,25 @@ const Categories = () => {
                         }}
                         loop={true}
                         spaceBetween={18}
+                        centeredSlides={true}
                         onSwiper={setSwiper}
                     >
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FirstImage} className={style.catImage} alt="category-image" />
+                        {categoriesData?.map(category => (
+                            <SwiperSlide key={category.id}>
+                                <div className={style.catWrapper}>
+                                    <div className={style.catImageWrapper}>
+                                        <Link href={`category/${category.cat_slug}`}>
+                                            <Image
+                                                src={category.image || DefaultImage}
+                                                className={style.catImage}
+                                                fill
+                                                alt={category.cat_name} />
+                                        </Link>
+                                    </div>
+                                    <p className={style.catName}>{category.cat_name} </p>
                                 </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FirstImage} className={style.catImage} alt="category-image" />
-                                </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FirstImage} className={style.catImage} alt="category-image" />
-                                </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FourthImage} className={style.catImage} alt="category-image" />
-                                </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FourthImage} className={style.catImage} alt="category-image" />
-                                </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FourthImage} className={style.catImage} alt="category-image" />
-                                </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FourthImage} className={style.catImage} alt="category-image" />
-                                </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={style.catWrapper}>
-                                <div className={style.catImageWrapper}>
-                                    <Image src={FourthImage} className={style.catImage} alt="category-image" />
-                                </div>
-                                <p className={style.catName}>موبايل </p>
-                            </div>
-                        </SwiperSlide>
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 )}
             </SectionLayout>

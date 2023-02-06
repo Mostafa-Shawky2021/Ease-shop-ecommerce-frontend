@@ -1,1 +1,1 @@
-export { default as useRandomCategoriesProducts } from './RandomCategoriesPrdoducts';
+export { default as RandomCategoriesProducts } from './RandomCategoriesPrdoducts';

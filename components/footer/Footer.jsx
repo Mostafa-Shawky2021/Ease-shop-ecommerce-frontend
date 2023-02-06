@@ -20,7 +20,7 @@ const Footer = () => {
                                 Shop<span className={style.special}>Notify</span>
                             </h3>
                             <p className={style.description}>
-                                نحن مجموعة من المستثمرين الاجانب الذي نهدف الي انشاء منصات الكترونيه والتي تهدف الي خدمة عبد الفتاح السيسي
+                                نحن مجموعة من المستثمرين الاجانب الذي نهدف الي انشاء منصات الكترونيه
                             </p>
                             <div className={style.social}>
                                 <Link href="#" className={style.link}>
