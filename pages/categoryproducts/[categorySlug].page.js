@@ -45,7 +45,7 @@ export const getStaticProps = async ({ params }) => {
         },
     }
 }
-const CategoryProducts = () => {
+const CategoryProductsPage = () => {
 
     return (
         <Container fluid="xl" style={{ marginTop: "2.8rem" }}>
@@ -61,4 +61,4 @@ const CategoryProducts = () => {
     )
 }
 
-export default CategoryProducts;
+export default CategoryProductsPage;

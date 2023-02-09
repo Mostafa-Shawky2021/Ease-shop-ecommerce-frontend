@@ -1,0 +1,37 @@
+@use 'sass/var' as var;
+
+.checkoutWrapper {
+    .required {
+        color: #f00;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .formControl {
+
+        &:hover,
+        &:focus {
+            border: 1px solid var.$secondarycolor;
+            box-shadow: none;
+        }
+    }
+
+    .checkOutbtn {
+        background-color: var.$secondarycolor;
+        color: #000;
+        font-weight: 600;
+        padding: 0.5rem 1.8rem;
+        border: 1px solid var.$secondarycolor;
+        transition: all 0.3s;
+
+        &:hover {
+            background: #e5a400;
+            border: 1px solid #e5a400;
+        }
+    }
+
+    .returnToCart {
+        color: var(--bs-primary);
+        font-weight: 500;
+    }
+}

@@ -20,7 +20,6 @@ const Header = ({ setIsOpenCartList }) => {
 
     const { data: carts } = useCartsData(guestId);
 
-    console.log(carts?.length);
     return (
         <div className={`${style.header} align-items-center`}>
 

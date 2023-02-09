@@ -51,21 +51,29 @@
         margin-top: 0.9rem;
         border-bottom: 1px solid #e3e3e3;
 
-        .item {
-            margin-bottom: 9px;
-            color: var.$softblack;
-        }
 
-        .icon {
-            color: var.$softblack;
-        }
+    }
 
-        .text {
-            color: #6a6a6a;
-            margin-right: 11px;
-            font-weight: 500;
-            font-size: 15px;
-        }
+    .listDetails .item {
+        margin-bottom: 9px;
+        color: var.$softblack;
+    }
+
+    .listDetails .icon {
+        color: var.$softblack;
+    }
+
+    .listDetails .text {
+        color: #6a6a6a;
+        margin-right: 11px;
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    .listDetails .productSize,
+    .addCartDetails {
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid #e3e3e3;
     }
 
     .labelText {

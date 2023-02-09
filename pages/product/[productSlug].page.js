@@ -27,7 +27,7 @@ export const getStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false
+        fallback: true
     }
 }
 
@@ -45,7 +45,8 @@ export const getStaticProps = async ({ params }) => {
 
     return {
         props: {
-            dehydratedState: dehydrate(queryClient)
+            dehydratedState: dehydrate(queryClient),
+
         },
     }
 }
@@ -53,8 +54,9 @@ export default function ProductDetailsPage() {
 
     const { query: { productSlug } } = useRouter();
 
-    const { data: productDetails } = useProductDetailsData(productSlug)
-    const { data: relatedProducts } = useRelatedProductsData(productSlug)
+    const { data: productDetails } = useProductDetailsData(productSlug);
+    const { data: relatedProducts } = useRelatedProductsData(productSlug);
+
     return (
         <>
             <Container style={{ marginTop: "2.8rem" }}>

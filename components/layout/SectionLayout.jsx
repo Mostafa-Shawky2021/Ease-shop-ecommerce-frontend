@@ -10,7 +10,7 @@ const SectionLayout = ({ title, children, isSwiper, link }) => {
 
     const nextElementRef = useRef(null)
     const prevElementRef = useRef(null)
-    console.log(link);
+
     return (
         <div className={style.sectionLayout}>
             <Container fluid="xl" style={{ position: 'relative' }}>

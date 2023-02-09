@@ -11,6 +11,9 @@
             "@root/utils": [
                 "utils/index"
             ],
+            "@root/lib": [
+                "lib/index"
+            ],
             "@root/components/*": [
                 "components/*"
             ],

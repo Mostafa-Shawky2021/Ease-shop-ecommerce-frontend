@@ -1,23 +1,59 @@
+import { useState } from 'react';
 import Image from 'next/image';
-import { ProductQuantity } from '@root/components/productquantity';
-import Myimage from '@assets/images/default/image.jpg';
 
-import { useCartsData, useGuest } from '@root/hooks';
+import {
+    useCartsData,
+    useDecrementProductData,
+    useDeleteProductData,
+    useGuest,
+    useIncrementProductData
+} from '@root/hooks';
+import { calcCartsCount } from '@root/utils';
+
+import { ToastContainer } from 'react-toastify';
+import { ProductQuantity } from '@root/components/productquantity';
+import { ListItem } from '@root/components/listitem';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { ListItem } from '@root/components/listitem';
-
-import { calcCartsCount } from '@root/utils';
 import style from './cartlist.module.scss';
 
 
 const CartList = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [currentCart, setCurrentCart] = useState(0);
+
     const { guestId } = useGuest();
 
     const { data: carts } = useCartsData(guestId);
 
+    const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading);
+    const { mutate: decrementProductMutation } = useDecrementProductData(setIsLoading);
+    const { mutate: deleteProductMutation } = useDeleteProductData();
+
+
+    const handleProductIncrement = (event) => {
+        const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+        setCurrentCart(cartId);
+        incrementProductMutation({ cartId })
+    }
+
+    const handleProductDecrement = (event) => {
+        const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+        setCurrentCart(cartId)
+        decrementProductMutation({ cartId });
+
+    }
+
+    const handleProductDelete = (event) => {
+        const deleteStatus = confirm('هل انت متاكد من انك تريد حذف المنتج؟');
+        if (deleteStatus) {
+            const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+            deleteProductMutation(cartId);
+        }
+
+    }
 
     return (
         <div className={style.cartListWrapper}>
@@ -68,15 +104,22 @@ const CartList = () => {
                             <div className={`${style.productControl} d-flex align-items-center`}>
                                 <ProductQuantity
                                     quantity={cart.quantity}
+                                    handleProductIncrement={handleProductIncrement}
+                                    handleProductDecrement={handleProductDecrement}
+                                    isLoading={isLoading}
+                                    cartId={cart?.id}
+                                    currentCart={currentCart}
                                 />
-                                <div className={style.deleteProduct} onClick={() => confirm("هل انت متاكد من حذف المنتج؟")}>
+                                <div
+                                    className={style.deleteProduct}
+                                    data-cart-id={cart.id}
+                                    onClick={handleProductDelete}>
                                     <DeleteIcon fontSize="small" />
                                 </div>
                             </div>
+                            <ToastContainer />
                         </div>
                     )} />
-
-
 
             ) : (<p>لا توجد منتجات لعرضها</p>)}
         </div>

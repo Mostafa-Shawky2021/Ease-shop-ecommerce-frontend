@@ -1,7 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import {
+    useAddCartData,
+    useIncrementProductData,
+    useGuest,
+    useCartsData,
+} from '@root/hooks';
 
-import SelectedBox from '@root/components/selectbox/SelectedBox';
+import { SelectedBox } from '@root/components/selectedbox';
 import { ProductQuantity } from '@root/components/productquantity';
 import { Button } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
@@ -12,13 +18,6 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { CartContext } from 'context';
-import {
-    useAddCartData,
-    useIncrementProductData,
-    useDecremenetProductData,
-} from 'hooks';
-import { generateRandomId } from 'utils'
 import style from "./productdetails.module.scss";
 
 const ProductDetails = ({ productDetails }) => {
@@ -28,12 +27,11 @@ const ProductDetails = ({ productDetails }) => {
     const [quantity, setQuantity] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
+    const { guestId } = useGuest();
+
+    const { data: carts } = useCartsData(guestId);
     const { mutate: addCartMutation } = useAddCartData(setIsLoading);
-
     const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading, setQuantity);
-
-    const { carts } = useContext(CartContext)
-
 
     useEffect(() => {
 
@@ -57,13 +55,11 @@ const ProductDetails = ({ productDetails }) => {
         const sizeElements = sizeArr?.map((size, index) => (
             <div key={index} value={size} className={style.option}>{size}</div>
         ))
+
         return sizeElements;
     }
 
-
     const handleAddtoCart = () => {
-
-        const randomId = generateRandomId();
 
         let calcTotalPrice = 0;
         if (productDetails.price_discount) {
@@ -73,7 +69,7 @@ const ProductDetails = ({ productDetails }) => {
         }
 
         const cartData = {
-            user_id: randomId,
+            user_id: guestId,
             product_id: productDetails.id,
             size,
             color,
@@ -123,7 +119,6 @@ const ProductDetails = ({ productDetails }) => {
                     <VerifiedUserOutlinedIcon className={style.icon} />
                     <label className={style.text}>{productDetails?.brand}</label>
                 </li>
-
                 <li className={style.item}>
                     <AttachMoneyIcon className={style.icon} />
                     <label className={style.text}>الدفع عن الاستلام</label>
@@ -139,17 +134,17 @@ const ProductDetails = ({ productDetails }) => {
                     </div>
                 </div>
             )}
+            {productDetails?.size &&
+                (<div className={`${style.productSize} d-flex align-items-center mb-3`}>
+                    <label className={style.labelText}>اختر المقاس</label>
+                    <div style={{ width: '200px' }}>
+                        <SelectedBox onChange={(size) => setSize(size)}>
+                            {renderProductSize()}
+                        </SelectedBox>
+                    </div>
+                </div>)}
 
-            {productDetails?.size && (<div className={`${style.productSize} d-flex align-items-center mb-3`} style={{ paddingBottom: '20px', borderBottom: '1px solid #e3e3e3' }}>
-                <label className={style.labelText}>اختر المقاس</label>
-                <div style={{ width: '200px' }}>
-                    <SelectedBox onChange={(size) => setSize(size)}>
-                        {renderProductSize()}
-                    </SelectedBox>
-                </div>
-            </div>)}
-
-            <div className={`${style.addCartDetails} d-flex`} style={{ borderBottom: '1px solid #eee', paddingBottom: "20px" }}>
+            <div className={`${style.addCartDetails} d-flex`}>
                 <div className={style.quantity}>
                     <ProductQuantity
                         quantity={quantity}

@@ -1,0 +1,32 @@
+@use 'sass/var' as var;
+
+.productsOrderWrapper {
+    height: 100%;
+    background-color: #fafafa;
+    width: 100%;
+    padding: 1rem 1.3rem;
+    border-right: 1px solid #dedede;
+
+    .table {
+        border: 1px solid rgba(0, 0, 0, .1);
+        width: 100%;
+    }
+
+    th {
+        color: var.$hardblack;
+    }
+
+    td {
+        color: var.$softblack;
+    }
+
+    th,
+    td {
+        padding: 15px 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        border-right: 1px solid rgba(0, 0, 0, .1);
+    }
+}

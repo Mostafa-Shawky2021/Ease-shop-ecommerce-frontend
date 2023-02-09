@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import {
-    useDecremenetProductData,
+    useDecrementProductData,
     useIncrementProductData,
     useDeleteProductData,
     useGuest,
@@ -31,7 +31,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
     const { guestId } = useGuest();
 
     const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading);
-    const { mutate: decrementProductMutation } = useDecremenetProductData(setIsLoading);
+    const { mutate: decrementProductMutation } = useDecrementProductData(setIsLoading);
     const { mutate: deleteProductMutation } = useDeleteProductData();
 
     const { data: carts } = useCartsData(guestId)

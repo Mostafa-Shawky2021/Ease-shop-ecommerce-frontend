@@ -1,6 +1,6 @@
 import { axiosInstance } from "lib";
 
-const decremenetProduct = async (cartData) => {
+const decrementProduct = async (cartData) => {
 
     const url = `/api/carts/${cartData.cartId}/decrement`;
     const { data } = await axiosInstance.post(url);
@@ -8,4 +8,4 @@ const decremenetProduct = async (cartData) => {
 
 }
 
-export default decremenetProduct;
+export default decrementProduct;
