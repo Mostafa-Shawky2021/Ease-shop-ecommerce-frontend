@@ -16,6 +16,17 @@
         }
     }
 
+    .errorField {
+        border: 1px solid #f00 !important;
+    }
+
+    .errMsg {
+        font-size: 0.9rem;
+        color: #f00;
+        margin-right: 5px;
+        margin-top: -3px;
+    }
+
     .checkOutbtn {
         background-color: var.$secondarycolor;
         color: #000;

@@ -72,7 +72,6 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                     className={style.closeIcon} />
             </header>
             <div className={`${style.cartList}`}>
-
                 <ListItem
                     data={carts}
                     renderItem={(cart) => (
@@ -134,7 +133,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                     </span>
                 </div>
                 <div className={`${style.checkoutWrapper} d-flex`}>
-                    <Link href="#" className={style.btn}>الطلب</Link>
+                    <Link href="/checkout" className={style.btn}>الطلب</Link>
                     <Link href="/carts" className={style.btn}>سلة التسوق</Link>
                 </div>
             </div>
