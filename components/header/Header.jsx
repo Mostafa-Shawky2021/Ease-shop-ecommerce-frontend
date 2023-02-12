@@ -41,8 +41,8 @@ const Header = ({ setIsOpenCartList }) => {
                     </Col>
                     <Col xs={12} md={3} lg={4}>
                         <div className="d-flex flex-wrap align-items-center my-3 my-lg-0">
-                            <Link href="#" className={`${style.actionWrapper} d-flex align-items-center`}>
-                                <FavoriteBorderIcon fontSize="large" sx={{ marginLeft: '8px' }} />
+                            <Link href="#" className={`${style.actionWrapper} d-flex align-items-center `}>
+                                <FavoriteBorderIcon fontSize="large" sx={{ marginRight: '8px' }} />
                                 <div className={style.actionName}>
                                     <span className={style.title}>القائمة البيضاء</span>
                                     <span className={style.subTitle}>منتجاتي المفضلة</span>
@@ -50,12 +50,12 @@ const Header = ({ setIsOpenCartList }) => {
                                 <span className={style.count}>5</span>
                             </Link>
                             <Button
-                                className={`${style.actionWrapper} d-flex align-items-center text-end`}
+                                className={`${style.actionWrapper} d-flex align-items-center text-start`}
                                 onClick={() => setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList)}
                             >
                                 <LocalMallOutlinedIcon
                                     fontSize="large"
-                                    sx={{ marginLeft: '8px' }} />
+                                />
                                 <div className={style.actionName}>
                                     <span className={style.title}>عربة التسوق</span>
                                     <span className={style.subTitle}>مشترياتي</span>

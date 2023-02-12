@@ -3,7 +3,7 @@
 @use 'sass/mixins/mediaquery' as *;
 
 .productDetailsWrapper {
-    margin-top: 30px;
+    margin-top: 2rem;
 
     @include mediaquery(var.$mediumscreen) {
         margin-top: 0px;
@@ -11,73 +11,71 @@
 
     .productName {
         color: #222;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 600;
-        margin-bottom: 0.8rem;
     }
 
     .priceWrapper {
         gap: 7px;
-
-        .price {
-            color: var.$accentcolor;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .oldPrice {
-            color: #918a8b;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: line-through;
-            margin-top: 5px;
-        }
-
-        .discountPercentage {
-            color: var(--bs-green);
-            font-weight: 600;
-            font-size: 13px;
-            margin-top: 5px;
-        }
     }
 
-    .shortDescription {
-        @include paragraph();
+    .priceWrapper .price {
+        color: #f00;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
 
+    .priceWrapper .oldPrice {
+        color: #918a8b;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: line-through;
+        margin-top: 2px;
+    }
+
+    .priceWrapper .discountPercentage {
+        color: var(--bs-green);
+        font-weight: 600;
+        font-size: 13px;
+        margin-top: 12px;
     }
 
     .listDetails {
         padding: 0px 0px 10px;
-        margin-top: 0.9rem;
+        margin-top: 0.5rem;
         border-bottom: 1px solid #e3e3e3;
-
-
     }
 
     .listDetails .item {
         margin-bottom: 9px;
         color: var.$softblack;
+        font-weight: 600;
+
     }
 
-    .listDetails .icon {
-        color: var.$softblack;
+    .listDetails .item span:first-child {
+        width: 50px;
     }
 
-    .listDetails .text {
-        color: #6a6a6a;
-        margin-right: 11px;
-        font-weight: 500;
-        font-size: 15px;
+    .listDetails .item a {
+        color: var(--bs-primary);
+        margin-right: 5px;
+        font-weight: 600;
     }
 
-    .listDetails .productSize,
-    .addCartDetails {
+    .shortDescription {
+        @include paragraph();
+        border-bottom: 1px solid #dedede;
+        padding-bottom: 1rem;
+    }
+
+    .listDetails .productSize {
         padding-bottom: 1.25rem;
-        border-bottom: 1px solid #e3e3e3;
+        border-bottom: 1px solid #dedede;
     }
 
     .labelText {
-        color: #6a6a6a;
+        color: var.$softblack;
         margin-left: 14px;
         font-size: 15px;
         font-weight: 600;
@@ -97,16 +95,35 @@
         }
     }
 
+    .addCartDetails {
+        margin-top: 1rem;
+    }
+
     .addCartbtn {
-        background: var.$accentcolor;
+        background: var.$secondarycolor;
+        color: #000;
         border: none;
-        height: 40px;
-        width: 90%;
+        height: 37px;
+        width: 80%;
         margin-right: 12px;
         font-size: 15px;
+        border-radius: 2px;
 
         &:hover {
+            color: #fff;
             background-color: #db002b;
+        }
+    }
+
+    .buyNow {
+        background-color: #f00;
+        color: #fff;
+        border: none;
+        padding: 5px 1.5rem;
+
+        &:hover {
+            background-color: #d50b0b;
+            ;
         }
     }
 
@@ -131,10 +148,5 @@
         }
     }
 
-    .listProductDetails {
-        padding: 0px;
-        margin-top: 15px;
-        color: var.$softblack;
 
-    }
 }

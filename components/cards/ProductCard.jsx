@@ -89,6 +89,7 @@ const ProductCard = ({ product, ...props }) => {
         }
 
     }
+
     return (
         <div className={`${style.productCard}  text-center`}
             {...props}
@@ -100,7 +101,7 @@ const ProductCard = ({ product, ...props }) => {
                 </div>
             </div>
             <div className={style.productCardImageWrapper}>
-                <Link href={`/product/${product?.product_slug} `}>
+                <Link href={`/product/${product?.product_slug}`}>
                     <Image
                         fill
                         src={product?.image}

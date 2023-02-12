@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 
 import style from './productview.module.scss'
@@ -6,9 +6,9 @@ import style from './productview.module.scss'
 const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
 
     const [selectedImage, setSelectedImage] = useState({ imageIndex: 0, imageUrl: '' });
+
     const imagePresentationRef = useRef(null)
     const thumbnailsImagesWrapperRef = useRef(null)
-
 
     const handleImageView = (event) => {
 
@@ -35,6 +35,7 @@ const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
                 ref={thumbnailsImagesWrapperRef}
                 onClick={handleImageView}>
                 <div className={`${style.imageThumbnail} ${selectedImage.imageIndex == 0 ? style.active : ''} `}>
+
                     <Image
                         fill
                         src={image || ''}
@@ -55,8 +56,6 @@ const ProductView = ({ image, imagesThumbnails, imageAlt }) => {
                                 data-image-index={index + 1} />
                         </div>)
                 }
-
-
                 )}
             </div>
         </div>

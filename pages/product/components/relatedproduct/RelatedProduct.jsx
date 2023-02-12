@@ -10,14 +10,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import style from './relatedproduct.module.scss';
-import { ListItem } from '@root/components/listitem';
+
 
 const RelatedProduct = ({ relatedProductsData }) => {
 
     const [swiper, setSwiper] = useState(null);
     return (
         <div className={style.relatedProductWrapper}>
-            <SectionLayout title="المنتجات ذات صلة">
+            <SectionLayout title="المنتجات ذات صلة" isSwiper={true}>
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
                         modules={[Pagination, Navigation]}
@@ -28,11 +28,9 @@ const RelatedProduct = ({ relatedProductsData }) => {
                             nextEl: prevElementRef.current,
                         }}
                         breakpoints={{
-                            0: { slidesPerView: 1 },
-                            480: { slidesPerView: 2 },
+                            0: { slidesPerView: 2 },
                             768: { slidesPerView: 3 },
-                            992: { slidesPerView: 4 },
-                            // 1170: { slidesPerView: 4 },
+                            992: { slidesPerView: 5 },
                         }}
                         loop={true}
                         spaceBetween={18}

@@ -8,7 +8,7 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { LayoutWrapper } from '@root/components/layout';
 
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import 'swiper/css';
 import 'react-toastify/dist/ReactToastify.css';
 import "@root/sass/_reset.scss";

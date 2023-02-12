@@ -6,3 +6,5 @@ export { default as useDecrementProductData } from './useDecrementProductData';
 export { default as useDeleteProductData } from './useDeleteProductData';
 export { default as useCategoriesData } from './useCategoriesData';
 export { default as useGuest } from './useGuest';
+export { default as useFormOrderValidation } from './useFormOrderValidation';
+export { default as useSendOrderData } from '../pages/checkout/hooks/useSendOrderData';

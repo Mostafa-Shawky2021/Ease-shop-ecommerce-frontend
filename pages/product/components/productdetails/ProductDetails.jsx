@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import {
     useAddCartData,
@@ -7,21 +8,24 @@ import {
     useCartsData,
 } from '@root/hooks';
 
-import { SelectedBox } from '@root/components/selectedbox';
-import { ProductQuantity } from '@root/components/productquantity';
+import { calcPriceDiscount } from '@root/utils';
+
 import { Button } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
+import { SelectedBox } from '@root/components/selectedbox';
+import { ProductQuantity } from '@root/components/productquantity';
+import { ModalFormOrder } from './modalformorder';
 
-import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import style from "./productdetails.module.scss";
 
+
 const ProductDetails = ({ productDetails }) => {
 
+    const [showModalOrder, setShowModalOrder] = useState(true);
     const [color, setColor] = useState('')
     const [size, setSize] = useState('');
     const [quantity, setQuantity] = useState(1);
@@ -77,22 +81,25 @@ const ProductDetails = ({ productDetails }) => {
             unit_price: productDetails.price_discount || productDetails.price,
             total_price: calcTotalPrice
         }
+
         // check if product contain color or size
         if (productDetails.color || productDetails.size) {
             // check if cart has already been added
-            const cartExistWithSamedata = carts.find(product => {
-                if (cartData.size == product.size && cartData.color == product.color) {
-                    return product;
+            const cartExistWithSamedata = carts.find(cart => {
+                if (cartData.size == cart.size && cartData.color == cart.color) {
+                    return cart;
                 }
             });
             if (cartExistWithSamedata) {
-                incrementProductMutation({ cartId: cartExistWithSamedata.id, quantity })
+                incrementProductMutation({ cartId: cartExistWithSamedata.id, quantity });
             } else {
-                addCartMutation(cartData)
+                addCartMutation(cartData);
             }
+
         } else {
+
             // check if cart has already been added
-            const cartExist = carts.find(cart => cart.product_id === cartData.product_id)
+            const cartExist = carts.find(cart => cart.product_id === cartData.product_id);
             if (cartExist) {
                 incrementProductMutation({ cartId: cartExist.id, quantity });
             } else {
@@ -100,32 +107,54 @@ const ProductDetails = ({ productDetails }) => {
             }
         }
     }
+
     const handleProductIncrement = () => setQuantity(quantity + 1)
     const handleProductDecrement = () => quantity > 1 && setQuantity(quantity - 1)
 
+    const renderPrice = () => {
+        if (productDetails?.price_discount) {
+            return (<>
+                <div className={style.price}>
+                    {productDetails?.price_discount} جنية
+                </div>
+                <div className={style.oldPrice}>
+                    <span className={`${style.productPrice} ${style.oldPrice}`}>
+                        {productDetails?.price} جنية
+                    </span>
+                </div>
+            </>)
+        } else {
+            return (
+                <div className={style.price}>
+                    {productDetails?.price_discount} جنية
+                </div>)
+        }
+    }
     return (
         <div className={style.productDetailsWrapper}>
             <div className={style.productName}>{productDetails?.product_name}</div>
             <div className={`${style.priceWrapper} d-flex align-items-center`}>
-                <div className={style.price}>{productDetails?.price_discount}جنية</div>
-                <div className={style.oldPrice}>{productDetails?.price} جنية</div>
-                <div className={style.discountPercentage}>خصم 50%</div>
+                {renderPrice()}
+                {productDetails?.price_discount && (<div className={style.discountPercentage}>
+                    خصم {calcPriceDiscount(productDetails?.price, productDetails?.price_discount)}%
+                </div>)}
             </div>
+
+            <ul className={`${style.listDetails} list-unstyled`}>
+                <li className={style.item}>
+                    <span>القسم: </span>
+                    <Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>{productDetails?.category?.cat_name}</Link>
+                </li>
+                <li className={style.item}>
+                    <span>البراند: </span>
+                    <Link href="#">{productDetails?.brand}</Link>
+                </li>
+            </ul>
             <div className={style.shortDescription}>
                 {productDetails?.short_description}
             </div>
-            <ul className={`${style.listDetails} list-unstyled`}>
-                <li className={style.item}>
-                    <VerifiedUserOutlinedIcon className={style.icon} />
-                    <label className={style.text}>{productDetails?.brand}</label>
-                </li>
-                <li className={style.item}>
-                    <AttachMoneyIcon className={style.icon} />
-                    <label className={style.text}>الدفع عن الاستلام</label>
-                </li>
-            </ul>
             {productDetails?.color && (
-                <div className={`${style.productColor} d-flex align-items-center mb-3`}>
+                <div className={`${style.productColor} d-flex align-items-center mb-3 mt-3`}>
                     <label className={style.labelText}>اختر لون المنتج</label>
                     <div style={{ width: '200px' }}>
                         <SelectedBox onChange={(color) => setColor(color)}>
@@ -135,7 +164,7 @@ const ProductDetails = ({ productDetails }) => {
                 </div>
             )}
             {productDetails?.size &&
-                (<div className={`${style.productSize} d-flex align-items-center mb-3`}>
+                (<div className={`${style.productSize} d-flex align-items-center mb-3 mt-3`}>
                     <label className={style.labelText}>اختر المقاس</label>
                     <div style={{ width: '200px' }}>
                         <SelectedBox onChange={(size) => setSize(size)}>
@@ -143,7 +172,6 @@ const ProductDetails = ({ productDetails }) => {
                         </SelectedBox>
                     </div>
                 </div>)}
-
             <div className={`${style.addCartDetails} d-flex`}>
                 <div className={style.quantity}>
                     <ProductQuantity
@@ -152,7 +180,7 @@ const ProductDetails = ({ productDetails }) => {
                         handleProductDecrement={handleProductDecrement}
                     />
                 </div>
-                <div style={{ position: 'relative', width: '100%' }}>
+                <div style={{ position: 'relative', width: '300px' }}>
                     {isLoading ?
                         (<CircularProgress className={style.iconLoading} size={25} />) :
                         (<Button className={style.addCartbtn} onClick={handleAddtoCart}>
@@ -161,18 +189,17 @@ const ProductDetails = ({ productDetails }) => {
                         </Button>
                         )}
                 </div>
-
+                <Button className={style.buyNow} onClick={() => setShowModalOrder(true)}>اشتري الأن</Button>
                 {/* <Button className={style.addFavouritebtn}>
                     <FavoriteBorderOutlinedIcon fontSize="small" />
                 </Button> */}
             </div>
-            <ul className={`${style.listProductDetails} list-unstyled`}>
-                <li className={style.item}>
-                    <label className={style.text}>
-                        القسم: {productDetails?.category?.cat_name}
-                    </label>
-                </li>
-            </ul>
+            {showModalOrder &&
+                <ModalFormOrder
+                    setShowModalOrder={setShowModalOrder}
+                    quantity={quantity}
+                    product={productDetails} />}
+
             <ToastContainer />
         </div>
     )
