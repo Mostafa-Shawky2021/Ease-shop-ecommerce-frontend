@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { LayoutWrapper } from '@root/components/layout';
+import { useCartsData, useGuest } from '@root/hooks';
 
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import 'swiper/css';
@@ -17,6 +18,7 @@ import "@root/sass/_typo.scss";
 
 export default function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient())
+
 
   return (
     <QueryClientProvider client={queryClient}>

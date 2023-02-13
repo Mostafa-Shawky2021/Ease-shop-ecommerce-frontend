@@ -58,12 +58,16 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
     }
 
     const handleProductDelete = (event) => {
-        const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
-        deleteProductMutation(cartId);
+        const deleteStatus = confirm("هل انت متاكد من انك تريد حذف المنتج ؟")
+        if (deleteStatus) {
+            const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
+            deleteProductMutation(cartId);
+        }
+
     }
 
     return (
-        <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''}`}>
+        <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''} `}>
             <header className={style.header}>
                 <h4 className={style.title}>سلة التسوق</h4>
                 <CloseIcon
@@ -85,19 +89,10 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                             </div>
                             <div className={style.productDetails}>
                                 <div className={style.productName}>
-                                    {cart?.product?.product_name} |
-                                    <span className={style.unitPrice}>
-                                        {cart?.unit_price} جنية
-                                    </span>
-                                </div>
-                                <div className={style.productMeta}>
-                                    {cart.color &&
-                                        (<span className={style.meta}>{cart?.color}</span>)}
-                                    {cart.size &&
-                                        (<span className={style.meta}>- {cart?.size}</span>)}
+                                    {cart?.product?.product_name}
                                 </div>
                                 <div className={style.productPrice}>
-                                    {cart?.total_price}
+                                    {Number(cart?.total_price).toLocaleString()}
                                     <span className={style.currency}>جنية</span>
                                     <span className={style.quantity}> x{cart.quantity}</span>
                                 </div>

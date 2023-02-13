@@ -6,7 +6,8 @@ const InputWithIcon = ({ children, className, ...props }) => {
         <div className={style.inputWrapper}>
             <input
                 className={`${style.inputBase} ${className}`}
-                {...props} />
+                {...props}
+            />
             {children}
         </div>)
 }

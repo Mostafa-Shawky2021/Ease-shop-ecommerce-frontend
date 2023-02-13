@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import Link from 'next/link';
 
 import { useSendOrderData } from '../../hooks';
-import { useGuest, useFormOrderValidation } from '@root/hooks';
+import { useGuest, useFormOrderValidation, useCartsData } from '@root/hooks';
 
 import { Button, Form } from "react-bootstrap";
-
+import { Loading } from '@root/components/loading';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import governorateData from 'data/governorate.json';
 
@@ -13,11 +15,14 @@ import style from './checkoutform.module.scss';
 
 const CheckOutForm = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const { guestId } = useGuest();
 
+    const { data: carts } = useCartsData(guestId);
     const { validateForm, formErrorMsg } = useFormOrderValidation();
 
-    const { mutate: sendOrder } = useSendOrderData();
+    const { mutate: sendOrder } = useSendOrderData(setIsLoading);
 
     const handleSubmit = (event) => {
 
@@ -40,8 +45,12 @@ const CheckOutForm = () => {
 
     }
 
+
     return (
         <div className={style.checkoutWrapper}>
+            {isLoading && (<Loading>
+                <CircularProgress size={35} style={{ position: 'absolute', top: '40vh', left: '50%' }} />
+            </Loading>)}
             <Form onSubmit={handleSubmit} >
                 <Form.Group style={{ position: 'relative' }} className="mb-3 mt-3" controlId="username">
                     <div className='d-flex align-items-center'>
@@ -51,7 +60,6 @@ const CheckOutForm = () => {
                     </div>
                     <Form.Control
                         name="username"
-
                         className={`${style.formControl} ${formErrorMsg.username ? style.errorField : ''}`}
                         autoComplete="off"
                     />
@@ -65,7 +73,6 @@ const CheckOutForm = () => {
                     <Form.Control
                         name="phone"
                         type="number"
-
                         className={`${style.formControl} ${formErrorMsg.phone ? style.errorField : ''}`}
                     />
                 </Form.Group>
@@ -124,7 +131,7 @@ const CheckOutForm = () => {
                     </Link>
                 </Form.Group>
             </Form>
-        </div>
+        </div >
     )
 }
 export default CheckOutForm

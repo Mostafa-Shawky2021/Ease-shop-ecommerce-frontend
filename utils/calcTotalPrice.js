@@ -4,7 +4,7 @@ const calcTotalPrice = (carts) => {
         for (const cart of carts) {
             sum += cart.total_price;
         }
-        return sum
+        return sum.toLocaleString();
     }
 }
 

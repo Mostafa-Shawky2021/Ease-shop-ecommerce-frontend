@@ -15,7 +15,7 @@
     overflow-y: auto;
 
     &::-webkit-scrollbar {
-        width: 15px;
+        width: 6px;
     }
 
     &::-webkit-scrollbar-track {
@@ -47,8 +47,11 @@
     }
 
     .closeIcon {
-        color: var(--bs-danger);
         cursor: pointer;
+
+        &:hover {
+            color: var(--bs-danger);
+        }
     }
 
     .cartList {
@@ -80,32 +83,17 @@
     .productName {
         color: #000000;
         font-weight: 600;
-        font-size: 1.125rem;
+        font-size: 1rem;
         line-height: 1.6;
-
-        .unitPrice {
-            margin-right: 5px;
-            margin-top: 5px;
-            font-size: 1rem
-        }
     }
 
-    .productMeta {
-        color: #919191;
-
-        .meta {
-            margin-left: 5px;
-            font-weight: 600;
-            text-transform: capitalize;
-        }
-    }
 
     .productPrice {
-        color: #646262;
+        color: #f00;
         font-family: var.$oswaldfont;
         margin-top: 0.2rem;
         font-size: 0.9rem;
-        font-weight: bold;
+        font-weight: 500;
 
     }
 
@@ -127,7 +115,7 @@
         background-color: transparent;
         border: none;
         height: 30px;
-        color: var.$softblack;
+        color: var.$hardblack;
         margin-right: 1rem;
 
         &:hover,

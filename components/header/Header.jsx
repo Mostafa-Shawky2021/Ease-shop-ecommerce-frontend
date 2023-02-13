@@ -1,6 +1,8 @@
 
+import { useState } from 'react';
 import Link from 'next/link'
 
+import { useRouter } from 'next/router';
 import { useCartsData, useGuest } from '@root/hooks';
 
 import { calcCartsCount } from '@root/utils';
@@ -14,12 +16,18 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 
 import style from './header.module.scss';
 
+
 const Header = ({ setIsOpenCartList }) => {
 
-    const { guestId } = useGuest();
+    const [searchInput, setSearchInput] = useState('');
 
+    const router = useRouter()
+    const { guestId } = useGuest();
     const { data: carts } = useCartsData(guestId);
 
+    const handleSearchInput = () => {
+        router.push(`/products?productname=${searchInput}`);
+    }
     return (
         <div className={`${style.header} align-items-center`}>
 
@@ -32,8 +40,11 @@ const Header = ({ setIsOpenCartList }) => {
                     </Col>
                     <Col xs={12} md={6} lg={6}>
                         <div>
-                            <InputWithIcon placeholder="عن ماذا تبحث؟" className={style.searchInput}>
-                                <button className={style.btnSearch}>
+                            <InputWithIcon
+                                onChange={(event) => setSearchInput(event.target.value)}
+                                placeholder="عن ماذا تبحث؟"
+                                className={style.searchInput}>
+                                <button className={style.btnSearch} onClick={handleSearchInput}>
                                     <SearchOutlinedIcon />
                                 </button>
                             </InputWithIcon>

@@ -3,10 +3,10 @@
 @use 'sass/mixins/mediaquery' as *;
 
 .productDetailsWrapper {
-    margin-top: 2rem;
+    margin-top: 1.7rem;
 
     @include mediaquery(var.$mediumscreen) {
-        margin-top: 0px;
+        // margin-top: 0px;
     }
 
     .productName {
@@ -104,7 +104,7 @@
         color: #000;
         border: none;
         height: 37px;
-        width: 80%;
+        width: 100%;
         margin-right: 12px;
         font-size: 15px;
         border-radius: 2px;
@@ -120,6 +120,7 @@
         color: #fff;
         border: none;
         padding: 5px 1.5rem;
+        margin-right: 1.2rem;
 
         &:hover {
             background-color: #d50b0b;

@@ -82,7 +82,7 @@
     }
 
     .productName {
-        color: #202020;
+        color: var.$primarycolor;
         font-weight: 500;
         margin-top: 7px;
         margin-bottom: 0px;
@@ -109,10 +109,14 @@
 
     .productPrice {
         color: var.$accentcolor;
-        font-size: 1.125rem;
-        font-weight: 600;
+        font-weight: 500;
         margin: 0px 5px;
         font-family: var.$oswaldfont;
+
+        .currency {
+            font-family: var.$cairofont;
+            font-weight: 500;
+        }
     }
 
     .oldPrice {

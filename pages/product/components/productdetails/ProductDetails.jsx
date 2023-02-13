@@ -25,7 +25,7 @@ import style from "./productdetails.module.scss";
 
 const ProductDetails = ({ productDetails }) => {
 
-    const [showModalOrder, setShowModalOrder] = useState(true);
+    const [showModalOrder, setShowModalOrder] = useState(false);
     const [color, setColor] = useState('')
     const [size, setSize] = useState('');
     const [quantity, setQuantity] = useState(1);
@@ -172,7 +172,7 @@ const ProductDetails = ({ productDetails }) => {
                         </SelectedBox>
                     </div>
                 </div>)}
-            <div className={`${style.addCartDetails} d-flex`}>
+            <div className={`${style.addCartDetails} d-flex flex-wrap`}>
                 <div className={style.quantity}>
                     <ProductQuantity
                         quantity={quantity}
@@ -180,7 +180,7 @@ const ProductDetails = ({ productDetails }) => {
                         handleProductDecrement={handleProductDecrement}
                     />
                 </div>
-                <div style={{ position: 'relative', width: '300px' }}>
+                <div style={{ position: 'relative', width: '170px' }}>
                     {isLoading ?
                         (<CircularProgress className={style.iconLoading} size={25} />) :
                         (<Button className={style.addCartbtn} onClick={handleAddtoCart}>
@@ -189,7 +189,9 @@ const ProductDetails = ({ productDetails }) => {
                         </Button>
                         )}
                 </div>
-                <Button className={style.buyNow} onClick={() => setShowModalOrder(true)}>اشتري الأن</Button>
+                <Button className={style.buyNow} onClick={() => setShowModalOrder(true)}>
+                    اشتري الأن
+                </Button>
                 {/* <Button className={style.addFavouritebtn}>
                     <FavoriteBorderOutlinedIcon fontSize="small" />
                 </Button> */}

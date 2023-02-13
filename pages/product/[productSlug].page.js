@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { axiosInstance } from 'lib';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Breadcrumb, Col, Container, Row } from 'react-bootstrap';
 
-import { Header } from '@root/components/header';
+
 import { ProductView } from './components/productview';
 import { ProductDetails } from './components/productdetails';
 import { ProductDescription } from './components/productdescription';
@@ -15,6 +15,7 @@ import { queryKeys } from './data';
 
 import { fetchProductDetails, fetchProductsRelated } from './queries';
 import { useProductDetailsData, useRelatedProductsData } from './hooks';
+import { BreadCrumbLayout } from '@root/components/layout';
 
 export const getStaticPaths = async () => {
 
@@ -32,6 +33,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
+
     const queryClient = new QueryClient();
     const productSlug = params.productSlug;
     await Promise.all([
@@ -59,6 +61,10 @@ export default function ProductDetailsPage() {
 
     return (
         <>
+            <BreadCrumbLayout>
+                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
+                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: 'bold' }}>{productDetails.product_name}</Breadcrumb.Item>
+            </BreadCrumbLayout>
             <Container style={{ marginTop: "2.8rem" }}>
                 <Row>
                     <Col xs={12} md={6}>

@@ -1,19 +1,37 @@
+import { useEffect, useState } from 'react';
+
 import { useFormOrderValidation, useGuest } from '@root/hooks';
 import { useFastOrderData } from '../../../hooks';
 
 import { Form, Button } from 'react-bootstrap';
 
 import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import governorateData from 'data/governorate.json';
 
 import style from './modalformorder.module.scss';
+import { Loading } from '@root/components/loading';
 
 const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const { validateForm, formErrorMsg } = useFormOrderValidation();
     const { guestId } = useGuest();
 
-    const { mutate: sendFastOrder } = useFastOrderData()
+    const { mutate: sendFastOrder } = useFastOrderData(setIsLoading, setShowModalOrder)
+
+
+    useEffect(() => {
+
+        const closeModalOrderForm = (event) => {
+            if (event.key === "Escape") setShowModalOrder(false);
+        }
+        document.body.addEventListener('keydown', closeModalOrderForm);
+        return () => document.body.removeEventListener('keydown', closeModalOrderForm);
+    }, []);
+
 
     const handleSubmit = (event) => {
 
@@ -21,6 +39,7 @@ const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
         const price = product.price_discount || product.price;
         const total_price = price * quantity;
         const formData = new FormData(event.currentTarget);
+
         const orderDetails = {
             guest_id: guestId,
             quantity,
@@ -49,6 +68,13 @@ const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
                     </div>
                 </header>
                 <div className={style.formModelBody}>
+
+                    {isLoading && (
+                        <Loading>
+                            <CircularProgress size={33} className={style.loadingIcon} />
+                        </Loading>
+
+                    )}
                     <div className={style.formOrderWrapper}>
                         <Form onSubmit={handleSubmit} >
                             <Form.Group style={{ position: 'relative' }} className="mb-3 mt-3" controlId="username">

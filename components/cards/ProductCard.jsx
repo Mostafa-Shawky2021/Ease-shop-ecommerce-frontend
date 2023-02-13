@@ -33,8 +33,12 @@ const ProductCard = ({ product, ...props }) => {
         if (product?.price_discount) {
             return (
                 <div className='d-flex align-items-center justify-content-center'>
-                    <span className={style.productPrice}>{product?.price_discount} جنية</span>
-                    <span className={`${style.productPrice} ${style.oldPrice}`}>{product?.price} جنية</span>
+                    <span className={style.productPrice}>
+                        {Number(product?.price_discount).toLocaleString()}  <span className={style.currency}>جنية</span>
+                    </span>
+                    <span className={`${style.productPrice} ${style.oldPrice}`}>
+                        {Number(product?.price).toLocaleString()} <span className={style.currency}>جنية</span>
+                    </span>
                 </div>
             )
         } else {
@@ -68,7 +72,7 @@ const ProductCard = ({ product, ...props }) => {
         // check if product contain color or size
         if (product.color || product.size) {
             // check if cart has already been added
-            const cartExistWithSamedata = carts.find(product => {
+            const cartExistWithSamedata = carts?.find(product => {
                 if (cartData.size == product.size && cartData.color == product.color) {
                     return product;
                 }

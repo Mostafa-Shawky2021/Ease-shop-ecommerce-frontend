@@ -8,12 +8,14 @@ import {
     useGuest,
     useIncrementProductData
 } from '@root/hooks';
+
 import { calcCartsCount } from '@root/utils';
 
 import { ToastContainer } from 'react-toastify';
 import { ProductQuantity } from '@root/components/productquantity';
-import { ListItem } from '@root/components/listitem';
 
+import { ListItem } from '@root/components/listitem';
+import { CartListLoading } from '@root/components/loading';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import style from './cartlist.module.scss';
@@ -26,7 +28,7 @@ const CartList = () => {
 
     const { guestId } = useGuest();
 
-    const { data: carts } = useCartsData(guestId);
+    const { data: carts, isLoading: isCartsLoading } = useCartsData(guestId);
 
     const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading);
     const { mutate: decrementProductMutation } = useDecrementProductData(setIsLoading);
@@ -61,8 +63,9 @@ const CartList = () => {
                 <h4 className={style.title}>سلة المشتريات</h4>
                 <span className={style.itemCount}>{calcCartsCount(carts)} عناصر</span>
             </header>
-            {!!carts?.length ? (
-                <ListItem
+            {isCartsLoading
+                ? <CartListLoading />
+                : <ListItem
                     data={carts}
                     renderItem={(cart) => (
                         <div className={`${style.cartListBody} d-flex flex-wrap justify-content-between`} key={cart.id}>
@@ -80,7 +83,7 @@ const CartList = () => {
                                     {cart.color && (
                                         <li className={style.listItem}>
                                             <span>اللون</span>
-                                            <span>{cart.ؤخمخق}</span>
+                                            <span>{cart.color}</span>
                                         </li>)}
                                     <li className={style.listItem}>
                                         <span>سعر الوحدة:  </span>
@@ -120,8 +123,11 @@ const CartList = () => {
                             <ToastContainer />
                         </div>
                     )} />
+            }
 
-            ) : (<p>لا توجد منتجات لعرضها</p>)}
+
+
+
         </div>
     )
 }

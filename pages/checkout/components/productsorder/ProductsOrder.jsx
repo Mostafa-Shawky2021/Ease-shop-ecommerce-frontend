@@ -17,7 +17,7 @@ const ProductsOrder = () => {
                 <table className={style.table}>
                     <thead className={style.tableHead}>
                         <tr>
-                            <th >اسم المنتج </th>
+                            <th>اسم المنتج </th>
                             <th>السعر الكلي</th>
                         </tr>
                     </thead>
@@ -27,7 +27,7 @@ const ProductsOrder = () => {
                             renderItem={(cart) => (
                                 <tr key={cart.id}>
                                     <td style={{ width: '75%' }}>   x {cart.quantity} {cart.product.product_name}</td>
-                                    <td style={{ width: '25%' }}>{cart.total_price}</td>
+                                    <td style={{ width: '25%' }}>{Number(cart.total_price).toLocaleString()}</td>
                                 </tr>
                             )}
                         />
