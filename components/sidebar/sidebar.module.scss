@@ -2,21 +2,19 @@
 
 .sidebarWrapper {
     margin-top: 1rem;
-    padding: 1.5rem;
+    padding: 1.5rem 1.8rem;
     margin-left: 1.1rem;
-    background: #fafafa;
     border-left: 1px solid #dedede;
 
     .priceFilter {
         border-bottom: 1px solid #dedede;
-        padding-bottom: 0.3rem;
+        padding-bottom: 0.7rem;
     }
 
     .title {
-        color: #222;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 600;
-        margin-bottom: 1.1rem;
+        margin-bottom: 0.5rem
     }
 
     .filter {

@@ -39,7 +39,7 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
 
         window.addEventListener('scroll', () => {
             let scrollValue = document.documentElement.scrollTop;
-            (scrollValue > 180) ? setFixedMenu(true) : setFixedMenu(false);
+            (scrollValue > 280) ? setFixedMenu(true) : setFixedMenu(false);
         })
 
     }, [setFixedMenu])

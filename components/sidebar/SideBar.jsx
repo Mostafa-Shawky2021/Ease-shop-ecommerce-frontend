@@ -53,7 +53,7 @@ const Sidebar = ({ setFilterRules, filterRules, handleFilter }) => {
     return (
         <div className={style.sidebarWrapper}>
             <div className={style.priceFilter}>
-                <h4 className={style.title}>فلترة بحسب السعر</h4>
+                <h4 className={style.title}>السعر</h4>
                 <Slider
                     size="small"
                     min={50}
@@ -66,8 +66,8 @@ const Sidebar = ({ setFilterRules, filterRules, handleFilter }) => {
                     valueLabelDisplay="auto"
                     disableSwap
                 />
-                <p className={style.priceRanger}>
-                    السعر  : {filterRules.price[1]} - {filterRules.price[0]}
+                <p className={style.priceRange}>
+                    السعر  : {Number(filterRules.price[1]).toLocaleString()} - {Number(filterRules.price[0]).toLocaleString()}
                 </p>
             </div>
             {!!productVariants?.sizes?.length &&
@@ -84,7 +84,7 @@ const Sidebar = ({ setFilterRules, filterRules, handleFilter }) => {
                 </div>)}
             {!!productVariants?.colors.length &&
                 (<div className={style.filter}>
-                    <h4 className={style.title}>فلترة بحسب اللون</h4>
+                    <h4 className={style.title}>اللون</h4>
                     <ul className={`list-unstyled ${style.filterList}`} onChange={handleColorFilter}>
                         {productVariants.colors.map(color => (
                             <li key={color.id} className={`${style.filterItem} d-flex`}>
@@ -101,10 +101,10 @@ const Sidebar = ({ setFilterRules, filterRules, handleFilter }) => {
             <div className={style.applyFilter}>
                 <Button className={style.applyFilterBtn} onClick={handleFilter}>تطبيق الفلتر</Button>
             </div>
-            <div className={style.tags}>
+            {/* <div className={style.tags}>
                 <h4 className={style.title}>العلامات</h4>
                 <Link href="" className={style.tagItem}>ملابس</Link>
-            </div>
+            </div> */}
         </div>
     )
 }

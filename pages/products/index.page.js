@@ -83,7 +83,7 @@ const ProductsPageSearch = () => {
                 </Breadcrumb.Item>
             </BreadCrumbLayout>
 
-            <Container fluid="xl" style={{ marginTop: "2.8rem" }}>
+            <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
                         <Sidebar

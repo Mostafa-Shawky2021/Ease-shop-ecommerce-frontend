@@ -1,9 +1,9 @@
 import { ProductCard } from '@root/components/cards';
 import { GridList } from '@root/components/gridlist';
-import React from 'react'
 import { Col } from 'react-bootstrap';
 
 import style from './productssearch.module.scss';
+
 const ProductsSearch = ({ products }) => {
 
     return (
