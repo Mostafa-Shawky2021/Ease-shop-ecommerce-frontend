@@ -37,31 +37,7 @@ const ProductDetails = ({ productDetails }) => {
     const { mutate: addCartMutation } = useAddCartData(setIsLoading);
     const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading, setQuantity);
 
-    useEffect(() => {
 
-        const sizes = productDetails?.size?.split(',');
-        const colors = productDetails?.color?.split(',');
-        sizes && setSize(sizes[0]);
-        colors && setColor(colors[0]);
-
-    }, [productDetails])
-
-
-    const renderProductColor = () => {
-        const colorsArr = productDetails?.color?.split(',');
-        const colorElements = colorsArr?.map((color, index) => (
-            <div key={index} value={color} className={style.option}>{color}</div>
-        ))
-        return colorElements;
-    }
-    const renderProductSize = () => {
-        const sizeArr = productDetails?.size?.split(',');
-        const sizeElements = sizeArr?.map((size, index) => (
-            <div key={index} value={size} className={style.option}>{size}</div>
-        ))
-
-        return sizeElements;
-    }
 
     const handleAddtoCart = () => {
 
@@ -130,6 +106,7 @@ const ProductDetails = ({ productDetails }) => {
                 </div>)
         }
     }
+
     return (
         <div className={style.productDetailsWrapper}>
             <div className={style.productName}>{productDetails?.product_name}</div>
@@ -153,25 +130,31 @@ const ProductDetails = ({ productDetails }) => {
             <div className={style.shortDescription}>
                 {productDetails?.short_description}
             </div>
-            {productDetails?.color && (
+            {!!productDetails?.colors?.length && (
                 <div className={`${style.productColor} d-flex align-items-center mb-3 mt-3`}>
                     <label className={style.labelText}>اختر لون المنتج</label>
                     <div style={{ width: '200px' }}>
                         <SelectedBox onChange={(color) => setColor(color)}>
-                            {renderProductColor()}
+                            {productDetails.colors.map(color => (
+                                <div key={color.id} value={color.name} className={style.option}>{color.name}</div>
+                            ))}
                         </SelectedBox>
                     </div>
                 </div>
             )}
-            {productDetails?.size &&
-                (<div className={`${style.productSize} d-flex align-items-center mb-3 mt-3`}>
-                    <label className={style.labelText}>اختر المقاس</label>
+
+            {!!productDetails?.sizes?.length && (
+                <div className={`${style.productColor} d-flex align-items-center mb-3 mt-3`}>
+                    <label className={style.labelText}>اختر حجم المنتج</label>
                     <div style={{ width: '200px' }}>
                         <SelectedBox onChange={(size) => setSize(size)}>
-                            {renderProductSize()}
+                            {productDetails.sizes.map(size => (
+                                <div key={size.id} value={size.name} className={style.option}>{size.name}</div>
+                            ))}
                         </SelectedBox>
                     </div>
-                </div>)}
+                </div>
+            )}
             <div className={`${style.addCartDetails} d-flex flex-wrap`}>
                 <div className={style.quantity}>
                     <ProductQuantity
@@ -201,7 +184,6 @@ const ProductDetails = ({ productDetails }) => {
                     setShowModalOrder={setShowModalOrder}
                     quantity={quantity}
                     product={productDetails} />}
-
             <ToastContainer />
         </div>
     )

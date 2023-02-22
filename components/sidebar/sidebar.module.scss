@@ -2,36 +2,33 @@
 
 .sidebarWrapper {
     margin-top: 1rem;
-    margin-left: 0.9rem;
-    padding-left: 0.5rem;
-    padding-right: 1rem;
+    padding: 1.5rem;
+    margin-left: 1.1rem;
+    background: #fafafa;
+    border-left: 1px solid #dedede;
+
+    .priceFilter {
+        border-bottom: 1px solid #dedede;
+        padding-bottom: 0.3rem;
+    }
 
     .title {
         color: #222;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 600;
-        margin-bottom: 1.3rem;
-
+        margin-bottom: 1.1rem;
     }
 
-    .search {
-        padding-bottom: 1.1rem;
-        border-bottom: 1px solid #eae9e9;
-        margin-bottom: 1.2rem;
+    .filter {
+        margin-top: 1rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 1px solid #dedede;
+        max-height: 250px;
+        overflow: auto;
     }
 
-    .btnSearch {
-        position: absolute;
-        left: 0px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: transparent;
-        color: var.$softblack;
-        border: none;
-        border-right: 1px solid #ccc;
-        cursor: pointer;
-        width: 45px;
-
+    .tags {
+        margin-top: 1rem;
     }
 
 }

@@ -12,6 +12,8 @@ import { calcPriceDiscount } from '@root/utils';
 
 import { Button } from 'react-bootstrap';
 
+import DefaultImage from '@assets/images/default/image.jpg';
+
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -108,9 +110,9 @@ const ProductCard = ({ product, ...props }) => {
                 <Link href={`/product/${product?.product_slug}`}>
                     <Image
                         fill
-                        src={product?.image}
+                        src={product?.image || DefaultImage}
                         className={style.productCardImage}
-                        alt="product-image" />
+                        alt={product?.name} />
                 </Link>
             </div>
             <div style={{ paddingLeft: '5px', paddingRight: '5px' }}>
@@ -121,7 +123,7 @@ const ProductCard = ({ product, ...props }) => {
                     <StarOutlineIcon className={style.productRating} />
                     <StarOutlineIcon className={style.productRating} />
                 </div>
-                <Link href={`/product / ${product?.product_slug} `}>
+                <Link href={`/product/${product?.product_slug}`}>
                     <p className={style.productName}>{product?.product_name}</p>
                 </Link>
                 <p className={style.productDescription}>{product?.short_description}</p>

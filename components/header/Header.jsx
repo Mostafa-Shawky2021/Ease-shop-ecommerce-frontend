@@ -26,7 +26,8 @@ const Header = ({ setIsOpenCartList }) => {
     const { data: carts } = useCartsData(guestId);
 
     const handleSearchInput = () => {
-        router.push(`/products?productname=${searchInput}`);
+        const searchInputUrl = encodeURIComponent(searchInput);
+        router.push(`/products?productname=${searchInputUrl}`);
     }
     return (
         <div className={`${style.header} align-items-center`}>
