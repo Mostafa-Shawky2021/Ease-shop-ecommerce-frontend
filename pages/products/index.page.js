@@ -3,18 +3,16 @@ import { useRouter } from "next/router";
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { useSearchProductsData } from "./hooks";
+import { useProductsData } from "@root/hooks";
 
-import { fetchProducts } from "./queries";
-import { fetchProductVariants } from "@root/queries";
+import { fetchProducts, fetchProductVariants } from "@root/queries";
 
 import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
 import { BreadCrumbLayout } from "@root/components/layout";
 import { ProductsSearch } from "./components/productssearch";
 import { Sidebar } from "@root/components/sidebar";
 
-import { queryKeys } from "./data";
-import { queryKeys as globalQueryKeys } from "data";
+import { queryKeys } from "data";
 
 
 
@@ -24,18 +22,20 @@ export async function getServerSideProps({ query }) {
 
     const urlSearchParams = new URLSearchParams();
 
-    Object.entries(query).forEach(([key, value]) => urlSearchParams.set(key, encodeURIComponent(value)));
+    Object.entries(query).forEach(([key, value]) => (
+        urlSearchParams.set(key, encodeURIComponent(value))));
 
     const urlSearchParamsToString = urlSearchParams.toString();
 
     await Promise.all([
         queryClient.prefetchQuery(
-            queryKeys.SEARCH_PRODUCTS(urlSearchParamsToString),
-            () => fetchProducts(urlSearchParamsToString)),
+            queryKeys.PRODUCTS(1, urlSearchParamsToString),
+            () => fetchProducts(1, urlSearchParamsToString,)),
         queryClient.prefetchQuery(
-            globalQueryKeys.PRODUCT_VARIANTS,
+            queryKeys.PRODUCT_VARIANTS,
             fetchProductVariants)
     ]);
+
     return {
         props: {
             dehydratedState: dehydrate(queryClient)
@@ -51,17 +51,21 @@ const ProductsPageSearch = () => {
         colors: [],
     });
 
+    const [pageNumber, setPageNumber] = useState(1);
+
     const router = useRouter();
 
-    const { data: productsSearchResult } = useSearchProductsData(router.query);
+    const { data: productsSearchResult } = useProductsData(pageNumber, router.query);
 
-    const d = useSearchProductsData(router.query);
+
     const handleFilter = () => {
 
         const urlSearchParams = new URLSearchParams()
 
         Object.entries(filterRules).forEach(([filterKey, value]) => {
-            if (value.length > 0) urlSearchParams.set(filterKey, encodeURIComponent(value.join('-')));
+            if (value.length > 0) {
+                urlSearchParams.set(filterKey, encodeURIComponent(value.join('-')));
+            }
         });
 
         const urlSearchParamsToString = urlSearchParams.toString();
@@ -93,7 +97,12 @@ const ProductsPageSearch = () => {
                         />
                     </Col>
                     <Col xs={12} lg={9} >
-                        <ProductsSearch products={productsSearchResult} />
+                        {productsSearchResult?.products ?
+                            (<ProductsSearch
+                                products={productsSearchResult}
+                                setPageNumber={setPageNumber}
+                            />)
+                            : (<p>لا توجد منتجات للعرض</p>)}
                     </Col>
                 </Row>
             </Container>

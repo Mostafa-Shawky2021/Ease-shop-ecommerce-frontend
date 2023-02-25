@@ -2,19 +2,26 @@
 
 .sidebarWrapper {
     margin-top: 1rem;
-    padding: 1.5rem 1.8rem;
+    padding: 1.5rem 1rem;
     margin-left: 1.1rem;
-    border-left: 1px solid #dedede;
+    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
 
     .priceFilter {
         border-bottom: 1px solid #dedede;
         padding-bottom: 0.7rem;
     }
 
+    .clearFilter {
+        background-color: transparent;
+        color: var(--bs-danger);
+        border: none;
+
+    }
+
     .title {
         font-size: 1rem;
         font-weight: 600;
-        margin-bottom: 0.5rem
+        margin-bottom: 0.9rem
     }
 
     .filter {
@@ -23,10 +30,44 @@
         border-bottom: 1px solid #dedede;
         max-height: 250px;
         overflow: auto;
+
+        &::-webkit-scrollbar {
+            opacity: 0
+        }
+
     }
 
-    .tags {
-        margin-top: 1rem;
+    .filterItem {
+        margin-bottom: 0.4rem;
+        margin-top: 0.7rem;
+        color: #767373;
     }
+
+    .checkBox {
+        width: 17px;
+        height: 17px;
+        border: 1px solid #dedede;
+    }
+
+    .categories {
+        position: relative;
+    }
+
+    .applyFilterBtn {
+        background-color: var.$secondarycolor;
+        color: #000;
+        border: 0px;
+        border-radius: 0px;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+
+        &:hover,
+        &:focus {
+            background-color: #efad06;
+            color: #000;
+        }
+
+    }
+
 
 }

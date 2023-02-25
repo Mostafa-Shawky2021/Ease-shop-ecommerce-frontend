@@ -39,7 +39,8 @@ const RandomCategoriesProducts = ({ randomCategoriesProductsData }) => {
                             breakpoints={{
                                 0: { slidesPerView: 2 },
                                 768: { slidesPerView: 3 },
-                                992: { slidesPerView: 5 },
+                                992: { slidesPerView: 4 },
+                                1400: { slidesPerView: 5 }
                             }}
                             loop={true}
                             spaceBetween={18}

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from 'react-bootstrap';
+import { ListItem } from '@root/components/listitem';
+
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import style from './categoriesmenu.module.scss';
-import { ListItem } from '@root/components/listitem';
 
 const CategoriesMenu = ({ categoriesData }) => {
 
-    const [categoryListIsOpen, setCategoryListIsOpen] = useState(false)
+    const [categoryListIsOpen, setCategoryListIsOpen] = useState(false);
 
     useEffect(() => {
 
@@ -42,14 +43,15 @@ const CategoriesMenu = ({ categoriesData }) => {
     }, [categoriesData])
 
     useEffect(() => {
+
         const closeCategoryListMenuList = (event) => {
             if (event.key === 'Escape') {
                 setCategoryListIsOpen(false);
-
             }
         };
         document.addEventListener('keydown', closeCategoryListMenuList);
         return () => document.removeEventListener('keydown', closeCategoryListMenuList);
+
     }, [])
 
     return (

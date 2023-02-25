@@ -22,7 +22,7 @@
         text-align: center;
         width: 98%;
 
-        @include mediaquery(var.$mediumscreen) {
+        @include minmediaquery('md') {
             text-align: right;
             padding: 0px;
             right: 30px;
@@ -40,11 +40,11 @@
                 color: #f00;
             }
 
-            @include mediaquery(var.$tabletscreen) {
+            @include minmediaquery('sm') {
                 font-size: 2.7rem;
             }
 
-            @include mediaquery(var.$mediumscreen) {
+            @include minmediaquery('md') {
                 font-size: 3.5rem;
             }
         }
@@ -54,7 +54,7 @@
             @include paragraph(#cfcfcf);
             font-size: 1rem;
 
-            @include mediaquery(var.$mediumscreen) {
+            @include minmediaquery('md') {
                 max-width: 640px;
                 font-size: 1.1rem
             }
@@ -75,7 +75,7 @@
             text-align: center;
             line-height: 45px;
 
-            @include mediaquery(var.$tabletscreen) {
+            @include minmediaquery('sm') {
                 height: 65px;
                 line-height: 65px;
             }
@@ -91,7 +91,7 @@
             font-size: 1.2rem;
             font-weight: 600;
 
-            @include mediaquery(var.$tabletscreen) {
+            @include minmediaquery('sm') {
                 font-size: 1.4rem;
             }
         }

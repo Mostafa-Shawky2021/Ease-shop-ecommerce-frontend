@@ -1,17 +1,23 @@
-import Link from 'next/link';
-import { useState } from 'react';
 
-import { useProductVariants } from "@root/hooks";
+import { useCategoriesData, useProductVariants } from "@root/hooks";
 
 import Slider from '@mui/material/Slider';
 import { Button } from 'react-bootstrap';
 
+import CloseIcon from '@mui/icons-material/Close';
+
 import style from './sidebar.module.scss';
+import { CategoriesMenu } from "../categoriesmenu";
 
 
-const Sidebar = ({ setFilterRules, filterRules, handleFilter }) => {
+const Sidebar = ({ setFilterRules,
+    filterRules,
+    handleFilter,
+    handleDeleteFilter
+}) => {
 
     const { data: productVariants } = useProductVariants();
+    const { data: categories } = useCategoriesData();
 
     const valueLabelFormat = (value) => value;
 
@@ -53,7 +59,13 @@ const Sidebar = ({ setFilterRules, filterRules, handleFilter }) => {
     return (
         <div className={style.sidebarWrapper}>
             <div className={style.priceFilter}>
-                <h4 className={style.title}>السعر</h4>
+                <div className='d-flex align-items-center justify-content-spacebetween'>
+                    <h4 className={style.title} style={{ margin: '0px' }}>السعر</h4>
+                    <Button className={style.clearFilter} onClick={handleDeleteFilter}>
+                        مسح الفلتر
+                        <CloseIcon className={style.coloricon} fontSize="small" />
+                    </Button>
+                </div>
                 <Slider
                     size="small"
                     min={50}
@@ -65,39 +77,59 @@ const Sidebar = ({ setFilterRules, filterRules, handleFilter }) => {
                     onChange={handlePriceFilter}
                     valueLabelDisplay="auto"
                     disableSwap
+
                 />
                 <p className={style.priceRange}>
                     السعر  : {Number(filterRules.price[1]).toLocaleString()} - {Number(filterRules.price[0]).toLocaleString()}
                 </p>
             </div>
-            {!!productVariants?.sizes?.length &&
-                (<div className={style.filter}>
-                    <h4 className={style.title}>فلترة بحسب الحجم</h4>
-                    <ul className={`list-unstyled ${style.filterList}`} onChange={handleSizeFilter}>
-                        {productVariants.sizes.map(size => (
-                            <li key={size.id} className={`${style.filterItem} d-flex`}>
-                                <input type="checkbox" value={size.name} id={size.name} />
-                                <label htmlFor={size.name} className="ms-2">{size.name}</label>
-                            </li>
-                        ))}
-                    </ul>
-                </div>)}
-            {!!productVariants?.colors.length &&
-                (<div className={style.filter}>
-                    <h4 className={style.title}>اللون</h4>
-                    <ul className={`list-unstyled ${style.filterList}`} onChange={handleColorFilter}>
-                        {productVariants.colors.map(color => (
-                            <li key={color.id} className={`${style.filterItem} d-flex`}>
-                                <input
-                                    type="checkbox"
-                                    value={color.name}
-                                    id={color.name}
-                                />
-                                <label htmlFor={color.name} className="ms-2">{color.name}</label>
-                            </li>
-                        ))}
-                    </ul>
-                </div>)}
+            <div>
+                {!!productVariants?.sizes?.length &&
+                    <div className={style.filter}>
+                        <h4 className={style.title}>فلترة بحسب الحجم</h4>
+                        <ul className={`list-unstyled ${style.filterList}`} onChange={handleSizeFilter}>
+                            {productVariants.sizes.map(size => (
+                                <li key={size.id} className={`${style.filterItem} d-flex align-items-center`}>
+                                    <input
+                                        className={style.checkBox}
+                                        type="checkbox"
+                                        value={size.name}
+                                        id={size.name} />
+                                    <label htmlFor={size.name} className="ms-2">{size.name}</label>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                }
+                {!!productVariants?.colors.length &&
+                    <div className={style.filter}>
+                        <h4 className={style.title}>اللون</h4>
+                        <ul className={`list-unstyled ${style.filterList}`} onChange={handleColorFilter}>
+                            {productVariants.colors.map(color => (
+                                <li key={color.id} className={`${style.filterItem} d-flex`}>
+                                    <input
+                                        className={style.checkBox}
+                                        type="checkbox"
+                                        value={color.name}
+                                        id={color.name}
+                                    />
+                                    <label htmlFor={color.name} className="ms-2">{color.name}</label>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                }
+            </div>
+            {!!categories?.length &&
+                <div className={style.categories}>
+                    <h4 className={style.title}>الاقسام</h4>
+                    <CategoriesMenu
+                        categoriesData={categories}
+                        withButtonOpen={false}
+                    />
+                </div>
+            }
+
             <div className={style.applyFilter}>
                 <Button className={style.applyFilterBtn} onClick={handleFilter}>تطبيق الفلتر</Button>
             </div>

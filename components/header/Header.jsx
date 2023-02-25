@@ -46,7 +46,7 @@ const Header = ({ setIsOpenCartList }) => {
             <Container fluid="xl" className={style.container}>
                 <Row className="align-items-center">
                     <Col xs={12} md={3} lg={2}>
-                        <div className={`${style.logo} text-center text-lg-end`}>
+                        <div className={`${style.logo} text-center text-lg-start`}>
                             <Link href="/homepage">Notify<span className={style.special}>Shop</span></Link>
                         </div>
                     </Col>

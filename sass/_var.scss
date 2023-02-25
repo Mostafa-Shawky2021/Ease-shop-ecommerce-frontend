@@ -12,11 +12,12 @@ $softblack: #626262;
 $hardblack: #222;
 $backgroundcolor: rgba(219, 219, 219, 0.89);
 
-$tabletscreen: 576px;
-$mediumscreen: 768px;
-$largescreen: 992px;
-$xlargescreen: 1200px;
-$xxlargescreen: 1400px;
-
+$breakpoints :(xs: 0,
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+    xxl: 1300,
+);
 
 $direction: rtl;

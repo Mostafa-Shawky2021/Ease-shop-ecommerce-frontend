@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useProductsData } from "../../hooks"
+import { useState, useEffect } from "react";
+
 import { Col } from "react-bootstrap";
 import { GridList } from "@root/components/gridlist";
 import { ProductCard } from "@root/components/cards";
@@ -8,30 +8,26 @@ import { Loading } from "@root/components/loading";
 
 import style from './products.module.scss';
 
-const Products = () => {
+const Products = ({
+    productsData,
+    isFetchingProducts,
+    isLoadingProducts,
+    setPageNumber
+}) => {
 
-    const [pageNumber, setPageNumber] = useState(1);
+    const { current_page, per_page, total } = productsData.meta_pagination;
 
-    const { data: products, isFetching, isLoading } = useProductsData(pageNumber);
-
-    const { current_page, per_page, total } = products.meta_pagination;
-
-    useEffect(() => {
-
-        window.scrollTo(0, 0);
-
-    }, [pageNumber])
     return (
         <div className={style.productsWrapper}>
-            {isFetching || isLoading ? <Loading /> : ''}
-            {!!products.products.length ? (<>
+            {isFetchingProducts || isLoadingProducts ? <Loading /> : ''}
+            {!!productsData.products.length ? (<>
                 <GridList
-                    data={products?.products}
+                    data={productsData?.products}
                     renderItem={(product) => (
                         <Col xs={12} sm={6} md={3} key={product.id}>
                             <ProductCard
                                 product={product}
-                                style={{ marginTop: '1rem' }} />
+                                style={{ marginTop: '2rem' }} />
                         </Col>
                     )}
                 />

@@ -34,7 +34,7 @@
         border-bottom: 1px solid #5c5c5c;
         margin-bottom: 10px;
 
-        @include mediaquery(var.$tabletscreen) {
+        @include minmediaquery(sm) {
             border-bottom: 0px;
             margin-bottom: 0px;
         }
@@ -59,7 +59,7 @@
         border-bottom: 1px solid #5c5c5c;
         margin-bottom: 10px;
 
-        @include mediaquery(var.$tabletscreen) {
+        @include minmediaquery('sm') {
             border-bottom: 0px;
             margin-bottom: 0px;
         }
@@ -81,7 +81,7 @@
         border-bottom: 1px solid #5c5c5c;
         margin-bottom: 10px;
 
-        @include mediaquery(var.$tabletscreen) {
+        @include minmediaquery('sm') {
             border-bottom: 0px;
             margin-bottom: 0px;
         }
@@ -89,7 +89,7 @@
 
 
 
-    .listProducts .item {
+    .tProducts .item {
         @include paragraph(#bfbfbf);
         padding: 0px;
         transition: all 0.3s;

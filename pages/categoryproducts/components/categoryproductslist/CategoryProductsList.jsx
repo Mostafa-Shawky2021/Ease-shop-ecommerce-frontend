@@ -1,41 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-
 import { Col } from 'react-bootstrap';
-import Pagination from "react-js-pagination";
-
-import { GridList } from '@root/components/gridlist';
+import { PaginationWrapper } from '@root/components/paginationwrapper';
 import { ProductCard } from '@root/components/cards';
-
-import { useCategoryProductsData } from '../../hooks';
+import { GridList } from '@root/components/gridlist';
+import { Loading } from '@root/components/loading';
 
 import style from './categoryproductslist.module.scss';
-import { Loading } from '@root/components/loading';
-import { Commet } from 'react-loading-indicators';
-import { PaginationWrapper } from '@root/components/paginationwrapper';
 
-const CategoryProductsList = () => {
+const CategoryProductsList = ({
+    productsCategoryData,
+    isFetchingProductsCategory,
+    isLoadingProductsCategory,
+    setPageNumber
+}) => {
 
-    const [pageNumber, setPageNumber] = useState(1)
+    const { current_page, per_page, total } = productsCategoryData.meta_pagination;
 
-    const { query: { categorySlug } } = useRouter();
-
-    const { data: categoryProducts, isLoading, isFetching } = useCategoryProductsData(categorySlug, pageNumber);
-
-    const { current_page, per_page, total } = categoryProducts.meta_pagination;
-
-    useEffect(() => {
-
-        window.scrollTo(0, 0);
-
-    }, [pageNumber])
 
     return (
         <div className={style.categoryProductsWrapper}>
-            {isFetching || isLoading ? <Loading /> : ''}
-            {!!categoryProducts.products.length ? (<>
+            {isFetchingProductsCategory || isLoadingProductsCategory ? <Loading /> : ''}
+            {!!productsCategoryData.products.length ? (<>
                 <GridList
-                    data={categoryProducts?.products}
+                    data={productsCategoryData?.products}
                     renderItem={(product) => (
                         <Col xs={12} sm={6} md={4} key={product.id}>
                             <ProductCard

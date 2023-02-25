@@ -6,8 +6,17 @@
     background-color: #fff;
     overflow: hidden;
     transition: all 0.4s;
-    border: 1px solid rgb(199 199 199 / 31%);
     border-radius: 4px;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+        box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+    }
+
+    @include minmediaquery('lg') {
+        margin-bottom: 3rem;
+    }
 
     &:hover .productCardImage {
         transform: scale(1.025);
@@ -37,7 +46,7 @@
         z-index: 1;
 
         .favourite {
-            color: var.$softblack;
+            color: #c3c3c3;
             padding: 4px 6px;
             cursor: pointer;
             transition: all 0.3s;
@@ -55,13 +64,9 @@
         overflow: hidden;
         text-align: center;
         transition: all 0.5s;
-        height: 239px;
+        height: 246px;
         padding-top: 2.5rem;
         background-color: #f8f8f8;
-
-        @include mediaquery(var.$mediumscreen) {
-            height: 270px;
-        }
 
         .productCardImage {
             cursor: pointer;

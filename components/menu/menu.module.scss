@@ -47,12 +47,12 @@
             color: var(--bs-danger);
             cursor: pointer;
 
-            @include mediaquery(var.$largescreen) {
+            @include minmediaquery('lg') {
                 display: none;
             }
         }
 
-        @include mediaquery(var.$largescreen) {
+        @include minmediaquery('lg') {
             display: flex;
             align-items: center;
             position: static;
@@ -70,11 +70,10 @@
         padding: 1rem 0px;
         font-weight: 600;
 
-
-        s>&:hover {
+        >&:hover {
             color: var.$secondarycolor;
 
-            @include mediaquery(var.$largescreen) {
+            @include minmediaquery('lg') {
                 color: #fff;
             }
 
@@ -121,7 +120,7 @@
         border-radius: 5px;
         margin-right: auto;
 
-        @include mediaquery(var.$largescreen) {
+        @include minmediaquery('lg') {
             display: none;
         }
     }
