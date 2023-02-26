@@ -10,3 +10,4 @@ export { default as useFormOrderValidation } from './useFormOrderValidation';
 export { default as useSendOrderData } from '../pages/checkout/hooks/useSendOrderData';
 export { default as useProductsData } from './useProductsData';
 export { default as useProductVariants } from './useProductVariants';
+export { default as useFilter } from './useFilter';

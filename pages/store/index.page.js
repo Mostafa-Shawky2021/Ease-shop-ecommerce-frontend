@@ -14,12 +14,21 @@ import { Products } from "./component/products";
 import { Sidebar } from "@root/components/sidebar";
 import { BreadCrumbLayout } from '@root/components/layout';
 
-export async function getStaticProps() {
+export async function getServerSideProps({ query }) {
 
     const queryClient = new QueryClient();
+
+    const urlSearchParams = new URLSearchParams();
+
+    // exclude page number from query paramters
+    Object.entries(query).forEach(([key, value]) => (
+        (key !== 'page') && urlSearchParams.set(key, encodeURIComponent(value))));
+
+    const urlSearchParamsToString = urlSearchParams.toString();
+
     await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS(1),
-        () => fetchProducts(1));
+        queryKeys.PRODUCTS(1, urlSearchParamsToString),
+        () => fetchProducts(1, urlSearchParamsToString));
 
     return {
         props: {
@@ -27,7 +36,6 @@ export async function getStaticProps() {
         },
     }
 }
-
 
 const StorePage = () => {
 
@@ -49,7 +57,8 @@ const StorePage = () => {
 
         window.scrollTo(0, 0);
 
-    }, [pageNumber])
+    }, [pageNumber]);
+
     const handleFilter = () => {
 
         const urlSearchParams = new URLSearchParams()

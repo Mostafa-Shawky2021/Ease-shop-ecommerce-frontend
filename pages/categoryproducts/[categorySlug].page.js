@@ -17,29 +17,28 @@ import { Sidebar } from "@root/components/sidebar"
 import { queryKeys } from "./data";
 
 
-export const getStaticPaths = async () => {
 
-    const { data: categories } = await axiosInstance.get('/api/categories');
-
-    const paths = categories.map(category => (
-        {
-            params: { categorySlug: category.cat_slug.toString() }
-        }))
-
-    return {
-        paths,
-        fallback: false
-    }
-}
-
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ query }) => {
 
     const queryClient = new QueryClient();
-    const catSlug = params.categorySlug;
+
+    const catSlug = query.categorySlug;
+
+    const urlSearchParams = new URLSearchParams();
+
+    // exclude page number from query paramters
+    Object.entries(query).forEach(([queryStringKey, queryStringValue]) => {
+
+        if (queryStringKey !== 'page' && queryStringKey !== 'categorySlug') {
+            urlSearchParams.set(queryStringKey, encodeURIComponent(queryStringValue));
+        }
+    })
+
+    const urlSearchParamsToString = urlSearchParams.toString();
 
     await queryClient.prefetchQuery(
-        queryKeys.CATEGORY_PRODUCTS(1, catSlug),
-        () => fetchCategoryProducts(1, catSlug)
+        queryKeys.CATEGORY_PRODUCTS(1, catSlug, urlSearchParamsToString),
+        () => fetchCategoryProducts(1, catSlug, urlSearchParamsToString)
     );
 
     return {

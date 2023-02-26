@@ -22,8 +22,9 @@ export async function getServerSideProps({ query }) {
 
     const urlSearchParams = new URLSearchParams();
 
+    //exclude page number from query paramters
     Object.entries(query).forEach(([key, value]) => (
-        urlSearchParams.set(key, encodeURIComponent(value))));
+        (key !== 'page') && urlSearchParams.set(key, encodeURIComponent(value))));
 
     const urlSearchParamsToString = urlSearchParams.toString();
 
