@@ -8,14 +8,17 @@ const useProductsData = (pageNumber, queryUri) => {
 
     const urlSearchParams = new URLSearchParams();
 
-    // this condition if the uri contain query string filteration for products
-    if (queryUri) {
-        Object.entries(queryUri).forEach(([key, value]) => {
-            urlSearchParams.set(key, encodeURIComponent(value));
-        })
+    /*  
+        ** any request contain page number  we need to exclude it 
+        ** from the uri so we avoid the repeating query string 
+    */
+    Object.entries(queryUri).forEach(([key, value]) => {
+        if (key !== 'page') urlSearchParams.set(key, encodeURIComponent(value));
 
-    }
+    })
+
     const urlSearchParamsToString = urlSearchParams.toString();
+
     return useQuery(
         queryKeys.PRODUCTS(pageNumber, urlSearchParamsToString),
         () => fetchProducts(pageNumber, urlSearchParamsToString),

@@ -2,21 +2,28 @@ import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../data";
 import { fetchCategoryProducts } from "../queries";
 
-const useCategoryProductsData = (categorySlug, pageNumber) => {
+const useCategoryProductsData = (pageNumber, queryUri) => {
 
-    // const urlSearchParams = new URLSearchParams();
+    const categorySlug = queryUri.categorySlug;
 
-    // // this condition if the uri contain query string filteration for products
-    // if (queryUri) {
-    //     Object.entries(queryUri).forEach(([key, value]) => {
-    //         urlSearchParams.set(key, encodeURIComponent(value));
-    //     })
+    const urlSearchParams = new URLSearchParams();
 
-    // }
-    // const urlSearchParamsToString = urlSearchParams.toString();
+    /*  
+        ** any request contain page number and dynamic category slug paramter so we need to exclude it 
+        ** from the uri so we avoid the repeating query string 
+    */
+    Object.entries(queryUri).forEach(([queryStringKey, queryStringValue]) => {
+
+        if (queryStringKey !== 'page' && queryStringKey !== 'categorySlug') {
+            urlSearchParams.set(queryStringKey, encodeURIComponent(queryStringValue));
+        }
+    })
+
+    const urlSearchParamsToString = urlSearchParams.toString();
+
     return useQuery(
-        queryKeys.CATEGORY_PRODUCTS(categorySlug, pageNumber),
-        () => fetchCategoryProducts(categorySlug, pageNumber),
+        queryKeys.CATEGORY_PRODUCTS(pageNumber, categorySlug, urlSearchParamsToString),
+        () => fetchCategoryProducts(pageNumber, categorySlug, urlSearchParamsToString),
         { keepPreviousData: true }
     )
 }

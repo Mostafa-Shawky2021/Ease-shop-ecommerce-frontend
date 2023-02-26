@@ -1,6 +1,9 @@
 
 const queryKeys = {
-    CATEGORY_PRODUCTS: (categorySlug, pageNumber) => ['categories', categorySlug, pageNumber],
+    CATEGORY_PRODUCTS: (pageNumber, categorySlug, queryUrIStringfyFilter) => (
+        queryUrIStringfyFilter
+            ? ['categories', pageNumber, categorySlug]
+            : ['categories', pageNumber]),
 
 }
 

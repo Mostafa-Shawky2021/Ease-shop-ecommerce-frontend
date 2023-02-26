@@ -8,7 +8,7 @@ import { axiosInstance } from "lib";
 import { useRouter } from 'next/router';
 import { useCategoryProductsData } from "./hooks";
 
-import { fetchCategoryProducts } from "@root/queries";
+import { fetchCategoryProducts } from "./queries";
 
 import { Container, Col, Row } from "react-bootstrap";
 import { CategoryProductsList } from "./components/categoryproductslist";
@@ -16,18 +16,15 @@ import { Sidebar } from "@root/components/sidebar"
 
 import { queryKeys } from "./data";
 
-;
-
-
 
 export const getStaticPaths = async () => {
 
     const { data: categories } = await axiosInstance.get('/api/categories');
-    const paths = categories.map(category =>
-    ({
-        params:
-            { categorySlug: category.cat_slug.toString() }
-    }))
+
+    const paths = categories.map(category => (
+        {
+            params: { categorySlug: category.cat_slug.toString() }
+        }))
 
     return {
         paths,
@@ -36,12 +33,13 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
+
     const queryClient = new QueryClient();
     const catSlug = params.categorySlug;
 
     await queryClient.prefetchQuery(
-        queryKeys.CATEGORY_PRODUCTS(catSlug, 1),
-        () => fetchCategoryProducts(catSlug, 1)
+        queryKeys.CATEGORY_PRODUCTS(1, catSlug),
+        () => fetchCategoryProducts(1, catSlug)
     );
 
     return {
@@ -58,11 +56,15 @@ const CategoryProductsPage = () => {
         sizes: [],
         colors: [],
     });
-    const { query: { categorySlug } } = useRouter();
+    const router = useRouter();
+
+
     const {
         data: productsCategory,
         isFetching: isFetchingProductsCategory,
-        isLoadingProductsCategory: isLoadingProductsCategory } = useCategoryProductsData(categorySlug, pageNumber)
+        isLoadingProductsCategory: isLoadingProductsCategory
+    } = useCategoryProductsData(pageNumber, router.query)
+
     useEffect(() => {
 
         window.scrollTo(0, 0);
@@ -81,7 +83,7 @@ const CategoryProductsPage = () => {
 
         const urlSearchParamsToString = urlSearchParams.toString();
 
-        const filterUrl = `/store?page=${pageNumber}&${urlSearchParamsToString}`;
+        const filterUrl = `/caegoryproducts/${categorySlug}?page=${pageNumber}&${urlSearchParamsToString}`;
 
         router.push(filterUrl, undefined, { shallow: true });
     }
@@ -92,8 +94,9 @@ const CategoryProductsPage = () => {
             sizes: [],
             colors: [],
         })
-        router.push('/store', undefined, { shallow: true });
+        router.push(`/categoryproducts/${categorySlug}`, undefined, { shallow: true });
     }
+
     return (
         <Container fluid="xl" style={{ marginTop: "2.8rem" }}>
             <Row className='g-0'>
@@ -106,12 +109,18 @@ const CategoryProductsPage = () => {
                     />
                 </Col>
                 <Col xs={12} lg={9} style={{ position: 'relative' }}>
-                    <CategoryProductsList
-                        productsCategoryData={productsCategory}
-                        isFetchingProductsCategory={isFetchingProductsCategory}
-                        isLoadingProductsCategory={isLoadingProductsCategory}
-                        setPageNumber={setPageNumber}
-                    />
+                    {productsCategory?.products ?
+                        <CategoryProductsList
+                            productsCategoryData={productsCategory}
+                            isFetchingProductsCategory={isFetchingProductsCategory}
+                            isLoadingProductsCategory={isLoadingProductsCategory}
+                            setPageNumber={setPageNumber}
+                        />
+                        : (
+                            <p>لا يوجد بيانات للعرض</p>
+                        )
+                    }
+
                 </Col>
             </Row>
         </Container>

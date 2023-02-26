@@ -112,7 +112,7 @@ const ProductCard = ({ product, ...props }) => {
                         fill
                         src={product?.image || DefaultImage}
                         className={style.productCardImage}
-                        alt={product?.name} />
+                        alt={product?.name || ''} />
                 </Link>
             </div>
             <div style={{ paddingLeft: '5px', paddingRight: '5px' }}>
