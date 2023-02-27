@@ -120,7 +120,7 @@ const Sidebar = ({ setFilterRules,
                     </div>
                 }
             </div>
-            {!!categories?.length &&
+            {/* {!!categories?.length &&
                 <div className={style.categories}>
                     <h4 className={style.title}>الاقسام</h4>
                     <CategoriesMenu
@@ -128,7 +128,7 @@ const Sidebar = ({ setFilterRules,
                         withButtonOpen={false}
                     />
                 </div>
-            }
+            } */}
 
             <div className={style.applyFilter}>
                 <Button className={style.applyFilterBtn} onClick={handleFilter}>تطبيق الفلتر</Button>

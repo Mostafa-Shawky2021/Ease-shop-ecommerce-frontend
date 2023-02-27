@@ -1,29 +1,29 @@
-
-import { Header } from '@root/components/header'
-import { Menu } from '@root/components/menu'
-import { Carousel } from './components/carousel'
-import { Services } from './components/services'
-import { TopCategories } from './components/topcategories'
-import { Categories } from './components/categories'
-import { LatestProducts } from './components/latestproducts'
-
 import { dehydrate, QueryClient } from '@tanstack/react-query';
+
+import {
+    useCategoriesData,
+    useLatestProductsData,
+    useRandomCategoriesProductsData
+} from './hooks';
 
 import {
     fetchLatestProducts,
     fetchRandomCategoriesProducts,
     fetchCategories
 } from './queries'
-import { queryKeys } from './data'
-import {
-    useCategoriesData,
-    useLatestProductsData,
-    useRandomCategoriesProductsData
-} from './hooks'
 
+import { queryKeys } from './data'
+
+import { Carousel } from './components/carousel'
+import { Services } from './components/services'
+import { TopCategories } from './components/topcategories'
+import { Categories } from './components/categories'
+import { LatestProducts } from './components/latestproducts'
 import { RandomCategoriesProducts } from './components/randomcategoriesproducts';
 import { ToastContainer } from 'react-toastify';
 import { Offer } from './components/offer';
+
+
 
 export async function getStaticProps() {
     const queryClient = new QueryClient()

@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { useProductsData } from "@root/hooks";
+import { useProductsData, useFilter } from "@root/hooks";
 
 import { fetchProducts, fetchProductVariants } from "@root/queries";
 
@@ -47,7 +47,7 @@ export async function getServerSideProps({ query }) {
 const ProductsPageSearch = () => {
 
     const [filterRules, setFilterRules] = useState({
-        price: [50, 3000],
+        price: [50, 10000],
         sizes: [],
         colors: [],
     });
@@ -56,29 +56,29 @@ const ProductsPageSearch = () => {
 
     const router = useRouter();
 
+    const { applyFilter, resetFilter } = useFilter(pageNumber);
+
     const { data: productsSearchResult } = useProductsData(pageNumber, router.query);
+
+    useEffect(() => {
+        Object.entries(router.query).length < 1 ? router.push('/homepage') : null;
+    }, [])
 
 
     const handleFilter = () => {
 
-        const urlSearchParams = new URLSearchParams()
+        const productName = router?.query?.productname;
 
-        Object.entries(filterRules).forEach(([filterKey, value]) => {
-            if (value.length > 0) {
-                urlSearchParams.set(filterKey, encodeURIComponent(value.join('-')));
-            }
-        });
+        applyFilter(
+            filterRules,
+            '/products',
+            { queriesFilter: productName ? { productname: router?.query?.productname } : null });
 
-        const urlSearchParamsToString = urlSearchParams.toString();
-        const productName = router.query.productname;
-
-        // this condition to avoid if user remove product name from the url
-        const filterUrl = productName
-            ? `/products?productname=${router.query.productname}&${urlSearchParamsToString}`
-            : `/products?${urlSearchParamsToString}`;
-        router.push(filterUrl, undefined, { shallow: true });
     }
 
+    const handleDeleteFilter = () => {
+        resetFilter(setFilterRules, `/products?productname=${router?.query?.productname}`)
+    }
     return (
         <>
             <BreadCrumbLayout>
@@ -95,6 +95,7 @@ const ProductsPageSearch = () => {
                             setFilterRules={setFilterRules}
                             filterRules={filterRules}
                             handleFilter={handleFilter}
+                            handleDeleteFilter={handleDeleteFilter}
                         />
                     </Col>
                     <Col xs={12} lg={9} >

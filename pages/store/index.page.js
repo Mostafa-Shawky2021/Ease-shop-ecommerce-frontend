@@ -3,7 +3,7 @@ import { Grid } from '@mui/material';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { useProductsData } from "@root/hooks";
+import { useProductsData, useFilter } from "@root/hooks";
 
 import { fetchProducts } from "@root/queries";
 
@@ -46,12 +46,15 @@ const StorePage = () => {
         colors: [],
     });
 
-
     const router = useRouter();
+
+    const { applyFilter, resetFilter } = useFilter(pageNumber);
+
     const {
         data: productsData,
         isFetching: isFetchingProducts,
-        isLoading: isLoadingProducts } = useProductsData(pageNumber, router.query);
+        isLoading: isLoadingProducts
+    } = useProductsData(pageNumber, router.query);
 
     useEffect(() => {
 
@@ -60,29 +63,14 @@ const StorePage = () => {
     }, [pageNumber]);
 
     const handleFilter = () => {
+        applyFilter(filterRules, `/store`)
 
-        const urlSearchParams = new URLSearchParams()
-
-        Object.entries(filterRules).forEach(([filterKey, value]) => {
-            if (value.length > 0) {
-                urlSearchParams.set(filterKey, encodeURIComponent(value.join('-')));
-            }
-        });
-
-        const urlSearchParamsToString = urlSearchParams.toString();
-
-        const filterUrl = `/store?page=${pageNumber}&${urlSearchParamsToString}`;
-
-        router.push(filterUrl, undefined, { shallow: true });
     }
 
     const handleDeleteFilter = () => {
-        setFilterRules({
-            price: [50, 3000],
-            sizes: [],
-            colors: [],
-        })
-        router.push('/store', undefined, { shallow: true });
+
+        resetFilter(setFilterRules, '/store')
+
     }
 
     return (

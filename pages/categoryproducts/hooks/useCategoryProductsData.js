@@ -1,6 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../data";
+
 import { fetchCategoryProducts } from "../queries";
+
+import { queryKeys } from "../data";
+
 
 const useCategoryProductsData = (pageNumber, queryUri) => {
 

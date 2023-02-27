@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 
-
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-
-import { axiosInstance } from "lib";
 
 import { useRouter } from 'next/router';
 import { useCategoryProductsData } from "./hooks";
@@ -11,6 +8,7 @@ import { useCategoryProductsData } from "./hooks";
 import { fetchCategoryProducts } from "./queries";
 
 import { Container, Col, Row } from "react-bootstrap";
+import { ToastContainer } from 'react-toastify';
 import { CategoryProductsList } from "./components/categoryproductslist";
 import { Sidebar } from "@root/components/sidebar"
 
@@ -97,7 +95,7 @@ const CategoryProductsPage = () => {
     }
 
     return (
-        <Container fluid="xl" style={{ marginTop: "2.8rem" }}>
+        <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
             <Row className='g-0'>
                 <Col xs={3} className='d-none d-lg-block' >
                     <Sidebar
@@ -116,12 +114,11 @@ const CategoryProductsPage = () => {
                             setPageNumber={setPageNumber}
                         />
                         : (
-                            <p>لا يوجد بيانات للعرض</p>
-                        )
-                    }
-
+                            <p>لا يوجد منتجات للعرض</p>
+                        )}
                 </Col>
             </Row>
+            <ToastContainer />
         </Container>
     )
 }

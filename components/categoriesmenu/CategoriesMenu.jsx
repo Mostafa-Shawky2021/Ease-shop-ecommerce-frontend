@@ -78,6 +78,11 @@ const CategoriesMenu = ({ categoriesData }) => {
                                         <ChevronLeftIcon className={style.subCategoriesIcon} fontSize="small" />
                                     </Button>
                                     <ul className={`${style.listSubCategories} list-unstyled`}>
+                                        <li className={style.subcategoryItem}>
+                                            <Link href={`/categoryproducts/${category.cat_slug}`}>
+                                                {category.cat_name}
+                                            </Link>
+                                        </li>
                                         {category.sub_categories.map(subCateogry => (
                                             <li className={style.subcategoryItem} key={subCateogry.id}>
                                                 <Link href={`/categoryproducts/${subCateogry.cat_slug}`}>

@@ -13,6 +13,7 @@ const useProductsData = (pageNumber, queryUri) => {
         ** from the uri so we avoid the repeating query string 
     */
     Object.entries(queryUri).forEach(([key, value]) => {
+
         if (key !== 'page') urlSearchParams.set(key, encodeURIComponent(value));
 
     })
