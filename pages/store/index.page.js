@@ -10,9 +10,10 @@ import { fetchProducts } from "@root/queries";
 import { queryKeys } from "data";
 
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
-import { Products } from "./component/products";
+import { ProductsList } from "./component/productslist";
 import { Sidebar } from "@root/components/sidebar";
 import { BreadCrumbLayout } from '@root/components/layout';
+
 
 export async function getServerSideProps({ query }) {
 
@@ -40,15 +41,8 @@ export async function getServerSideProps({ query }) {
 const StorePage = () => {
 
     const [pageNumber, setPageNumber] = useState(1);
-    const [filterRules, setFilterRules] = useState({
-        price: [50, 3000],
-        sizes: [],
-        colors: [],
-    });
 
     const router = useRouter();
-
-    const { applyFilter, resetFilter } = useFilter(pageNumber);
 
     const {
         data: productsData,
@@ -56,22 +50,18 @@ const StorePage = () => {
         isLoading: isLoadingProducts
     } = useProductsData(pageNumber, router.query);
 
+    const { applyFilter, resetFilter } = useFilter(pageNumber);
+
+    console.log('rerender from storepage');
     useEffect(() => {
 
         window.scrollTo(0, 0);
 
     }, [pageNumber]);
 
-    const handleFilter = () => {
-        applyFilter(filterRules, `/store`)
+    const handleFilter = (filterRules) => applyFilter(filterRules, `/store`);
 
-    }
-
-    const handleDeleteFilter = () => {
-
-        resetFilter(setFilterRules, '/store')
-
-    }
+    const handleDeleteFilter = (setFilterRules) => resetFilter(setFilterRules, '/store');
 
     return (
         <>
@@ -85,26 +75,22 @@ const StorePage = () => {
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
                         <Sidebar
-                            setFilterRules={setFilterRules}
-                            filterRules={filterRules}
                             handleFilter={handleFilter}
                             handleDeleteFilter={handleDeleteFilter}
                         />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
                         {productsData?.products ? (
-                            <Products
+                            <ProductsList
                                 productsData={productsData}
                                 isFetchingProducts={isFetchingProducts}
                                 isLoadingProducts={isLoadingProducts}
                                 setPageNumber={setPageNumber}
                             />
                         ) : (<p>لا توجد منتجات للعرض</p>)}
-
                     </Col>
                 </Row>
             </Container>
-
         </>
 
     )

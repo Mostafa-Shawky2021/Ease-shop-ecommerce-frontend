@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Link from 'next/link';
-import Image from 'next/image';
+
 
 import {
     useDecrementProductData,
@@ -18,7 +18,9 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { Button } from 'react-bootstrap';
 import { ProductQuantity } from '@root/components/productquantity';
-import { ListItem } from '@root/components/listitem';
+
+import { SidebarCartItem } from './sidebarcartitem';
+
 
 import style from './sidebarcartlist.module.scss';
 
@@ -66,6 +68,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
     }
 
+
     return (
         <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''} `}>
             <header className={style.header}>
@@ -75,49 +78,26 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                     fontSize="small"
                     className={style.closeIcon} />
             </header>
+
             <div className={`${style.cartList}`}>
-                <ListItem
-                    data={carts}
-                    renderItem={(cart) => (
-                        <div className={`${style.item} d-flex flex-wrap`} key={cart?.id}>
-                            <div className={style.productImage}>
-                                <Image
-                                    src={cart?.product?.image}
-                                    alt={cart?.product?.image}
-                                    fill
-                                />
-                            </div>
-                            <div className={style.productDetails}>
-                                <div className={style.productName}>
-                                    {cart?.product?.product_name}
-                                </div>
-                                <div className={style.productPrice}>
-                                    {Number(cart?.total_price).toLocaleString()}
-                                    <span className={style.currency}>جنية</span>
-                                    <span className={style.quantity}> x{cart.quantity}</span>
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <div className={style.productQuantity}>
-                                        <ProductQuantity
-                                            handleProductIncrement={handleProductIncrement}
-                                            handleProductDecrement={handleProductDecrement}
-                                            quantity={cart?.quantity}
-                                            isLoading={isLoading}
-                                            cartId={cart?.id}
-                                            currentCart={currentCart}
-                                        />
-                                    </div>
-                                    <Button
-                                        className={style.btnDelete}
-                                        onClick={handleProductDelete}
-                                        data-cart-id={cart.id}
-                                    >
-                                        <DeleteOutlineIcon fontSize="small" />
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    )} />
+                {carts?.map(cart =>
+                    <SidebarCartItem
+                        key={cart.id}
+                        cart={cart}
+                        productQuantity={
+                            <ProductQuantity
+                                handleProductIncrement={handleProductIncrement}
+                                handleProductDecrement={handleProductDecrement}
+                                quantity={cart?.quantity}
+                                isLoading={isLoading}
+                                cartId={cart?.id}
+                                currentCart={currentCart} />}>
+
+                        <Button className={style.btnDelete} onClick={handleProductDelete} data-cart-id={cart.id}  >
+                            <DeleteOutlineIcon fontSize="small" />
+                        </Button>
+                    </SidebarCartItem>
+                )}
             </div>
             <div className={style.footer}>
                 <div className={`${style.cost} d-flex align-items-center justify-content-between`}>

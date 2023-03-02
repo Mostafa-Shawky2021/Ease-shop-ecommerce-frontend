@@ -46,11 +46,6 @@ export async function getServerSideProps({ query }) {
 
 const ProductsPageSearch = () => {
 
-    const [filterRules, setFilterRules] = useState({
-        price: [50, 10000],
-        sizes: [],
-        colors: [],
-    });
 
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -65,14 +60,13 @@ const ProductsPageSearch = () => {
     }, [])
 
 
-    const handleFilter = () => {
+    const handleFilter = (filterRules) => {
 
         const productName = router?.query?.productname;
-
         applyFilter(
             filterRules,
             '/products',
-            { queriesFilter: productName ? { productname: router?.query?.productname } : null });
+            { queriesFilter: productName ? { productName } : null });
 
     }
 
@@ -92,8 +86,6 @@ const ProductsPageSearch = () => {
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
                         <Sidebar
-                            setFilterRules={setFilterRules}
-                            filterRules={filterRules}
                             handleFilter={handleFilter}
                             handleDeleteFilter={handleDeleteFilter}
                         />

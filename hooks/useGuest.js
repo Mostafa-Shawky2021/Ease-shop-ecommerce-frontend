@@ -16,7 +16,7 @@ function useGuest() {
             window.localStorage.setItem('guest', JSON.stringify(randomId));
             setGuestId(randomId);
         }
-    }, [])
+    }, [setGuestId])
 
     return {
         guestId

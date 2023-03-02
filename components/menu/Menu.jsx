@@ -35,14 +35,15 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
         return () => document.removeEventListener('keydown', closeCategoryListMenuList);
     }, [])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        window.addEventListener('scroll', () => {
-            let scrollValue = document.documentElement.scrollTop;
-            (scrollValue > 400) ? setFixedMenu(true) : setFixedMenu(false);
-        })
+    //     window.addEventListener('scroll', () => {
+    //         let scrollValue = document.documentElement.scrollTop;
+    //         (scrollValue > 400) ? setFixedMenu(true) : setFixedMenu(false);
+    //     })
 
-    }, [setFixedMenu])
+
+    // }, [setFixedMenu])
 
     return (
         <div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ''}`}>
@@ -62,7 +63,7 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
                         <Link href="#">الطلبات</Link>
                     </li>
                     <li className={style.item}>
-                        <Link href="#">المتجر</Link>
+                        <Link href="/store">المتجر</Link>
                     </li>
                     <li className={style.item}>
                         <Link href="#">التواصل معنا</Link>

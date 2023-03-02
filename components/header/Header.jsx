@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link'
 
 import { useRouter } from 'next/router';
@@ -21,9 +21,8 @@ const Header = ({ setIsOpenCartList }) => {
 
     const [searchInput, setSearchInput] = useState('');
 
-    const inputRef = useRef(null);
+    const router = useRouter();
 
-    const router = useRouter()
     const { guestId } = useGuest();
 
     const { data: carts } = useCartsData(guestId);
@@ -37,12 +36,12 @@ const Header = ({ setIsOpenCartList }) => {
         if (event.key === "Enter") {
             const searchInputUrl = encodeURIComponent(searchInput);
             router.push(`/products?productname=${searchInputUrl}`, undefined, { shallow: true });
-
         }
     };
-    return (
-        <div className={`${style.header} align-items-center`}>
 
+    return (
+
+        <div className={`${style.header} align-items-center`}>
             <Container fluid="xl" className={style.container}>
                 <Row className="align-items-center">
                     <Col xs={12} md={3} lg={2}>
@@ -56,7 +55,6 @@ const Header = ({ setIsOpenCartList }) => {
                                 onChange={(event) => setSearchInput(event.target.value)}
                                 placeholder="عن ماذا تبحث؟"
                                 className={style.searchInput}
-                                ref={inputRef}
                                 onKeyPress={handleKeyPress}
                             >
                                 <button className={style.btnSearch} onClick={handleSearchInput}>

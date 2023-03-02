@@ -19,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import '@root/sass/_app.scss';
 
-export default function App({ Component, pageProps}) {
+export default function App({ Component, pageProps }) {
 
   const [queryClient] = useState(() => new QueryClient())
 

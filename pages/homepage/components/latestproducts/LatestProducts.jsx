@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
+import { useLatestProductsData } from '../../hooks';
+
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { SectionLayout } from '@root/components/layout';
 import { ProductCard } from '@root/components/cards';
 
@@ -11,17 +12,15 @@ import "swiper/css/navigation";
 
 import style from './latestproducts.module.scss';
 
-const LatestProducts = ({ latestProductsData }) => {
+const LatestProducts = () => {
 
-    const [swiper, setSwiper] = useState(null)
+    const [_, setSwiper] = useState(null)
 
+    const { data: latestProducts, isFetching, isLoading } = useLatestProductsData();
+    console.log({ isLoading, isFetching })
     return (
         <div className={style.latestProducts}>
-            <SectionLayout
-                title="احدث المنتجات"
-                isSwiper={true}
-
-            >
+            <SectionLayout title="احدث المنتجات">
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
                         style={{ direction: 'rtl' }}
@@ -40,15 +39,13 @@ const LatestProducts = ({ latestProductsData }) => {
                             1400: { slidesPerView: 5 }
                         }}
                         loop={true}
-                        spaceBetween={18}
-                        centeredSlides={true}
-                        onSwiper={setSwiper}
-                    >
-                        {latestProductsData?.map(product => (
+                        spaceBetween={10}
+                        onSwiper={setSwiper}>
+                        {latestProducts?.map(product =>
                             <SwiperSlide key={product.id}>
                                 <ProductCard product={product} />
                             </SwiperSlide>
-                        ))}
+                        )}
                     </Swiper>
                 )}
             </SectionLayout>

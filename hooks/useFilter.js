@@ -7,15 +7,20 @@ const useFilter = (pageNumber) => {
     /*
     ** url RequestFilter will be the uri which will be send to the backend to apply filter
     */
-    const applyFilter = (filterRules, urlRequestFilter, { queriesFilter = null }) => {
+    const applyFilter = (filterRules, urlRequestFilter, additionalQueryFilter) => {
 
         const urlSearchParams = new URLSearchParams()
 
         //check if additionalquery paratmer contain query filter key,value
-        if (queriesFilter) {
-            Object.entries(queriesFilter).forEach(([filterKey, filterValue]) => {
+        if (additionalQueryFilter) {
 
-                if (Array.isArray(filterValue) && filterValue.length > 0) {
+            const { queriesFilter } = additionalQueryFilter;
+
+            Object.entries(queriesFilter).forEach(([filterKey, filterValue]) => {
+                console.log(filterValue);
+                if (filterValue) return;
+
+                else if (Array.isArray(filterValue) && filterValue.length > 0) {
                     urlSearchParams.set(filterKey, encodeURIComponent(filterValue.join()));
                 } else {
                     urlSearchParams.set(filterKey, encodeURIComponent(filterValue));
@@ -29,6 +34,7 @@ const useFilter = (pageNumber) => {
             if (Array.isArray(filterValue) && filterValue.length > 0) {
                 urlSearchParams.set(filterKey, encodeURIComponent(filterValue.join('-')));
             }
+
         });
 
         const urlSearchParamsToString = urlSearchParams.toString();
@@ -44,7 +50,7 @@ const useFilter = (pageNumber) => {
             sizes: [],
             colors: [],
         })
-        router.push(uriDefaultRequest, undefined, { shallow: true });
+        router.push(uriDefaultRequest, undefined, { shallow: false });
     }
     return {
         applyFilter,

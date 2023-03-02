@@ -18,7 +18,7 @@
         margin-bottom: 3rem;
     }
 
-    &:hover .productCardImage {
+    &:hover .productCard {
         transform: scale(1.025);
     }
 
@@ -64,7 +64,7 @@
         overflow: hidden;
         text-align: center;
         transition: all 0.5s;
-        height: 246px;
+        height: 300px;
         padding-top: 2.5rem;
         background-color: #f8f8f8;
 

@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { axiosInstance } from 'lib';
+
 import { dehydrate, QueryClient } from '@tanstack/react-query';
+
+import { useProductDetailsData, useRelatedProductsData } from './hooks';
+
+import { fetchProductDetails, fetchProductsRelated } from './queries';
+
 import { Breadcrumb, Col, Container, Row } from 'react-bootstrap';
-
-
 import { ProductView } from './components/productview';
 import { ProductDetails } from './components/productdetails';
 import { ProductDescription } from './components/productdescription';
 import { RelatedProduct } from './components/relatedproduct';
+import { BreadCrumbLayout } from '@root/components/layout';
 
 import { queryKeys } from './data';
 
-import { fetchProductDetails, fetchProductsRelated } from './queries';
-import { useProductDetailsData, useRelatedProductsData } from './hooks';
-import { BreadCrumbLayout } from '@root/components/layout';
 
 export const getStaticPaths = async () => {
 

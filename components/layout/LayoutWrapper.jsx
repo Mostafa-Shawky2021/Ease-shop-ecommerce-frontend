@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { useGuest, useCartsData, useCategoriesData } from '@root/hooks';
+import { useCategoriesData } from '@root/hooks';
 
 import { Header } from "@root/components/header";
 import { Menu } from "@root/components/menu";
@@ -12,8 +12,6 @@ const LayoutWrapper = ({ children }) => {
 	const [isOpenCartList, setIsOpenCartList] = useState(false);
 
 	const { data: categories } = useCategoriesData();
-	const { guestId } = useGuest();
-	const { data: carts } = useCartsData(guestId);
 
 	return (
 		<>

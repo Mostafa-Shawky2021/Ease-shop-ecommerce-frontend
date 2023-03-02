@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
+
+import { useCategoriesData } from '../../hooks';
 
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,12 +13,15 @@ import DefaultImage from "@assets/images/default/image.jpg"
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
 import style from './categories.module.scss'
 
 
-const Categories = ({ categoriesData }) => {
+const Categories = () => {
 
     const [swiper, setSwiper] = useState();
+
+    const { data: categories } = useCategoriesData();
 
     return (
         <div className={style.categories}>
@@ -46,7 +51,7 @@ const Categories = ({ categoriesData }) => {
                         centeredSlides={true}
                         onSwiper={setSwiper}
                     >
-                        {categoriesData?.map(category => (
+                        {categories?.map(category => (
                             <SwiperSlide key={category.id}>
                                 <div className={style.catWrapper}>
                                     <div className={style.catImageWrapper}>

@@ -38,7 +38,7 @@ function Services() {
                         </div>
                     </Col>
                 </Row>
-            </Container >
+            </Container>
         </div>
     )
 }

@@ -1,67 +1,79 @@
 
+import { useState, useEffect } from 'react';
+
+import { useRouter } from "next/router";
 import { useCategoriesData, useProductVariants } from "@root/hooks";
 
 import Slider from '@mui/material/Slider';
 import { Button } from 'react-bootstrap';
+import { CategoriesMenu } from "./categoriesmenu";
 
 import CloseIcon from '@mui/icons-material/Close';
 
 import style from './sidebar.module.scss';
-import { CategoriesMenu } from "../categoriesmenu";
 
 
-const Sidebar = ({ setFilterRules,
-    filterRules,
-    handleFilter,
-    handleDeleteFilter
-}) => {
+const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
 
+    const [filterRules, setFilterRules] = useState({
+        price: [50, 10000],
+        sizes: [],
+        colors: [],
+    });
+
+    const router = useRouter();
     const { data: productVariants } = useProductVariants();
     const { data: categories } = useCategoriesData();
+
 
     const valueLabelFormat = (value) => value;
 
     const handlePriceFilter = (event) => {
         setFilterRules({ ...filterRules, price: [...event.target.value] })
     }
-    const handleSizeFilter = (event) => {
+    const handleSizeChange = (event) => {
 
-        if (event.target.nodeName === 'INPUT') {
-
-            if (event.target.checked) {
-                const filterData = [...filterRules.sizes, event.target.getAttribute('value')]
-                setFilterRules({ ...filterRules, sizes: filterData });
-            } else {
-                const filterDataFun = (size) => size !== event.target.getAttribute('value');
-                const sizes = filterRules.sizes.filter(filterDataFun)
-                setFilterRules({ ...filterRules, sizes });
-
-            }
+        if (event.target.checked) {
+            const filterData = [...filterRules.sizes, event.target.value]
+            setFilterRules({ ...filterRules, sizes: filterData });
+        } else {
+            const filterDataFun = (size) => size !== event.target.value;
+            const sizes = filterRules.sizes.filter(filterDataFun)
+            setFilterRules({ ...filterRules, sizes });
         }
     }
 
-    const handleColorFilter = (event) => {
+    const handleColorChange = (event) => {
 
-        if (event.target.nodeName === 'INPUT') {
+        if (event.target.checked) {
+            const filterData = [...filterRules.colors, event.target.value]
+            setFilterRules({ ...filterRules, colors: filterData });
+        } else {
+            const filterDataFun = (color) => color !== event.target.value;
+            const colors = filterRules.colors.filter(filterDataFun)
+            setFilterRules({ ...filterRules, colors });
 
-            if (event.target.checked) {
-                const filterData = [...filterRules.colors, event.target.getAttribute('value')]
-                setFilterRules({ ...filterRules, colors: filterData });
-            } else {
-                const filterDataFun = (color) => color !== event.target.getAttribute('value');
-                const colors = filterRules.colors.filter(filterDataFun)
-                setFilterRules({ ...filterRules, colors });
-
-            }
         }
+
     }
 
+    useEffect(() => {
+        const queryFilter = router.query;
+
+        const filterRulesQueries = {};
+
+        (queryFilter.price) ? filterRulesQueries.price = queryFilter.price.split('-') : null;
+        (queryFilter.sizes) ? filterRulesQueries.sizes = queryFilter.sizes.split('-') : null;
+        (queryFilter.colors) ? filterRulesQueries.colors = queryFilter.colors.split('-') : null;
+        setFilterRules({ ...filterRules, ...filterRulesQueries })
+
+    }, [])
     return (
         <div className={style.sidebarWrapper}>
             <div className={style.priceFilter}>
                 <div className='d-flex align-items-center justify-content-spacebetween'>
                     <h4 className={style.title} style={{ margin: '0px' }}>السعر</h4>
-                    <Button className={style.clearFilter} onClick={handleDeleteFilter}>
+                    <Button className={style.clearFilter} onClick={() => handleDeleteFilter(setFilterRules)}>
                         مسح الفلتر
                         <CloseIcon className={style.coloricon} fontSize="small" />
                     </Button>
@@ -69,7 +81,7 @@ const Sidebar = ({ setFilterRules,
                 <Slider
                     size="small"
                     min={50}
-                    max={3000}
+                    max={10000}
                     step={80}
                     getAriaValueText={valueLabelFormat}
                     valueLabelFormat={valueLabelFormat}
@@ -87,14 +99,17 @@ const Sidebar = ({ setFilterRules,
                 {!!productVariants?.sizes?.length &&
                     <div className={style.filter}>
                         <h4 className={style.title}>فلترة بحسب الحجم</h4>
-                        <ul className={`list-unstyled ${style.filterList}`} onChange={handleSizeFilter}>
+                        <ul className={`list-unstyled ${style.filterList}`} >
                             {productVariants.sizes.map(size => (
                                 <li key={size.id} className={`${style.filterItem} d-flex align-items-center`}>
                                     <input
                                         className={style.checkBox}
                                         type="checkbox"
                                         value={size.name}
-                                        id={size.name} />
+                                        id={size.name}
+                                        onChange={handleSizeChange}
+                                        checked={filterRules.sizes.includes(size.name) ? 'checked' : ''}
+                                    />
                                     <label htmlFor={size.name} className="ms-2">{size.name}</label>
                                 </li>
                             ))}
@@ -104,7 +119,7 @@ const Sidebar = ({ setFilterRules,
                 {!!productVariants?.colors.length &&
                     <div className={style.filter}>
                         <h4 className={style.title}>اللون</h4>
-                        <ul className={`list-unstyled ${style.filterList}`} onChange={handleColorFilter}>
+                        <ul className={`list-unstyled ${style.filterList}`}>
                             {productVariants.colors.map(color => (
                                 <li key={color.id} className={`${style.filterItem} d-flex`}>
                                     <input
@@ -112,6 +127,8 @@ const Sidebar = ({ setFilterRules,
                                         type="checkbox"
                                         value={color.name}
                                         id={color.name}
+                                        onChange={handleColorChange}
+                                        checked={filterRules.colors.includes(color.name) ? 'checked' : ''}
                                     />
                                     <label htmlFor={color.name} className="ms-2">{color.name}</label>
                                 </li>
@@ -120,18 +137,15 @@ const Sidebar = ({ setFilterRules,
                     </div>
                 }
             </div>
-            {/* {!!categories?.length &&
+            {!!categories?.length &&
                 <div className={style.categories}>
                     <h4 className={style.title}>الاقسام</h4>
-                    <CategoriesMenu
-                        categoriesData={categories}
-                        withButtonOpen={false}
-                    />
+                    <CategoriesMenu />
                 </div>
-            } */}
+            }
 
             <div className={style.applyFilter}>
-                <Button className={style.applyFilterBtn} onClick={handleFilter}>تطبيق الفلتر</Button>
+                <Button className={style.applyFilterBtn} onClick={() => handleFilter(filterRules)}>تطبيق الفلتر</Button>
             </div>
             {/* <div className={style.tags}>
                 <h4 className={style.title}>العلامات</h4>

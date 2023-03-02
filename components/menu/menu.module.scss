@@ -3,7 +3,7 @@
 
 .menuWrapper {
     background-color: var.$secondarycolor;
-    padding: 10px;
+    padding: 7px;
     top: -86px;
     transition: all 0.5s;
 
@@ -68,7 +68,6 @@
         margin-left: 2rem;
         transition: all 0.3s;
         padding: 1rem 0px;
-        font-weight: 600;
 
         >&:hover {
             color: var.$secondarycolor;

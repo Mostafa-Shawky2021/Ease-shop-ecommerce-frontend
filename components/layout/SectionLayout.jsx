@@ -1,12 +1,15 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link';
-import { Container } from 'react-bootstrap'
-import style from './sectionlayout.module.scss'
+
+import { Container } from 'react-bootstrap';
 
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
-const SectionLayout = ({ title, children, isSwiper, link }) => {
+import style from './sectionlayout.module.scss';
+
+
+const SectionLayout = ({ title, children, link }) => {
 
     const nextElementRef = useRef(null)
     const prevElementRef = useRef(null)
@@ -18,20 +21,16 @@ const SectionLayout = ({ title, children, isSwiper, link }) => {
                     <h4 className={style.title}>
                         {link ? <Link href={link}>{title}</Link> : title}
                     </h4>
-                    {!!isSwiper && (
-                        <div className={`${style.arrowWrapper} d-flex`}>
-                            <div className={style.arrow} ref={nextElementRef}>
-                                <ChevronRightIcon fontSize="small" className={style.arrowIcon} />
-                            </div>
-                            <div className={style.arrow} ref={prevElementRef}>
-                                <ChevronLeftIcon fontSize="small" className={style.arrowIcon} />
-                            </div>
+                    <div className={`${style.arrowWrapper} d-flex`}>
+                        <div className={style.arrow} ref={nextElementRef}>
+                            <ChevronRightIcon fontSize="small" className={style.arrowIcon} />
                         </div>
-                    )}
+                        <div className={style.arrow} ref={prevElementRef}>
+                            <ChevronLeftIcon fontSize="small" className={style.arrowIcon} />
+                        </div>
+                    </div>
                 </header>
-                {typeof (children) === 'function'
-                    ? children(nextElementRef, prevElementRef)
-                    : children}
+                {children(nextElementRef, prevElementRef)}
             </Container>
         </div>
 

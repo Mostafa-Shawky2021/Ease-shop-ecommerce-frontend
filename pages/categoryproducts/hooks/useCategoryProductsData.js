@@ -4,7 +4,6 @@ import { fetchCategoryProducts } from "../queries";
 
 import { queryKeys } from "../data";
 
-
 const useCategoryProductsData = (pageNumber, queryUri) => {
 
     const categorySlug = queryUri.categorySlug;

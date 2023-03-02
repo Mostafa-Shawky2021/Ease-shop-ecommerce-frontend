@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { useRouter } from 'next/router';
+
 import { useCategoryProductsData } from "./hooks";
+
+import { useFilter } from "@root/hooks";
 
 import { fetchCategoryProducts } from "./queries";
 
@@ -14,8 +17,6 @@ import { Sidebar } from "@root/components/sidebar"
 
 import { queryKeys } from "./data";
 
-
-
 export const getServerSideProps = async ({ query }) => {
 
     const queryClient = new QueryClient();
@@ -24,7 +25,7 @@ export const getServerSideProps = async ({ query }) => {
 
     const urlSearchParams = new URLSearchParams();
 
-    // exclude page number from query paramters
+    // exclude page number and category slug from query paramters
     Object.entries(query).forEach(([queryStringKey, queryStringValue]) => {
 
         if (queryStringKey !== 'page' && queryStringKey !== 'categorySlug') {
@@ -48,19 +49,16 @@ export const getServerSideProps = async ({ query }) => {
 const CategoryProductsPage = () => {
 
     const [pageNumber, setPageNumber] = useState(1);
-    const [filterRules, setFilterRules] = useState({
-        price: [50, 3000],
-        sizes: [],
-        colors: [],
-    });
-    const router = useRouter();
 
+    const router = useRouter();
 
     const {
         data: productsCategory,
         isFetching: isFetchingProductsCategory,
-        isLoadingProductsCategory: isLoadingProductsCategory
-    } = useCategoryProductsData(pageNumber, router.query)
+        isLoadingProductsCategory: isLoadingProductsCategory }
+        = useCategoryProductsData(pageNumber, router.query)
+
+    const { applyFilter, resetFilter } = useFilter(pageNumber);
 
     useEffect(() => {
 
@@ -68,30 +66,25 @@ const CategoryProductsPage = () => {
 
     }, [pageNumber])
 
-    const handleFilter = () => {
 
-        const urlSearchParams = new URLSearchParams()
+    const handleFilter = (filterRules) => {
 
-        Object.entries(filterRules).forEach(([filterKey, value]) => {
-            if (value.length > 0) {
-                urlSearchParams.set(filterKey, encodeURIComponent(value.join('-')));
-            }
-        });
-
-        const urlSearchParamsToString = urlSearchParams.toString();
-
-        const filterUrl = `/caegoryproducts/${categorySlug}?page=${pageNumber}&${urlSearchParamsToString}`;
-
-        router.push(filterUrl, undefined, { shallow: true });
+        const categoryName = router?.query?.categorySlug;
+        applyFilter(filterRules, `/categoryproducts/${categoryName}`);
     }
 
-    const handleDeleteFilter = () => {
+    const handleDeleteFilter = (setFilterRules) => {
+
+        const categorySlug = router.query.categorySlug;
+
         setFilterRules({
-            price: [50, 3000],
+            price: [50, 10000],
             sizes: [],
             colors: [],
         })
-        router.push(`/categoryproducts/${categorySlug}`, undefined, { shallow: true });
+
+        resetFilter(setFilterRules, `/products?productname=${categorySlug}`);
+
     }
 
     return (
@@ -99,8 +92,6 @@ const CategoryProductsPage = () => {
             <Row className='g-0'>
                 <Col xs={3} className='d-none d-lg-block' >
                     <Sidebar
-                        setFilterRules={setFilterRules}
-                        filterRules={filterRules}
                         handleFilter={handleFilter}
                         handleDeleteFilter={handleDeleteFilter}
                     />

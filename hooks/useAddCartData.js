@@ -16,8 +16,7 @@ const useAddCartData = (setIsLoading) => {
             toast.success("تم اضافة المنتج بنجاح");
             const userId = JSON.parse(window.localStorage.getItem('guest')) || null;
             const cartDataResponse = res.data;
-            console.log(cartDataResponse)
-            console.log(cartDataResponse);
+
             queryClient.setQueriesData(
                 queryKeys.USER_CARTS(userId),
                 (carts) => [...carts, cartDataResponse])

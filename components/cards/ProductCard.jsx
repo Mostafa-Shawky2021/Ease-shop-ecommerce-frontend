@@ -29,17 +29,20 @@ const ProductCard = ({ product, ...props }) => {
 
     const { guestId } = useGuest();
 
-    const { data: carts } = useCartsData(guestId);
+    // const { data: carts } = useCartsData(guestId);
 
     const renderPrice = () => {
+
         if (product?.price_discount) {
             return (
                 <div className='d-flex align-items-center justify-content-center'>
                     <span className={style.productPrice}>
-                        {Number(product?.price_discount).toLocaleString()}  <span className={style.currency}>جنية</span>
+                        {Number(product?.price_discount).toLocaleString()}
+                        <span className={style.currency}>جنية</span>
                     </span>
                     <span className={`${style.productPrice} ${style.oldPrice}`}>
-                        {Number(product?.price).toLocaleString()} <span className={style.currency}>جنية</span>
+                        {Number(product?.price).toLocaleString()}
+                        <span className={style.currency}>جنية</span>
                     </span>
                 </div>
             )
@@ -54,7 +57,7 @@ const ProductCard = ({ product, ...props }) => {
             return (
                 <div
                     className={style.productDiscount}>
-                    {calcPriceDiscount(product.price, product.price_discount)}%
+                    {calcPriceDiscount(product?.price, product?.price_discount)}%
                 </div>)
         }
     }
@@ -112,7 +115,8 @@ const ProductCard = ({ product, ...props }) => {
                         fill
                         src={product?.image || DefaultImage}
                         className={style.productCardImage}
-                        alt={product?.name || ''} />
+                        alt={product?.name || ''}   
+                    />
                 </Link>
             </div>
             <div style={{ paddingLeft: '5px', paddingRight: '5px' }}>
