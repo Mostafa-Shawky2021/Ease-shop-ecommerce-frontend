@@ -58,7 +58,9 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
                     <li className={style.item}>
                         <Link href="/homepage">الصفحة الرئيسية</Link>
                     </li>
-
+                    <li className={style.item}>
+                        <Link href="/offers">العروض المميزة</Link>
+                    </li>
                     <li className={style.item}>
                         <Link href="#">الطلبات</Link>
                     </li>

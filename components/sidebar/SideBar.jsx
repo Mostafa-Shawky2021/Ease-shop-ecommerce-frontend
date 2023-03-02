@@ -25,6 +25,17 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
     const { data: productVariants } = useProductVariants();
     const { data: categories } = useCategoriesData();
 
+    useEffect(() => {
+        const queryFilter = router.query;
+
+        const filterRulesQueries = {};
+
+        (queryFilter.price) ? filterRulesQueries.price = queryFilter.price.split('-') : null;
+        (queryFilter.sizes) ? filterRulesQueries.sizes = queryFilter.sizes.split('-') : null;
+        (queryFilter.colors) ? filterRulesQueries.colors = queryFilter.colors.split('-') : null;
+        setFilterRules({ ...filterRules, ...filterRulesQueries })
+
+    }, []);
 
     const valueLabelFormat = (value) => value;
 
@@ -57,17 +68,7 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
 
     }
 
-    useEffect(() => {
-        const queryFilter = router.query;
 
-        const filterRulesQueries = {};
-
-        (queryFilter.price) ? filterRulesQueries.price = queryFilter.price.split('-') : null;
-        (queryFilter.sizes) ? filterRulesQueries.sizes = queryFilter.sizes.split('-') : null;
-        (queryFilter.colors) ? filterRulesQueries.colors = queryFilter.colors.split('-') : null;
-        setFilterRules({ ...filterRules, ...filterRulesQueries })
-
-    }, [])
     return (
         <div className={style.sidebarWrapper}>
             <div className={style.priceFilter}>

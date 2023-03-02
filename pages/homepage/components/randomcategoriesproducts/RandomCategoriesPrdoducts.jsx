@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { SectionLayout } from '@root/components/layout';
 import { ProductCard } from '@root/components/cards';
 
-
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
@@ -21,7 +20,6 @@ const RandomCategoriesProducts = () => {
     const { data: randomCategoriesProducts } = useRandomCategoriesProductsData();
     return (
         <div className={style.randomCategoriesProductsWrapper}>
-
             {randomCategoriesProducts?.map((randomCat) => (
                 <SectionLayout
                     key={randomCat.id}

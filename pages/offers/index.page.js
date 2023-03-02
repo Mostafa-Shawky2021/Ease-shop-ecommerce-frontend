@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { useProductsData, useFilter } from "@root/hooks";
+import { useProductsOffersData } from "./hooks";
+import { useFilter } from "@root/hooks";
 
-import { fetchProducts } from "@root/queries";
+import { fetchProductsOffers } from "./queries";
 
-import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
-import { ProductsList } from "@root/components/productslist";
+import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
 import { Sidebar } from "@root/components/sidebar";
-import { BreadCrumbLayout } from '@root/components/layout';
+import { BreadCrumbLayout } from "@root/components/layout";
+import { ProductsList } from "@root/components/productslist";
 
-import { queryKeys } from "data";
-
+import { queryKeys } from "./data";
 
 export async function getServerSideProps({ query }) {
 
@@ -28,8 +28,8 @@ export async function getServerSideProps({ query }) {
     const urlSearchParamsToString = urlSearchParams.toString();
 
     await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS(1, urlSearchParamsToString),
-        () => fetchProducts(1, urlSearchParamsToString));
+        queryKeys.PRODUCTS_OFFERS(1, urlSearchParamsToString),
+        () => fetchProductsOffers(1, urlSearchParamsToString));
 
     return {
         props: {
@@ -38,7 +38,8 @@ export async function getServerSideProps({ query }) {
     }
 }
 
-const StorePage = () => {
+
+const OffersPage = () => {
 
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -48,7 +49,7 @@ const StorePage = () => {
         data: productsData,
         isFetching: isFetchingProducts,
         isLoading: isLoadingProducts
-    } = useProductsData(pageNumber, router.query);
+    } = useProductsOffersData(pageNumber, router.query);
 
     const { applyFilter, resetFilter } = useFilter(pageNumber);
 
@@ -58,16 +59,16 @@ const StorePage = () => {
 
     }, [pageNumber]);
 
-    const handleFilter = (filterRules) => applyFilter(filterRules, `/store`);
+    const handleFilter = (filterRules) => applyFilter(filterRules, `/offers`);
 
-    const handleDeleteFilter = (setFilterRules) => resetFilter(setFilterRules, '/store');
+    const handleDeleteFilter = (setFilterRules) => resetFilter(setFilterRules, '/offers');
 
     return (
         <>
             <BreadCrumbLayout>
                 <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
                 <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: 'bold' }}>
-                    المتجر
+                    العروض المميزة
                 </Breadcrumb.Item>
             </BreadCrumbLayout>
             <Container fluid="xxl">
@@ -86,7 +87,7 @@ const StorePage = () => {
                                 isLoadingProducts={isLoadingProducts}
                                 setPageNumber={setPageNumber}
                             />
-                        ) : (<p>لا توجد منتجات للعرض</p>)}
+                        ) : (<p>ليس متوفر عروض في الوقت الحالي</p>)}
                     </Col>
                 </Row>
             </Container>
@@ -94,4 +95,5 @@ const StorePage = () => {
 
     )
 }
-export default StorePage;
+
+export default OffersPage;

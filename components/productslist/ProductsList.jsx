@@ -8,7 +8,7 @@ import { Loading } from "@root/components/loading";
 
 import style from './products.module.scss';
 
-const Products = ({
+const ProductsList = ({
     productsData,
     isFetchingProducts,
     isLoadingProducts,
@@ -23,13 +23,12 @@ const Products = ({
             {!!productsData.products.length ? (<>
                 <GridList
                     data={productsData?.products}
-                    renderItem={(product) => (
+                    renderItem={(product) =>
                         <Col xs={12} sm={6} md={3} key={product.id}>
                             <ProductCard
                                 product={product}
                                 style={{ marginTop: '2rem' }} />
-                        </Col>
-                    )}
+                        </Col>}
                 />
                 <PaginationWrapper
                     activePage={current_page}
@@ -49,4 +48,4 @@ const Products = ({
 
     )
 }
-export default Products
+export default ProductsList

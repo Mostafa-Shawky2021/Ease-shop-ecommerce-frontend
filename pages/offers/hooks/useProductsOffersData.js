@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "../data";
 
-import { queryKeys } from "data";
+import { fetchProductsOffers } from "../queries";
 
-import { fetchProducts } from "@root/queries";
-
-const useProductsData = (pageNumber, queryUri) => {
+const useProductsOffersData = (pageNumber, queryUri) => {
 
     const urlSearchParams = new URLSearchParams();
 
     /*  
+        ** extract the filter rules from the query string
         ** any request contain page number  we need to exclude it 
         ** from the uri so we avoid the repeating query string 
     */
@@ -21,9 +21,9 @@ const useProductsData = (pageNumber, queryUri) => {
     const urlSearchParamsToString = urlSearchParams.toString();
 
     return useQuery(
-        queryKeys.PRODUCTS(pageNumber, urlSearchParamsToString),
-        () => fetchProducts(pageNumber, urlSearchParamsToString),
+        queryKeys.PRODUCTS_OFFERS(pageNumber, urlSearchParamsToString),
+        () => fetchProductsOffers(pageNumber, urlSearchParamsToString),
         { keepPreviousData: true });
 }
 
-export default useProductsData;
+export default useProductsOffersData;
