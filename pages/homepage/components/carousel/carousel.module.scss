@@ -22,13 +22,17 @@
         text-align: center;
         width: 98%;
 
-        @include minmediaquery('md') {
+        @include minmediaquery('sm') {
             text-align: right;
             padding: 0px;
             right: 30px;
             top: 24%;
             transform: none;
+            width: auto;
+        }
 
+        @include minmediaquery('xl') {
+            right: 0px;
         }
 
         .title {
@@ -74,10 +78,12 @@
             display: block;
             text-align: center;
             line-height: 45px;
+            margin: auto;
 
             @include minmediaquery('sm') {
                 height: 65px;
                 line-height: 65px;
+                margin-right: 0px;
             }
 
             @include animationbutton();

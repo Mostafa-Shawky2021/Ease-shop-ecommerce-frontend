@@ -1,30 +1,36 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 import {
-    fetchLatestProducts,
     fetchRandomCategoriesProducts,
     fetchCategories
-} from './queries'
+} from './queries';
 
-import { queryKeys } from './data'
+import { fetchProducts } from '@root/queries';
 
 import { Carousel } from './components/carousel'
 import { Services } from './components/services'
-import { TopCategories } from './components/topcategories'
 import { Categories } from './components/categories'
 import { LatestProducts } from './components/latestproducts'
 import { RandomCategoriesProducts } from './components/randomcategoriesproducts';
 import { ToastContainer } from 'react-toastify';
 import { Offer } from './components/offer';
 
+import { queryKeys } from './data'
+import { queryKeys as globalQueryKeys } from 'data';
+import { ProductsOffers } from './components/productsoffers';
+
+
 export async function getServerSideProps() {
 
-    const queryClient = new QueryClient()
+    const queryClient = new QueryClient();
+
+
+
     await Promise.allSettled(
         [
             queryClient.prefetchQuery(
-                queryKeys.LATEST_PRODUCTS,
-                fetchLatestProducts),
+                globalQueryKeys.PRODUCTS(1, "latest=true&limit=8"),
+                fetchProducts),
             queryClient.prefetchQuery(
                 queryKeys.RANDOM_CATEGORIES_PRODUCTS,
                 fetchRandomCategoriesProducts),
@@ -45,12 +51,13 @@ export default function HomePage() {
         <>
             <Carousel />
             <Services />
-            <LatestProducts />
-            <Categories />
-            {/* <TopCategories /> */}
             <Offer />
-            <RandomCategoriesProducts />
+            <Categories />
+            <LatestProducts />
+            <ProductsOffers />
+            {/* <TopCategories /> */}
             <ToastContainer />
+            <RandomCategoriesProducts />
         </>
     )
 }

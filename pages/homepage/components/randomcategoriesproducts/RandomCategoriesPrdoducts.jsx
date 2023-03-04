@@ -25,6 +25,7 @@ const RandomCategoriesProducts = () => {
                     key={randomCat.id}
                     title={randomCat?.cat_name}
                     link={`/categoryproducts/${randomCat?.cat_slug}`}
+                    isSwiper={true}
                 >
                     {(nextElementRef, prevElementRef) => (
                         <Swiper

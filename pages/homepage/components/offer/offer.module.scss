@@ -11,6 +11,14 @@
         background-size: cover;
         position: relative;
         background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        @include minmediaquery('lg') {
+            text-align: right;
+        }
     }
 
     .banner.firstBanner {
@@ -22,15 +30,20 @@
     }
 
     .intro {
-        position: absolute;
-        left: 25px;
-        top: 50%;
-        transform: translateY(-50%);
+
+        @include minmediaquery('lg') {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
     }
 
     .intro .title {
-        font-size: 1.6rem;
-        font-weight: bold;
+        font-size: 1.3rem;
+        font-weight: 600;
     }
 
     .intro .description {
@@ -45,7 +58,7 @@
     }
 
     .intro .shopNow {
-        margin-right: 20px;
+        margin: auto;
         width: 155px;
         height: 42px;
         position: relative;
@@ -55,7 +68,15 @@
         background: var.$secondarycolor;
         color: #000;
         font-weight: 600;
+        display: block;
+        text-align: center;
+        line-height: 42px;
         @include animationbutton(var.$accentcolor);
+
+        @include minmediaquery('lg') {
+            margin-right: 0px;
+
+        }
 
         .text {
             transition: all 0.3s;

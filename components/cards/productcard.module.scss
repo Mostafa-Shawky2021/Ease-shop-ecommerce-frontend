@@ -9,13 +9,10 @@
     border-radius: 4px;
     margin-top: 1rem;
     margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
 
     &:hover {
         box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
-    }
-
-    @include minmediaquery('lg') {
-        margin-bottom: 3rem;
     }
 
     &:hover .productCard {
@@ -64,8 +61,7 @@
         overflow: hidden;
         text-align: center;
         transition: all 0.5s;
-        height: 300px;
-        padding-top: 2.5rem;
+        height: 236px;
         background-color: #f8f8f8;
 
         .productCardImage {
@@ -135,7 +131,7 @@
 
     .addProduct {
         width: 170px;
-        margin: 20px auto;
+        margin: 20px auto 0px;
         background-color: var(--bs-primary);
         color: #fff;
         box-shadow: none !important;

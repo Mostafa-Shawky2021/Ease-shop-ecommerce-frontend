@@ -6,17 +6,20 @@ import { fetchProducts } from "@root/queries";
 
 const useProductsData = (pageNumber, queryUri) => {
 
+
     const urlSearchParams = new URLSearchParams();
 
     /*  
         ** any request contain page number  we need to exclude it 
         ** from the uri so we avoid the repeating query string 
     */
-    Object.entries(queryUri).forEach(([key, value]) => {
+    if (queryUri) {
+        Object.entries(queryUri).forEach(([key, value]) => {
+            if (key !== 'page') urlSearchParams.set(key, encodeURIComponent(value));
 
-        if (key !== 'page') urlSearchParams.set(key, encodeURIComponent(value));
+        });
 
-    });
+    }
 
     const urlSearchParamsToString = urlSearchParams.toString();
 

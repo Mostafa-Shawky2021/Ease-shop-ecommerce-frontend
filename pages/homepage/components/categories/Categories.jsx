@@ -25,7 +25,7 @@ const Categories = () => {
 
     return (
         <div className={style.categories}>
-            <SectionLayout title="التسوق عن طريق الاقسام" isSwiper={true}>
+            <SectionLayout title="الاقسام" isSwiper={true}>
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
                         style={{ direction: 'rtl' }}
@@ -45,15 +45,15 @@ const Categories = () => {
                             670: { slidesPerView: 4 },
                             768: { slidesPerView: 5 },
                             992: { slidesPerView: 6 },
+                            1400: { slidesPerView: 7 },
                         }}
-                        loop={true}
+                        loop={false}
                         spaceBetween={18}
-                        centeredSlides={true}
                         onSwiper={setSwiper}
                     >
                         {categories?.map(category => (
                             <SwiperSlide key={category.id}>
-                                <div className={style.catWrapper}>
+                                <div className={style.catWrapper} style={{ marginTop: '1rem' }}>
                                     <div className={style.catImageWrapper}>
                                         <Link href={`category/${category.cat_slug}`}>
                                             <Image
