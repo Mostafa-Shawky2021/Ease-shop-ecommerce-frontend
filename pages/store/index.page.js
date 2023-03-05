@@ -11,6 +11,7 @@ import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { ProductsList } from "@root/components/productslist";
 import { Sidebar } from "@root/components/sidebar";
 import { BreadCrumbLayout } from '@root/components/layout';
+import { ToastContainer } from 'react-toastify';
 
 import { queryKeys } from "data";
 
@@ -89,6 +90,19 @@ const StorePage = () => {
                         ) : (<p>لا توجد منتجات للعرض</p>)}
                     </Col>
                 </Row>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={1000}
+                    limit={1}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl
+                    pauseOnFocusLoss={false}
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
             </Container>
         </>
 

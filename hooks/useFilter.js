@@ -11,15 +11,16 @@ const useFilter = (pageNumber) => {
 
         const urlSearchParams = new URLSearchParams()
 
-        //check if additionalquery paratmer contain query filter key,value
+        //check if additionalquery paramater contain query filter key,value
         if (additionalQueryFilter) {
 
             const { queriesFilter } = additionalQueryFilter;
 
             Object.entries(queriesFilter).forEach(([filterKey, filterValue]) => {
-                console.log(filterValue);
-                if (filterValue) return;
 
+                if (filterValue) {
+                    urlSearchParams.set(filterKey, encodeURIComponent(filterValue));
+                }
                 else if (Array.isArray(filterValue) && filterValue.length > 0) {
                     urlSearchParams.set(filterKey, encodeURIComponent(filterValue.join()));
                 } else {

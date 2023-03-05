@@ -11,6 +11,7 @@ import { Carousel } from './components/carousel'
 import { Services } from './components/services'
 import { Categories } from './components/categories'
 import { LatestProducts } from './components/latestproducts'
+import { TopCategories } from './components/topcategories';
 import { RandomCategoriesProducts } from './components/randomcategoriesproducts';
 import { ToastContainer } from 'react-toastify';
 import { Offer } from './components/offer';
@@ -55,9 +56,21 @@ export default function HomePage() {
             <Categories />
             <LatestProducts />
             <ProductsOffers />
-            {/* <TopCategories /> */}
-            <ToastContainer />
             <RandomCategoriesProducts />
+            {/* <TopCategories /> */}
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                limit={1}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     )
 }

@@ -13,23 +13,23 @@ import style from './latestproducts.module.scss';
 
 const LatestProducts = () => {
 
-    const [_, setSwiper] = useState(null)
 
     const { data: latestProducts } = useProductsData(1, { latest: true, limit: 8 });
 
     return (
-        <div className={style.latestProducts}>
-            <SectionLayout title="احدث المنتجات" link="/latestproducts">
-                <Row>
-                    {latestProducts.products?.map(product => (
-                        <Col xs={12} sm={6} md={4} lg={3}>
-                            <ProductCard product={product} />
-                        </Col>
-                    ))}
-                </Row>
-            </SectionLayout>
+        !!latestProducts && (
+            <div className={style.latestProducts}>
+                <SectionLayout title="احدث المنتجات" link="/latestproducts">
+                    <Row>
+                        {latestProducts?.products?.map(product =>
+                            <Col key={product.id} xs={6} sm={6} md={4} lg={3}>
+                                <ProductCard product={product} />
+                            </Col>
+                        )}
+                    </Row>
+                </SectionLayout>
+            </div>)
 
-        </div >
     )
 }
 

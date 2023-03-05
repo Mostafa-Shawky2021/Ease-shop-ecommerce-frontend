@@ -131,7 +131,7 @@ const ProductDetails = ({ productDetails }) => {
                 {productDetails?.short_description}
             </div>
             {!!productDetails?.colors?.length && (
-                <div className={`${style.productColor} d-flex align-items-center mb-3 mt-3`}>
+                <div className={`${style.productVariants} d-flex align-items-center mb-3 mt-3`}>
                     <label className={style.labelText}>اختر لون المنتج</label>
                     <div style={{ width: '200px' }}>
                         <SelectedBox onChange={(color) => setColor(color)}>
@@ -144,7 +144,7 @@ const ProductDetails = ({ productDetails }) => {
             )}
 
             {!!productDetails?.sizes?.length && (
-                <div className={`${style.productColor} d-flex align-items-center mb-3 mt-3`}>
+                <div className={`${style.productVariants} d-flex align-items-center mb-3 mt-3`}>
                     <label className={style.labelText}>اختر حجم المنتج</label>
                     <div style={{ width: '200px' }}>
                         <SelectedBox onChange={(size) => setSize(size)}>
@@ -155,7 +155,7 @@ const ProductDetails = ({ productDetails }) => {
                     </div>
                 </div>
             )}
-            <div className={`${style.addCartDetails} d-flex flex-wrap`}>
+            <div className={`${style.addCartDetails} d-flex flex-wrap mt-3`}>
                 <div className={style.quantity}>
                     <ProductQuantity
                         quantity={quantity}

@@ -7,8 +7,7 @@
     overflow: hidden;
     transition: all 0.4s;
     border-radius: 4px;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
     padding-bottom: 1rem;
 
     &:hover {
@@ -42,19 +41,20 @@
         top: 10px;
         z-index: 1;
 
-        .favourite {
-            color: #c3c3c3;
-            padding: 4px 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-
-            &:hover {
-                transform: scale(1.1);
-                color: var.$accentcolor;
-            }
-        }
-
     }
+
+    .productAction .favourite {
+        color: #c3c3c3;
+        padding: 4px 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            transform: scale(1.1);
+            color: var.$accentcolor;
+        }
+    }
+
 
     .productCardImageWrapper {
         position: relative;
@@ -62,7 +62,10 @@
         text-align: center;
         transition: all 0.5s;
         height: 236px;
-        background-color: #f8f8f8;
+
+        @include maxmediaquery("sm") {
+            height: 180px;
+        }
 
         .productCardImage {
             cursor: pointer;
@@ -94,28 +97,15 @@
         overflow: hidden;
     }
 
-    .productDescription {
-        color: #767373;
-        font-size: 1rem;
-        margin-top: 4px;
-        margin-bottom: 3px;
-        font-weight: 500;
-        max-width: 90%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        margin: auto;
-    }
-
     .productPrice {
-        color: var.$accentcolor;
-        font-weight: 500;
+        color: #f00;
+        font-weight: bold;
         margin: 0px 5px;
         font-family: var.$oswaldfont;
 
         .currency {
             font-family: var.$cairofont;
-            font-weight: 500;
+            font-weight: bold;
         }
     }
 
@@ -130,7 +120,8 @@
     }
 
     .addProduct {
-        width: 170px;
+        width: 98%;
+        max-width: 170px;
         margin: 20px auto 0px;
         background-color: var(--bs-primary);
         color: #fff;
@@ -144,6 +135,10 @@
         position: relative;
         height: 38px;
         overflow: hidden;
+
+        @include maxmediaquery('sm') {
+            font-size: 0.7rem;
+        }
 
         .contentWrapper {
             position: absolute;

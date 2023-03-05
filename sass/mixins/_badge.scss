@@ -1,0 +1,28 @@
+@use 'sass/var' as var;
+
+@mixin badge($offset: ()) {
+    position: absolute;
+
+    @if length($offset)>0 {
+
+        @each $propetyName,
+        $propertyValue in $offset {
+            #{$propetyName} : #{$propertyValue}px;
+        }
+    }
+
+    @else {
+        right: 21px;
+        top: -9px;
+    }
+
+    background-color: var.$accentcolor;
+    color: #fff;
+    border-radius: 50%;
+    width: 17px;
+    text-align: center;
+    height: 17px;
+    line-height: 18px;
+    font-size: 12px;
+    font-weight: 400;
+}

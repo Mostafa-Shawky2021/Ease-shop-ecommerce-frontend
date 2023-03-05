@@ -11,7 +11,7 @@ import {
 
 import { calcCartsCount } from '@root/utils';
 
-import { ToastContainer } from 'react-toastify';
+
 import { ProductQuantity } from '@root/components/productquantity';
 
 import { ListItem } from '@root/components/listitem';
@@ -120,7 +120,7 @@ const CartList = () => {
                                     <DeleteIcon fontSize="small" />
                                 </div>
                             </div>
-                            <ToastContainer />
+
                         </div>
                     )} />
             }

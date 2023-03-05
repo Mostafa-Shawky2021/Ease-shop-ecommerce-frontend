@@ -1,5 +1,6 @@
 @use "sass/var" as var;
-
+@use "sass/mixins/mediaquery" as *;
+@use "sass/mixins/badge" as *;
 
 .header {
     background: var.$primarycolor;
@@ -7,16 +8,18 @@
     width: 100%;
     transition: all 1s;
     top: -170px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    @include minmediaquery('lg') {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
 
     &.fixed {
         position: fixed;
         top: 0px;
         transition: all 1s;
-    }
-
-    .container {
-        padding-top: 17px;
-        padding-bottom: 17px
     }
 
     .logo {
@@ -36,15 +39,16 @@
     .searchInput {
         height: 37px;
         border: 1px solid transparent;
+        margin-top: 0.5rem;
     }
 
     .btnSearch {
         position: absolute;
-        left: 0px;
-        top: 0px;
-        color: #212224;
         width: 41px;
-        height: 100%;
+        height: 79%;
+        top: 8px;
+        left: 0px;
+        color: #212224;
         border: none;
         background-color: transparent;
         border-right: 1px solid #cfcfcf
@@ -58,8 +62,20 @@
         box-shadow: none !important;
         cursor: pointer;
         padding: 0px;
-        margin-left: 1.3rem;
+        display: flex;
+        align-items: center;
+        text-align: right;
+        margin-top: 0.5rem;
 
+        &:last-child {
+            @include maxmediaquery('md') {
+                margin-right: 10px;
+            }
+
+            @include minmediaquery('lg') {
+                margin-right: 10px;
+            }
+        }
     }
 
     .actionName {
@@ -80,18 +96,7 @@
     }
 
     .count {
-        position: absolute;
-        right: 21px;
-        top: -9px;
-        background-color: var.$accentcolor;
-        color: #fff;
-        border-radius: 50%;
-        width: 17px;
-        text-align: center;
-        height: 17px;
-        line-height: 18px;
-        font-size: 12px;
-        font-weight: 400;
+        @include badge;
 
     }
 

@@ -5,7 +5,7 @@
     position: relative;
 
     .catWrapper {
-        // padding-bottom: 30px;
+        padding-bottom: 30px;
         text-align: center;
         border-radius: 5px;
     }
@@ -13,12 +13,10 @@
     .catImageWrapper {
         overflow: hidden;
         position: relative;
-        height: 187px;
-        background-color: #b7e5ff;
-        // border-radius: 50%;
+        height: 160px;
 
         &:hover .catImage {
-            transform: scale(1.1);
+            transform: scale(1.0258);
         }
     }
 
@@ -29,14 +27,17 @@
     }
 
     .catName {
-        color: #636363;
-        font-weight: 600;
         text-align: center;
         cursor: pointer;
-        font-weight: bold;
-        margin-top: 10px;
+        margin-top: 0.9rem;
         margin-bottom: 0px;
+        color: var(--bs-primary);
+        transition: all 0.5s;
+        display: block;
 
+        &:hover {
+            color: #0b5cd3;
+        }
     }
 
 }

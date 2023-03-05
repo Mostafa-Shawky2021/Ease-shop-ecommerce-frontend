@@ -35,19 +35,19 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
         return () => document.removeEventListener('keydown', closeCategoryListMenuList);
     }, [])
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     window.addEventListener('scroll', () => {
-    //         let scrollValue = document.documentElement.scrollTop;
-    //         (scrollValue > 400) ? setFixedMenu(true) : setFixedMenu(false);
-    //     })
+        // window.addEventListener('scroll', () => {
+        //     let scrollValue = document.documentElement.scrollTop;
+        //     (scrollValue > 400) ? setFixedMenu(true) : setFixedMenu(false);
+        // })
 
 
-    // }, [setFixedMenu])
+    }, [setFixedMenu])
 
     return (
         <div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ''}`}>
-            <Container fluid="xl" className="d-flex align-items-center">
+            <Container fluid="xl" className="d-flex align-items-center px-1">
                 <div className={style.categoryWrapper}>
                     <CategoriesMenu categoriesData={categoriesData} />
                 </div>
@@ -59,7 +59,7 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
                         <Link href="/homepage">الصفحة الرئيسية</Link>
                     </li>
                     <li className={style.item}>
-                        <Link href="/offers">العروض المميزة</Link>
+                        <Link href="/productsoffers">العروض المميزة</Link>
                     </li>
                     <li className={style.item}>
                         <Link href="#">الطلبات</Link>
@@ -79,7 +79,10 @@ const Menu = ({ categoriesData, setIsOpenCartList }) => {
                 )}
 
                 {/* display in mobile screen  */}
-                <div className={style.iconMobileWrapper} onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}>
+                <div
+                    className={style.iconMobileWrapper}
+                    onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}
+                >
                     <DehazeIcon fontSize="large" />
                 </div>
             </Container>

@@ -18,25 +18,11 @@ import { BreadCrumbLayout } from '@root/components/layout';
 import { queryKeys } from './data';
 
 
-export const getStaticPaths = async () => {
 
-    const { data: products } = await axiosInstance.get('/api/products');
-    const paths = products.map(product =>
-    ({
-        params:
-            { productSlug: product.product_slug.toString() }
-    }))
-
-    return {
-        paths,
-        fallback: false
-    }
-}
-
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ query }) => {
 
     const queryClient = new QueryClient();
-    const productSlug = params.productSlug;
+    const productSlug = query.productSlug;
     await Promise.all([
         queryClient.prefetchQuery(
             queryKeys.PRODUCT_DETAILS(productSlug),

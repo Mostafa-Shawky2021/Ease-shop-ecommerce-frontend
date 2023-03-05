@@ -15,7 +15,7 @@ import style from './randomcategoriesproducts.module.scss';
 
 const RandomCategoriesProducts = () => {
 
-    const [swiper, setSwiper] = useState(null)
+    const [swiper, setSwiper] = useState(null);
 
     const { data: randomCategoriesProducts } = useRandomCategoriesProductsData();
     return (

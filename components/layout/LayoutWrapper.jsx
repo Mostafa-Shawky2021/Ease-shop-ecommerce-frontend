@@ -4,6 +4,7 @@ import { useCategoriesData } from '@root/hooks';
 
 import { Header } from "@root/components/header";
 import { Menu } from "@root/components/menu";
+import { MenuMobile } from "@root/components/menumobile";
 import { Footer } from "@root/components/footer";
 import { SidebarCartList } from "@root/components/sidebarcartlist";
 
@@ -20,6 +21,7 @@ const LayoutWrapper = ({ children }) => {
 			<Menu
 				categoriesData={categories}
 				setIsOpenCartList={setIsOpenCartList} />
+			<MenuMobile />
 			<SidebarCartList
 				isOpenCartList={isOpenCartList}
 				setIsOpenCartList={setIsOpenCartList} />

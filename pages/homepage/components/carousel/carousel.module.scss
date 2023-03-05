@@ -55,7 +55,7 @@
 
         .description {
 
-            @include paragraph(#cfcfcf);
+            @include paragraph(#fdfdfd);
             font-size: 1rem;
 
             @include minmediaquery('md') {
@@ -71,14 +71,13 @@
             height: 45px;
             font-size: 1.3rem;
             color: #000;
-            margin-top: 1rem;
+            margin: 1.5rem auto;
             position: relative;
             isolation: isolate;
             border-radius: 0px;
             display: block;
             text-align: center;
             line-height: 45px;
-            margin: auto;
 
             @include minmediaquery('sm') {
                 height: 65px;

@@ -24,54 +24,63 @@ const Categories = () => {
     const { data: categories } = useCategoriesData();
 
     return (
-        <div className={style.categories}>
-            <SectionLayout title="الاقسام" isSwiper={true}>
-                {(nextElementRef, prevElementRef) => (
-                    <Swiper
-                        style={{ direction: 'rtl' }}
-                        modules={[Autoplay, Navigation]}
-                        pagination={{ clickable: true }}
-                        className={style.swiperWrapper}
-                        autoplay={{ delay: 4000 }}
-                        slidesPerView={"auto"}
-                        allowTouchMove={false}
-                        navigation={{
-                            prevEl: prevElementRef.current,
-                            nextEl: nextElementRef.current,
-                        }}
-                        breakpoints={{
-                            0: { slidesPerView: 2 },
-                            480: { slidesPerView: 3 },
-                            670: { slidesPerView: 4 },
-                            768: { slidesPerView: 5 },
-                            992: { slidesPerView: 6 },
-                            1400: { slidesPerView: 7 },
-                        }}
-                        loop={false}
-                        spaceBetween={18}
-                        onSwiper={setSwiper}
-                    >
-                        {categories?.map(category => (
-                            <SwiperSlide key={category.id}>
-                                <div className={style.catWrapper} style={{ marginTop: '1rem' }}>
-                                    <div className={style.catImageWrapper}>
-                                        <Link href={`category/${category.cat_slug}`}>
-                                            <Image
-                                                src={category.image || DefaultImage}
-                                                className={style.catImage}
-                                                fill
-                                                alt={category.cat_name} />
-                                        </Link>
+        !!categories && (
+            <div className={style.categories}>
+                <SectionLayout title="الاقسام" isSwiper={true}>
+                    {(nextElementRef, prevElementRef) => (
+                        <Swiper
+                            style={{ direction: 'rtl' }}
+                            modules={[Autoplay, Navigation]}
+                            pagination={{ clickable: true }}
+                            className={style.swiperWrapper}
+                            autoplay={{ delay: 4000 }}
+                            slidesPerView={"auto"}
+                            // allowTouchMove={false}
+                            navigation={{
+                                prevEl: prevElementRef.current,
+                                nextEl: nextElementRef.current,
+                            }}
+                            breakpoints={{
+                                0: { slidesPerView: 2 },
+                                480: { slidesPerView: 3 },
+                                670: { slidesPerView: 4 },
+                                768: { slidesPerView: 5 },
+                                992: { slidesPerView: 6 },
+                                1400: { slidesPerView: 7 },
+                            }}
+                            loop={false}
+                            spaceBetween={18}
+                            onSwiper={setSwiper}
+                        >
+                            {categories?.map(category => (
+                                <SwiperSlide key={category.id}>
+                                    <div className={style.catWrapper} style={{ marginTop: '1rem' }}>
+                                        <div className={style.catImageWrapper}>
+                                            <Link href={`categoryproducts/${category.cat_slug}`}>
+                                                <Image
+                                                    src={category.image || DefaultImage}
+                                                    className={style.catImage}
+                                                    fill
+                                                    alt={category.cat_name} />
+                                            </Link>
+                                        </div>
+                                        <Link href={`categoryproducts/${category.cat_slug}`} className={style.catName}>{category.cat_name} </Link>
                                     </div>
-                                    <p className={style.catName}>{category.cat_name} </p>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                )}
-            </SectionLayout>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    )}
+                </SectionLayout>
 
-        </div >
+            </div>
+
+        )
+
+
+
+
+
+
     )
 }
 export default Categories

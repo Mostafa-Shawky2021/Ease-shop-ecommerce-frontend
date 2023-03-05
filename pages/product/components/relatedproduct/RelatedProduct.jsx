@@ -17,7 +17,9 @@ const RelatedProduct = ({ relatedProductsData }) => {
     const [swiper, setSwiper] = useState(null);
     return (
         <div className={style.relatedProductWrapper}>
-            <SectionLayout title="المنتجات ذات صلة" isSwiper={true}>
+            <SectionLayout
+                title="المنتجات ذات صلة"
+                isSwiper={true}>
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
                         modules={[Pagination, Navigation]}
@@ -28,9 +30,10 @@ const RelatedProduct = ({ relatedProductsData }) => {
                             nextEl: prevElementRef.current,
                         }}
                         breakpoints={{
-                            0: { slidesPerView: 2 },
+                            0: { slidesPerView: 1 },
                             768: { slidesPerView: 3 },
-                            992: { slidesPerView: 5 },
+                            992: { slidesPerView: 4 },
+                            1400: { slidesPerView: 5 }
                         }}
                         loop={true}
                         spaceBetween={18}

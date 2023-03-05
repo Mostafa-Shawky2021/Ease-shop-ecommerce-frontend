@@ -3,7 +3,7 @@
 
 .menuWrapper {
     background-color: var.$secondarycolor;
-    padding: 7px;
+    padding: 0.625rem;
     top: -86px;
     transition: all 0.5s;
 
@@ -40,18 +40,6 @@
 
         }
 
-        .iconMenuMobileCloseWrapper {
-            position: absolute;
-            left: 10px;
-            top: 5px;
-            color: var(--bs-danger);
-            cursor: pointer;
-
-            @include minmediaquery('lg') {
-                display: none;
-            }
-        }
-
         @include minmediaquery('lg') {
             display: flex;
             align-items: center;
@@ -62,8 +50,22 @@
         }
     }
 
+    .listMenu .iconMenuMobileCloseWrapper {
+        position: absolute;
+        left: 10px;
+        top: 5px;
+        color: var(--bs-danger);
+        cursor: pointer;
+
+        @include minmediaquery('lg') {
+            display: none;
+        }
+    }
+
     .listMenu>.item {
         color: #000;
+        font-weight: 500;
+        font-size: 0.9rem;
         font-family: var.$cairofont;
         margin-left: 2rem;
         transition: all 0.3s;
@@ -109,18 +111,18 @@
     }
 
     .iconMobileWrapper {
-
         width: 40px;
         height: 33px;
         text-align: center;
         line-height: 30px;
         cursor: pointer;
-        color: #505050;
+        color: var.$hardblack;
         border-radius: 5px;
         margin-right: auto;
+        display: none;
 
-        @include minmediaquery('lg') {
-            display: none;
+        @include betweenmediaquery('sm', 'lg') {
+            display: block;
         }
     }
 }

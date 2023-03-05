@@ -1,2 +1,10 @@
 @use './reset';
 @use './typo';
+
+body {
+    background-color: #f8f8f8;
+}
+
+.swiper-wrapper {
+    padding-bottom: 12px;
+}

@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 import {
     useCartsData,
     useAddCartData,
@@ -11,6 +13,8 @@ import {
 import { calcPriceDiscount } from '@root/utils';
 
 import { Button } from 'react-bootstrap';
+
+import { queryKeys } from "data";
 
 import DefaultImage from '@assets/images/default/image.jpg';
 
@@ -23,13 +27,10 @@ import style from './productcard.module.scss'
 
 const ProductCard = ({ product, ...props }) => {
 
+    const queryClient = useQueryClient();
     const { mutate: addCartMutation } = useAddCartData();
-
     const { mutate: incrementProductMutation } = useIncrementProductData();
-
     const { guestId } = useGuest();
-
-    // const { data: carts } = useCartsData(guestId);
 
     const renderPrice = () => {
 
@@ -63,6 +64,8 @@ const ProductCard = ({ product, ...props }) => {
     }
 
     const handleAddProduct = () => {
+
+        const carts = queryClient.getQueryData(queryKeys.USER_CARTS(guestId));
 
         const cartData = {
             user_id: guestId,
@@ -115,7 +118,7 @@ const ProductCard = ({ product, ...props }) => {
                         fill
                         src={product?.image || DefaultImage}
                         className={style.productCardImage}
-                        alt={product?.name || ''}   
+                        alt={product?.name || ''}
                     />
                 </Link>
             </div>
@@ -130,7 +133,7 @@ const ProductCard = ({ product, ...props }) => {
                 <Link href={`/product/${product?.product_slug}`}>
                     <p className={style.productName}>{product?.product_name}</p>
                 </Link>
-                <p className={style.productDescription}>{product?.short_description}</p>
+                {/* <p className={style.productDescription}>{product?.short_description}</p> */}
                 <div className='d-flex align-items-center justify-content-center'>
                     {renderPrice()}
                 </div>

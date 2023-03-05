@@ -39,17 +39,18 @@ const Header = ({ setIsOpenCartList }) => {
         }
     };
 
+    const handleOpenCartList = () => setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
     return (
 
         <div className={`${style.header} align-items-center`}>
             <Container fluid="xl" className={style.container}>
                 <Row className="align-items-center">
                     <Col xs={12} md={3} lg={2}>
-                        <div className={`${style.logo} text-center text-lg-start`}>
+                        <div className={`${style.logo} text-center text-md-start`}>
                             <Link href="/homepage">Notify<span className={style.special}>Shop</span></Link>
                         </div>
                     </Col>
-                    <Col xs={12} md={6} lg={6}>
+                    <Col xs={12} md={5} lg={6}>
                         <div>
                             <InputWithIcon
                                 onChange={(event) => setSearchInput(event.target.value)}
@@ -58,28 +59,23 @@ const Header = ({ setIsOpenCartList }) => {
                                 onKeyPress={handleKeyPress}
                             >
                                 <button className={style.btnSearch} onClick={handleSearchInput}>
-                                    <SearchOutlinedIcon />
+                                    <SearchOutlinedIcon fontSize="small" />
                                 </button>
                             </InputWithIcon>
                         </div>
                     </Col>
-                    <Col xs={12} md={3} lg={4}>
+                    <Col xs={12} md={4} lg={4}>
                         <div className="d-flex flex-wrap align-items-center my-3 my-lg-0">
                             <Link href="#" className={`${style.actionWrapper} d-flex align-items-center `}>
-                                <FavoriteBorderIcon fontSize="large" sx={{ marginRight: '8px' }} />
+                                <FavoriteBorderIcon fontSize="large" />
                                 <div className={style.actionName}>
                                     <span className={style.title}>القائمة البيضاء</span>
                                     <span className={style.subTitle}>منتجاتي المفضلة</span>
                                 </div>
                                 <span className={style.count}>5</span>
                             </Link>
-                            <Button
-                                className={`${style.actionWrapper} d-flex align-items-center text-start`}
-                                onClick={() => setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList)}
-                            >
-                                <LocalMallOutlinedIcon
-                                    fontSize="large"
-                                />
+                            <Button className={style.actionWrapper} onClick={handleOpenCartList}>
+                                <LocalMallOutlinedIcon fontSize="large" />
                                 <div className={style.actionName}>
                                     <span className={style.title}>عربة التسوق</span>
                                     <span className={style.subTitle}>مشترياتي</span>

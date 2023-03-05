@@ -26,6 +26,7 @@ export async function getServerSideProps({ query }) {
         (key !== 'page') && urlSearchParams.set(key, encodeURIComponent(value))));
 
     const urlSearchParamsToString = urlSearchParams.toString();
+    console.log(urlSearchParamsToString);
 
     await queryClient.prefetchQuery(
         queryKeys.PRODUCTS_OFFERS(1, urlSearchParamsToString),
@@ -38,8 +39,7 @@ export async function getServerSideProps({ query }) {
     }
 }
 
-
-const OffersPage = () => {
+const ProductsOffers = () => {
 
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -96,4 +96,4 @@ const OffersPage = () => {
     )
 }
 
-export default OffersPage;
+export default ProductsOffers;

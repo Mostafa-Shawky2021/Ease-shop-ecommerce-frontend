@@ -4,8 +4,8 @@
 .categoryWrapperMenu {
 
     .buttonCategories {
-        width: 90%;
-        padding: 6px 21px;
+        width: 100%;
+        padding: 10px 21px;
         background-color: #fff;
         border: none;
         font-weight: 600;
@@ -18,6 +18,9 @@
         outline: 0px;
         box-shadow: none;
         margin-left: 10px;
+        font-size: 0.9375rem;
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius: 0.375rem;
     }
 
     .buttonCategories:focus,
@@ -43,13 +46,11 @@
 
     .listCategories {
         position: absolute;
-        box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
         padding: 0px 14px;
         background-color: #fff;
-        width: 86%;
+        width: 100%;
         z-index: 999;
-        top: 49px;
-        border: 1px solid #e9e6e6;
+        top: 47px;
         padding-bottom: 10px;
         transform: scale(1, 0);
         transition: all 0.3s;
@@ -61,9 +62,7 @@
             transform: scale(1)
         }
 
-        @include minmediaquery('sm') {
-            width: 90%;
-        }
+
 
         &::-webkit-scrollbar {
             background-color: transparent;
@@ -82,7 +81,7 @@
             font-weight: bold;
             margin-bottom: 5px;
             margin-top: 5px;
-            border-bottom: 1px solid #dedede
+            border-bottom: 1px solid #dedede52
         }
 
         .itemCategory .collapseButton {
@@ -91,8 +90,9 @@
             justify-content: space-between;
             cursor: pointer;
             background-color: transparent;
-            color: #101010;
-            font-weight: 600;
+            color: var.$softblack;
+            font-weight: 500;
+            font-size: 0.9375rem;
             border: none;
             width: 100%;
             padding: 4px 8px;
@@ -103,8 +103,8 @@
             padding: 2px 7px 6px;
             display: block;
             background-color: transparent;
-            color: #101010;
-            font-weight: 600;
+            color: var.$softblack;
+            font-weight: 500;
             border: none;
             width: 100%;
         }
@@ -125,21 +125,21 @@
         height: 0px;
         overflow: hidden;
 
-        &::after {
-            content: "";
-            position: absolute;
-            height: 75%;
-            width: 2px;
-            background-color: var.$primarycolor;
-            top: 10px;
-            right: 10px;
-        }
+        // &::after {
+        //     content: "";
+        //     position: absolute;
+        //     height: 75%;
+        //     width: 2px;
+        //     background-color: var.$primarycolor;
+        //     top: 10px;
+        //     right: 10px;
+        // }
 
         .subcategoryItem {
             color: var.$softblack;
-            font-size: 1rem;
+            font-size: 0.9375rem;
             padding: 2px 4px;
-            font-weight: normal;
+            font-weight: 500;
 
             &:hover {
                 color: #000;

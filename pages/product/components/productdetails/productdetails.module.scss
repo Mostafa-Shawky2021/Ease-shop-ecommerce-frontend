@@ -34,7 +34,7 @@
         color: var(--bs-green);
         font-weight: 600;
         font-size: 13px;
-        margin-top: 12px;
+        margin-top: 5px;
     }
 
     .listDetails {
@@ -66,7 +66,7 @@
         padding-bottom: 1rem;
     }
 
-    .listDetails .productSize {
+    .productVariants {
         padding-bottom: 1.25rem;
         border-bottom: 1px solid #dedede;
     }
@@ -74,7 +74,6 @@
     .labelText {
         color: var.$softblack;
         margin-left: 14px;
-        font-size: 15px;
         font-weight: 600;
         width: 100px
     }
