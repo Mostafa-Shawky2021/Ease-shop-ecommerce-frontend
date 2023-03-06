@@ -108,42 +108,6 @@
             border: none;
             width: 100%;
         }
-
-        .itemCategory .subCategoriesIcon {
-            color: var.$softblack;
-            transition: all 0.3s;
-        }
-
     }
 
-    .listSubCategories {
-        color: #000;
-        padding: 0px;
-        padding-right: 16px;
-        position: relative;
-        transition: all 0.3s;
-        height: 0px;
-        overflow: hidden;
-
-        // &::after {
-        //     content: "";
-        //     position: absolute;
-        //     height: 75%;
-        //     width: 2px;
-        //     background-color: var.$primarycolor;
-        //     top: 10px;
-        //     right: 10px;
-        // }
-
-        .subcategoryItem {
-            color: var.$softblack;
-            font-size: 0.9375rem;
-            padding: 2px 4px;
-            font-weight: 500;
-
-            &:hover {
-                color: #000;
-            }
-        }
-    }
 }

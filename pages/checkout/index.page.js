@@ -15,18 +15,18 @@ const CheckOutPage = () => {
     const { data: carts, isLoading } = useCartsData(guestId);
 
     return (
-        <Container fluid="lg" style={{ marginTop: '2.5rem', position: 'relative' }}>
-            {isLoading ?
-                (<div style={{ height: '700px', position: 'relative' }}>
+        <Container fluid="lg" style={{ marginTop: '2.5rem', paddingTop: '2rem', position: 'relative', background: '#fff' }}>
+            {isLoading
+                ? <div style={{ height: '700px', position: 'relative' }}>
                     <Loading isOpacity={false}>
                         <Seek
                             style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%)' }}
                             color="#ffb700" size="medium" text="" textColor=""
                         />
                     </Loading>
-                </div>)
-                : !!carts.length ?
-                    (<Row>
+                </div>
+                : !!carts.length
+                    ? <Row>
                         <Col xs={12} md={6}>
                             <CheckOutForm />
                         </Col>
@@ -34,8 +34,7 @@ const CheckOutPage = () => {
                             <ProductsOrder />
                         </Col>
                     </Row>
-
-                    ) : (<p> لا يوجد طلبات لعرضها</p>)}
+                    : <p> لا يوجد طلبات لعرضها</p>}
         </Container >
     )
 }

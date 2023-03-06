@@ -51,7 +51,8 @@ const CheckOutForm = () => {
             {isLoading && (<Loading>
                 <CircularProgress size={35} style={{ position: 'absolute', top: '40vh', left: '50%' }} />
             </Loading>)}
-            <Form onSubmit={handleSubmit} >
+            <Form onSubmit={handleSubmit}>
+                <h4 className={style.title}>بيانات العميل</h4>
                 <Form.Group style={{ position: 'relative' }} className="mb-3 mt-3" controlId="username">
                     <div className='d-flex align-items-center'>
                         <Form.Label>اسم المستخدم</Form.Label>

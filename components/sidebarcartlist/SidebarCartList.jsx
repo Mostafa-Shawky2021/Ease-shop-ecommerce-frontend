@@ -107,9 +107,9 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                         <span className={style.currency}>جنية</span>
                     </span>
                 </div>
-                <div className={`${style.checkoutWrapper} d-flex`}>
-                    <Link href="/checkout" className={style.btn}>الطلب</Link>
-                    <Link href="/carts" className={style.btn}>سلة التسوق</Link>
+                <div className={style.checkoutWrapper}>
+                    <Link href="/carts" className={style.btn} onClick={() => setIsOpenCartList(false)}>سلة التسوق</Link>
+                    <Link href="/checkout" className={style.btn} onClick={() => setIsOpenCartList(false)}>اطب الأن</Link>
                 </div>
             </div>
         </div>

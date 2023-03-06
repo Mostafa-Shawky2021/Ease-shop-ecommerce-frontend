@@ -18,8 +18,16 @@ const CartTotal = () => {
                 </h4>
                 <div className={style.cartTotalBody}>
                     <div className='d-flex align-item-center justify-spacebetween'>
-                        <span>الجموع الكلي:</span>
-                        <span className={style.price}>{calcTotalPrice(carts)} جنية</span>
+                        <div className={style.total}>الجموع الكلي:</div>
+                        <div className={style.priceWrapper}>
+                            <span className={style.price}>
+                                {calcTotalPrice(carts)}
+                            </span>
+                            <span className={style.currency}>
+                                جنية
+                            </span>
+                        </div>
+
                     </div>
                     <Link href="/checkout" className={style.checkoutButton}>
                         <span className={style.text}>اتمام الاوردر</span>

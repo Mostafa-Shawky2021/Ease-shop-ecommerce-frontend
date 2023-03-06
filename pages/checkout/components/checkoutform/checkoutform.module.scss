@@ -1,6 +1,11 @@
 @use 'sass/var' as var;
 
 .checkoutWrapper {
+
+    .title {
+        font-size: 1.1rem;
+    }
+
     .required {
         color: #f00;
         font-weight: bold;

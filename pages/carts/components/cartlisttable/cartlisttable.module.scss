@@ -1,0 +1,58 @@
+@use 'sass/var' as var;
+@use 'sass/mixins/mediaquery' as *;
+
+.cartListWrapper {
+    .countinueShopping {
+        background-color: #fff;
+        padding: 1rem 0.8rem;
+        color: var(--bs-primary);
+        border: 1px solid #eaedff;
+        border-radius: 5px;
+    }
+
+    .cartTable {
+        margin-top: 2rem;
+        border: 1px solid #eaedff;
+        background-color: #fff;
+
+
+        thead th {
+            border-bottom: 1px solid #eaedff;
+        }
+
+        thead th,
+        tbody td {
+            color: var.$hardblack;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 1.2rem;
+            border-right: 1px solid #eaedff;
+            text-align: center;
+            vertical-align: middle;
+
+        }
+
+        tbody td {
+            color: var.$softblack;
+        }
+
+    }
+
+    .deleteProduct {
+        cursor: pointer;
+        color: var.$softblack;
+        transition: all 0.3s;
+        background-color: transparent;
+        border: 0px;
+
+        &:hover,
+        &:focus {
+            background-color: transparent;
+        }
+
+        &:hover {
+            color: var(--bs-danger);
+        }
+    }
+
+}

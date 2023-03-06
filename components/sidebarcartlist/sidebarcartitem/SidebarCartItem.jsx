@@ -13,15 +13,16 @@ const SidebarCartItem = ({ cart, productQuantity, deleteButton }) => {
                 <Image
                     src={cart?.product?.image || DefaultImage}
                     alt={cart?.product?.image}
-                    fill
+                    width={80}
+                    height={80}
                 />
             </div>
             <div className={style.productDetails}>
                 <div className={style.productName}>
                     {cart?.product?.product_name}
                 </div>
-                <div className={style.productPrice}>
-                    {Number(cart?.total_price).toLocaleString()}
+                <div className={style.productPriceWraper}>
+                    <span className={style.price}>{Number(cart?.total_price).toLocaleString()}</span>
                     <span className={style.currency}>جنية</span>
                     <span className={style.quantity}> x{cart.quantity}</span>
                 </div>

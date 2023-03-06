@@ -22,6 +22,11 @@ const CategoriesMenu = ({ categoriesData }) => {
             }
         };
         document.addEventListener('keydown', closeCategoryListMenuList);
+
+        document.body.addEventListener('click', function () {
+
+        })
+
         return () => document.removeEventListener('keydown', closeCategoryListMenuList);
 
     }, [])
@@ -38,7 +43,7 @@ const CategoriesMenu = ({ categoriesData }) => {
                     <span className={style.barIcon}></span>
                 </div>
             </Button>
-            {categoriesData && (
+            {categoriesData &&
                 <ul className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
                     {categoriesData?.map((category) => (
                         <li key={category.id} className={style.itemCategory}>
@@ -47,9 +52,7 @@ const CategoriesMenu = ({ categoriesData }) => {
                             </Link>
                         </li>
                     ))}
-
                 </ul>
-            )
             }
         </div>
     )

@@ -15,13 +15,13 @@ const ProductQuantity = ({
     cartId,
     isLoading,
     currentCart,
-
+    ...props
 }) => {
 
     return (
-        <div className={`${style.productQuantity} d-flex align-items-center`}>
+        <div className={`${style.productQuantity} d-flex align-items-center`} {...props}>
             <Button
-                className={style.quantity}
+                className={style.quantityAction}
                 onClick={handleProductIncrement}
                 data-cart-id={cartId}
                 disabled={isLoading && currentCart === cartId}
@@ -30,16 +30,13 @@ const ProductQuantity = ({
             </Button>
             <div className={style.content}>
                 <span className={style.quantityContent}>
-                    {isLoading && currentCart == cartId ?
-                        <CircularProgress
-                            className={style.iconLoading}
-                            size={18} /> :
-                        quantity}
-
+                    {(isLoading && currentCart == cartId)
+                        ? <CircularProgress className={style.iconLoading} size={18} />
+                        : quantity}
                 </span>
             </div>
             <Button
-                className={style.quantity}
+                className={style.quantityAction}
                 onClick={handleProductDecrement}
                 data-cart-id={cartId}
                 disabled={isLoading && currentCart === cartId}
