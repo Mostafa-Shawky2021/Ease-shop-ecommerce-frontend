@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 import { Button } from 'react-bootstrap';
@@ -12,27 +12,36 @@ const CategoriesMenu = ({ categoriesData }) => {
 
     const [categoryListIsOpen, setCategoryListIsOpen] = useState(false);
 
-
+    const refCategoryMenu = useRef(null);
 
     useEffect(() => {
 
-        const closeCategoryListMenuList = (event) => {
+        const closeCategoryListMenuListOnPressEscape = (event) => {
             if (event.key === 'Escape') {
                 setCategoryListIsOpen(false);
             }
         };
-        document.addEventListener('keydown', closeCategoryListMenuList);
+        const closeCategoryListMenuListOnMouseClick = (event) => {
+            if (refCategoryMenu.current.contains(event.target)) {
+                return;
+            }
+            setCategoryListIsOpen(false);
+        }
 
-        document.body.addEventListener('click', function () {
+        document.addEventListener('keydown', closeCategoryListMenuListOnPressEscape);
+        document.addEventListener('click', closeCategoryListMenuListOnMouseClick);
 
-        })
 
-        return () => document.removeEventListener('keydown', closeCategoryListMenuList);
+        return () => {
+            document.removeEventListener('keydown', closeCategoryListMenuListOnPressEscape);
+            document.removeEventListener('click', closeCategoryListMenuListOnMouseClick);
+
+        }
 
     }, [])
 
     return (
-        <div className={style.categoryWrapperMenu}>
+        <div className={style.categoryWrapperMenu} ref={refCategoryMenu}>
             <Button
                 className={style.buttonCategories}
                 onClick={() => setCategoryListIsOpen(!categoryListIsOpen)}>
@@ -44,14 +53,19 @@ const CategoriesMenu = ({ categoriesData }) => {
                 </div>
             </Button>
             {categoriesData &&
-                <ul className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
-                    {categoriesData?.map((category) => (
-                        <li key={category.id} className={style.itemCategory}>
+                <ul
+                    className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
+                    {categoriesData?.map((category) =>
+                        <li
+                            key={category.id}
+                            className={style.itemCategory}
+                            onClick={() => setCategoryListIsOpen(false)}
+                        >
                             <Link className={style.categoryLink} href={`/categoryproducts/${category.cat_slug}`}>
                                 {category.cat_name}
                             </Link>
                         </li>
-                    ))}
+                    )}
                 </ul>
             }
         </div>

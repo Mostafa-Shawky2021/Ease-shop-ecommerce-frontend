@@ -52,9 +52,9 @@ export default function HomePage() {
         <>
             <Carousel />
             <Services />
-            <Offer />
             <Categories />
             <LatestProducts />
+            <Offer />
             <ProductsOffers />
             <RandomCategoriesProducts />
             {/* <TopCategories /> */}

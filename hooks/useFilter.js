@@ -7,28 +7,26 @@ const useFilter = (pageNumber) => {
     /*
     ** url RequestFilter will be the uri which will be send to the backend to apply filter
     */
-    const applyFilter = (filterRules, urlRequestFilter, additionalQueryFilter) => {
+    const applyFilter = (filterRules, urlPage, additionalQueryFilter = null) => {
 
         const urlSearchParams = new URLSearchParams()
 
-        //check if additionalquery paramater contain query filter key,value
+        //Additional query if we need to build additional query string paramater beside state data
         if (additionalQueryFilter) {
 
             const { queriesFilter } = additionalQueryFilter;
 
+
             Object.entries(queriesFilter).forEach(([filterKey, filterValue]) => {
 
-                if (filterValue) {
-                    urlSearchParams.set(filterKey, encodeURIComponent(filterValue));
-                }
-                else if (Array.isArray(filterValue) && filterValue.length > 0) {
-                    urlSearchParams.set(filterKey, encodeURIComponent(filterValue.join()));
+                if (Array.isArray(filterValue)) {
+                    urlSearchParams.set(filterKey, encodeURIComponent(filterValue.join('-')));
                 } else {
                     urlSearchParams.set(filterKey, encodeURIComponent(filterValue));
                 }
             })
-
         }
+
         // build url filter according to state data
         Object.entries(filterRules).forEach(([filterKey, filterValue]) => {
 
@@ -40,7 +38,7 @@ const useFilter = (pageNumber) => {
 
         const urlSearchParamsToString = urlSearchParams.toString();
 
-        const filterUrl = `${urlRequestFilter}?${urlSearchParamsToString}&page=${pageNumber}`;
+        const filterUrl = `${urlPage}?${urlSearchParamsToString}&page=${pageNumber}`;
 
         router.push(filterUrl, undefined, { shallow: true });
     }

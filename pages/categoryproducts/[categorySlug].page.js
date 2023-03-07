@@ -10,6 +10,8 @@ import { useFilter } from "@root/hooks";
 
 import { fetchCategoryProducts } from "./queries";
 
+import { generateQueryStringFilter } from "@root/utils";
+
 import { Container, Col, Row } from "react-bootstrap";
 import { ToastContainer } from 'react-toastify';
 import { CategoryProductsList } from "./components/categoryproductslist";
@@ -21,23 +23,17 @@ export const getServerSideProps = async ({ query }) => {
 
     const queryClient = new QueryClient();
 
-    const catSlug = query.categorySlug;
 
-    const urlSearchParams = new URLSearchParams();
+    const { categorySlug: catSlug, ...restQueryParamter } = query;
 
-    // exclude page number and category slug from query paramters
-    Object.entries(query).forEach(([queryStringKey, queryStringValue]) => {
+    const filterQueryString = Object.entries(restQueryParamter).length > 0
+        ? generateQueryStringFilter(restQueryParamter)
+        : '';
 
-        if (queryStringKey !== 'page' && queryStringKey !== 'categorySlug') {
-            urlSearchParams.set(queryStringKey, encodeURIComponent(queryStringValue));
-        }
-    })
-
-    const urlSearchParamsToString = urlSearchParams.toString();
 
     await queryClient.prefetchQuery(
-        queryKeys.CATEGORY_PRODUCTS(1, catSlug, urlSearchParamsToString),
-        () => fetchCategoryProducts(1, catSlug, urlSearchParamsToString)
+        queryKeys.CATEGORY_PRODUCTS(1, catSlug, filterQueryString),
+        () => fetchCategoryProducts(1, catSlug, filterQueryString)
     );
 
     return {
@@ -109,7 +105,19 @@ const CategoryProductsPage = () => {
                         )}
                 </Col>
             </Row>
-            <ToastContainer />
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                limit={1}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </Container>
     )
 }

@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 import { Col } from "react-bootstrap";
 import { GridList } from "@root/components/gridlist";
 import { ProductCard } from "@root/components/cards";
@@ -24,7 +22,7 @@ const ProductsList = ({
                 <GridList
                     data={productsData?.products}
                     renderItem={(product) =>
-                        <Col xs={12} sm={6} md={3} key={product.id}>
+                        <Col xs={6} md={3} key={product.id}>
                             <ProductCard
                                 product={product}
                                 style={{ marginTop: '2rem' }} />

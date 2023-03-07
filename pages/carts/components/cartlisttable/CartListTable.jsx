@@ -85,7 +85,7 @@ const CartListTable = () => {
                             <tbody>
                                 {!!carts.length
                                     ? carts?.map(cart =>
-                                        <tr>
+                                        <tr key={cart?.id}>
                                             <td style={{ width: '120px' }}>
                                                 <Image
                                                     src={cart?.product?.image || DefaultImage}

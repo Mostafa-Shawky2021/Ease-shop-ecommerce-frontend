@@ -8,29 +8,28 @@ import { useFilter } from "@root/hooks";
 
 import { fetchProductsOffers } from "./queries";
 
+import { generateQueryStringFilter } from "@root/utils";
+
 import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
 import { Sidebar } from "@root/components/sidebar";
 import { BreadCrumbLayout } from "@root/components/layout";
 import { ProductsList } from "@root/components/productslist";
 
-import { queryKeys } from "./data";
+import { queryKeys } from "data";
 
 export async function getServerSideProps({ query }) {
 
+
     const queryClient = new QueryClient();
 
-    const urlSearchParams = new URLSearchParams();
-
-    // exclude page number from query paramters
-    Object.entries(query).forEach(([key, value]) => (
-        (key !== 'page') && urlSearchParams.set(key, encodeURIComponent(value))));
-
-    const urlSearchParamsToString = urlSearchParams.toString();
-    console.log(urlSearchParamsToString);
+    let filterQueryString = ""
+    filterQueryString = Object.keys(query).length > 0
+        ? generateQueryStringFilter(query) // if the url contain filter string
+        : 'offers=true'; // default while generating page component with query filter string
 
     await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS_OFFERS(1, urlSearchParamsToString),
-        () => fetchProductsOffers(1, urlSearchParamsToString));
+        queryKeys.PRODUCTS(1, filterQueryString),
+        () => fetchProductsOffers(1, filterQueryString));
 
     return {
         props: {
@@ -59,15 +58,22 @@ const ProductsOffers = () => {
 
     }, [pageNumber]);
 
-    const handleFilter = (filterRules) => applyFilter(filterRules, `/offers`);
+    const handleFilter = (filterRules) => {
+        applyFilter(
+            filterRules,
+            `/productsoffers`,
+            { queriesFilter: { offers: "true" } });
+    }
 
-    const handleDeleteFilter = (setFilterRules) => resetFilter(setFilterRules, '/offers');
+    const handleDeleteFilter = (setFilterRules) => {
+        resetFilter(setFilterRules, '/productsoffers');
+    }
 
     return (
         <>
             <BreadCrumbLayout>
                 <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: 'bold' }}>
+                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
                     العروض المميزة
                 </Breadcrumb.Item>
             </BreadCrumbLayout>
