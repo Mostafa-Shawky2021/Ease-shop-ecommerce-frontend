@@ -15,7 +15,9 @@ import style from './relatedproduct.module.scss';
 const RelatedProduct = ({ relatedProductsData }) => {
 
     const [swiper, setSwiper] = useState(null);
+
     return (
+        !!relatedProductsData.length &&
         <div className={style.relatedProductWrapper}>
             <SectionLayout
                 title="المنتجات ذات صلة"
@@ -35,7 +37,7 @@ const RelatedProduct = ({ relatedProductsData }) => {
                             992: { slidesPerView: 4 },
                             1400: { slidesPerView: 5 }
                         }}
-                        loop={true}
+                        loop={false}
                         spaceBetween={18}
                         onSwiper={setSwiper}
                     >
@@ -46,9 +48,7 @@ const RelatedProduct = ({ relatedProductsData }) => {
                         ))}
                     </Swiper>
                 )}
-
             </SectionLayout>
-
         </div>
     )
 }

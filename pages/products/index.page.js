@@ -63,10 +63,11 @@ const ProductsPageSearch = () => {
     const handleFilter = (filterRules) => {
 
         const productName = router?.query?.productname;
+
         applyFilter(
             filterRules,
             '/products',
-            { queriesFilter: productName ? { productName } : null });
+            { queriesFilter: productName ? { productname: productName } : null });
 
     }
 

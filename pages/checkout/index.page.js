@@ -6,9 +6,6 @@ import { Loading } from '@root/components/loading';
 import { CheckOutForm } from './components/checkoutform';
 import { ProductsOrder } from './components/productsorder';
 
-
-
-
 const CheckOutPage = () => {
 
     const { guestId } = useGuest();

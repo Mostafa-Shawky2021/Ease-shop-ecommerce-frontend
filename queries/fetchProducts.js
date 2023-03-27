@@ -7,6 +7,7 @@ const fetchProducts = async (pageNumber, queryUrIStringfyFilter) => {
         : `/api/products?page=${pageNumber}`;
 
     const { data } = await axiosInstance.get(url);
+
     return data;
 }
 

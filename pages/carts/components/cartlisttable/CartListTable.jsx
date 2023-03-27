@@ -14,8 +14,9 @@ import { calcCartsCount } from '@root/utils';
 
 import { Table, Button } from 'react-bootstrap';
 import { ProductQuantity } from '@root/components/productquantity';
-import { ListItem } from '@root/components/listitem';
 import { CartListLoading } from '@root/components/loading';
+
+import { url } from 'data';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -83,18 +84,20 @@ const CartListTable = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {!!carts.length
+                                {!!carts?.length
                                     ? carts?.map(cart =>
                                         <tr key={cart?.id}>
                                             <td style={{ width: '120px' }}>
                                                 <Image
-                                                    src={cart?.product?.image || DefaultImage}
+                                                    src={cart?.product?.image ? `${url}/${cart?.product?.image}` : DefaultImage}
                                                     alt={cart?.product?.product_name}
                                                     width={100}
                                                     height={80}
                                                 />
                                             </td>
-                                            <td>{cart?.product?.product_name}</td>
+                                            <td>
+                                                <p style={{ margin: '0px', width: '200px', wordBreak: 'break-all' }}>{cart?.product?.product_name}</p>
+                                            </td>
                                             <td>{cart?.color || '--'}</td>
                                             <td>{cart?.size || '--'}</td>
                                             <td>{Number(cart?.unit_price).toLocaleString()}</td>

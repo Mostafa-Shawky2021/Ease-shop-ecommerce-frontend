@@ -1,6 +1,8 @@
 
 import Image from 'next/image';
 
+import { url } from 'data';
+
 import DefaultImage from '@assets/images/default/image.jpg';
 
 import style from './sidebarcartitem.module.scss';
@@ -11,10 +13,11 @@ const SidebarCartItem = ({ cart, productQuantity, deleteButton }) => {
         <div className={`${style.item} d-flex flex-wrap`}>
             <div className={style.productImage}>
                 <Image
-                    src={cart?.product?.image || DefaultImage}
-                    alt={cart?.product?.image}
-                    width={80}
-                    height={80}
+                    src={cart?.product?.image ? `${url}/${cart?.product.image}` : DefaultImage}
+                    alt={cart?.product?.product_name}
+                    width={50}
+                    height={50}
+                    style={{ objectFit: 'cover' }}
                 />
             </div>
             <div className={style.productDetails}>

@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { SectionLayout } from '@root/components/layout';
 
+import { url } from "data";
+
 import DefaultImage from "@assets/images/default/image.jpg"
 
 import "swiper/css/pagination";
@@ -22,9 +24,9 @@ const Categories = () => {
     const [swiper, setSwiper] = useState();
 
     const { data: categories } = useCategoriesData();
-
+    console.log(categories);
     return (
-        !!categories && (
+        !!categories?.data && (
             <div className={style.categories}>
                 <SectionLayout title="الاقسام" isSwiper={true}>
                     {(nextElementRef, prevElementRef) => (
@@ -52,13 +54,13 @@ const Categories = () => {
                             spaceBetween={18}
                             onSwiper={setSwiper}
                         >
-                            {categories?.map(category => (
+                            {categories?.data?.map(category => (
                                 <SwiperSlide key={category.id}>
                                     <div className={style.catWrapper} style={{ marginTop: '1rem' }}>
                                         <div className={style.catImageWrapper}>
                                             <Link href={`categoryproducts/${category.cat_slug}`}>
                                                 <Image
-                                                    src={category.image || DefaultImage}
+                                                    src={category?.image ? `${url}/${category?.image}` : DefaultImage}
                                                     className={style.catImage}
                                                     fill
                                                     alt={category.cat_name} />

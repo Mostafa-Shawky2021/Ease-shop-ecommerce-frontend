@@ -4,27 +4,15 @@ import { queryKeys } from "data";
 
 import { fetchProducts } from "@root/queries";
 
+import { generateQueryStringFilter } from "@root/utils";
+
 const useProductsData = (pageNumber, queryUri) => {
 
-    const urlSearchParams = new URLSearchParams();
-
-    /*  
-        ** any request contain page number  we need to exclude it 
-        ** from the uri so we avoid the repeating query string 
-    */
-    if (queryUri) {
-        Object.entries(queryUri).forEach(([key, value]) => {
-            if (key !== 'page') urlSearchParams.set(key, encodeURIComponent(value));
-
-        });
-
-    }
-
-    const urlSearchParamsToString = urlSearchParams.toString();
+    const queryProductsUriFilter = generateQueryStringFilter(queryUri)
 
     return useQuery(
-        queryKeys.PRODUCTS(pageNumber, urlSearchParamsToString),
-        () => fetchProducts(pageNumber, urlSearchParamsToString),
+        queryKeys.PRODUCTS(pageNumber, queryProductsUriFilter),
+        () => fetchProducts(pageNumber, queryProductsUriFilter),
         { keepPreviousData: true });
 }
 

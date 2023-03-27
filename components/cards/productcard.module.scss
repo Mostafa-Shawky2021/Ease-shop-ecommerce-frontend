@@ -9,9 +9,11 @@
     border-radius: 4px;
     margin-top: 1.5rem;
     padding-bottom: 1rem;
+    box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, .03);
+
 
     &:hover {
-        box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+        // box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
     }
 
     &:hover .productCard {
@@ -61,7 +63,7 @@
         overflow: hidden;
         text-align: center;
         transition: all 0.5s;
-        height: 236px;
+        height: 232px;
 
         @include maxmediaquery("sm") {
             height: 180px;
@@ -78,7 +80,6 @@
 
     .productRatingWrapper {
         color: #fec348;
-        margin-top: 9px;
 
         .productRating {
             font-size: 18px;

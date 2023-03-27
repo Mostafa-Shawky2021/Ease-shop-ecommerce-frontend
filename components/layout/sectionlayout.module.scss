@@ -2,11 +2,12 @@
 @use 'sass/mixins/mediaquery' as *;
 
 .sectionLayout {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     position: relative;
+    background-color: #fff;
 
     @include minmediaquery('md') {
-        margin-top: 4rem;
+        margin-top: 2rem;
     }
 
     .header {
@@ -39,6 +40,8 @@
         border-radius: 5px;
         margin-top: -10px;
         transition: 0.3s;
+        border: 1px solid #dede;
+        font-size: 0.8rem;
 
         &:hover {
             color: var.$secondarycolor;

@@ -1,7 +1,8 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { queryKeys } from "data";
 import { addCart } from "queries"
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
+
 const useAddCartData = (setIsLoading) => {
 
     const queryClient = useQueryClient();

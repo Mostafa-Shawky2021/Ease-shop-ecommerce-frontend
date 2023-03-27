@@ -25,20 +25,23 @@ export async function getServerSideProps() {
 
     const queryClient = new QueryClient();
 
-
-
     await Promise.allSettled(
         [
             queryClient.prefetchQuery(
                 globalQueryKeys.PRODUCTS(1, "latest=true&limit=8"),
-                fetchProducts),
+                () => fetchProducts(1, "latest=true&limit=8")),
             queryClient.prefetchQuery(
                 queryKeys.RANDOM_CATEGORIES_PRODUCTS,
                 fetchRandomCategoriesProducts),
             queryClient.prefetchQuery(
                 queryKeys.CATEGORIES,
                 fetchCategories),
+            queryClient.prefetchQuery(
+                globalQueryKeys.PRODUCTS(1, "offers=true&latest=true&limit=8"),
+                () => fetchProducts(1, "offers=true&latest=true&limit=8"),
+            )
         ]);
+
 
     return {
         props: {
@@ -57,20 +60,7 @@ export default function HomePage() {
             <Offer />
             <ProductsOffers />
             <RandomCategoriesProducts />
-            {/* <TopCategories /> */}
-            <ToastContainer
-                position="top-center"
-                autoClose={1000}
-                limit={1}
-                hideProgressBar
-                newestOnTop={false}
-                closeOnClick
-                rtl
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
+            <TopCategories />
         </>
     )
 }

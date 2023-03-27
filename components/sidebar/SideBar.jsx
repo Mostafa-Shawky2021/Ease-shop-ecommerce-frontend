@@ -106,12 +106,12 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
                                     <input
                                         className={style.checkBox}
                                         type="checkbox"
-                                        value={size.name}
-                                        id={size.name}
+                                        value={size.size_name}
+                                        id={size.size_name}
                                         onChange={handleSizeChange}
-                                        checked={filterRules.sizes.includes(size.name) ? 'checked' : ''}
+                                        checked={filterRules.sizes.includes(size.size_name) ? 'checked' : ''}
                                     />
-                                    <label htmlFor={size.name} className="ms-2">{size.name}</label>
+                                    <label htmlFor={size.size_name} className="ms-2">{size.size_name}</label>
                                 </li>
                             ))}
                         </ul>
@@ -126,12 +126,12 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
                                     <input
                                         className={style.checkBox}
                                         type="checkbox"
-                                        value={color.name}
-                                        id={color.name}
+                                        value={color.color_name}
+                                        id={color.color_name}
                                         onChange={handleColorChange}
-                                        checked={filterRules.colors.includes(color.name) ? 'checked' : ''}
+                                        checked={filterRules.colors.includes(color.color_name) ? 'checked' : ''}
                                     />
-                                    <label htmlFor={color.name} className="ms-2">{color.name}</label>
+                                    <label htmlFor={color.color_name} className="ms-2">{color.color_name}</label>
                                 </li>
                             ))}
                         </ul>

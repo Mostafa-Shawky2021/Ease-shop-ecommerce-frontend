@@ -31,9 +31,11 @@
         cursor: pointer;
         margin-top: 0.9rem;
         margin-bottom: 0px;
-        color: var(--bs-primary);
+        color: #fff;
         transition: all 0.5s;
         display: block;
+        background-color: var.$primarycolor;
+        padding: 5px;
 
         &:hover {
             color: #0b5cd3;

@@ -26,7 +26,7 @@ const ProductsOrder = () => {
                             data={carts}
                             renderItem={(cart) => (
                                 <tr key={cart.id}>
-                                    <td style={{ width: '75%' }}>   x {cart.quantity} {cart.product.product_name}</td>
+                                    <td style={{ width: '75%' }}>   x {cart.quantity} {cart?.product?.product_name}</td>
                                     <td style={{ width: '25%' }}>{Number(cart.total_price).toLocaleString()}</td>
                                 </tr>
                             )}

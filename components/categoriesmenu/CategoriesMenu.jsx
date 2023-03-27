@@ -39,7 +39,6 @@ const CategoriesMenu = ({ categoriesData }) => {
         }
 
     }, [])
-
     return (
         <div className={style.categoryWrapperMenu} ref={refCategoryMenu}>
             <Button
@@ -52,10 +51,10 @@ const CategoriesMenu = ({ categoriesData }) => {
                     <span className={style.barIcon}></span>
                 </div>
             </Button>
-            {categoriesData &&
+            {!!categoriesData?.data &&
                 <ul
                     className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
-                    {categoriesData?.map((category) =>
+                    {categoriesData?.data?.map((category) =>
                         <li
                             key={category.id}
                             className={style.itemCategory}

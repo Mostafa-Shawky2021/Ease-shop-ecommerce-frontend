@@ -1,0 +1,52 @@
+@use 'sass/var' as var;
+
+.productViewWrapper {
+
+    .presentationImage {
+        height: 350px;
+        background-color: #fff;
+        position: relative;
+    }
+
+    .presentationImage .image {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0;
+        transition: all 0.4s;
+    }
+
+    .presentationImage .image.active {
+        z-index: 1;
+        opacity: 1;
+    }
+
+    .imageThumbnailWrapper {
+        margin-top: 1.7rem;
+        display: flex;
+        gap: 5px;
+    }
+
+    .imageThumbnailWrapper .thumbnail {
+        height: 80px;
+        width: calc(100% / 4);
+        border: 1px solid #dfdfdf;
+        cursor: pointer;
+        position: relative;
+        opacity: 0.5;
+        transition: all 0.3s;
+        background: #f3f3f3;
+
+        &:not(:last-child) {
+            margin-left: 1%;
+        }
+
+        &.active {
+            border-bottom: 2px solid var.$secondarycolor;
+            opacity: 1;
+        }
+    }
+}

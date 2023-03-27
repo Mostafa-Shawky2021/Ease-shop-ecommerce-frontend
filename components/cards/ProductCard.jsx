@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+
+
 import {
     useCartsData,
     useAddCartData,
@@ -12,9 +14,10 @@ import {
 
 import { calcPriceDiscount } from '@root/utils';
 
+
 import { Button } from 'react-bootstrap';
 
-import { queryKeys } from "data";
+import { queryKeys, url } from "data";
 
 import DefaultImage from '@assets/images/default/image.jpg';
 
@@ -115,8 +118,9 @@ const ProductCard = ({ product, ...props }) => {
             <div className={style.productCardImageWrapper}>
                 <Link href={`/product/${product?.product_slug}`}>
                     <Image
+                        style={{ objectFit: 'cover' }}
                         fill
-                        src={product?.image || DefaultImage}
+                        src={product?.image ? `${url}/${product?.image}` : DefaultImage}
                         className={style.productCardImage}
                         alt={product?.name || ''}
                     />

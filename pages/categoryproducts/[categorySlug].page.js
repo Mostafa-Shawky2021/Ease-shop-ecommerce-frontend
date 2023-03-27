@@ -79,7 +79,7 @@ const CategoryProductsPage = () => {
             colors: [],
         })
 
-        resetFilter(setFilterRules, `/products?productname=${categorySlug}`);
+        resetFilter(setFilterRules, `/categoryproducts/${categorySlug}`);
 
     }
 

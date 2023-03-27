@@ -18,7 +18,7 @@ const ProductsOffers = () => {
     const { data: productsOffers } = useProductsData(1, { offers: true, limit: 8 });
 
     return (
-        !!productsOffers && (
+        !!productsOffers?.products && (
             <div className={style.offersWrapper}>
                 <SectionLayout
                     title="عروض وخصومات"
@@ -27,10 +27,9 @@ const ProductsOffers = () => {
                 >
                     {(nextElementRef, prevElementRef) => (
                         <Swiper
-                            style={{ direction: 'rtl' }}
                             modules={[Navigation, Autoplay]}
                             className={style.swiperWrapper}
-                            slidesPerView={"auto"}
+                            slidesPerView="auto"
                             autoplay={{ delay: 4000 }}
                             navigation={{
                                 prevEl: nextElementRef.current,
@@ -42,7 +41,7 @@ const ProductsOffers = () => {
                                 992: { slidesPerView: 4 },
                                 1400: { slidesPerView: 5 }
                             }}
-                            loop={true}
+                            loop={false}
                             spaceBetween={22}
                             onSwiper={setSwiper}>
                             {productsOffers?.products?.map(product =>

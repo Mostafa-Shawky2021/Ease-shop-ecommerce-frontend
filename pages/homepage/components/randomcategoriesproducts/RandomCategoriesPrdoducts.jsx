@@ -18,13 +18,15 @@ const RandomCategoriesProducts = () => {
     const [swiper, setSwiper] = useState(null);
 
     const { data: randomCategoriesProducts } = useRandomCategoriesProductsData();
+
     return (
+        !!randomCategoriesProducts?.data &&
         <div className={style.randomCategoriesProductsWrapper}>
-            {randomCategoriesProducts?.map((randomCat) => (
+            {randomCategoriesProducts?.data?.map((randomCat) => (
                 <SectionLayout
                     key={randomCat.id}
                     title={randomCat?.cat_name}
-                    link={`/categoryproducts/${randomCat?.cat_slug}`}
+                    link={`/categoryproducts/${randomCat.cat_slug}`}
                     isSwiper={true}
                 >
                     {(nextElementRef, prevElementRef) => (
@@ -47,7 +49,7 @@ const RandomCategoriesProducts = () => {
                             spaceBetween={18}
                             onSwiper={setSwiper}
                         >
-                            {randomCat.products?.map(product => (
+                            {randomCat?.products?.map(product => (
                                 <SwiperSlide key={product.id}>
                                     <ProductCard product={product} />
                                 </SwiperSlide>

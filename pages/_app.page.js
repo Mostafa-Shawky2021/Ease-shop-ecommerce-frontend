@@ -11,9 +11,6 @@ import { LayoutWrapper } from '@root/components/layout';
 
 import { ThemeProvider } from 'react-bootstrap';
 
-
-
-
 import 'swiper/css';
 import 'react-toastify/dist/ReactToastify.css';
 import "bootstrap/dist/css/bootstrap.rtl.min.css";

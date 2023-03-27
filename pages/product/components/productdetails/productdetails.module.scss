@@ -3,22 +3,24 @@
 @use 'sass/mixins/mediaquery' as *;
 
 .productDetailsWrapper {
-    margin-top: 1.7rem;
-
+    padding: 1.1rem;
 
     .productName {
         color: #222;
-        font-size: 1.4rem;
-        font-weight: 600;
+        font-size: 1.3rem;
+        font-weight: 500;
     }
 
     .priceWrapper {
         gap: 7px;
+        margin-top: 0.5rem;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e3e3e3;
     }
 
     .priceWrapper .price {
-        color: #f00;
-        font-size: 1.1rem;
+        color: var(--bs-danger);
+        font-size: 1.0625rem;
         font-weight: 600;
     }
 
@@ -37,6 +39,13 @@
         margin-top: 5px;
     }
 
+    .shortDescription {
+        @include paragraph();
+
+        border-bottom: 1px solid #dedede;
+        padding-bottom: 1rem;
+    }
+
     .listDetails {
         padding: 0px 0px 10px;
         margin-top: 0.5rem;
@@ -46,8 +55,8 @@
     .listDetails .item {
         margin-bottom: 9px;
         color: var.$softblack;
-        font-weight: 600;
-
+        font-weight: 500;
+        font-size: 0.9rem;
     }
 
     .listDetails .item span:first-child {
@@ -60,11 +69,6 @@
         font-weight: 600;
     }
 
-    .shortDescription {
-        @include paragraph();
-        border-bottom: 1px solid #dedede;
-        padding-bottom: 1rem;
-    }
 
     .productVariants {
         padding-bottom: 1.25rem;
