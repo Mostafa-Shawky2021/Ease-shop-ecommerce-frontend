@@ -23,7 +23,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import style from "./productdetails.module.scss";
 
 const ProductDetails = ({ productDetails }) => {
-    console.log(productDetails);
+
     const [showModalOrder, setShowModalOrder] = useState(false);
     const [color, setColor] = useState('');
     const [size, setSize] = useState('');
@@ -120,10 +120,11 @@ const ProductDetails = ({ productDetails }) => {
                     <span>القسم: </span>
                     <Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>{productDetails?.category?.cat_name}</Link>
                 </li>
-                <li className={style.item}>
-                    <span>البراند: </span>
-                    <Link href="#">{productDetails?.brand}</Link>
-                </li>
+                {!!productDetails?.brand &&
+                    <li className={style.item}>
+                        <span>البراند: </span>
+                        <Link href="#">{productDetails?.brand?.brand_name}</Link>
+                    </li>}
             </ul>
 
             {!!productDetails?.colors?.length && (

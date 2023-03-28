@@ -67,7 +67,7 @@ const StorePage = () => {
         <>
             <BreadCrumbLayout>
                 <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: 'bold' }}>
+                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
                     المتجر
                 </Breadcrumb.Item>
             </BreadCrumbLayout>

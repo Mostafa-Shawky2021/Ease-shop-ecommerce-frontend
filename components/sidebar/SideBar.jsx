@@ -19,13 +19,15 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
         price: [50, 10000],
         sizes: [],
         colors: [],
+        brands: [],
     });
 
     const router = useRouter();
     const { data: productVariants } = useProductVariants();
-    const { data: categories } = useCategoriesData();
 
+    console.log(productVariants)
     useEffect(() => {
+
         const queryFilter = router.query;
 
         const filterRulesQueries = {};
@@ -33,14 +35,28 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
         (queryFilter.price) ? filterRulesQueries.price = queryFilter.price.split('-') : null;
         (queryFilter.sizes) ? filterRulesQueries.sizes = queryFilter.sizes.split('-') : null;
         (queryFilter.colors) ? filterRulesQueries.colors = queryFilter.colors.split('-') : null;
-        setFilterRules({ ...filterRules, ...filterRulesQueries })
+        (queryFilter.brands) ? filterRulesQueries.brands = queryFilter.brands.split('-') : null;
+
+        setFilterRules({ ...filterRules, ...filterRulesQueries });
 
     }, []);
 
     const valueLabelFormat = (value) => value;
 
+
     const handlePriceFilter = (event) => {
         setFilterRules({ ...filterRules, price: [...event.target.value] })
+    }
+    const handleBrandChange = (event) => {
+
+        if (event.target.checked) {
+            const filterData = [...filterRules.brands, event.target.value]
+            setFilterRules({ ...filterRules, brands: filterData });
+        } else {
+            const filterDataFun = (brand) => brand !== event.target.value;
+            const brands = filterRules.brands.filter(filterDataFun)
+            setFilterRules({ ...filterRules, brands });
+        }
     }
     const handleSizeChange = (event) => {
 
@@ -68,7 +84,6 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
 
     }
 
-
     return (
         <div className={style.sidebarWrapper}>
             <div className={style.priceFilter}>
@@ -89,17 +104,35 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
                     value={filterRules.price}
                     onChange={handlePriceFilter}
                     valueLabelDisplay="auto"
-                    disableSwap
-
-                />
+                    disableSwap />
                 <p className={style.priceRange}>
                     السعر  : {Number(filterRules.price[1]).toLocaleString()} - {Number(filterRules.price[0]).toLocaleString()}
                 </p>
             </div>
             <div>
+                {!!productVariants?.brands?.length &&
+                    <div className={style.filter}>
+                        <h4 className={style.title}>البراندات</h4>
+                        <ul className={`list-unstyled ${style.filterList}`} >
+                            {productVariants.brands.map(brand => (
+                                <li key={brand.id} className={`${style.filterItem} d-flex align-items-center`}>
+                                    <input
+                                        className={style.checkBox}
+                                        type="checkbox"
+                                        value={brand.brand_name}
+                                        id="brand"
+                                        onChange={handleBrandChange}
+                                        checked={filterRules.brands.includes(brand.brand_name) ? 'checked' : ''}
+                                    />
+                                    <label htmlFor="brand" className="ms-2">{brand.brand_name}</label>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                }
                 {!!productVariants?.sizes?.length &&
                     <div className={style.filter}>
-                        <h4 className={style.title}>فلترة بحسب الحجم</h4>
+                        <h4 className={style.title}>المقاسات</h4>
                         <ul className={`list-unstyled ${style.filterList}`} >
                             {productVariants.sizes.map(size => (
                                 <li key={size.id} className={`${style.filterItem} d-flex align-items-center`}>
@@ -107,11 +140,11 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
                                         className={style.checkBox}
                                         type="checkbox"
                                         value={size.size_name}
-                                        id={size.size_name}
+                                        id="size"
                                         onChange={handleSizeChange}
                                         checked={filterRules.sizes.includes(size.size_name) ? 'checked' : ''}
                                     />
-                                    <label htmlFor={size.size_name} className="ms-2">{size.size_name}</label>
+                                    <label htmlFor="size" className="ms-2">{size.size_name}</label>
                                 </li>
                             ))}
                         </ul>
@@ -127,31 +160,21 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
                                         className={style.checkBox}
                                         type="checkbox"
                                         value={color.color_name}
-                                        id={color.color_name}
+                                        id="color"
                                         onChange={handleColorChange}
                                         checked={filterRules.colors.includes(color.color_name) ? 'checked' : ''}
                                     />
-                                    <label htmlFor={color.color_name} className="ms-2">{color.color_name}</label>
+                                    <label htmlFor="color" className="ms-2">{color.color_name}</label>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 }
             </div>
-            {!!categories?.length &&
-                <div className={style.categories}>
-                    <h4 className={style.title}>الاقسام</h4>
-                    <CategoriesMenu />
-                </div>
-            }
 
             <div className={style.applyFilter}>
                 <Button className={style.applyFilterBtn} onClick={() => handleFilter(filterRules)}>تطبيق الفلتر</Button>
             </div>
-            {/* <div className={style.tags}>
-                <h4 className={style.title}>العلامات</h4>
-                <Link href="" className={style.tagItem}>ملابس</Link>
-            </div> */}
         </div>
     )
 }

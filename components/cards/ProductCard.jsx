@@ -118,7 +118,7 @@ const ProductCard = ({ product, ...props }) => {
             <div className={style.productCardImageWrapper}>
                 <Link href={`/product/${product?.product_slug}`}>
                     <Image
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'contain' }}
                         fill
                         src={product?.image ? `${url}/${product?.image}` : DefaultImage}
                         className={style.productCardImage}

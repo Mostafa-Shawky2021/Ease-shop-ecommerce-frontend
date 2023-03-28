@@ -16,7 +16,6 @@ const useFilter = (pageNumber) => {
 
             const { queriesFilter } = additionalQueryFilter;
 
-
             Object.entries(queriesFilter).forEach(([filterKey, filterValue]) => {
 
                 if (Array.isArray(filterValue)) {
