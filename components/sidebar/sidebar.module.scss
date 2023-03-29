@@ -6,6 +6,15 @@
     margin-left: 1.1rem;
     box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
     background-color: #fff;
+    position: relative;
+
+    .loadingIcon {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var.$secondarycolor;
+    }
 
     .priceFilter {
         border-bottom: 1px solid #dedede;

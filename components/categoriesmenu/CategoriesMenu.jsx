@@ -1,16 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+
+
+import { useCategoriesData } from '@root/hooks';
 
 import { Button } from 'react-bootstrap';
-import { ListItem } from '@root/components/listitem';
+import { SubMenuCategories } from './submenucategories';
 
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+import Icon from '@assets/images/categoriesmenu/icon.png';
 
 import style from './categoriesmenu.module.scss';
 
 const CategoriesMenu = ({ categoriesData }) => {
 
     const [categoryListIsOpen, setCategoryListIsOpen] = useState(false);
+
+    const [activeSubMenu, setActiveSubMenu] = useState(0);
+
+    const { data: categories } = useCategoriesData();
 
     const refCategoryMenu = useRef(null);
 
@@ -39,33 +49,60 @@ const CategoriesMenu = ({ categoriesData }) => {
         }
 
     }, [])
+
+    const handleMouseMoveSubMenu = (event) => {
+
+        const activeSubMenu = event.currentTarget.getAttribute('data-active-submenu');
+        setActiveSubMenu(activeSubMenu);
+    }
+
     return (
         <div className={style.categoryWrapperMenu} ref={refCategoryMenu}>
             <Button
                 className={style.buttonCategories}
                 onClick={() => setCategoryListIsOpen(!categoryListIsOpen)}>
-                <span className={style.text}>جميع الاقسام</span>
-                <div className={style.barIconWrapper}>
+                <div className={`${style.barIconWrapper} ${categoryListIsOpen ? style.activeButton : ''}`}>
                     <span className={style.barIcon}></span>
                     <span className={style.barIcon}></span>
                     <span className={style.barIcon}></span>
                 </div>
+                <span className={style.text}>جميع الاقسام</span>
+                <span className="ms-auto">
+                    <KeyboardArrowDownIcon fontSize="small" />
+                </span>
             </Button>
-            {!!categoriesData?.data &&
+            {!!categories?.data ?
                 <ul
                     className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
-                    {categoriesData?.data?.map((category) =>
+                    {categories?.data?.map((category) =>
                         <li
                             key={category.id}
                             className={style.itemCategory}
                             onClick={() => setCategoryListIsOpen(false)}
-                        >
-                            <Link className={style.categoryLink} href={`/categoryproducts/${category.cat_slug}`}>
-                                {category.cat_name}
+                            onMouseMove={handleMouseMoveSubMenu}
+                            onMouseOut={() => setActiveSubMenu(0)}
+                            data-active-submenu={category.id}>
+
+                            <Link
+                                className={style.categoryLink}
+                                href={`/categoryproducts/${category.cat_slug}`}>
+
+                                <Image
+                                    width={17}
+                                    height={17}
+                                    src={Icon} />
+                                <span className="ms-2">{category.cat_name}</span>
                             </Link>
+                            {!!category.sub_categories.length &&
+                                <SubMenuCategories
+                                    parentCategory={category.id}
+                                    activeSubMenu={activeSubMenu}
+                                    subCateogiresData={category.sub_categories} />
+                            }
                         </li>
                     )}
-                </ul>
+                </ul> :
+                <p>لا توجد اقسام</p>
             }
         </div>
     )

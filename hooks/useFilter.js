@@ -47,6 +47,7 @@ const useFilter = (pageNumber) => {
             price: [50, 10000],
             sizes: [],
             colors: [],
+            brands: [],
         })
         router.push(uriDefaultRequest, undefined, { shallow: false });
     }

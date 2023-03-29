@@ -172,15 +172,13 @@ const ProductDetails = ({ productDetails }) => {
                 <Button className={style.buyNow} onClick={() => setShowModalOrder(true)}>
                     اشتري الأن
                 </Button>
-                {/* <Button className={style.addFavouritebtn}>
-                    <FavoriteBorderOutlinedIcon fontSize="small" />
-                </Button> */}
             </div>
             {showModalOrder &&
                 <ModalFormOrder
                     setShowModalOrder={setShowModalOrder}
                     quantity={quantity}
-                    product={productDetails} />}
+                    product={productDetails} />
+            }
         </div>
     )
 }

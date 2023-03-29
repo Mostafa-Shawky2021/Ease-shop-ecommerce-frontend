@@ -5,41 +5,61 @@
 
     .buttonCategories {
         width: 100%;
-        padding: 10px 21px;
+        padding: 0.5rem 0.75rem;
         background-color: #fff;
         border: none;
-        font-weight: 600;
+        font-weight: 500;
         position: relative;
         border-radius: 0px;
         color: #000;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         outline: 0px;
         box-shadow: none;
         margin-left: 10px;
-        font-size: 0.9375rem;
+        font-size: 0.9rem;
+
     }
 
     .buttonCategories:focus,
     .buttonCategories:hover {
-        background-color: #fff;
-        color: var.$softblack;
+        background-color: #fff !important;
+        color: #000 !important;
 
     }
 
     .barIconWrapper {
-        margin-right: 22px;
-        margin-top: 6px;
-
+        margin-left: 0.7rem;
+        margin-top: 5px;
     }
 
+
     .barIcon {
-        width: 25px;
+        width: 17px;
         height: 2px;
         background-color: #888;
         display: block;
-        margin-bottom: 5px;
+        margin-bottom: 3px;
+        transition: all 0.4s;
+        background-color: var(--bs-gray);
+    }
+
+    .barIconWrapper.activeButton span:first-child {
+        transform: rotate(45deg) translate(1px, 5px)
+    }
+
+    .barIconWrapper.activeButton span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .barIconWrapper.activeButton span:last-child {
+        transform: rotate(-46deg) translate(2px, -6px)
+    }
+
+    .text {
+        color: var.$softblack;
+        font-size: 0.85rem;
+        font-weight: 600;
     }
 
     .listCategories {
@@ -53,14 +73,11 @@
         transform: scale(1, 0);
         transition: all 0.3s;
         transform-origin: 50% 0%;
-        max-height: 70vh;
-        overflow: auto;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
         &.openCategoryList {
             transform: scale(1)
         }
-
-
 
         &::-webkit-scrollbar {
             background-color: transparent;
@@ -75,41 +92,30 @@
         }
 
         .itemCategory {
-            color: #222;
-            font-weight: bold;
             margin-bottom: 5px;
             margin-top: 5px;
-            border-bottom: 1px solid rgb(222 222 222 / 58%);
-
-            &:first-child {
-                border-top: 1px solid rgb(222 222 222 / 58%);
-            }
-        }
-
-        .itemCategory .collapseButton {
+            position: relative;
             display: flex;
+            gap: 5px;
             align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            background-color: transparent;
-            color: var.$softblack;
-            font-weight: 500;
-            font-size: 0.9375rem;
-            border: none;
-            width: 100%;
-            padding: 4px 8px;
+            flex-wrap: wrap;
+
         }
 
         .categoryLink {
             cursor: pointer;
-            padding: 2px 7px 6px;
-            display: block;
             background-color: transparent;
             color: var.$softblack;
             font-weight: 500;
             border: none;
+            padding: 0.5rem 0.2rem;
             width: 100%;
         }
+
+        .itemCategory:not(:last-child) {
+            border-bottom: 1px solid #dedede;
+        }
+
     }
 
 }

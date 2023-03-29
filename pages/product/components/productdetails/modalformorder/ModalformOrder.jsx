@@ -4,6 +4,7 @@ import { useFormOrderValidation, useGuest } from '@root/hooks';
 import { useFastOrderData } from '../../../hooks';
 
 import { Form, Button } from 'react-bootstrap';
+import { Loading } from '@root/components/loading';
 
 import CloseIcon from '@mui/icons-material/Close';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -11,7 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import governorateData from 'data/governorate.json';
 
 import style from './modalformorder.module.scss';
-import { Loading } from '@root/components/loading';
+
 
 const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
 
@@ -70,7 +71,7 @@ const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
                 <div className={style.formModelBody}>
 
                     {isLoading && (
-                        <Loading>
+                        <Loading >
                             <CircularProgress size={33} className={style.loadingIcon} />
                         </Loading>
 

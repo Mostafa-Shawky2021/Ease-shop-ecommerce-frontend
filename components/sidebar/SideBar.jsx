@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react';
 
 import { useRouter } from "next/router";
-import { useCategoriesData, useProductVariants } from "@root/hooks";
+import { useProductVariants } from "@root/hooks";
 
+import { CircularProgress } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import { Button } from 'react-bootstrap';
-import { CategoriesMenu } from "./categoriesmenu";
+import { Loading } from '@root/components/loading';
 
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -23,9 +24,8 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
     });
 
     const router = useRouter();
-    const { data: productVariants } = useProductVariants();
+    const { data: productVariants, isLoading } = useProductVariants();
 
-    console.log(productVariants)
     useEffect(() => {
 
         const queryFilter = router.query;
@@ -86,6 +86,9 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
 
     return (
         <div className={style.sidebarWrapper}>
+            {isLoading && <Loading isOpacity={false}>
+                <CircularProgress size={33} className={style.loadingIcon} />
+            </Loading>}
             <div className={style.priceFilter}>
                 <div className='d-flex align-items-center justify-content-spacebetween'>
                     <h4 className={style.title} style={{ margin: '0px' }}>السعر</h4>
@@ -110,6 +113,7 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
                 </p>
             </div>
             <div>
+
                 {!!productVariants?.brands?.length &&
                     <div className={style.filter}>
                         <h4 className={style.title}>البراندات</h4>
@@ -122,7 +126,7 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
                                         value={brand.brand_name}
                                         id="brand"
                                         onChange={handleBrandChange}
-                                        checked={filterRules.brands.includes(brand.brand_name) ? 'checked' : ''}
+                                        checked={filterRules.brands?.includes(brand.brand_name) ? 'checked' : ''}
                                     />
                                     <label htmlFor="brand" className="ms-2">{brand.brand_name}</label>
                                 </li>
