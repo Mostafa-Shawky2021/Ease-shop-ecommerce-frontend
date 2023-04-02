@@ -11,6 +11,10 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
+    @include maxmediaquery('lg') {
+        display: none;
+    }
+
     @include minmediaquery('lg') {
         padding-top: 1rem;
         padding-bottom: 1rem;

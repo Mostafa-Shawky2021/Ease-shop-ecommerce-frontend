@@ -1,24 +1,13 @@
-.listSubCategories {
-    position: absolute;
-    top: 30px;
-    right: 110%;
-    width: 300px;
-    background-color: #fff;
-    padding: 0.625rem;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    transition: all 0.4s;
-    opacity: 0;
+.defaultListSubCategories {
 
-    &.activeSubMenu {
-        opacity: 1;
-        top: 0px;
-    }
+    background-color: #fff;
+    padding: 0.2rem 0.6rem;
 
     .itemCategory {
         margin-bottom: 5px;
         margin-top: 5px;
         padding-right: 0.5rem;
-        padding-left: 0.5srem;
+        padding-left: 0.5rem;
     }
 
     .link {
@@ -27,6 +16,10 @@
         width: 100%;
         font-weight: 500;
         border: none;
+
+        &:hover {
+            color: var(--bs-primary)
+        }
     }
 
     .itemCategory:not(:last-child) .link {

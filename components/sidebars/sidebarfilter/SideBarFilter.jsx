@@ -14,7 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import style from './sidebar.module.scss';
 
 
-const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
+const SidebarFilter = ({ handleFilter, handleDeleteFilter }) => {
 
     const [filterRules, setFilterRules] = useState({
         price: [50, 10000],
@@ -182,4 +182,4 @@ const Sidebar = ({ handleFilter, handleDeleteFilter }) => {
         </div>
     )
 }
-export default Sidebar;
+export default SidebarFilter;

@@ -43,6 +43,7 @@ const useFilter = (pageNumber) => {
     }
 
     const resetFilter = (setFilterRules, uriDefaultRequest) => {
+        
         setFilterRules({
             price: [50, 10000],
             sizes: [],

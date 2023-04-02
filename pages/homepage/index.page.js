@@ -13,13 +13,11 @@ import { Categories } from './components/categories'
 import { LatestProducts } from './components/latestproducts'
 import { TopCategories } from './components/topcategories';
 import { RandomCategoriesProducts } from './components/randomcategoriesproducts';
-import { ToastContainer } from 'react-toastify';
 import { Offer } from './components/offer';
+import { ProductsOffers } from './components/productsoffers';
 
 import { queryKeys } from './data'
 import { queryKeys as globalQueryKeys } from 'data';
-import { ProductsOffers } from './components/productsoffers';
-
 
 export async function getServerSideProps() {
 

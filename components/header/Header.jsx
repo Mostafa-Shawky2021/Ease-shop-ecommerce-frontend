@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link'
 
 import { useRouter } from 'next/router';
@@ -40,6 +40,7 @@ const Header = ({ setIsOpenCartList }) => {
     };
 
     const handleOpenCartList = () => setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
+
     return (
 
         <div className={`${style.header} align-items-center`}>
@@ -47,7 +48,12 @@ const Header = ({ setIsOpenCartList }) => {
                 <Row className="align-items-center">
                     <Col xs={12} md={3} lg={2}>
                         <div className={`${style.logo} text-center text-md-start`}>
-                            <Link href="/homepage">Notify<span className={style.special}>Shop</span></Link>
+                            <Link href="/homepage">
+                                Notify
+                                <span className={style.special}>
+                                    Shop
+                                </span>
+                            </Link>
                         </div>
                     </Col>
                     <Col xs={12} md={5} lg={6}>

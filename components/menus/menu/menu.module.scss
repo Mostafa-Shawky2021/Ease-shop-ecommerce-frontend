@@ -1,0 +1,86 @@
+@use "sass/var" as var;
+@use "sass/mixins/mediaquery" as *;
+
+.menuWrapper {
+    background-color: var.$secondarycolor;
+    padding: 0.625rem;
+    top: -86px;
+    transition: all 0.5s;
+
+
+    .categoryWrapper {
+        width: 260px;
+        position: relative;
+        margin-left: 10px;
+        display: none;
+
+        @include minmediaquery('lg') {
+            display: block;
+        }
+    }
+
+    .listMenu {
+        display: none;
+
+        @include minmediaquery('lg') {
+            padding-right: 10px;
+            display: flex;
+            align-items: center;
+            margin: 0px;
+        }
+    }
+
+    .listMenu>.item {
+        color: #000;
+        font-weight: 500;
+        font-size: 0.9rem;
+        font-family: var.$cairofont;
+        margin-left: 2rem;
+        transition: all 0.3s;
+        padding: 1rem 0px;
+
+        >&:hover {
+            color: var.$secondarycolor;
+
+            @include minmediaquery('lg') {
+                color: #fff;
+            }
+
+        }
+    }
+
+    .mobileWrapper {
+        width: 100%;
+        display: none;
+
+        @include maxmediaquery('lg') {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+
+    .mobileWrapper .logoMobileScreen .logo {
+
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 1.4375rem;
+        font-family: var.$oswaldfont;
+        user-select: none;
+
+        .special {
+            color: var.$accentcolor;
+        }
+
+    }
+
+    .mobileWrapper .barWrapper {
+        cursor: pointer
+    }
+
+    .mobileWrapper .barWrapper .barIcon {
+        background-color: #000;
+    }
+
+}

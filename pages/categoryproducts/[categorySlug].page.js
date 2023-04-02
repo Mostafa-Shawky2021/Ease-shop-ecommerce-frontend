@@ -12,12 +12,12 @@ import { fetchCategoryProducts } from "./queries";
 
 import { generateQueryStringFilter } from "@root/utils";
 
-import { Container, Col, Row } from "react-bootstrap";
-import { ToastContainer } from 'react-toastify';
+import { Container, Col, Row, Breadcrumb } from "react-bootstrap";
 import { CategoryProductsList } from "./components/categoryproductslist";
-import { Sidebar } from "@root/components/sidebar"
+import { SidebarFilter } from "@root/components/sidebars/sidebarfilter"
 
 import { queryKeys } from "./data";
+import { BreadCrumbLayout } from "@root/components/layout";
 
 export const getServerSideProps = async ({ query }) => {
 
@@ -73,52 +73,40 @@ const CategoryProductsPage = () => {
 
         const categorySlug = router.query.categorySlug;
 
-        setFilterRules({
-            price: [50, 10000],
-            sizes: [],
-            colors: [],
-        })
-
         resetFilter(setFilterRules, `/categoryproducts/${categorySlug}`);
 
     }
 
     return (
-        <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
-            <Row className='g-0'>
-                <Col xs={3} className='d-none d-lg-block' >
-                    <Sidebar
-                        handleFilter={handleFilter}
-                        handleDeleteFilter={handleDeleteFilter}
-                    />
-                </Col>
-                <Col xs={12} lg={9} style={{ position: 'relative' }}>
-                    {productsCategory?.products ?
-                        <CategoryProductsList
-                            productsCategoryData={productsCategory}
-                            isFetchingProductsCategory={isFetchingProductsCategory}
-                            isLoadingProductsCategory={isLoadingProductsCategory}
-                            setPageNumber={setPageNumber}
-                        />
-                        : (
-                            <p>لا يوجد منتجات للعرض</p>
-                        )}
-                </Col>
-            </Row>
-            <ToastContainer
-                position="top-center"
-                autoClose={1000}
-                limit={1}
-                hideProgressBar
-                newestOnTop={false}
-                closeOnClick
-                rtl
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
-        </Container>
+        <>
+            <BreadCrumbLayout>
+                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
+                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
+                    {router?.query?.categorySlug}
+                </Breadcrumb.Item>
+            </BreadCrumbLayout>
+            <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
+                <Row className='g-0'>
+                    <Col xs={3} className='d-none d-lg-block' >
+                        <SidebarFilter
+                            handleFilter={handleFilter}
+                            handleDeleteFilter={handleDeleteFilter} />
+                    </Col>
+                    <Col xs={12} lg={9} style={{ position: 'relative' }}>
+                        {productsCategory?.products ?
+                            <CategoryProductsList
+                                productsCategoryData={productsCategory}
+                                isFetchingProductsCategory={isFetchingProductsCategory}
+                                isLoadingProductsCategory={isLoadingProductsCategory}
+                                setPageNumber={setPageNumber} />
+                            : (
+                                <p>لا يوجد منتجات للعرض</p>
+                            )}
+                    </Col>
+                </Row>
+            </Container>
+        </>
+
     )
 }
 

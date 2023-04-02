@@ -5,16 +5,15 @@ import Icon from '@assets/images/categoriesmenu/icon.png';
 
 import style from './submenucategories.module.scss';
 
-const SubMenuCategories = ({ parentCategory, activeSubMenu, subCateogiresData }) => {
-
-    const activeSubMenuClass = parentCategory === Number(activeSubMenu) ? style.activeSubMenu : 'k';
+const SubMenuCategories = ({ className, subCateogiresData }) => {
 
     return (
         <ul
-            className={`${style.listSubCategories} ${activeSubMenuClass} list-unstyled`}>
+            className={`${style.defaultListSubCategories} ${className} list-unstyled`}>
             {subCateogiresData.map(subCategory =>
                 <li className={style.itemCategory}>
-                    <Link className={style.link} href="#">
+                    <Link className={style.link}
+                        href={`/categoryproducts/${subCategory.cat_slug}`}>
                         <Image
                             width={17}
                             height={17}

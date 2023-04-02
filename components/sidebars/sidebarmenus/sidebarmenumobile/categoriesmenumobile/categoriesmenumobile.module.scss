@@ -1,0 +1,39 @@
+@use 'sass/var' as var;
+
+.categoriesMenuMobileWrapper {
+    margin-top: 1.8rem;
+
+    .buttonCategories {
+        width: 100%;
+        padding: 0.7rem 0.75rem;
+        border: none;
+        font-weight: 500;
+        position: relative;
+        border-radius: 0px;
+        display: flex;
+        align-items: center;
+        outline: 0px;
+        box-shadow: none;
+        margin-left: 10px;
+        font-size: 0.9rem;
+
+    }
+
+    .listCategories {
+        margin-top: 0.7rem;
+    }
+
+    .text {
+        color: #ffff;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .barIcon {
+        background-color: #fff;
+    }
+
+    .text {
+        font-size: 0.8rem;
+    }
+}

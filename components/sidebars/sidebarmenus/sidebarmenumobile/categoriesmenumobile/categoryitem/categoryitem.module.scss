@@ -1,0 +1,56 @@
+@use "sass/var" as var;
+
+
+.itemCategory {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #dedede;
+
+    .categoryLink {
+        flex-grow: 1;
+        font-weight: 500;
+        position: relative;
+        color: var.$softblack;
+        outline: 0px;
+        box-shadow: none;
+        font-size: 0.9rem;
+        padding: 0.7rem 0px;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var(--bs-primary)
+        }
+    }
+
+    .openSubCategoryButton {
+        padding: 3px 4px;
+        text-align: center;
+        border-radius: 0px;
+
+        span {
+            transition: all 0.3s;
+            margin-left: -2px;
+        }
+
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid #dedede;
+    }
+
+    .subMenuCategoriesMobile {
+        height: 0px;
+        overflow: hidden;
+        transition: all 0.3s;
+        width: 100%;
+    }
+
+    .listSubCategories a {
+        padding: 0px;
+    }
+
+}

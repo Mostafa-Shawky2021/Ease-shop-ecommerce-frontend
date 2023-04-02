@@ -11,7 +11,7 @@ import { fetchProductsOffers } from "./queries";
 import { generateQueryStringFilter } from "@root/utils";
 
 import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
-import { Sidebar } from "@root/components/sidebar";
+import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 import { BreadCrumbLayout } from "@root/components/layout";
 import { ProductsList } from "@root/components/productslist";
 
@@ -80,10 +80,9 @@ const ProductsOffers = () => {
             <Container fluid="xxl">
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
-                        <Sidebar
+                        <SidebarFilter
                             handleFilter={handleFilter}
-                            handleDeleteFilter={handleDeleteFilter}
-                        />
+                            handleDeleteFilter={handleDeleteFilter} />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
                         {productsData?.products ? (
@@ -91,8 +90,7 @@ const ProductsOffers = () => {
                                 productsData={productsData}
                                 isFetchingProducts={isFetchingProducts}
                                 isLoadingProducts={isLoadingProducts}
-                                setPageNumber={setPageNumber}
-                            />
+                                setPageNumber={setPageNumber} />
                         ) : (<p>ليس متوفر عروض في الوقت الحالي</p>)}
                     </Col>
                 </Row>
