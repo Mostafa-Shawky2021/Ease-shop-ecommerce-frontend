@@ -1,32 +1,141 @@
 import { useState } from 'react';
-import useAddCartData from './useAddCartData';
-import useIncrementProductData from './useIncrementProductData';
 
-const useCarts = () => {
+import { useQueryClient } from '@tanstack/react-query';
+
+import {
+    useGuest,
+    useAddCartData,
+    useIncrementCartData,
+    useDecrementCartData,
+    useDeleteCartData
+} from '@root/hooks';
+
+import { queryKeys } from 'data';
+
+const useCarts = (productDetails = null) => {
 
     const [isLoading, setIsLoading] = useState(false);
+    const [productVariants, setProductVariants] = useState({
+        color: "",
+        size: "",
+        quantity: 1,
+    });
 
-    const {
-        mutate: addCartMutation,
-        isSuccess: isCartSuccessfully } = useAddCartData(setIsLoading)
+    const queryClient = useQueryClient();
 
-    const {
-        mutate: incrementProductMutation,
-        isSuccess: isProductIncreased } = useIncrementProductData(setIsLoading)
+    const { guestId } = useGuest();
 
-    const addCartData = (cartData) => {
-        addCartMutation(cartData)
+    const addCart = useAddCartData(setIsLoading)
+    const incrementCart = useIncrementCartData(setIsLoading, setProductVariants, guestId);
+    const decrementCart = useDecrementCartData(setIsLoading, guestId);
+    const deleteCart = useDeleteCartData(setIsLoading, guestId);
+
+    const checkProductDetailsContainVariants = () => {
+
+        return Boolean(productDetails.colors.length || productDetails.sizes.length)
     }
-    const incrementProduct = (data) => {
-        incrementProductMutation(data)
+
+    const checkProductVariantValidation = () => {
+
+        let productVariantsStauts = true;
+
+        if (checkProductDetailsContainVariants()) {
+            if (!productVariants?.color?.trim()) {
+                console.log('should chose at least color');
+                productVariantsStauts = false;
+            }
+            if (!productVariants?.size?.trim()) {
+                console.log('should chose at least size');
+                productVariantsStauts = false;
+            }
+        }
+
+
+        return productVariantsStauts;
     }
 
+    const addCartData = () => {
+
+        let calcTotalPrice = 0;
+        calcTotalPrice = productDetails?.price_discount
+            ? (productDetails.price_discount * productVariants.quantity)
+            : (productDetails.price * productVariants.quantity)
+
+        if (!checkProductVariantValidation()) return false;
+
+        const carts = queryClient.getQueryData(queryKeys.USER_CARTS(guestId));
+
+        const cartData = {
+
+            user_id: guestId,
+            product_id: productDetails.id,
+            size: productVariants.size,
+            color: productVariants.color,
+            quantity: productVariants.quantity,
+            unit_price: productDetails.price_discount || productDetails.price,
+            total_price: calcTotalPrice
+
+        }
+
+        // check if product contain color or size
+        if (checkProductDetailsContainVariants()) {
+            // check if cart has already been added
+            const cartExistWithSamedata = carts.find(cart =>
+                (cartData.size == cart.size && cartData.color == cart.color));
+
+            if (cartExistWithSamedata) {
+                incrementCart.mutate(
+                    {
+                        cartId: cartExistWithSamedata.id,
+                        quantity: productVariants.quantity
+                    });
+                return true;
+            }
+
+            addCart.mutate(cartData);
+
+            return true;
+
+        } else {
+
+            // check if cart has already been added
+            const cartExist = carts.find(cart => cart.product_id === cartData.product_id);
+            if (cartExist) {
+                incrementCart.mutate(
+                    {
+                        cartId: cartExist.id,
+                        quantity: productVariants.quantity
+                    });
+                return true
+            }
+            addCart.mutate(cartData);
+            return true;
+
+        }
+
+    }
+    const incrementCartData = (data) => {
+
+        incrementCart.mutate(data)
+    }
+    const decrementCartData = (data) => {
+
+        decrementCart.mutate(data);
+    }
+
+    const deleteCartData = (cartId) => {
+
+        deleteCart.mutate(cartId);
+    }
     return {
+        productVariants,
+        setProductVariants,
         addCartData,
-        incrementProduct,
+        incrementCartData,
+        decrementCartData,
+        deleteCartData,
         isLoading,
-        isCartSuccessfully,
-        isProductIncreased
+
     }
 }
 

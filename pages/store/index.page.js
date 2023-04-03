@@ -9,7 +9,7 @@ import { fetchProducts } from "@root/queries";
 
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { ProductsList } from "@root/components/productslist";
-import { Sidebar } from "@root/components/sidebar";
+import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 import { BreadCrumbLayout } from '@root/components/layout';
 import { ToastContainer } from 'react-toastify';
 
@@ -74,35 +74,20 @@ const StorePage = () => {
             <Container fluid="xxl">
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
-                        <Sidebar
+                        <SidebarFilter
                             handleFilter={handleFilter}
-                            handleDeleteFilter={handleDeleteFilter}
-                        />
+                            handleDeleteFilter={handleDeleteFilter} />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
-                        {productsData?.products ? (
+                        {!!productsData?.products.length ? (
                             <ProductsList
                                 productsData={productsData}
                                 isFetchingProducts={isFetchingProducts}
                                 isLoadingProducts={isLoadingProducts}
-                                setPageNumber={setPageNumber}
-                            />
+                                setPageNumber={setPageNumber} />
                         ) : (<p>لا توجد منتجات للعرض</p>)}
                     </Col>
                 </Row>
-                <ToastContainer
-                    position="top-center"
-                    autoClose={1000}
-                    limit={1}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl
-                    pauseOnFocusLoss={false}
-                    draggable
-                    pauseOnHover
-                    theme="colored"
-                />
             </Container>
         </>
 

@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+
+
 import {
     useAddCartData,
     useIncrementProductData,
     useGuest,
     useCartsData,
+    useCarts,
 } from '@root/hooks';
 
 import { calcPriceDiscount } from '@root/utils';
 
 import { Button } from 'react-bootstrap';
-import { ToastContainer } from 'react-toastify';
-import { SelectedBox } from '@root/components/selectedbox';
 import { ProductQuantity } from '@root/components/productquantity';
 import { ModalFormOrder } from './modalformorder';
 
@@ -21,68 +22,48 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import CircularProgress from '@mui/material/CircularProgress';
 
 import style from "./productdetails.module.scss";
-
+import CheckIcon from '@mui/icons-material/Check';
 const ProductDetails = ({ productDetails }) => {
 
     const [showModalOrder, setShowModalOrder] = useState(false);
-    const [color, setColor] = useState('');
-    const [size, setSize] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
 
-    const { guestId } = useGuest();
+    const {
+        addCartData,
+        setProductVariants,
+        productVariants,
+        isLoading } = useCarts(productDetails);
 
-    const { data: carts } = useCartsData(guestId);
-    const { mutate: addCartMutation } = useAddCartData(setIsLoading);
-    const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading, setQuantity);
 
-    const handleAddtoCart = () => {
+    const handleChooseColor = (event) => {
 
-        let calcTotalPrice = 0;
-        if (productDetails.price_discount) {
-            calcTotalPrice = (productDetails.price_discount * quantity);
-        } else {
-            calcTotalPrice = (productDetails.price * quantity);
-        }
-
-        const cartData = {
-            user_id: guestId,
-            product_id: productDetails.id,
-            size,
-            color,
-            quantity,
-            unit_price: productDetails.price_discount || productDetails.price,
-            total_price: calcTotalPrice
-        }
-
-        // check if product contain color or size
-        if (productDetails.color || productDetails.size) {
-            // check if cart has already been added
-            const cartExistWithSamedata = carts.find(cart => {
-                if (cartData.size == cart.size && cartData.color == cart.color) {
-                    return cart;
-                }
-            });
-            if (cartExistWithSamedata) {
-                incrementProductMutation({ cartId: cartExistWithSamedata.id, quantity });
-            } else {
-                addCartMutation(cartData);
-            }
-
-        } else {
-
-            // check if cart has already been added
-            const cartExist = carts.find(cart => cart.product_id === cartData.product_id);
-            if (cartExist) {
-                incrementProductMutation({ cartId: cartExist.id, quantity });
-            } else {
-                addCartMutation(cartData)
-            }
-        }
+        const chossenColorValue = event.target.getAttribute('value');
+        setProductVariants({ ...productVariants, color: chossenColorValue });
     }
 
-    const handleProductIncrement = () => setQuantity(quantity + 1);
-    const handleProductDecrement = () => quantity > 1 && setQuantity(quantity - 1);
+    const handleChooseSize = (event) => {
+        const chossenSizeValue = event.target.getAttribute('value');
+        setProductVariants({ ...productVariants, size: chossenSizeValue });
+    }
+
+    const handleAddtoCart = () => addCartData();
+
+    const handleProductIncrement = () => {
+
+        setProductVariants(
+            {
+                ...productVariants,
+                quantity: productVariants.quantity + 1
+            });
+    }
+
+    const handleProductDecrement = () => {
+
+        productVariants.quantity > 1 && setProductVariants(
+            {
+                ...productVariants,
+                quantity: productVariants.quantity - 1
+            });
+    }
 
     const renderPrice = () => {
 
@@ -105,16 +86,50 @@ const ProductDetails = ({ productDetails }) => {
     return (
 
         <div className={style.productDetailsWrapper}>
+            <p>{productVariants.size}</p>
             <div className={style.productName}>{productDetails?.product_name}</div>
             <div className={`${style.priceWrapper} d-flex align-items-center`}>
                 {renderPrice()}
-                {productDetails?.price_discount && (<div className={style.discountPercentage}>
-                    خصم {calcPriceDiscount(productDetails?.price, productDetails?.price_discount)}%
-                </div>)}
+                {productDetails?.price_discount &&
+                    <div className={style.discountPercentage}>
+                        خصم {calcPriceDiscount(productDetails?.price, productDetails?.price_discount)}%
+                    </div>
+                }
             </div>
             <div className={style.shortDescription}>
                 {productDetails?.short_description}
             </div>
+            {!!productDetails?.colors?.length &&
+                <div className={`${style.productVariantsWrapper} mb-3 mt-3`}>
+                    <label className={style.labelText}>اختر لون المنتج</label>
+                    <div className={style.variants}>
+                        {productDetails?.colors?.map(color =>
+                            <Button
+                                onClick={handleChooseColor}
+                                style={{ background: color.color_name }}
+                                className={`${productVariants.color === color.color_name ? style.activeChoose : ''} ${style.btnColor}`}
+                                value={color.color_name}>
+                            </Button>
+                        )}
+                    </div>
+
+                </div>
+            }
+            {!!productDetails?.sizes?.length &&
+                <div className={`${style.productVariantsWrapper} mb-3 mt-3`}>
+                    <label className={style.labelText}>اختر مقاس المنتج</label>
+                    <div className={style.variants}>
+                        {productDetails?.sizes?.map(size =>
+                            <Button
+                                onClick={handleChooseSize}
+                                className={`${productVariants.size === size.size_name ? style.activeChoose : ''} ${style.btnSize}`}
+                                value={size.size_name}>
+                                {size.size_name}
+                            </Button>
+                        )}
+                    </div>
+                </div>
+            }
             <ul className={`${style.listDetails} list-unstyled`}>
                 <li className={style.item}>
                     <span>القسم: </span>
@@ -124,41 +139,15 @@ const ProductDetails = ({ productDetails }) => {
                     <li className={style.item}>
                         <span>البراند: </span>
                         <Link href="#">{productDetails?.brand?.brand_name}</Link>
-                    </li>}
+                    </li>
+                }
             </ul>
-
-            {!!productDetails?.colors?.length && (
-                <div className={`${style.productVariants} d-flex align-items-center mb-3 mt-3`}>
-                    <label className={style.labelText}>اختر لون المنتج</label>
-                    <div style={{ width: '200px' }}>
-                        <select className="form-control" onChange={(event) => setColor(event.target.value)}>
-                            <option value="">...</option>
-                            {productDetails?.colors?.map(color => (
-                                <option value={color.color_name}>{color.color_name}</option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-            )}
-            {!!productDetails?.sizes?.length && (
-                <div className={`${style.productVariants} d-flex align-items-center mb-3 mt-3`}>
-                    <label className={style.labelText}>اختر حجم المنتج</label>
-                    <div style={{ width: '200px' }}>
-                        <SelectedBox onChange={(size) => setSize(size)}>
-                            {productDetails.sizes.map(size => (
-                                <div key={size.id} value={size.size_name} className={style.option}>{size.name}</div>
-                            ))}
-                        </SelectedBox>
-                    </div>
-                </div>
-            )}
             <div className={`${style.addCartDetails} d-flex flex-wrap mt-3`}>
                 <div className={style.quantity}>
                     <ProductQuantity
-                        quantity={quantity}
+                        quantity={productVariants.quantity}
                         handleProductIncrement={handleProductIncrement}
-                        handleProductDecrement={handleProductDecrement}
-                    />
+                        handleProductDecrement={handleProductDecrement} />
                 </div>
                 <div style={{ position: 'relative', width: '170px' }}>
                     {isLoading ?

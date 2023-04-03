@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Link from 'next/link';
 
-
 import {
-    useDecrementProductData,
-    useIncrementProductData,
-    useDeleteProductData,
+    useCarts,
     useGuest,
     useCartsData
 } from 'hooks';
@@ -21,21 +18,19 @@ import { ProductQuantity } from '@root/components/productquantity';
 
 import { SidebarCartItem } from './sidebarcartitem';
 
-
 import style from './sidebarcartlist.module.scss';
-
 
 const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
-    const [isLoading, setIsLoading] = useState(false);
     const [currentCart, setCurrentCart] = useState(0);
 
     const { guestId } = useGuest();
-
-    const { mutate: incrementProductMutation } = useIncrementProductData(setIsLoading);
-    const { mutate: decrementProductMutation } = useDecrementProductData(setIsLoading);
-    const { mutate: deleteProductMutation } = useDeleteProductData();
-
+    const {
+        incrementCartData,
+        decrementCartData,
+        deleteCartData,
+        isLoading
+    } = useCarts();
     const { data: carts } = useCartsData(guestId)
 
     useEffect(() => {
@@ -47,15 +42,17 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
     }, [])
 
     const handleProductIncrement = (event) => {
+
         const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
         setCurrentCart(cartId);
-        incrementProductMutation({ cartId })
+        incrementCartData({ cartId });
+
     }
 
     const handleProductDecrement = (event) => {
         const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
         setCurrentCart(cartId)
-        decrementProductMutation({ cartId });
+        decrementCartData({ cartId });
 
     }
 
@@ -63,11 +60,10 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
         const deleteStatus = confirm("هل انت متاكد من انك تريد حذف المنتج ؟")
         if (deleteStatus) {
             const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
-            deleteProductMutation(cartId);
+            deleteCartData(cartId);
         }
 
     }
-
 
     return (
         <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''} `}>
@@ -93,7 +89,10 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                                 cartId={cart?.id}
                                 currentCart={currentCart} />}>
 
-                        <Button className={style.btnDelete} onClick={handleProductDelete} data-cart-id={cart.id}  >
+                        <Button
+                            className={style.btnDelete}
+                            onClick={handleProductDelete}
+                            data-cart-id={cart.id}>
                             <DeleteOutlineIcon fontSize="small" />
                         </Button>
                     </SidebarCartItem>

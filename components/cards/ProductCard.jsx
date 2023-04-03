@@ -3,8 +3,6 @@ import Link from 'next/link';
 
 import { useQueryClient } from '@tanstack/react-query';
 
-
-
 import {
     useCartsData,
     useAddCartData,
@@ -31,9 +29,9 @@ import style from './productcard.module.scss'
 const ProductCard = ({ product, ...props }) => {
 
     const queryClient = useQueryClient();
-    const { mutate: addCartMutation } = useAddCartData();
-    const { mutate: incrementProductMutation } = useIncrementProductData();
-    const { guestId } = useGuest();
+    // const { mutate: addCartMutation } = useAddCartData();
+    // const { mutate: incrementProductMutation } = useIncrementProductData();
+    // const { guestId } = useGuest();
 
     const renderPrice = () => {
 
@@ -73,15 +71,15 @@ const ProductCard = ({ product, ...props }) => {
         const cartData = {
             user_id: guestId,
             product_id: product.id,
-            size: product?.size?.split(',')[0] || null,
-            color: product?.color?.split(',')[0] || null,
+            size: product?.sizes?.length ? product.sizes[0].size_name : null,
+            color: product?.colors?.length ? product.colors[0].color_name : null,
             quantity: 1,
             unit_price: product.price_discount || product.price,
             total_price: product.price_discount || product.price
         }
 
         // check if product contain color or size
-        if (product.color || product.size) {
+        if (product.colors.length || product.sizes.length) {
             // check if cart has already been added
             const cartExistWithSamedata = carts?.find(product => {
                 if (cartData.size == product.size && cartData.color == product.color) {
@@ -106,9 +104,7 @@ const ProductCard = ({ product, ...props }) => {
     }
 
     return (
-        <div className={`${style.productCard}  text-center`}
-            {...props}
-        >
+        <div className={`${style.productCard} text-center`} {...props}>
             {renderDicountPrecentage()}
             <div className={style.productAction}>
                 <div className={style.favourite}>

@@ -1,6 +1,9 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query"
-import { queryKeys } from "data";
+
 import { addCart } from "queries"
+
+import { queryKeys } from "data";
+
 import { toast } from "react-toastify";
 
 const useAddCartData = (setIsLoading) => {
@@ -9,8 +12,9 @@ const useAddCartData = (setIsLoading) => {
 
     return useMutation(addCart, {
         onMutate: () => {
-            setIsLoading && setIsLoading(true)
+            setIsLoading && setIsLoading(true);
         },
+
         onSuccess: (res) => {
 
             setIsLoading && setIsLoading(false);
@@ -23,9 +27,10 @@ const useAddCartData = (setIsLoading) => {
                 (carts) => [...carts, cartDataResponse])
 
         },
+
         onError: () => {
             setIsLoading(false)
-            toast.error('يوجد مشكله بالسيرفر')
+            console.log('Error with server')
         }
     })
 }

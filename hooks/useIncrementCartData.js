@@ -7,9 +7,8 @@ import { queryKeys } from "data";
 import { incrementProduct } from "../queries"
 
 
-const useIncrementProductData = (setIsLoading, setQuantity) => {
+const useIncrementCartData = (setIsLoading, setProductVariants, guestId) => {
 
-    const { guestId } = useGuest();
     const queryClient = useQueryClient();
 
     return useMutation(incrementProduct,
@@ -18,6 +17,7 @@ const useIncrementProductData = (setIsLoading, setQuantity) => {
                 setIsLoading && setIsLoading(true);
             },
             onSuccess: (res) => {
+
                 const cartDataResponse = res.data;
                 setIsLoading && setIsLoading(false);
                 queryClient.setQueryData(
@@ -35,7 +35,8 @@ const useIncrementProductData = (setIsLoading, setQuantity) => {
                             }
                         })
                     });
-                setQuantity && setQuantity(1);
+
+                setProductVariants && setProductVariants(prevData => ({ ...prevData, quantity: 1 }));
                 toast.success('تم زيادة عدد الكمية')
 
 
@@ -47,4 +48,4 @@ const useIncrementProductData = (setIsLoading, setQuantity) => {
         })
 }
 
-export default useIncrementProductData;
+export default useIncrementCartData;

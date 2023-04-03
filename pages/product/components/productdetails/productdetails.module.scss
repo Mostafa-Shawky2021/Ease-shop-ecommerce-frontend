@@ -53,7 +53,7 @@
     }
 
     .listDetails .item {
-        margin-bottom: 9px;
+        margin-bottom: 1rem;
         color: var.$softblack;
         font-weight: 500;
         font-size: 0.9rem;
@@ -70,16 +70,52 @@
     }
 
 
-    .productVariants {
+    .productVariantsWrapper {
         padding-bottom: 1.25rem;
         border-bottom: 1px solid #dedede;
+
     }
 
-    .labelText {
+    .productVariantsWrapper .labelText {
         color: var.$softblack;
         margin-left: 14px;
-        font-weight: 600;
-        width: 100px
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .productVariantsWrapper .variants {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 0.8rem;
+        padding: 5px;
+    }
+
+
+    .variants .btnColor {
+        border: 1px solid #bdb4b4;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+
+        &.activeChoose {
+            border: 1px solid #000;
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        }
+    }
+
+    .variants .btnSize {
+        border: 1px solid #d9d9d9;
+        border-radius: 3px;
+        min-width: 50px;
+        background-color: #fff;
+        color: var.$softblack;
+
+        &.activeChoose {
+            background: #f7f7f7;
+            border: 1px solid #000;
+        }
     }
 
     .option {
