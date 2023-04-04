@@ -92,32 +92,6 @@
         padding: 5px;
     }
 
-
-    .variants .btnColor {
-        border: 1px solid #bdb4b4;
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-
-        &.activeChoose {
-            border: 1px solid #000;
-            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-        }
-    }
-
-    .variants .btnSize {
-        border: 1px solid #d9d9d9;
-        border-radius: 3px;
-        min-width: 50px;
-        background-color: #fff;
-        color: var.$softblack;
-
-        &.activeChoose {
-            background: #f7f7f7;
-            border: 1px solid #000;
-        }
-    }
-
     .option {
         padding: 5px 15px;
         color: #383838;

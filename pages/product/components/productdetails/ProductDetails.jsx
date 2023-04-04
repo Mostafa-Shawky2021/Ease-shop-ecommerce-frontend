@@ -15,6 +15,9 @@ import { calcPriceDiscount } from '@root/utils';
 
 import { Button } from 'react-bootstrap';
 import { ProductQuantity } from '@root/components/productquantity';
+
+import { ColorsVariant } from '@root/components/productvariants/colorsvariant';
+import { SizesVariant } from '@root/components/productvariants/sizesvariant';
 import { ModalFormOrder } from './modalformorder';
 
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -22,7 +25,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import CircularProgress from '@mui/material/CircularProgress';
 
 import style from "./productdetails.module.scss";
-import CheckIcon from '@mui/icons-material/Check';
+
 const ProductDetails = ({ productDetails }) => {
 
     const [showModalOrder, setShowModalOrder] = useState(false);
@@ -86,7 +89,6 @@ const ProductDetails = ({ productDetails }) => {
     return (
 
         <div className={style.productDetailsWrapper}>
-            <p>{productVariants.size}</p>
             <div className={style.productName}>{productDetails?.product_name}</div>
             <div className={`${style.priceWrapper} d-flex align-items-center`}>
                 {renderPrice()}
@@ -102,31 +104,24 @@ const ProductDetails = ({ productDetails }) => {
             {!!productDetails?.colors?.length &&
                 <div className={`${style.productVariantsWrapper} mb-3 mt-3`}>
                     <label className={style.labelText}>اختر لون المنتج</label>
-                    <div className={style.variants}>
-                        {productDetails?.colors?.map(color =>
-                            <Button
-                                onClick={handleChooseColor}
-                                style={{ background: color.color_name }}
-                                className={`${productVariants.color === color.color_name ? style.activeChoose : ''} ${style.btnColor}`}
-                                value={color.color_name}>
-                            </Button>
-                        )}
+                    <div>
+                        <ColorsVariant
+                            className={style.variants}
+                            colors={productDetails?.colors}
+                            handleChooseColor={handleChooseColor}
+                            choosenColor={productVariants?.color} />
                     </div>
-
                 </div>
             }
             {!!productDetails?.sizes?.length &&
                 <div className={`${style.productVariantsWrapper} mb-3 mt-3`}>
                     <label className={style.labelText}>اختر مقاس المنتج</label>
-                    <div className={style.variants}>
-                        {productDetails?.sizes?.map(size =>
-                            <Button
-                                onClick={handleChooseSize}
-                                className={`${productVariants.size === size.size_name ? style.activeChoose : ''} ${style.btnSize}`}
-                                value={size.size_name}>
-                                {size.size_name}
-                            </Button>
-                        )}
+                    <div>
+                        <SizesVariant
+                            className={style.variants}
+                            sizes={productDetails?.sizes}
+                            handleChooseSize={handleChooseSize}
+                            choosenSize={productVariants?.size} />
                     </div>
                 </div>
             }

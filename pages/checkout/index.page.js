@@ -17,9 +17,13 @@ const CheckOutPage = () => {
                 ? <div style={{ height: '700px', position: 'relative' }}>
                     <Loading isOpacity={false}>
                         <Seek
-                            style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%)' }}
-                            color="#ffb700" size="medium" text="" textColor=""
-                        />
+                            style={{
+                                position: 'fixed',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%)'
+                            }}
+                            color="#ffb700" size="medium" text="" textColor="" />
                     </Loading>
                 </div>
                 : !!carts.length
