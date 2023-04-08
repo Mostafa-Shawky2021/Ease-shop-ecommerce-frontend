@@ -6,7 +6,7 @@ import { queryKeys } from "data";
 
 import { toast } from "react-toastify";
 
-const useAddCartData = (setIsLoading) => {
+const useAddCartData = (setIsLoading, guestId) => {
 
     const queryClient = useQueryClient();
 
@@ -15,15 +15,14 @@ const useAddCartData = (setIsLoading) => {
             setIsLoading && setIsLoading(true);
         },
 
-        onSuccess: (res) => {
+        onSuccess: (res, oldAddedCartData) => {
 
             setIsLoading && setIsLoading(false);
             toast.success("تم اضافة المنتج بنجاح");
-            const userId = JSON.parse(window.localStorage.getItem('guest')) || null;
             const cartDataResponse = res.data;
 
             queryClient.setQueriesData(
-                queryKeys.USER_CARTS(userId),
+                queryKeys.USER_CARTS(guestId),
                 (carts) => [...carts, cartDataResponse])
 
         },

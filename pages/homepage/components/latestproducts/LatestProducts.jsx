@@ -13,10 +13,10 @@ import style from './latestproducts.module.scss';
 
 const LatestProducts = () => {
 
-
     const { data: latestProducts } = useProductsData(1, { latest: true, limit: 8 });
 
     return (
+
         !!latestProducts?.products && (
             <div className={style.latestProducts}>
                 <SectionLayout title="احدث المنتجات" link="/latestproducts">

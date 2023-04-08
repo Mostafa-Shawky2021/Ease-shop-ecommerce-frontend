@@ -22,7 +22,7 @@ const ProductsList = ({
                 <GridList
                     data={productsData?.products}
                     renderItem={(product) =>
-                        <Col xs={6} md={3} key={product.id}>
+                        <Col xs={6} md={4} key={product.id}>
                             <ProductCard
                                 product={product}
                                 style={{ marginTop: '2rem' }} />
@@ -33,8 +33,7 @@ const ProductsList = ({
                     itemsCountPerPage={per_page}
                     totalItemsCount={total}
                     pageRangeDisplayed={5}
-                    onChange={(page) => setPageNumber(page)}
-                />
+                    onChange={(page) => setPageNumber(page)} />
             </>
 
             ) : (<p> لا يوجد منتجات لعرضها</p>)}

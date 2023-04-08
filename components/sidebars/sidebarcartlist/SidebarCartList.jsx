@@ -31,6 +31,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
         deleteCartData,
         isLoading
     } = useCarts();
+
     const { data: carts } = useCartsData(guestId)
 
     useEffect(() => {
@@ -46,14 +47,13 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
         const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
         setCurrentCart(cartId);
         incrementCartData({ cartId });
-
     }
 
     const handleProductDecrement = (event) => {
+
         const cartId = Number(event.currentTarget.getAttribute('data-cart-id'));
         setCurrentCart(cartId)
         decrementCartData({ cartId });
-
     }
 
     const handleProductDelete = (event) => {

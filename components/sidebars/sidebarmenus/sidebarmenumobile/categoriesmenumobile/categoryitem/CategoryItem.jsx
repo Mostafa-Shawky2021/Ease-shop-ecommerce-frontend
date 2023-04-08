@@ -51,7 +51,8 @@ const CategoryItem = (
                 <Image
                     width={17}
                     height={17}
-                    src={Icon} />
+                    src={Icon}
+                    alt="category-icon" />
                 <span className="ms-2">
                     {categoryData.cat_name}
                 </span>

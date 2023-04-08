@@ -20,6 +20,7 @@ const useIncrementCartData = (setIsLoading, setProductVariants, guestId) => {
 
                 const cartDataResponse = res.data;
                 setIsLoading && setIsLoading(false);
+
                 queryClient.setQueryData(
                     queryKeys.USER_CARTS(guestId),
                     (carts) => {

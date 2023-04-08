@@ -62,7 +62,7 @@ const CategoriesMenu = () => {
             </Button>
             <ul className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
 
-                {!!categories?.data.length ?
+                {!!categories?.data?.length ?
                     <ListItem
                         data={categories.data}
                         renderItem={

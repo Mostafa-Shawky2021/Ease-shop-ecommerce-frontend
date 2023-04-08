@@ -1,5 +1,6 @@
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { url } from 'data';
 
@@ -7,9 +8,14 @@ import DefaultImage from '@assets/images/default/image.jpg';
 
 import style from './sidebarcartitem.module.scss';
 
-const SidebarCartItem = ({ cart, productQuantity, deleteButton }) => {
+const SidebarCartItem = (
+    {
+        cart,
+        productQuantity,
+        children }) => {
 
     return (
+
         <div className={`${style.item} d-flex flex-wrap`}>
             <div className={style.productImage}>
                 <Image
@@ -17,12 +23,13 @@ const SidebarCartItem = ({ cart, productQuantity, deleteButton }) => {
                     alt={cart?.product?.product_name}
                     width={50}
                     height={50}
-                    style={{ objectFit: 'cover' }}
-                />
+                    style={{ objectFit: 'cover' }} />
             </div>
             <div className={style.productDetails}>
                 <div className={style.productName}>
-                    {cart?.product?.product_name}
+                    <Link href={`product/${cart?.product.procut_slug}`}>
+                        {cart?.product?.product_name}
+                    </Link>
                 </div>
                 <div className={style.productPriceWraper}>
                     <span className={style.price}>{Number(cart?.total_price).toLocaleString()}</span>
@@ -33,7 +40,7 @@ const SidebarCartItem = ({ cart, productQuantity, deleteButton }) => {
                     <div className={style.productQuantity}>
                         {productQuantity}
                     </div>
-                    {deleteButton}
+                    {children}
                 </div>
             </div>
         </div>

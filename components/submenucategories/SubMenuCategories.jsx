@@ -11,13 +11,14 @@ const SubMenuCategories = ({ className, subCateogiresData }) => {
         <ul
             className={`${style.defaultListSubCategories} ${className} list-unstyled`}>
             {subCateogiresData.map(subCategory =>
-                <li className={style.itemCategory}>
+                <li key={subCategory.id} className={style.itemCategory}>
                     <Link className={style.link}
                         href={`/categoryproducts/${subCategory.cat_slug}`}>
                         <Image
                             width={17}
                             height={17}
-                            src={Icon} />
+                            src={Icon}
+                            alt="category-icon" />
                         {subCategory.cat_name}
                     </Link>
                 </li>

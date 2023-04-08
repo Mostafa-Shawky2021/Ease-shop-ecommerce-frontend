@@ -3,21 +3,23 @@
 
 .productCard {
     position: relative;
-    background-color: #fff;
     overflow: hidden;
     transition: all 0.4s;
     border-radius: 4px;
     margin-top: 1.5rem;
     padding-bottom: 1rem;
-    box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, .03);
-
+    border: 1px solid #dedede;
+    min-height: 400px;
 
     &:hover {
-        // box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+        box-shadow: 0px 4px 10px rgba(1, 15, 28, 0.14)
     }
 
-    &:hover .productCard {
-        transform: scale(1.025);
+    .header {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        border-bottom: 1px solid #dedede;
     }
 
     .productDiscount {
@@ -56,60 +58,98 @@
         }
     }
 
-
-    .productCardImageWrapper {
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-        transition: all 0.5s;
-        height: 232px;
-
-        @include maxmediaquery("sm") {
-            height: 180px;
-        }
-
-        .productCardImage {
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.6s ease-in-out;
-
-        }
+    .variantsWrapper {
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+        position: absolute;
+        bottom: -74px;
+        left: 0px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        background-color: #fff;
+        z-index: 99;
+        transition: all 0.5s ease-in-out;
 
     }
 
+    &:hover .variantsWrapper {
+        bottom: 0px;
+
+    }
+
+    .variantsWrapper .colorsBtn {
+        margin-bottom: 8px;
+    }
+
+    .variantsWrapper .sizesBtn button {
+        min-width: 27px;
+        font-size: 0.8rem
+    }
+
+    .productCardImageWrapper .productCardImage {
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.5s ease-in-out;
+
+    }
+
+    .productName {
+        color: var(--bs-primary);
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin: 17px 0px 3px;
+        font-family: var.$cairofont;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+    }
+
+    .productDescription {
+        color: var.$softblack;
+        margin: -9px 0px 0px;
+        font-size: 0.9375rem;
+        max-width: 98%;
+    }
+
     .productRatingWrapper {
-        color: #fec348;
+        color: var.$secondarycolor;
+        margin-top: 0px;
 
         .productRating {
             font-size: 18px;
         }
     }
 
-    .productName {
-        color: var.$primarycolor;
-        font-weight: 500;
+    .priceWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-top: 7px;
-        margin-bottom: 0px;
-        font-family: var.$cairofont;
-        // max-width: 97%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+
     }
 
     .productPrice {
-        color: #f00;
-        font-weight: bold;
-        margin: 0px 5px;
+        color: var.$softblack ;
+        font-weight: 500;
+        margin: -4px 0px 0px 5px;
         font-family: var.$oswaldfont;
+        font-size: 1rem;
 
-        .currency {
-            font-family: var.$cairofont;
-            font-weight: bold;
-        }
     }
 
-    .oldPrice {
+    .productPrice .currency {
+        font-family: var.$cairofont;
+        font-weight: 500;
+        margin-right: 5px;
+    }
+
+    .productPrice.oldPrice span {
         font-weight: 600;
         color: #888;
         position: relative;
@@ -120,6 +160,7 @@
     }
 
     .addProduct {
+        display: block;
         width: 98%;
         max-width: 170px;
         margin: 20px auto 0px;

@@ -1,19 +1,26 @@
 @use 'sass/var' as var;
 
 .sizesWrapper {
+    display: flex;
+    gap: 8px;
 
     .btnSize {
-        border: 1px solid #d9d9d9;
-        border-radius: 3px;
-        min-width: 50px;
-        background-color: #fff;
+        border-radius: 1px;
+        min-width: 30px;
+        background-color: transparent;
         color: var.$softblack;
         transition: all 0.3s;
+        padding: 1px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid #dedede;
 
-        &.activeChoose {
-            background: #f7f7f7;
-            border: 1px solid #000;
+        &.activeChoose,
+        &:focus,
+        &:hover {
+            background: var(--bs-primary);
+            color: #fff;
+            border: 1px solid transparent;
         }
-
     }
 }

@@ -39,7 +39,8 @@ const CategoryItem = ({ categoryData, subMenuCategories, ...props }) => {
                 <Image
                     width={17}
                     height={17}
-                    src={Icon} />
+                    src={Icon}
+                    alt="category-icon" />
                 <span className="ms-2">{categoryData.cat_name}</span>
                 {!!categoryData.sub_categories.length &&
                     <span className="ms-auto">

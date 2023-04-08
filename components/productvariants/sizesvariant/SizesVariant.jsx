@@ -8,7 +8,7 @@ const SizesVariant = ({
     choosenSize,
     className,
     ...props }) => {
-    console.log(choosenSize)
+
     return (
         <div className={`${style.sizesWrapper} ${className}`} {...props}>
             {sizes?.map(size =>

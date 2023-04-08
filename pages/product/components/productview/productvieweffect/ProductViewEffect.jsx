@@ -5,7 +5,7 @@ import { url } from 'data';
 
 import style from "./productvieweffect.module.scss";
 
-const ProductViewEffect = ({ image, imagesThumbnails }) => {
+const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
 
     const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -15,6 +15,7 @@ const ProductViewEffect = ({ image, imagesThumbnails }) => {
         const activeIndex = Number(event.currentTarget.getAttribute('data-index'));
         setActiveImageIndex(activeIndex)
     }
+
     return (
         <div className={style.productViewWrapper}>
             <div className={style.presentationImage}>
@@ -23,14 +24,17 @@ const ProductViewEffect = ({ image, imagesThumbnails }) => {
                         fill
                         style={{ paddingLeft: '15px', paddingRight: '15px' }}
                         src={image ? `${url}/${image}` : ''}
-                    />
+                        alt={imageAlt} />
                 </div>
                 {imagesThumbnails?.map((thumbnail, index) => (
-                    <div className={`${style.image} ${activeImageIndex === index + 1 ? style.active : ''}`} key={thumbnail.id}>
+                    <div
+                        className={`${style.image} ${activeImageIndex === index + 1 ? style.active : ''}`}
+                        key={thumbnail.id}>
                         <Image
                             fill
                             style={{ paddingLeft: '15px', paddingRight: '15px' }}
-                            src={thumbnail?.url ? `${url}/${thumbnail?.url}` : ''} />
+                            src={thumbnail?.url ? `${url}/${thumbnail?.url}` : ''}
+                            alt={imageAlt} />
                     </div>
                 ))}
             </div>
@@ -42,11 +46,11 @@ const ProductViewEffect = ({ image, imagesThumbnails }) => {
                     className={`${style.thumbnail} ${0 === activeImageIndex ? style.active : ''}`}
                     onClick={handleimageThumbnail}
                     data-index={0}>
-
                     <Image
                         fill
                         style={{ padding: '5px' }}
-                        src={image ? `${url}/${image}` : ''} />
+                        src={image ? `${url}/${image}` : ''}
+                        alt={imageAlt} />
                 </div>
 
                 {imagesThumbnails?.map((thumbnail, index) => (
@@ -60,7 +64,7 @@ const ProductViewEffect = ({ image, imagesThumbnails }) => {
                             fill
                             src={thumbnail?.url ? `${url}/${thumbnail?.url}` : ''}
                             style={{ padding: '5px' }}
-                        />
+                            alt={imageAlt} />
                     </div>
                 ))}
             </div>

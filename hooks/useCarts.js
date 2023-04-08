@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -25,31 +25,46 @@ const useCarts = (productDetails = null) => {
 
     const { guestId } = useGuest();
 
-    const addCart = useAddCartData(setIsLoading)
+    const addCart = useAddCartData(setIsLoading, guestId)
     const incrementCart = useIncrementCartData(setIsLoading, setProductVariants, guestId);
     const decrementCart = useDecrementCartData(setIsLoading, guestId);
     const deleteCart = useDeleteCartData(setIsLoading, guestId);
 
+    useEffect(() => {
+
+        const firstSize = productDetails?.sizes?.length
+            ? productDetails.sizes[0].size_name
+            : "";
+        const firstColor = productDetails?.colors?.length
+            ? productDetails.colors[0].color_name
+            : "";
+
+        setProductVariants({
+            ...productVariants,
+            size: firstSize,
+            color: firstColor
+        });
+
+
+    }, [productDetails]);
+
     const checkProductDetailsContainVariants = () => {
 
-        return Boolean(productDetails.colors.length || productDetails.sizes.length)
+        return Boolean(productDetails?.colors?.length || productDetails?.sizes?.length)
     }
 
     const checkProductVariantValidation = () => {
 
         let productVariantsStauts = true;
 
-        if (checkProductDetailsContainVariants()) {
-            if (!productVariants?.color?.trim()) {
-                console.log('should chose at least color');
-                productVariantsStauts = false;
-            }
-            if (!productVariants?.size?.trim()) {
-                console.log('should chose at least size');
-                productVariantsStauts = false;
-            }
+        if (productDetails?.colors?.length && !productVariants?.color?.trim()) {
+            console.log('should chose at least color');
+            productVariantsStauts = false;
         }
-
+        if (productDetails?.colors?.length && !productVariants?.size?.trim()) {
+            console.log('should chose at least size');
+            productVariantsStauts = false;
+        }
 
         return productVariantsStauts;
     }
@@ -80,10 +95,16 @@ const useCarts = (productDetails = null) => {
         // check if product contain color or size
         if (checkProductDetailsContainVariants()) {
             // check if cart has already been added
-            const cartExistWithSamedata = carts.find(cart =>
-                (cartData.size == cart.size && cartData.color == cart.color));
+            const cartExistWithSamedata = carts?.find(cart => {
+
+                if (cartData.size == cart.size && cartData.color == cart.color) return cart;
+                if (cartData.size === cart.size) return cart;
+                if (cartData.color === cart.color) return cart;
+            });
+
 
             if (cartExistWithSamedata) {
+
                 incrementCart.mutate(
                     {
                         cartId: cartExistWithSamedata.id,
@@ -114,10 +135,12 @@ const useCarts = (productDetails = null) => {
         }
 
     }
+
     const incrementCartData = (data) => {
 
         incrementCart.mutate(data)
     }
+
     const decrementCartData = (data) => {
 
         decrementCart.mutate(data);
@@ -127,6 +150,7 @@ const useCarts = (productDetails = null) => {
 
         deleteCart.mutate(cartId);
     }
+
     return {
         productVariants,
         setProductVariants,

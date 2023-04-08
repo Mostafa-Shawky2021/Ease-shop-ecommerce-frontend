@@ -9,19 +9,26 @@ const ColorsVariant = ({
     className,
     ...props }) => {
 
+
     return (
 
         <div className={`${style.colorsWrapper} ${className}`} {...props}>
 
-            {colors?.map(color =>
-                <Button
+            {colors?.map(color => {
+
+                const activeChossenColor = choosenColor === color.color_name
+                    ? style.activeChoose
+                    : '';
+
+                return <Button
                     key={color.id}
                     onClick={handleChooseColor}
-                    style={{ background: color.color_name }}
-                    className={`${choosenColor === color.color_name ? style.activeChoose : ''} ${style.btnColor}`}
+                    style={{ background: color.color_value }}
+                    className={`${activeChossenColor} ${style.btnColor}`}
                     value={color.color_name}>
                 </Button>
-            )}
+            })
+            }
 
         </div>
     )
