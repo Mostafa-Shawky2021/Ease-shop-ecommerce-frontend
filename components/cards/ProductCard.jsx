@@ -11,6 +11,8 @@ import { SizesVariant } from '../productvariants/sizesvariant';
 
 import { url } from "data";
 
+import CircularProgress from '@mui/material/CircularProgress';
+
 import DefaultImage from '@assets/images/default/image.jpg';
 
 import StarIcon from '@mui/icons-material/Star';
@@ -25,7 +27,7 @@ const ProductCard = ({ product, ...props }) => {
     const {
         addCartData,
         productVariants,
-        setProductVariants } = useCarts(product);
+        setProductVariants, isLoading } = useCarts(product);
 
     const renderPrice = () => {
 
@@ -94,7 +96,7 @@ const ProductCard = ({ product, ...props }) => {
                         handleChooseColor={handleChooseColor} />
 
                     <SizesVariant
-                        className={`${style.variants}${style.sizesBtn}`}
+                        className={`${style.sizesBtn}`}
                         sizes={product?.sizes}
                         choosenSize={productVariants.size}
                         handleChooseSize={handleChooseSize} />
@@ -130,7 +132,10 @@ const ProductCard = ({ product, ...props }) => {
                 <Button className={style.addProduct} onClick={handleAddProduct}>
                     <div className={style.contentWrapper}>
                         <span className={style.text}>اضافة الي سلة التسوق</span>
-                        <ShoppingBagOutlinedIcon className={style.icon} fontSize="small" />
+                        {isLoading
+                            ? <CircularProgress className={style.iconLoading} size={13} />
+                            : <ShoppingBagOutlinedIcon className={style.icon} fontSize="small" />}
+
                     </div>
                 </Button>
 

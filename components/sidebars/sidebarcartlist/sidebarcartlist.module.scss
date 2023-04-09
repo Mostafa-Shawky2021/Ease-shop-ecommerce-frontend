@@ -73,6 +73,24 @@
             color: var.$accentcolor;
             background-color: transparent;
         }
+
+    }
+
+    .btnDelete {
+        margin-top: 10px;
+        color: var.$softblack;
+        transition: all 0.4s;
+        padding: 5px;
+        border-radius: 0px;
+    }
+
+    .btnDelete:hover {
+        color: var(--bs-primary);
+    }
+
+    .btnDelete .icon {
+        color: inherit;
+        font-size: 1.1rem;
     }
 
     .footer {

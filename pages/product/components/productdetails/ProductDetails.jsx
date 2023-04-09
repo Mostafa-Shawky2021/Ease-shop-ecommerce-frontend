@@ -28,8 +28,6 @@ import style from "./productdetails.module.scss";
 
 const ProductDetails = ({ productDetails }) => {
 
-    const [showModalOrder, setShowModalOrder] = useState(false);
-
     const {
         addCartData,
         setProductVariants,
@@ -118,7 +116,7 @@ const ProductDetails = ({ productDetails }) => {
                     <label className={style.labelText}>اختر مقاس المنتج</label>
                     <div>
                         <SizesVariant
-                            className={style.variants}
+                            className={`${style.variants} ${style.sizeVariant}`}
                             sizes={productDetails?.sizes}
                             handleChooseSize={handleChooseSize}
                             choosenSize={productVariants?.size} />
@@ -128,7 +126,9 @@ const ProductDetails = ({ productDetails }) => {
             <ul className={`${style.listDetails} list-unstyled`}>
                 <li className={style.item}>
                     <span>القسم: </span>
-                    <Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>{productDetails?.category?.cat_name}</Link>
+                    <Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>
+                        {productDetails?.category?.cat_name}
+                    </Link>
                 </li>
                 {!!productDetails?.brand &&
                     <li className={style.item}>
@@ -152,17 +152,17 @@ const ProductDetails = ({ productDetails }) => {
                             <ShoppingCartOutlinedIcon fontSize="small" />
                         </Button>
                         )}
+
                 </div>
-                <Button className={style.buyNow} onClick={() => setShowModalOrder(true)}>
-                    اشتري الأن
-                </Button>
-            </div>
-            {showModalOrder &&
                 <ModalFormOrder
-                    setShowModalOrder={setShowModalOrder}
-                    quantity={quantity}
-                    product={productDetails} />
-            }
+                    quantity={productVariants.quantity}
+                    product={productDetails}
+                    renderButton={(setOpenModal) =>
+                        <Button
+                            className={style.buyNow}
+                            onClick={() => setOpenModal(true)}>اشتري الان
+                        </Button>} />
+            </div>
         </div>
     )
 }

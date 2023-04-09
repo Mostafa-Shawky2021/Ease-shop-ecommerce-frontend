@@ -80,7 +80,7 @@ const useCarts = (productDetails = null) => {
 
         const carts = queryClient.getQueryData(queryKeys.USER_CARTS(guestId));
 
-        const cartData = {
+        const newCartData = {
 
             user_id: guestId,
             product_id: productDetails.id,
@@ -94,12 +94,13 @@ const useCarts = (productDetails = null) => {
 
         // check if product contain color or size
         if (checkProductDetailsContainVariants()) {
+
             // check if cart has already been added
             const cartExistWithSamedata = carts?.find(cart => {
 
-                if (cartData.size == cart.size && cartData.color == cart.color) return cart;
-                if (cartData.size === cart.size) return cart;
-                if (cartData.color === cart.color) return cart;
+                if (newCartData.size === cart.size && newCartData.color == cart.color) return cart;
+                if (newCartData.size === cart.size && newCartData.color === null) return cart;
+                if (newCartData.color === cart.color && newCartData.size === null) return cart;
             });
 
 
@@ -113,7 +114,7 @@ const useCarts = (productDetails = null) => {
                 return true;
             }
 
-            addCart.mutate(cartData);
+            addCart.mutate(newCartData);
 
             return true;
 

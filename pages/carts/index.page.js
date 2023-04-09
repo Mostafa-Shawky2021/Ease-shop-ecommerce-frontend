@@ -1,10 +1,19 @@
+import { useCartsData, useGuest } from '@root/hooks';
+
 import { Row, Col, Container, Breadcrumb } from 'react-bootstrap';
 import { CartListTable } from './components/cartlisttable';
 import { CartTotal } from './components/carttotal';
-import { ToastContainer } from 'react-toastify';
 import { BreadCrumbLayout } from '@root/components/layout';
 
 const CartsPage = () => {
+
+    const { guestId } = useGuest();
+
+    const {
+        data: carts,
+        isLoading: isCartsLoading
+    } = useCartsData(guestId);
+
     return (
         <>
             <BreadCrumbLayout>
@@ -14,27 +23,16 @@ const CartsPage = () => {
                 </Breadcrumb.Item>
             </BreadCrumbLayout>
             <Container fluid="lg" style={{ marginTop: '2.5rem' }}>
+
                 <Row>
                     <Col xs={12}>
-                        <CartListTable />
+                        <CartListTable cartsData={carts} isCartsLoading={isCartsLoading} />
                     </Col>
                     <Col xs={12} sm={4}>
-                        <CartTotal />
+                        {!!carts?.length && <CartTotal cartsData={carts} />}
                     </Col>
                 </Row>
-                <ToastContainer
-                    position="top-center"
-                    autoClose={1000}
-                    limit={1}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl
-                    pauseOnFocusLoss={false}
-                    draggable
-                    pauseOnHover
-                    theme="colored"
-                />
+
             </Container>
         </>
     )

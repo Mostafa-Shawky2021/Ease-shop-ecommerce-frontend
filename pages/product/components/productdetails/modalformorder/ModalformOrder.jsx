@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
+
+
 import { useFormOrderValidation, useGuest } from '@root/hooks';
 import { useFastOrderData } from '../../../hooks';
 
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 import { Loading } from '@root/components/loading';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,24 +16,25 @@ import governorateData from 'data/governorate.json';
 import style from './modalformorder.module.scss';
 
 
-const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
+const ModalformOrder = ({ quantity, product, renderButton }) => {
+
+    const [openModalOrder, setOpenModalOrder] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
 
     const { validateForm, formErrorMsg } = useFormOrderValidation();
     const { guestId } = useGuest();
 
-    const { mutate: sendFastOrder } = useFastOrderData(setIsLoading, setShowModalOrder)
+    const { mutate: sendFastOrder } = useFastOrderData(setIsLoading, setOpenModalOrder)
 
+    // useEffect(() => {
 
-    useEffect(() => {
-
-        const closeModalOrderForm = (event) => {
-            if (event.key === "Escape") setShowModalOrder(false);
-        }
-        document.body.addEventListener('keydown', closeModalOrderForm);
-        return () => document.body.removeEventListener('keydown', closeModalOrderForm);
-    }, []);
+    //     const closeModalOrderForm = (event) => {
+    //         if (event.key === "Escape") setOpenModalOrder(false);
+    //     }
+    //     document.body.addEventListener('keydown', closeModalOrderForm);
+    //     return () => document.body.removeEventListener('keydown', closeModalOrderForm);
+    // }, []);
 
 
     const handleSubmit = (event) => {
@@ -58,53 +61,56 @@ const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
 
     }
     return (
-        <div className={style.formModel}>
-            <div className={style.formModalContent}>
-                <header className={style.formModelHeader}>
-                    <h3 className={style.title}>
+        <>
+            {renderButton(setOpenModalOrder)}
+
+            <Modal
+                className={style.formModal}
+                show={openModalOrder}
+                onHide={() => setOpenModalOrder(false)}>
+                <Modal.Header className={style.formModalHeader} >
+                    <Modal.Title className={style.title}>
                         طلب اوردر
-                    </h3>
-                    <div className={style.closeIcon} onClick={() => setShowModalOrder(false)}>
-                        <CloseIcon fontSize="small" />
-                    </div>
-                </header>
-                <div className={style.formModelBody}>
-
-                    {isLoading && (
-                        <Loading >
-                            <CircularProgress size={33} className={style.loadingIcon} />
+                    </Modal.Title>
+                    <Button className={style.closeModal}>
+                        <CloseIcon className={style.icon} fontSize="small" />
+                    </Button>
+                </Modal.Header>
+                <Modal.Body>
+                    {isLoading &&
+                        <Loading>
+                            <CircularProgress
+                                size={33}
+                                className={style.loadingIcon} />
                         </Loading>
-
-                    )}
+                    }
                     <div className={style.formOrderWrapper}>
                         <Form onSubmit={handleSubmit} >
                             <Form.Group style={{ position: 'relative' }} className="mb-3 mt-3" controlId="username">
                                 <div className='d-flex align-items-center'>
-                                    <Form.Label>اسم المستخدم</Form.Label>
+                                    <Form.Label className={style.labelControl}>اسم المستخدم</Form.Label>
                                     <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                                     <span className={style.errMsg}>{formErrorMsg.username}</span>
                                 </div>
                                 <Form.Control
                                     name="username"
                                     className={`${style.formControl} ${formErrorMsg.username ? style.errorField : ''}`}
-                                    autoComplete="off"
-                                />
+                                    autoComplete="off" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="phone">
                                 <div className='d-flex align-items-center'>
-                                    <Form.Label>رقم التلفون</Form.Label>
+                                    <Form.Label className={style.labelControl}>رقم التلفون</Form.Label>
                                     <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                                     <span className={style.errMsg}>{formErrorMsg.phone}</span>
                                 </div>
                                 <Form.Control
                                     name="phone"
                                     type="number"
-                                    className={`${style.formControl} ${formErrorMsg.phone ? style.errorField : ''}`}
-                                />
+                                    className={`${style.formControl} ${formErrorMsg.phone ? style.errorField : ''}`} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="governorate">
                                 <div className='d-flex align-items-center'>
-                                    <Form.Label>المحافظة</Form.Label>
+                                    <Form.Label className={style.labelControl}>المحافظة</Form.Label>
                                     <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                                     <span className={style.errMsg}>{formErrorMsg.governorate}</span>
                                 </div>
@@ -116,8 +122,7 @@ const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
                                         <option
                                             key={governorate.id}
                                             className={style.option}
-                                            value={governorate.governorate_name_ar}
-                                        >
+                                            value={governorate.governorate_name_ar} >
                                             {governorate.governorate_name_ar}
                                         </option>
                                     ))}
@@ -125,15 +130,14 @@ const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="street">
                                 <div className='d-flex align-items-center'>
-                                    <Form.Label>عنوان الشارع</Form.Label>
+                                    <Form.Label className={style.labelControl}>عنوان الشارع</Form.Label>
                                     <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                                     <span className={style.errMsg}>{formErrorMsg.street}</span>
                                 </div>
                                 <Form.Control
                                     name="street"
                                     type="text"
-                                    className={`${style.formControl} ${formErrorMsg.street ? style.errorField : ''}`}
-                                />
+                                    className={`${style.formControl} ${formErrorMsg.street ? style.errorField : ''}`} />
                             </Form.Group>
                             <Form.Group className="mt-4 d-flex align-items-center justify-content-between">
                                 <Button className={style.checkOutbtn} type='submit'>
@@ -142,9 +146,10 @@ const ModalformOrder = ({ setShowModalOrder, quantity, product }) => {
                             </Form.Group>
                         </Form>
                     </div>
-                </div>
-            </div>
-        </div>
+                </Modal.Body>
+            </Modal>
+        </>
+
     )
 }
 

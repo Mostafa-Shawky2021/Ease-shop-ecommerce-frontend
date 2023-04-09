@@ -17,17 +17,34 @@
     }
 
     .productName {
-        color: var(--bs-primary);
-        font-weight: 500;
-        font-size: 1rem;
+        color: var.$hardblack;
+        font-weight: 600;
+        font-size: 0.9rem;
         line-height: 1.6;
         max-width: 240px;
         overflow: hidden;
         text-overflow: ellipsis;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var(--bs-primary)
+        }
+    }
+
+    .productVariantWrapper .productVariant {
+        color: var.$softblack;
+    }
+
+    .productVariantWrapper .productVariant:last-child {
+        &::before {
+            content: "/";
+            margin: 0px 5px;
+        }
+
     }
 
     .productPriceWraper {
-        color: #f00;
+        color: var.$hardblack;
         font-family: var.$cairofont;
         margin-top: 0.2rem;
         font-size: 0.9rem;

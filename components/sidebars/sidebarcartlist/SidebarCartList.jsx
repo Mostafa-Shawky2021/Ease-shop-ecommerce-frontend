@@ -12,13 +12,14 @@ import { calcTotalPrice } from '@root/utils';
 
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { Button } from 'react-bootstrap';
 import { ProductQuantity } from '@root/components/productquantity';
-
 import { SidebarCartItem } from './sidebarcartitem';
 
 import style from './sidebarcartlist.module.scss';
+import { Loading } from '@root/components/loading';
 
 const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
@@ -66,7 +67,15 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
     }
 
     return (
+
         <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''} `}>
+            {isLoading &&
+                <Loading>
+                    <CircularProgress
+                        size={33}
+                        className={style.loadingIcon} />
+                </Loading>
+            }
             <header className={style.header}>
                 <h4 className={style.title}>سلة التسوق</h4>
                 <CloseIcon
@@ -76,6 +85,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
             </header>
 
             <div className={`${style.cartList}`}>
+
                 {carts?.map(cart =>
                     <SidebarCartItem
                         key={cart.id}
@@ -85,7 +95,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                                 handleProductIncrement={handleProductIncrement}
                                 handleProductDecrement={handleProductDecrement}
                                 quantity={cart?.quantity}
-                                isLoading={isLoading}
+
                                 cartId={cart?.id}
                                 currentCart={currentCart} />}>
 
@@ -93,8 +103,13 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                             className={style.btnDelete}
                             onClick={handleProductDelete}
                             data-cart-id={cart.id}>
-                            <DeleteOutlineIcon fontSize="small" />
+
+                            <DeleteOutlineIcon
+                                fontSize="small"
+                                className={style.icon} />
+
                         </Button>
+
                     </SidebarCartItem>
                 )}
             </div>
@@ -107,7 +122,11 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                     </span>
                 </div>
                 <div className={style.checkoutWrapper}>
-                    <Link href="/carts" className={style.btn} onClick={() => setIsOpenCartList(false)}>سلة التسوق</Link>
+                    <Link href="/carts"
+                        className={style.btn}
+                        onClick={() => setIsOpenCartList(false)}>
+                        سلة التسوق
+                    </Link>
                     <Link href="/checkout" className={style.btn} onClick={() => setIsOpenCartList(false)}>اطب الأن</Link>
                 </div>
             </div>

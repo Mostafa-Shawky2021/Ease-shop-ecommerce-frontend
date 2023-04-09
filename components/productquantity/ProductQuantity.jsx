@@ -16,6 +16,7 @@ const ProductQuantity = ({
     isLoading,
     currentCart,
     ...props
+
 }) => {
 
     return (
@@ -24,8 +25,8 @@ const ProductQuantity = ({
                 className={style.quantityAction}
                 onClick={handleProductIncrement}
                 data-cart-id={cartId}
-                disabled={isLoading && currentCart === cartId}
-            >
+                disabled={isLoading && currentCart === cartId}>
+
                 <AddIcon className={style.icon} fontSize="small" />
             </Button>
             <div className={style.content}>
@@ -39,8 +40,7 @@ const ProductQuantity = ({
                 className={style.quantityAction}
                 onClick={handleProductDecrement}
                 data-cart-id={cartId}
-                disabled={isLoading && currentCart === cartId}
-            >
+                disabled={isLoading && currentCart === cartId}>
                 <RemoveIcon className={style.icon} fontSize="small" />
             </Button>
         </div>

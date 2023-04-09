@@ -9,8 +9,11 @@ const useDeleteCartData = (setIsLoading, guestId) => {
 
     return useMutation(deleteProduct, {
 
+        onMutate: () => setIsLoading(true),
+
         onSuccess: (res) => {
 
+            setIsLoading(false);
             const deletedCartId = res?.data?.id;
 
             if (deletedCartId) {

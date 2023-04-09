@@ -17,6 +17,7 @@ const LayoutWrapper = ({ children }) => {
 	return (
 		<>
 			<Header setIsOpenCartList={setIsOpenCartList} />
+
 			<SideBarMobileMenuCollapse>
 				{(sidebarMenuIsOpen, setSidebarMenuIsOpen) =>
 					<>

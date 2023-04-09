@@ -7,8 +7,7 @@
 
     .productName {
         color: #222;
-        font-size: 1.3rem;
-        font-weight: 500;
+        font-size: 1.2rem;
 
         a {
             width: 100%;
@@ -19,7 +18,7 @@
 
     .priceWrapper {
         gap: 7px;
-        margin-top: 0.5rem;
+        margin-top: 0.8rem;
         padding-bottom: 10px;
         border-bottom: 1px solid #e3e3e3;
     }
@@ -90,12 +89,14 @@
     }
 
     .productVariantsWrapper .variants {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 8px;
         margin-top: 0.8rem;
+    }
+
+    .variants .sizeVariant {
+        font-size: 0.9rem;
         padding: 5px;
+        min-width: 45px;
+
     }
 
     .option {
@@ -126,6 +127,8 @@
         margin-right: 12px;
         font-size: 15px;
         border-radius: 2px;
+        font-size: 0.8rem;
+        font-weight: 500;
 
         &:hover {
             color: #fff;
@@ -139,10 +142,11 @@
         border: none;
         padding: 5px 1.5rem;
         margin-right: 1.2rem;
+        font-size: 0.8rem;
+        border-radius: 2px;
 
         &:hover {
             background-color: #d50b0b;
-            ;
         }
     }
 

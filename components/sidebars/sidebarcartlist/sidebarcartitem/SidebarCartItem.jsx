@@ -26,11 +26,29 @@ const SidebarCartItem = (
                     style={{ objectFit: 'cover' }} />
             </div>
             <div className={style.productDetails}>
+
                 <div className={style.productName}>
                     <Link href={`product/${cart?.product.procut_slug}`}>
                         {cart?.product?.product_name}
                     </Link>
                 </div>
+
+                {(cart?.color || cart?.size) &&
+                    <div className={style.productVariantWrapper}>
+                        {cart?.color &&
+                            <span className={style.productVariant}>
+                                {cart?.color}
+                            </span>
+                        }
+
+                        {cart.size &&
+                            <span className={style.productVariant}>
+                                {cart.size}
+                            </span>
+                        }
+                    </div>
+                }
+
                 <div className={style.productPriceWraper}>
                     <span className={style.price}>{Number(cart?.total_price).toLocaleString()}</span>
                     <span className={style.currency}>جنية</span>

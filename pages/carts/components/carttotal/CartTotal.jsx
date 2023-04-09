@@ -1,15 +1,12 @@
 
 import Link from 'next/link';
-import { useCartsData, useGuest } from '@root/hooks';
 
 import { calcTotalPrice } from '@root/utils';
 
 import style from './carttotal.module.scss';
 
-const CartTotal = () => {
+const CartTotal = ({ cartsData }) => {
 
-    const { guestId } = useGuest();
-    const { data: carts } = useCartsData(guestId)
     return (
         <>
             <div className={style.cartTotalWrapper}>
@@ -21,7 +18,7 @@ const CartTotal = () => {
                         <div className={style.total}>الجموع الكلي:</div>
                         <div className={style.priceWrapper}>
                             <span className={style.price}>
-                                {calcTotalPrice(carts)}
+                                {calcTotalPrice(cartsData)}
                             </span>
                             <span className={style.currency}>
                                 جنية

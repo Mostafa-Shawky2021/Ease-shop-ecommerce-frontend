@@ -2,6 +2,7 @@
 @use 'sass/mixins/mediaquery' as *;
 
 .cartListWrapper {
+
     .countinueShopping {
         background-color: #fff;
         padding: 1rem 0.8rem;
@@ -36,6 +37,21 @@
             color: var.$softblack;
         }
 
+    }
+
+    .loadingIcon {
+        color: var(--bs-primary);
+    }
+
+    .productName {
+        margin: 0px;
+        width: 200px;
+        word-break: break-all;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var(--bs-primary);
+        }
     }
 
     .deleteProduct {
