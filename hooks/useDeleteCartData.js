@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { deleteProduct } from "queries";
+
 import { queryKeys } from "data";
 
 const useDeleteCartData = (setIsLoading, guestId) => {
@@ -14,6 +16,7 @@ const useDeleteCartData = (setIsLoading, guestId) => {
         onSuccess: (res) => {
 
             setIsLoading(false);
+
             const deletedCartId = res?.data?.id;
 
             if (deletedCartId) {

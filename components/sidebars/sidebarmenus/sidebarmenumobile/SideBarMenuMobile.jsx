@@ -7,14 +7,18 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import style from './sidebarmenumobile.module.scss';
 
-const SideBarMenu = ({ setSidebarMenuIsOpen, sidebarMenuIsOpen }) => {
+const SideBarMenuMobile = ({ sidebarMenuMobileIsOpen, setSidebarMenuMobileIsOpen }) => {
 
-    const sideBarMenuMobileIsOpen = sidebarMenuIsOpen ? style.openSidebarMenuMobile : '';
+    const sideBarMenuMobileIsOpenClass = sidebarMenuMobileIsOpen ? style.openSidebarMenuMobile : '';
 
     return (
-        <div className={`${style.sidebarListMenu} ${sideBarMenuMobileIsOpen}`}>
-            <div className={style.iconMenuMobileCloseWrapper} onClick={() => setSidebarMenuIsOpen(false)}>
-                <CloseIcon fontSize="small" className={style.icon} />
+        <div className={`${style.sidebarListMenu} ${sideBarMenuMobileIsOpenClass}`}>
+            <div
+                className={style.iconMenuMobileCloseWrapper}
+                onClick={() => setSidebarMenuMobileIsOpen(false)}>
+                <CloseIcon
+                    fontSize="small"
+                    className={style.icon} />
             </div>
             <div className={`${style.categoriesWrapper} ${style.item}`} >
                 <CategoriesMenuMobile />
@@ -35,11 +39,9 @@ const SideBarMenu = ({ setSidebarMenuIsOpen, sidebarMenuIsOpen }) => {
                 <li className={style.item}>
                     <Link href="#">التواصل معنا</Link>
                 </li>
-
             </ul>
-
         </div>
     )
 }
 
-export default SideBarMenu;
+export default SideBarMenuMobile;

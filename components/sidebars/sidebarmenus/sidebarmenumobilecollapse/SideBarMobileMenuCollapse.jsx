@@ -1,24 +1,22 @@
 import { useState, useEffect } from 'react';
 
-const SideBarMobileMenuCollapse = ({ children }) => {
+const SideBarMobileMenuCollapse = ({ renderSideBarMenuMobile }) => {
 
-    const [sidebarMenuIsOpen, setSidebarMenuIsOpen] = useState(false);
+    const [sidebarMenuMobileIsOpen, setSidebarMenuMobileIsOpen] = useState(false);
 
     useEffect(() => {
 
         const closeSideBarMobileMenuMobileonKeyDown = (event) => {
-            if (event.key === 'Escape') setSidebarMenuIsOpen(false);
+            if (event.key === 'Escape') setSidebarMenuMobileIsOpen(false);
         };
-
 
         document.body.addEventListener('keydown', closeSideBarMobileMenuMobileonKeyDown);
 
         return () => document.removeEventListener('keydown', closeSideBarMobileMenuMobileonKeyDown);
 
-
     }, [])
 
-    return children(sidebarMenuIsOpen, setSidebarMenuIsOpen)
+    return renderSideBarMenuMobile(sidebarMenuMobileIsOpen, setSidebarMenuMobileIsOpen)
 
 }
 

@@ -7,7 +7,7 @@ import { BarIcon } from '@root/components/baricon';
 
 import style from './menu.module.scss';
 
-const Menu = ({ setSidebarMenuIsOpen, sidebarMenuIsOpen }) => {
+const Menu = ({ sidebarMenuMobileIsOpen, setSidebarMenuMobileIsOpen, }) => {
 
     const [fixedMenu, setFixedMenu] = useState(false);
 
@@ -17,7 +17,6 @@ const Menu = ({ setSidebarMenuIsOpen, sidebarMenuIsOpen }) => {
             let scrollValue = document.documentElement.scrollTop;
             (scrollValue > 400) ? setFixedMenu(true) : setFixedMenu(false);
         })
-
 
     }, [setFixedMenu])
 
@@ -57,11 +56,10 @@ const Menu = ({ setSidebarMenuIsOpen, sidebarMenuIsOpen }) => {
                     </div>
                     <div className={style.barWrapper}>
                         <BarIcon
-                            activeIcons={sidebarMenuIsOpen ? true : false}
+                            activeIcons={sidebarMenuMobileIsOpen ? true : false}
                             style={{ width: '20px', color: "#000" }}
-                            onClick={() => setSidebarMenuIsOpen(!sidebarMenuIsOpen)}
-                            barIconStyle={style.barIcon}
-                        />
+                            onClick={() => setSidebarMenuMobileIsOpen(!sidebarMenuMobileIsOpen)}
+                            barIconStyle={style.barIcon} />
                     </div>
                 </div>
             </Container>

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { ToastContainer } from "react-toastify";
 
 import { Header } from "@root/components/header";
@@ -9,33 +7,36 @@ import { SideBarMobileMenuCollapse } from "@root/components/sidebars/sidebarmenu
 import { SideBarMenuMobile } from "@root/components/sidebars/sidebarmenus/sidebarmenumobile";
 import { Footer } from "@root/components/footer";
 import { SidebarCartList } from "@root/components/sidebars/sidebarcartlist";
+import { SideBarCartListCollapse } from "@root/components/sidebars/sidebarcartlistcollapse";
 
 const LayoutWrapper = ({ children }) => {
 
-	const [isOpenCartList, setIsOpenCartList] = useState(false);
-
 	return (
 		<>
-			<Header setIsOpenCartList={setIsOpenCartList} />
-
-			<SideBarMobileMenuCollapse>
-				{(sidebarMenuIsOpen, setSidebarMenuIsOpen) =>
-					<>
-						<Menu
-							setSidebarMenuIsOpen={setSidebarMenuIsOpen}
-							sidebarMenuIsOpen={sidebarMenuIsOpen} />
-						<SideBarMenuMobile
-							sidebarMenuIsOpen={sidebarMenuIsOpen}
-							setSidebarMenuIsOpen={setSidebarMenuIsOpen} />
-					</>
-				}
-
-			</SideBarMobileMenuCollapse>
+			<SideBarCartListCollapse
+				renderCartListCollapse={
+					(isOpenCartList, setIsOpenCartList) =>
+						<>
+							<Header setIsOpenCartList={setIsOpenCartList} />
+							<SidebarCartList
+								isOpenCartList={isOpenCartList}
+								setIsOpenCartList={setIsOpenCartList} />
+						</>
+				} />
+			<SideBarMobileMenuCollapse
+				renderSideBarMenuMobile={
+					(sidebarMenuMobileIsOpen, setSidebarMenuMobileIsOpen) =>
+						<>
+							<Menu
+								sidebarMenuMobileIsOpen={sidebarMenuMobileIsOpen}
+								setSidebarMenuMobileIsOpen={setSidebarMenuMobileIsOpen} />
+							<SideBarMenuMobile
+								sidebarMenuMobileIsOpen={sidebarMenuMobileIsOpen}
+								setSidebarMenuMobileIsOpen={setSidebarMenuMobileIsOpen} />
+						</>
+				} />
 
 			<MenuMobile />
-			<SidebarCartList
-				isOpenCartList={isOpenCartList}
-				setIsOpenCartList={setIsOpenCartList} />
 			{children}
 			<ToastContainer
 				position="top-center"
@@ -48,8 +49,7 @@ const LayoutWrapper = ({ children }) => {
 				pauseOnFocusLoss={false}
 				draggable
 				pauseOnHover
-				theme="colored"
-			/>
+				theme="colored" />
 			<Footer />
 		</>
 	);
