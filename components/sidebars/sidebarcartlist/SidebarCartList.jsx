@@ -41,7 +41,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
         }
         document.body.addEventListener('keydown', closeCartList)
         return () => document.body.removeEventListener('keydown', closeCartList)
-    }, [])
+    }, [setIsOpenCartList])
 
     const handleProductIncrement = (event) => {
 

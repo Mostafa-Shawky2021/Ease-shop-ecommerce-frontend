@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 
 import { useCategoryProductsData } from "./hooks";
 
-import { useFilter } from "@root/hooks";
-
 import { fetchCategoryProducts } from "./queries";
 
 import { generateQueryStringFilter } from "@root/utils";
@@ -23,17 +21,15 @@ export const getServerSideProps = async ({ query }) => {
 
     const queryClient = new QueryClient();
 
-
     const { categorySlug: catSlug, ...restQueryParamter } = query;
 
-    const filterQueryString = Object.entries(restQueryParamter).length > 0
+    const uriQueryStringFilter = Object.entries(restQueryParamter).length > 0
         ? generateQueryStringFilter(restQueryParamter)
         : '';
 
-
     await queryClient.prefetchQuery(
-        queryKeys.CATEGORY_PRODUCTS(1, catSlug, filterQueryString),
-        () => fetchCategoryProducts(1, catSlug, filterQueryString)
+        queryKeys.CATEGORY_PRODUCTS(1, catSlug, uriQueryStringFilter),
+        () => fetchCategoryProducts(1, catSlug, uriQueryStringFilter)
     );
 
     return {
@@ -46,15 +42,15 @@ const CategoryProductsPage = () => {
 
     const [pageNumber, setPageNumber] = useState(1);
 
-    const router = useRouter();
+    const { query } = useRouter();
+
+    const dynamicRouteCategory = { categorySlug: query.categorySlug }
 
     const {
         data: productsCategory,
         isFetching: isFetchingProductsCategory,
         isLoadingProductsCategory: isLoadingProductsCategory }
-        = useCategoryProductsData(pageNumber, router.query)
-
-    const { applyFilter, resetFilter } = useFilter(pageNumber);
+        = useCategoryProductsData(pageNumber, query)
 
     useEffect(() => {
 
@@ -63,34 +59,20 @@ const CategoryProductsPage = () => {
     }, [pageNumber])
 
 
-    const handleFilter = (filterRules) => {
-
-        const categoryName = router?.query?.categorySlug;
-        applyFilter(filterRules, `/categoryproducts/${categoryName}`);
-    }
-
-    const handleDeleteFilter = (setFilterRules) => {
-
-        const categorySlug = router.query.categorySlug;
-
-        resetFilter(setFilterRules, `/categoryproducts/${categorySlug}`);
-
-    }
-
     return (
         <>
             <BreadCrumbLayout>
                 <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
                 <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
-                    {router?.query?.categorySlug}
+                    {query?.categorySlug}
                 </Breadcrumb.Item>
             </BreadCrumbLayout>
             <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
                         <SidebarFilter
-                            handleFilter={handleFilter}
-                            handleDeleteFilter={handleDeleteFilter} />
+                            pageNumber={pageNumber}
+                            dynamicRoute={dynamicRouteCategory} />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
                         {productsCategory?.products ?

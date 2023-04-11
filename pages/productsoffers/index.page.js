@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { useProductsOffersData } from "./hooks";
-import { useFilter } from "@root/hooks";
 
 import { fetchProductsOffers } from "./queries";
 
@@ -18,7 +17,6 @@ import { ProductsList } from "@root/components/productslist";
 import { queryKeys } from "data";
 
 export async function getServerSideProps({ query }) {
-
 
     const queryClient = new QueryClient();
 
@@ -50,24 +48,11 @@ const ProductsOffers = () => {
         isLoading: isLoadingProducts
     } = useProductsOffersData(pageNumber, router.query);
 
-    const { applyFilter, resetFilter } = useFilter(pageNumber);
-
     useEffect(() => {
 
         window.scrollTo(0, 0);
 
     }, [pageNumber]);
-
-    const handleFilter = (filterRules) => {
-        applyFilter(
-            filterRules,
-            `/productsoffers`,
-            { queriesFilter: { offers: "true" } });
-    }
-
-    const handleDeleteFilter = (setFilterRules) => {
-        resetFilter(setFilterRules, '/productsoffers');
-    }
 
     return (
         <>
@@ -80,9 +65,7 @@ const ProductsOffers = () => {
             <Container fluid="xxl">
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
-                        <SidebarFilter
-                            handleFilter={handleFilter}
-                            handleDeleteFilter={handleDeleteFilter} />
+                        <SidebarFilter pageNumber={pageNumber} />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
                         {productsData?.products ? (

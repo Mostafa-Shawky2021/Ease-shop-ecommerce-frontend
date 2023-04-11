@@ -21,10 +21,10 @@ import style from './categories.module.scss'
 
 const Categories = () => {
 
-    const [swiper, setSwiper] = useState();
+    const [_, setSwiper] = useState();
 
     const { data: categories } = useCategoriesData();
-    console.log(categories);
+
     return (
         !!categories?.data && (
             <div className={style.categories}>
@@ -52,8 +52,7 @@ const Categories = () => {
                             }}
                             loop={false}
                             spaceBetween={18}
-                            onSwiper={setSwiper}
-                        >
+                            onSwiper={setSwiper}>
                             {categories?.data?.map(category => (
                                 <SwiperSlide key={category.id}>
                                     <div className={style.catWrapper} style={{ marginTop: '1rem' }}>

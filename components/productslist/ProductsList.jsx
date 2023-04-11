@@ -26,8 +26,7 @@ const ProductsList = ({
                             <ProductCard
                                 product={product}
                                 style={{ marginTop: '2rem' }} />
-                        </Col>}
-                />
+                        </Col>} />
                 <PaginationWrapper
                     activePage={current_page}
                     itemsCountPerPage={per_page}

@@ -1,7 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-
 
 import {
     useAddCartData,
@@ -25,6 +23,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import CircularProgress from '@mui/material/CircularProgress';
 
 import style from "./productdetails.module.scss";
+
 
 const ProductDetails = ({ productDetails }) => {
 

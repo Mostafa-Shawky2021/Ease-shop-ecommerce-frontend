@@ -16,7 +16,6 @@ const CategoriesMenu = () => {
 
     const [categoryListIsOpen, setCategoryListIsOpen] = useState(false);
 
-
     const refCategoryMenu = useRef(null);
 
     const { data: categories } = useCategoriesData();
@@ -71,8 +70,7 @@ const CategoriesMenu = () => {
                                     key={category.id}
                                     categoryData={category}
                                     onClick={() => setCategoryListIsOpen(false)}
-                                />)}
-                    />
+                                />)} />
 
                     : <li style={{ padding: " 0.5rem 0.2rem" }}>لا توجد اقسام</li>
 

@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
 
-import { axiosInstance } from 'lib';
-
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 import { useProductDetailsData, useRelatedProductsData } from './hooks';
@@ -21,6 +19,7 @@ export const getServerSideProps = async ({ query }) => {
 
     const queryClient = new QueryClient();
     const productSlug = query.productSlug;
+
     await Promise.all([
         queryClient.prefetchQuery(
             queryKeys.PRODUCT_DETAILS(productSlug),
@@ -33,11 +32,11 @@ export const getServerSideProps = async ({ query }) => {
     return {
         props: {
             dehydratedState: dehydrate(queryClient),
-
         },
     }
 }
 export default function ProductDetailsPage() {
+
 
     const { query: { productSlug } } = useRouter();
 
@@ -48,7 +47,9 @@ export default function ProductDetailsPage() {
         <>
             <BreadCrumbLayout>
                 <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: 'bold' }}>{productDetails.product_name}</Breadcrumb.Item>
+                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: 'bold' }}>
+                    {productDetails?.product_name}
+                </Breadcrumb.Item>
             </BreadCrumbLayout>
             <Container style={{ marginTop: "2.8rem" }}>
                 <Row>
@@ -58,8 +59,7 @@ export default function ProductDetailsPage() {
                                 <ProductViewEffect
                                     image={productDetails?.image}
                                     imageAlt={productDetails?.product_name}
-                                    imagesThumbnails={productDetails?.images} />}
-                        />
+                                    imagesThumbnails={productDetails?.images} />} />
                     </Col>
                     <Col xs={12} md={7}>
                         <ProductDetails productDetails={productDetails} />

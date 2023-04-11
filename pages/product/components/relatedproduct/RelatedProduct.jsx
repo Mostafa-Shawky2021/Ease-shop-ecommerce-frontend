@@ -11,13 +11,12 @@ import "swiper/css/navigation";
 
 import style from './relatedproduct.module.scss';
 
-
 const RelatedProduct = ({ relatedProductsData }) => {
 
     const [swiper, setSwiper] = useState(null);
 
     return (
-        !!relatedProductsData.length &&
+        !!relatedProductsData?.length &&
         <div className={style.relatedProductWrapper}>
             <SectionLayout
                 title="المنتجات ذات صلة"
@@ -39,8 +38,7 @@ const RelatedProduct = ({ relatedProductsData }) => {
                         }}
                         loop={false}
                         spaceBetween={18}
-                        onSwiper={setSwiper}
-                    >
+                        onSwiper={setSwiper}>
                         {relatedProductsData?.map(product => (
                             <SwiperSlide key={product.id}>
                                 <ProductCard product={product} />

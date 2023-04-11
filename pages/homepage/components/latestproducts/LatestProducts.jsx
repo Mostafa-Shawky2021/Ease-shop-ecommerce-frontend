@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import { useProductsData } from '@root/hooks';
+; import { useProductsData } from '@root/hooks';
 
 import { Row, Col } from 'react-bootstrap';
 import { SectionLayout } from '@root/components/layout';

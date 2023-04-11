@@ -9,7 +9,6 @@ const generateQueryStringFilter = (query) => {
     Object.entries(query).forEach(([key, value]) => {
 
         if (key !== 'page') urlSearchParams.set(key, encodeURIComponent(value));
-
     });
     return urlSearchParams.toString();
 }

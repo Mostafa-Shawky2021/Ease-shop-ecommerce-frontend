@@ -10,10 +10,7 @@ const useCategoryProductsData = (pageNumber, queryUri) => {
 
     const urlSearchParams = new URLSearchParams();
 
-    /*  
-        ** any request contain page number and dynamic category slug paramter so we need to exclude it 
-        ** from the uri so we avoid the repeating query string 
-    */
+    // exclude any request contain page number and dynamic category slug paramter 
     Object.entries(queryUri).forEach(([queryStringKey, queryStringValue]) => {
 
         if (queryStringKey !== 'page' && queryStringKey !== 'categorySlug') {

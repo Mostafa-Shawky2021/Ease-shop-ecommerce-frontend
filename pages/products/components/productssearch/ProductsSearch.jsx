@@ -19,15 +19,13 @@ const ProductsSearch = ({ products, setPageNumber }) => {
                             product={product}
                             style={{ marginTop: '1rem' }} />
                     </Col>
-                )}
-            />
+                )} />
             <PaginationWrapper
                 activePage={current_page}
                 itemsCountPerPage={per_page}
                 totalItemsCount={total}
                 pageRangeDisplayed={5}
-                onChange={(page) => setPageNumber(page)}
-            />
+                onChange={(page) => setPageNumber(page)} />
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { useProductsData, useFilter } from "@root/hooks";
+import { useProductsData } from "@root/hooks";
 
 import { fetchProducts } from "@root/queries";
 
@@ -11,26 +11,20 @@ import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { ProductsList } from "@root/components/productslist";
 import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 import { BreadCrumbLayout } from '@root/components/layout';
-import { ToastContainer } from 'react-toastify';
 
 import { queryKeys } from "data";
+import generateQueryStringFilter from 'utils/generateQueryStringFilter';
 
 
 export async function getServerSideProps({ query }) {
 
     const queryClient = new QueryClient();
 
-    const urlSearchParams = new URLSearchParams();
-
-    // exclude page number from query paramters
-    Object.entries(query).forEach(([key, value]) => (
-        (key !== 'page') && urlSearchParams.set(key, encodeURIComponent(value))));
-
-    const urlSearchParamsToString = urlSearchParams.toString();
+    const uriQueryStringFilter = generateQueryStringFilter(query);
 
     await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS(1, urlSearchParamsToString),
-        () => fetchProducts(1, urlSearchParamsToString));
+        queryKeys.PRODUCTS(1, uriQueryStringFilter),
+        () => fetchProducts(1, uriQueryStringFilter));
 
     return {
         props: {
@@ -43,15 +37,12 @@ const StorePage = () => {
 
     const [pageNumber, setPageNumber] = useState(1);
 
-    const router = useRouter();
-
+    const { query } = useRouter();
     const {
         data: productsData,
         isFetching: isFetchingProducts,
         isLoading: isLoadingProducts
-    } = useProductsData(pageNumber, router.query);
-
-    const { applyFilter, resetFilter } = useFilter(pageNumber);
+    } = useProductsData(pageNumber, query);
 
     useEffect(() => {
 
@@ -59,9 +50,7 @@ const StorePage = () => {
 
     }, [pageNumber]);
 
-    const handleFilter = (filterRules) => applyFilter(filterRules, `/store`);
 
-    const handleDeleteFilter = (setFilterRules) => resetFilter(setFilterRules, '/store');
 
     return (
         <>
@@ -72,14 +61,13 @@ const StorePage = () => {
                 </Breadcrumb.Item>
             </BreadCrumbLayout>
             <Container fluid="xxl">
+
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
-                        <SidebarFilter
-                            handleFilter={handleFilter}
-                            handleDeleteFilter={handleDeleteFilter} />
+                        <SidebarFilter pageNumber={pageNumber} />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
-                        {!!productsData?.products.length ? (
+                        {!!productsData?.products?.length ? (
                             <ProductsList
                                 productsData={productsData}
                                 isFetchingProducts={isFetchingProducts}

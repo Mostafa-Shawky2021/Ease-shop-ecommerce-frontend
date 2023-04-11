@@ -1,9 +1,7 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-import {
-    fetchRandomCategoriesProducts,
-    fetchCategories
-} from './queries';
+import { fetchRandomCategoriesProducts } from './queries';
+import { fetchCategories } from '@root/queries';
 
 import { fetchProducts } from '@root/queries';
 

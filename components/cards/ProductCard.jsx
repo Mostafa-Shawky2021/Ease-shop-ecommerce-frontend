@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { useCarts } from '@root/hooks';
 
-import { calcPriceDiscount } from '@root/utils';
+import { calcPriceDiscount, truncateCharacter } from '@root/utils';
 
 import { Button } from 'react-bootstrap';
 import { ColorsVariant } from '../productvariants/colorsvariant';
@@ -23,7 +23,7 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import style from './productcard.module.scss'
 
 const ProductCard = ({ product, ...props }) => {
-
+    console.log(product)
     const {
         addCartData,
         productVariants,
@@ -112,12 +112,13 @@ const ProductCard = ({ product, ...props }) => {
                     </Link>
                 </div>
             </header>
-
             <div style={{ padding: '0px 10px' }}>
                 <Link className={style.productName} href={`/product/${product?.product_slug}`} >
-                    {product?.product_name}
+                    {truncateCharacter(product?.product_name, 20)}
                 </Link>
-                <p className={style.productDescription}>{product?.short_description}</p>
+                <p className={style.productDescription}>
+                    {truncateCharacter(product?.short_description, 50)}
+                </p>
                 <div className={`${style.productRatingWrapper} `}>
                     <StarIcon className={style.productRating} />
                     <StarIcon className={style.productRating} />
@@ -135,10 +136,8 @@ const ProductCard = ({ product, ...props }) => {
                         {isLoading
                             ? <CircularProgress className={style.iconLoading} size={13} />
                             : <ShoppingBagOutlinedIcon className={style.icon} fontSize="small" />}
-
                     </div>
                 </Button>
-
             </div>
         </div>
     )

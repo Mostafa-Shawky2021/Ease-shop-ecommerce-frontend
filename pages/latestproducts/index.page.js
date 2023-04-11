@@ -3,15 +3,16 @@ import { useRouter } from "next/router";
 
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { useFilter } from "@root/hooks";
 import { useLatestProductsData } from "./hooks";
 
 import { fetchLatestProducts } from "./queries";
 
+import { generateQueryStringFilter } from "@root/utils";
+
 import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
 import { BreadCrumbLayout } from "@root/components/layout";
 import { ProductsList } from "@root/components/productslist";
-import { Sidebar } from "@root/components/sidebar";
+import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 
 import { queryKeys } from "data";
 
@@ -40,7 +41,7 @@ const LatestProdutsPage = () => {
     const [pageNumber, setPageNumber] = useState(1);
 
     const router = useRouter();
-    const { applyFilter, resetFilter } = useFilter(pageNumber);
+
     const {
         data: productsData,
         isFetching: isFetchingProducts,
@@ -53,16 +54,7 @@ const LatestProdutsPage = () => {
 
     }, [pageNumber]);
 
-    const handleFilter = (filterRules) => {
-        applyFilter(
-            filterRules,
-            `/latestproducts`,
-            { queriesFilter: { latest: "true" } });
-    }
 
-    const handleDeleteFilter = (setFilterRules) => {
-        resetFilter(setFilterRules, '/latestproducts');
-    }
     return (
         <>
             <BreadCrumbLayout>
@@ -74,10 +66,7 @@ const LatestProdutsPage = () => {
             <Container fluid="xxl">
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
-                        <Sidebar
-                            handleFilter={handleFilter}
-                            handleDeleteFilter={handleDeleteFilter}
-                        />
+                        <SidebarFilter pageNumber={pageNumber} />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
                         {productsData?.products ? (
@@ -85,8 +74,7 @@ const LatestProdutsPage = () => {
                                 productsData={productsData}
                                 isFetchingProducts={isFetchingProducts}
                                 isLoadingProducts={isLoadingProducts}
-                                setPageNumber={setPageNumber}
-                            />
+                                setPageNumber={setPageNumber} />
                         ) : (<p>ليس متوفر منتجات في الوقت الحالي</p>)}
                     </Col>
                 </Row>

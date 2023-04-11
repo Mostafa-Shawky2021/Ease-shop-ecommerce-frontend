@@ -7,6 +7,7 @@ const fetchCategoryProducts = async (pageNumber, categorySlug, queryUrIStringfyF
         : `/api/categories/catslug/${categorySlug}?page=${pageNumber}`;
 
     const { data } = await axiosInstance.get(url);
+
     return data;
 }
 export default fetchCategoryProducts;
