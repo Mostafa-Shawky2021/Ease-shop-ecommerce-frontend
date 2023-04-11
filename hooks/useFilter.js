@@ -52,11 +52,10 @@ const useFilter = (pageNumber, dynamicRoute = null, additionalQuery = null) => {
         if (event.target.checked) {
 
             const filterData = [...filterRules[inputName], event.target.value]
-            setFilterRules({ ...filterRules, [inputName]: filterData });
+            setFilterRules({ ...filterRules, filterData });
         } else {
 
             const filterDataFun = (inputValue) => inputValue !== event.target.value;
-            // console.log(filterRules[inputName], event.target.value)
             const filteredData = filterRules[inputName].filter(filterDataFun)
             setFilterRules({ ...filterRules, [inputName]: filteredData });
         }
