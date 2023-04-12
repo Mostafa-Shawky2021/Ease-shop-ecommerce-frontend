@@ -34,7 +34,6 @@ const ProductsOrder = () => {
                             <td style={{ color: '#000' }}>المجموع الكلي </td>
                             <td style={{ color: '#000' }}>{calcTotalPrice(carts)}</td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>

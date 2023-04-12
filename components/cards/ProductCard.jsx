@@ -23,7 +23,7 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import style from './productcard.module.scss'
 
 const ProductCard = ({ product, ...props }) => {
-    console.log(product)
+
     const {
         addCartData,
         productVariants,

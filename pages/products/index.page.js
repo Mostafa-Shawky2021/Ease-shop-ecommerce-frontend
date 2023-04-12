@@ -13,6 +13,8 @@ import { ProductsSearch } from "./components/productssearch";
 import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 
 import { queryKeys } from "data";
+import { Loading } from '@root/components/loading';
+import { CircularProgress, Seek } from 'react-loading-indicators';
 
 export async function getServerSideProps({ query }) {
 
@@ -48,7 +50,8 @@ const ProductsPageSearch = () => {
 
     const router = useRouter();
 
-    const { data: productsSearchResult } = useProductsData(pageNumber, router.query);
+    const productsSearchResult = useProductsData(pageNumber, router.query);
+
 
     useEffect(() => {
         Object.entries(router.query).length < 1 ? router.push('/homepage') : null;
@@ -68,19 +71,32 @@ const ProductsPageSearch = () => {
         <>
             <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
+
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
                         <SidebarFilter
                             pageNumber={pageNumber}
                             additionalQuery={productNameQueryString} />
                     </Col>
-                    <Col xs={12} lg={9}>
-                        {productsSearchResult?.products
-                            ? <ProductsSearch
-                                products={productsSearchResult}
-                                setPageNumber={setPageNumber} />
-                            : <p>لا توجد منتجات للعرض</p>
+                    <Col xs={12} lg={9} style={{ position: 'relative' }}>
+                        {productsSearchResult.isLoading
+                            ? <Loading isOpacity={true} isLoading={productsSearchResult.isLoading}>
+                                <Seek
+                                    style={{
+                                        position: 'fixed',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%)'
+                                    }}
+                                    color="#ffb700" size="medium" text="" textColor="" />
+                            </Loading>
+                            : !!productsSearchResult?.data?.products
+                                ? <ProductsSearch
+                                    products={productsSearchResult?.data}
+                                    setPageNumber={setPageNumber} />
+                                : <p>لا توجد منتجات للعرض</p>
                         }
+
                     </Col>
                 </Row>
             </Container>

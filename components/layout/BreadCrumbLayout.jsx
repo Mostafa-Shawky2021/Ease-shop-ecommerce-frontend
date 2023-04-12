@@ -4,11 +4,10 @@ import style from './breadcrumblayout.module.scss';
 
 const BreadCrumbLayout = ({ data }) => {
 
-
-    const renderItem = data?.map(item => {
+    const renderItem = data?.map((item, index) => {
 
         const activeItem = item.active ? style.active : '';
-        return <Breadcrumb.Item className={`${activeItem} ${style.item}`}
+        return <Breadcrumb.Item key={index} className={`${activeItem} ${style.item}`}
             href={item.link ? item.link : ""}>
             {item.label}
         </Breadcrumb.Item>

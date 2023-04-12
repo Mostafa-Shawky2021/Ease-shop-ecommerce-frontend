@@ -13,7 +13,12 @@ const useProductsOffersData = (pageNumber, queryUri) => {
     return useQuery(
         queryKeys.PRODUCTS(pageNumber, queryStringFilter),
         () => fetchProductsOffers(pageNumber, queryStringFilter),
-        { keepPreviousData: true });
+        {
+            keepPreviousData: true,
+            onError: (error) => console.log(error)
+        },
+
+    );
 }
 
 export default useProductsOffersData;

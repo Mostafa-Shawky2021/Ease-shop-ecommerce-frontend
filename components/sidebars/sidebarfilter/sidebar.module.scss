@@ -8,14 +8,6 @@
     background-color: #fff;
     position: relative;
 
-    .loadingIcon {
-        position: absolute;
-        top: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        color: var.$secondarycolor;
-    }
-
     .priceFilter {
         border-bottom: 1px solid #dedede;
         padding-bottom: 0.7rem;
@@ -26,6 +18,14 @@
         color: var(--bs-danger);
         border: none;
 
+    }
+
+    .iconLoading {
+        color: var(--bs-primary);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%);
     }
 
     .title {
