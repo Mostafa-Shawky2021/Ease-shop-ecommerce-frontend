@@ -50,18 +50,15 @@ const StorePage = () => {
 
     }, [pageNumber]);
 
-
+    const breadCrumbData = [
+        { label: 'الصفحة الرئيسية', link: "/homepage" },
+        { label: 'المتجر', active: true }
+    ]
 
     return (
         <>
-            <BreadCrumbLayout>
-                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
-                    المتجر
-                </Breadcrumb.Item>
-            </BreadCrumbLayout>
+            <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="xxl">
-
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
                         <SidebarFilter pageNumber={pageNumber} />

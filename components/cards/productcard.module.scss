@@ -1,6 +1,7 @@
 @use 'sass/var' as var;
 @use 'sass/mixins/mediaquery' as *;
 
+
 .productCard {
     position: relative;
     overflow: hidden;
@@ -17,7 +18,7 @@
 
     .header {
         position: relative;
-        height: 300px;
+        height: 250px;
         overflow: hidden;
         border-bottom: 1px solid #dedede;
     }
@@ -177,54 +178,63 @@
         height: 38px;
         overflow: hidden;
 
+
         @include maxmediaquery('sm') {
             font-size: 0.7rem;
         }
 
-        .contentWrapper {
-            position: absolute;
-            width: 100%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 5;
-        }
 
-        &::after {
-            content: '';
-            position: absolute;
-            left: -2px;
-            top: 0px;
-            width: 0px;
-            height: 100%;
-            background-color: var.$secondarycolor;
-            transition: all 0.3s;
-            border-radius: 4px;
-            border: 1px solid var.$secondarycolor;
 
-        }
 
-        &:hover::after {
-            width: 102%
-        }
+    }
 
-        &:hover .text {
-            color: #000;
-        }
+    .addProduct::after {
+        content: '';
+        position: absolute;
+        left: -2px;
+        top: 0px;
+        width: 0px;
+        height: 100%;
+        background-color: var.$secondarycolor;
+        transition: all 0.3s;
+        border-radius: 4px;
+        border: 1px solid var.$secondarycolor;
 
-        .text {
-            margin-left: 5px;
-            display: inline;
-            vertical-align: middle;
-            transition: all 0.3s;
-        }
+    }
 
-        .iconLoading {
-            position: absolute;
-            color: #fff;
-            z-index: 10;
-            top: 5px;
-        }
+    .addProduct .text {
+        margin-left: 5px;
+        display: inline;
+        vertical-align: middle;
+        transition: all 0.3s;
+    }
 
+    .addProduct:hover::after {
+        width: 102%
+    }
+
+    .addProduct:hover .text {
+        color: #000;
+    }
+
+    .addProduct .contentWrapper {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .contentWrapper .iconLoading {
+        color: #fff;
+    }
+
+    .contentWrapper:hover .iconLoading {
+        color: #000;
     }
 }

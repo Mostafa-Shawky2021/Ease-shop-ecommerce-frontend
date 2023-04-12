@@ -95,7 +95,6 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
                                 handleProductIncrement={handleProductIncrement}
                                 handleProductDecrement={handleProductDecrement}
                                 quantity={cart?.quantity}
-
                                 cartId={cart?.id}
                                 currentCart={currentCart} />}>
 

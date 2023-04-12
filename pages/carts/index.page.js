@@ -14,16 +14,16 @@ const CartsPage = () => {
         isLoading: isCartsLoading
     } = useCartsData(guestId);
 
+
+    const breadCrumbData = [
+        { label: 'الصفحة الرئيسية', link: "/homepage" },
+        { label: 'سلة المشتريات', active: true }
+    ]
+
     return (
         <>
-            <BreadCrumbLayout>
-                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
-                    سلة المشتريات
-                </Breadcrumb.Item>
-            </BreadCrumbLayout>
+            <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="lg" style={{ marginTop: '2.5rem' }}>
-
                 <Row>
                     <Col xs={12}>
                         <CartListTable cartsData={carts} isCartsLoading={isCartsLoading} />

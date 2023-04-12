@@ -58,15 +58,14 @@ const CategoryProductsPage = () => {
 
     }, [pageNumber])
 
+    const breadCrumbData = [
+        { label: 'الصفحة الرئيسية', link: "/homepage" },
+        { label: query?.categorySlug, active: true }
+    ]
 
     return (
         <>
-            <BreadCrumbLayout>
-                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
-                    {query?.categorySlug}
-                </Breadcrumb.Item>
-            </BreadCrumbLayout>
+            <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >

@@ -5,9 +5,17 @@
     width: 100%;
     padding: 1rem 1.3rem;
 
+
+    .title {
+        font-size: 1rem;
+        color: var.$softblack;
+        font-weight: 600;
+    }
+
     .table {
         border: 1px solid rgba(0, 0, 0, .1);
         width: 100%;
+        margin-top: 6px;
     }
 
     th {

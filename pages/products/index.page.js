@@ -54,20 +54,19 @@ const ProductsPageSearch = () => {
         Object.entries(router.query).length < 1 ? router.push('/homepage') : null;
     }, [router])
 
-    const productNameQueryString = router.query.productname ?
-        { productname: router.query.productname }
+
+    const productNameQueryString = router.query.productname
+        ? { productname: router.query.productname }
         : null;
 
+    const breadCrumbData = [
+        { label: 'الصفحة الرئيسية', link: "/homepage" },
+        { label: router.query.productname, active: true }
+    ]
 
     return (
         <>
-            <BreadCrumbLayout>
-                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
-                    {router.query?.productname}
-                </Breadcrumb.Item>
-            </BreadCrumbLayout>
-
+            <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >

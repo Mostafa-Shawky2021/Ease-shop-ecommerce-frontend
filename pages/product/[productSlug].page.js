@@ -43,14 +43,13 @@ export default function ProductDetailsPage() {
     const { data: productDetails } = useProductDetailsData(productSlug);
     const { data: relatedProducts } = useRelatedProductsData(productSlug);
 
+    const breadCrumbData = [
+        { label: 'الصفحة الرئيسية', link: "/homepage" },
+        { label: productDetails?.product_name, active: true }
+    ]
     return (
         <>
-            <BreadCrumbLayout>
-                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: 'bold' }}>
-                    {productDetails?.product_name}
-                </Breadcrumb.Item>
-            </BreadCrumbLayout>
+            <BreadCrumbLayout data={breadCrumbData} />
             <Container style={{ marginTop: "2.8rem" }}>
                 <Row>
                     <Col xs={12} md={5}>

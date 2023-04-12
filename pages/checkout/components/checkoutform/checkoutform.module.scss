@@ -2,10 +2,6 @@
 
 .checkoutWrapper {
 
-    .title {
-        font-size: 1.1rem;
-    }
-
     .required {
         color: #f00;
         font-weight: bold;
@@ -14,13 +10,19 @@
 
     .formControl {
         border-radius: 0px;
-        margin-top: 7px;
+        margin-top: 3px;
 
         &:hover,
         &:focus {
             border: 1px solid var.$secondarycolor;
             box-shadow: none;
         }
+    }
+
+    .formLabel {
+        color: var.$softblack;
+        font-size: 0.85rem;
+        font-weight: 600;
     }
 
     .errorField {
@@ -41,6 +43,8 @@
         padding: 0.5rem 1.8rem;
         border: 1px solid var.$secondarycolor;
         transition: all 0.3s;
+        border-radius: 0px;
+        font-size: 0.9rem;
 
         &:hover {
             background: #e5a400;
@@ -51,5 +55,6 @@
     .returnToCart {
         color: var(--bs-primary);
         font-weight: 500;
+        font-size: 0.9rem
     }
 }

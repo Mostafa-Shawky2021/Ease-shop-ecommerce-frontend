@@ -29,8 +29,7 @@ const ProductsOrder = () => {
                                     <td style={{ width: '75%' }}>   x {cart.quantity} {cart?.product?.product_name}</td>
                                     <td style={{ width: '25%' }}>{Number(cart.total_price).toLocaleString()}</td>
                                 </tr>
-                            )}
-                        />
+                            )} />
                         <tr>
                             <td style={{ color: '#000' }}>المجموع الكلي </td>
                             <td style={{ color: '#000' }}>{calcTotalPrice(carts)}</td>

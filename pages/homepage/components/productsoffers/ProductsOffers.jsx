@@ -23,8 +23,7 @@ const ProductsOffers = () => {
                 <SectionLayout
                     title="عروض وخصومات"
                     isSwiper={true}
-                    link="/productsoffers"
-                >
+                    link="/productsoffers">
                     {(nextElementRef, prevElementRef) => (
                         <Swiper
                             modules={[Navigation, Autoplay]}

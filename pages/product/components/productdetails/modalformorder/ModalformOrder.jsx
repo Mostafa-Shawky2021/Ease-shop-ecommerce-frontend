@@ -27,15 +27,6 @@ const ModalformOrder = ({ quantity, product, renderButton }) => {
 
     const { mutate: sendFastOrder } = useFastOrderData(setIsLoading, setOpenModalOrder)
 
-    // useEffect(() => {
-
-    //     const closeModalOrderForm = (event) => {
-    //         if (event.key === "Escape") setOpenModalOrder(false);
-    //     }
-    //     document.body.addEventListener('keydown', closeModalOrderForm);
-    //     return () => document.body.removeEventListener('keydown', closeModalOrderForm);
-    // }, []);
-
 
     const handleSubmit = (event) => {
 
@@ -60,6 +51,7 @@ const ModalformOrder = ({ quantity, product, renderButton }) => {
         }
 
     }
+
     return (
         <>
             {renderButton(setOpenModalOrder)}
@@ -86,7 +78,7 @@ const ModalformOrder = ({ quantity, product, renderButton }) => {
                     }
                     <div className={style.formOrderWrapper}>
                         <Form onSubmit={handleSubmit} >
-                            <Form.Group style={{ position: 'relative' }} className="mb-3 mt-3" controlId="username">
+                            <Form.Group style={{ position: 'relative', flexGrow: '1' }} className="mb-3 mt-3" controlId="username">
                                 <div className='d-flex align-items-center'>
                                     <Form.Label className={style.labelControl}>اسم المستخدم</Form.Label>
                                     <span className={style.required} style={{ marginRight: '5px' }}>*</span>

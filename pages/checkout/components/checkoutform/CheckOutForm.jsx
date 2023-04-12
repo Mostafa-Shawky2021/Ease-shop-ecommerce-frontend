@@ -17,12 +17,9 @@ const CheckOutForm = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const { guestId } = useGuest();
-
-    const { data: carts } = useCartsData(guestId);
     const { validateForm, formErrorMsg } = useFormOrderValidation();
-
     const { mutate: sendOrder } = useSendOrderData(setIsLoading);
+    const { guestId } = useGuest();
 
     const handleSubmit = (event) => {
 
@@ -39,47 +36,55 @@ const CheckOutForm = () => {
             order_notes: formData.get('order_notes'),
         };
 
-        if (validateForm(orderDetails)) {
-            sendOrder(orderDetails);
-        }
+        if (validateForm(orderDetails)) sendOrder(orderDetails);
 
     }
 
-
     return (
+
         <div className={style.checkoutWrapper}>
-            {isLoading && (<Loading>
-                <CircularProgress size={35} style={{ position: 'absolute', top: '40vh', left: '50%' }} />
-            </Loading>)}
+            {isLoading &&
+                <Loading>
+                    <CircularProgress
+                        size={35}
+                        style={{
+                            position: 'absolute',
+                            top: '40vh',
+                            left: '50%'
+                        }} />
+                </Loading>
+            }
             <Form onSubmit={handleSubmit}>
-                <h4 className={style.title}>بيانات العميل</h4>
                 <Form.Group style={{ position: 'relative' }} className="mb-3 mt-3" controlId="username">
                     <div className='d-flex align-items-center'>
-                        <Form.Label>اسم المستخدم</Form.Label>
+                        <Form.Label className={style.formLabel}>
+                            اسم المستخدم
+                        </Form.Label>
                         <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                         <span className={style.errMsg}>{formErrorMsg.username}</span>
                     </div>
                     <Form.Control
                         name="username"
                         className={`${style.formControl} ${formErrorMsg.username ? style.errorField : ''}`}
-                        autoComplete="off"
-                    />
+                        autoComplete="off" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="phone">
                     <div className='d-flex align-items-center'>
-                        <Form.Label>رقم التلفون</Form.Label>
+                        <Form.Label className={style.formLabel}>
+                            رقم التلفون
+                        </Form.Label>
                         <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                         <span className={style.errMsg}>{formErrorMsg.phone}</span>
                     </div>
                     <Form.Control
                         name="phone"
-                        type="number"
-                        className={`${style.formControl} ${formErrorMsg.phone ? style.errorField : ''}`}
-                    />
+                        className={`${style.formControl} ${formErrorMsg.phone ? style.errorField : ''}`} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="governorate">
                     <div className='d-flex align-items-center'>
-                        <Form.Label>المحافظة</Form.Label>
+                        <Form.Label className={style.formLabel}>
+                            المحافظة
+                        </Form.Label>
                         <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                         <span className={style.errMsg}>{formErrorMsg.governorate}</span>
                     </div>
@@ -91,8 +96,7 @@ const CheckOutForm = () => {
                             <option
                                 key={governorate.id}
                                 className={style.option}
-                                value={governorate.governorate_name_ar}
-                            >
+                                value={governorate.governorate_name_ar}>
                                 {governorate.governorate_name_ar}
                             </option>
                         ))}
@@ -100,26 +104,30 @@ const CheckOutForm = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="street">
                     <div className='d-flex align-items-center'>
-                        <Form.Label>عنوان الشارع</Form.Label>
+                        <Form.Label className={style.formLabel}>
+                            عنوان الشارع
+                        </Form.Label>
                         <span className={style.required} style={{ marginRight: '5px' }}>*</span>
                         <span className={style.errMsg}>{formErrorMsg.street}</span>
                     </div>
                     <Form.Control
                         name="street"
                         type="text"
-                        className={`${style.formControl} ${formErrorMsg.street ? style.errorField : ''}`}
-                    />
+                        className={`${style.formControl} ${formErrorMsg.street ? style.errorField : ''}`} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>البريد الالكتروني</Form.Label>
+                    <Form.Label className={style.formLabel}>
+                        البريد الالكتروني
+                    </Form.Label>
                     <Form.Control
                         name="email"
                         type="email"
-                        className={style.formControl}
-                    />
+                        className={style.formControl} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>ملاحظات بخصوص الاوردر</Form.Label>
+                    <Form.Label className={style.formLabel}>
+                        ملاحظات بخصوص الاوردر
+                    </Form.Label>
                     <Form.Control as="textarea" rows={3} name="order_notes" />
                 </Form.Group>
                 <Form.Group className="mt-4 d-flex align-items-center justify-content-between">

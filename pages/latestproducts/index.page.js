@@ -54,10 +54,14 @@ const LatestProdutsPage = () => {
 
     }, [pageNumber]);
 
+    const breadCrumbData = [
+        { label: 'الصفحة الرئيسية', link: "/homepage" },
+        { label: 'احدث المنتجات', active: true }
+    ]
 
     return (
         <>
-            <BreadCrumbLayout>
+            <BreadCrumbLayout data={breadCrumbData}>
                 <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
                 <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
                     احدث المنتجات

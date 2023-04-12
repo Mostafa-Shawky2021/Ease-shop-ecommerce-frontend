@@ -4,6 +4,7 @@ import { sendOrder } from "../queries";
 import { queryKeys } from "data";
 import { useGuest } from '@root/hooks';
 const useSendOrderData = (setIsLoading) => {
+
     const route = useRouter();
     const queryClient = useQueryClient();
     const { guestId } = useGuest();
@@ -17,6 +18,10 @@ const useSendOrderData = (setIsLoading) => {
                 setIsLoading(false);
                 queryClient.setQueryData(queryKeys.USER_CARTS(guestId), (carts) => []);
                 route.push('/checkout/success');
+            },
+            onError: (error) => {
+                setIsLoading(false);
+                console.log(error);
             }
         }
     )

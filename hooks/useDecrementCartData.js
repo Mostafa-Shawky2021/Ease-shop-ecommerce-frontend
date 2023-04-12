@@ -24,7 +24,7 @@ const useDecrementCartData = (setIsLoading, guestId) => {
                     (carts) => {
 
                         if (cartDataResponse?.id) {
-
+                            toast.success('تم تقليل الكمية');
                             return carts.map(cart => {
 
                                 if (cartDataResponse.id === cart.id) {
@@ -40,7 +40,6 @@ const useDecrementCartData = (setIsLoading, guestId) => {
                                 }
                             })
 
-                            toast.success('تم تقليل الكمية');
                         }
                         else {
 

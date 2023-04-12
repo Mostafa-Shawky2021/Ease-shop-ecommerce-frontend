@@ -20,7 +20,7 @@ const ProductQuantity = ({
 }) => {
 
     return (
-        <div className={`${style.productQuantity} d-flex align-items-center`} {...props}>
+        <div className={`${style.productQuantity} d-flex`} {...props}>
             <Button
                 className={style.quantityAction}
                 onClick={handleProductIncrement}

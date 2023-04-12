@@ -31,13 +31,9 @@ const useFilter = (pageNumber, dynamicRoute = null, additionalQuery = null) => {
 
     }, [setFilterRules, router]);
 
-    /*
-    ** url RequestFilter will be the uri which will be send to the backend to apply filter
-    */
 
     const handleOnChangeInputFilter = inputName => (event) => {
 
-        //convert sate key into array to check if incoming input is valid
         const stateFitlerRulesKeys = Object.keys(filterRules);
         if (!stateFitlerRulesKeys.includes(inputName)) {
             console.log('sorry this input name is not valid as state key');
@@ -52,7 +48,7 @@ const useFilter = (pageNumber, dynamicRoute = null, additionalQuery = null) => {
         if (event.target.checked) {
 
             const filterData = [...filterRules[inputName], event.target.value]
-            setFilterRules({ ...filterRules, filterData });
+            setFilterRules({ ...filterRules, [inputName]: filterData });
         } else {
 
             const filterDataFun = (inputValue) => inputValue !== event.target.value;

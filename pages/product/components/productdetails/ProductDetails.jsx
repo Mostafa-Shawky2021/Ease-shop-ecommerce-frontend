@@ -1,13 +1,6 @@
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-import {
-    useAddCartData,
-    useIncrementProductData,
-    useGuest,
-    useCartsData,
-    useCarts,
-} from '@root/hooks';
+import { useCarts } from '@root/hooks';
 
 import { calcPriceDiscount } from '@root/utils';
 
@@ -21,6 +14,7 @@ import { ModalFormOrder } from './modalformorder';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CircularProgress from '@mui/material/CircularProgress';
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 
 import style from "./productdetails.module.scss";
 
@@ -32,7 +26,6 @@ const ProductDetails = ({ productDetails }) => {
         setProductVariants,
         productVariants,
         isLoading } = useCarts(productDetails);
-
 
     const handleChooseColor = (event) => {
 
@@ -136,31 +129,37 @@ const ProductDetails = ({ productDetails }) => {
                     </li>
                 }
             </ul>
-            <div className={`${style.addCartDetails} d-flex flex-wrap mt-3`}>
-                <div className={style.quantity}>
+            <div className={`${style.addCartDetails} d-flex flex-wrap gap-3 mt-3`}>
+                <div>
                     <ProductQuantity
                         quantity={productVariants.quantity}
                         handleProductIncrement={handleProductIncrement}
                         handleProductDecrement={handleProductDecrement} />
                 </div>
-                <div style={{ position: 'relative', width: '170px' }}>
-                    {isLoading ?
-                        (<CircularProgress className={style.iconLoading} size={25} />) :
-                        (<Button className={style.addCartbtn} onClick={handleAddtoCart}>
-                            اضافة الي السلة
-                            <ShoppingCartOutlinedIcon fontSize="small" />
-                        </Button>
-                        )}
+                <div className="flex-grow-1" style={{ position: 'relative' }}>
+
+                    <Button className={`${style.addCartbtn}`} onClick={handleAddtoCart}>
+                        اضافة الي السلة
+                        {isLoading
+                            ? <CircularProgress className={style.iconLoading} size={14} />
+                            : <ShoppingCartOutlinedIcon fontSize="small" style={{ fontSize: '16px' }} />
+                        }
+                    </Button>
 
                 </div>
-                <ModalFormOrder
-                    quantity={productVariants.quantity}
-                    product={productDetails}
-                    renderButton={(setOpenModal) =>
-                        <Button
-                            className={style.buyNow}
-                            onClick={() => setOpenModal(true)}>اشتري الان
-                        </Button>} />
+                <div className="flex-grow-1">
+                    <ModalFormOrder
+                        quantity={productVariants.quantity}
+                        product={productDetails}
+                        renderButton={(setOpenModal) =>
+                            <Button
+                                className={style.buyNow}
+                                onClick={() => setOpenModal(true)}>
+                                اشتري الان
+                                <ElectricBoltIcon fontSize="small" />
+                            </Button>} />
+                </div>
+
             </div>
         </div>
     )

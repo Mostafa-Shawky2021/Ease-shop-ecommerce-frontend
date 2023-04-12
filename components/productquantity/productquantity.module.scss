@@ -1,14 +1,14 @@
 @use 'sass/var' as var;
 
 .productQuantity {
-    height: 34px;
+
+    height: 40px;
 
     .quantityAction {
         background: transparent;
         border: 1px solid #dedede;
         color: var.$hardblack;
         width: 40px;
-        height: 100%;
         text-align: center;
         padding: 0px;
         user-select: none;
@@ -31,7 +31,6 @@
 
     .content {
         width: 42px;
-        height: 100%;
         color: var.$hardblack;
         text-align: center;
         border-top: 1px solid #dedede;

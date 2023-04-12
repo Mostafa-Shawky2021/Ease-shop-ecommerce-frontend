@@ -16,18 +16,14 @@ import style from './sidebar.module.scss';
 const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 
     const { filterRules,
-        setFilterRules,
         applyFilter,
         resetFilter,
         handleOnChangeInputFilter
-
     } = useFilter(pageNumber, dynamicRoute, additionalQuery);
 
     const { data: productVariants, isLoading } = useProductVariantsData();
 
     const valueLabelFormat = (value) => value;
-
-
 
     return (
         <div className={style.sidebarWrapper}>
