@@ -4,14 +4,14 @@ import { fetchLatestProducts } from "../queries";
 
 import { generateQueryStringFilter } from "@root/utils";
 
-import { queryKeys } from "data";
+import { queryKeys } from "../data";
 
 const useLatestProductsData = (pageNumber, queryUri) => {
 
     let queryStringFilter = generateQueryStringFilter(queryUri);
 
     return useQuery(
-        queryKeys.PRODUCTS(pageNumber, queryStringFilter),
+        queryKeys.PRODUCTS_LATEST(pageNumber, queryStringFilter),
         () => fetchLatestProducts(pageNumber, queryStringFilter),
         { keepPreviousData: true });
 }

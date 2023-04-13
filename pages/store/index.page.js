@@ -14,6 +14,8 @@ import { BreadCrumbLayout } from '@root/components/layout';
 
 import { queryKeys } from "data";
 import generateQueryStringFilter from 'utils/generateQueryStringFilter';
+import { Seek } from 'react-loading-indicators';
+import { Loading } from '@root/components/loading';
 
 
 export async function getServerSideProps({ query }) {
@@ -38,11 +40,7 @@ const StorePage = () => {
     const [pageNumber, setPageNumber] = useState(1);
 
     const { query } = useRouter();
-    const {
-        data: productsData,
-        isFetching: isFetchingProducts,
-        isLoading: isLoadingProducts
-    } = useProductsData(pageNumber, query);
+    const productsData = useProductsData(pageNumber, query);
 
     useEffect(() => {
 
@@ -60,18 +58,26 @@ const StorePage = () => {
             <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="xxl">
                 <Row className='g-0'>
-                    <Col xs={3} className='d-none d-lg-block' >
-                        <SidebarFilter pageNumber={pageNumber} />
-                    </Col>
-                    <Col xs={12} lg={9} style={{ position: 'relative' }}>
-                        {!!productsData?.products?.length ? (
-                            <ProductsList
-                                productsData={productsData}
-                                isFetchingProducts={isFetchingProducts}
-                                isLoadingProducts={isLoadingProducts}
-                                setPageNumber={setPageNumber} />
-                        ) : (<p>لا توجد منتجات للعرض</p>)}
-                    </Col>
+                    {productsData.isLoading // for first time loading indicator
+                        ? <Loading isOpacity={true}>
+                            <Seek color="#ffb700" size="medium" />
+                        </Loading>
+                        : <>
+                            <Col xs={3} className='d-none d-lg-block' >
+                                <SidebarFilter pageNumber={pageNumber} />
+                            </Col>
+                            <Col xs={12} lg={9} style={{ position: 'relative' }}>
+                                {!!productsData.data?.products ?
+                                    <ProductsList
+                                        productsData={productsData.data}
+                                        isFetchingProducts={productsData.isFetching}
+                                        setPageNumber={setPageNumber} />
+                                    : <p>لا توجد منتجات للعرض</p>
+                                }
+                            </Col>
+                        </>
+                    }
+
                 </Row>
             </Container>
         </>

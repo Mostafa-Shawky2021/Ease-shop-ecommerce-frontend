@@ -44,6 +44,8 @@ const CategoriesMenu = () => {
 
     }, []);
 
+    const CategoryListOpenClass = categoryListIsOpen ? style.openCategoryList : '';
+
     return (
         <div className={style.categoryWrapperMenu} ref={refCategoryMenu}>
             <Button
@@ -59,7 +61,8 @@ const CategoriesMenu = () => {
                     <KeyboardArrowDownIcon fontSize="small" />
                 </span>
             </Button>
-            <ul className={`${style.listCategories} ${categoryListIsOpen ? style.openCategoryList : ''}  list-unstyled`}>
+
+            <ul className={`${style.listCategories} ${CategoryListOpenClass}  list-unstyled`}>
 
                 {!!categories?.data?.length ?
                     <ListItem

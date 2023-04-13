@@ -14,7 +14,7 @@ import { BreadCrumbLayout } from "@root/components/layout";
 import { ProductsList } from "@root/components/productslist";
 import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 
-import { queryKeys } from "data";
+import { queryKeys } from "./data";
 
 export async function getServerSideProps({ query }) {
 
@@ -22,11 +22,11 @@ export async function getServerSideProps({ query }) {
 
     let filterQueryString = ""
     filterQueryString = Object.keys(query).length > 0
-        ? generateQueryStringFilter(query) // if the url contain filter string
-        : 'latest=true'; // default while generating page component with query filter string
+        ? generateQueryStringFilter(query) // extract query object data to make reqeust with filter rule
+        : '';
 
     await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS(1, filterQueryString),
+        queryKeys.PRODUCTS_LATEST(1, filterQueryString),
         () => fetchLatestProducts(1, filterQueryString));
 
     return {
@@ -42,11 +42,7 @@ const LatestProdutsPage = () => {
 
     const router = useRouter();
 
-    const {
-        data: productsData,
-        isFetching: isFetchingProducts,
-        isLoading: isLoadingProducts
-    } = useLatestProductsData(pageNumber, router.query);
+    const latestProducts = useLatestProductsData(pageNumber, router.query);
 
     useEffect(() => {
 
@@ -61,25 +57,21 @@ const LatestProdutsPage = () => {
 
     return (
         <>
-            <BreadCrumbLayout data={breadCrumbData}>
-                <Breadcrumb.Item href="/homepage">الصفحة الرئيسية</Breadcrumb.Item>
-                <Breadcrumb.Item active style={{ color: 'var(--bs-primary)', fontWeight: '500' }}>
-                    احدث المنتجات
-                </Breadcrumb.Item>
-            </BreadCrumbLayout>
+
+            <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="xxl">
                 <Row className='g-0'>
                     <Col xs={3} className='d-none d-lg-block' >
                         <SidebarFilter pageNumber={pageNumber} />
                     </Col>
                     <Col xs={12} lg={9} style={{ position: 'relative' }}>
-                        {productsData?.products ? (
+                        {latestProducts.data?.products ?
                             <ProductsList
-                                productsData={productsData}
-                                isFetchingProducts={isFetchingProducts}
-                                isLoadingProducts={isLoadingProducts}
+                                productsData={latestProducts.data}
+                                isFetchingProducts={latestProducts.isFetching}
                                 setPageNumber={setPageNumber} />
-                        ) : (<p>ليس متوفر منتجات في الوقت الحالي</p>)}
+                            : <p>ليس متوفر منتجات في الوقت الحالي</p>
+                        }
                     </Col>
                 </Row>
             </Container>

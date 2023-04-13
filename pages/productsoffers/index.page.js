@@ -11,12 +11,13 @@ import { generateQueryStringFilter } from "@root/utils";
 
 import { Container, Row, Col } from "react-bootstrap";
 import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
+import { Loading } from "@root/components/loading";
+import { Seek } from "react-loading-indicators";
 import { BreadCrumbLayout } from "@root/components/layout";
 import { ProductsList } from "@root/components/productslist";
 
-import { queryKeys } from "data";
-import { Loading } from "@root/components/loading";
-import { Seek } from "react-loading-indicators";
+import { queryKeys } from "./data";
+
 
 export async function getServerSideProps({ query }) {
 
@@ -24,11 +25,11 @@ export async function getServerSideProps({ query }) {
 
     let filterQueryString = ""
     filterQueryString = Object.keys(query).length > 0
-        ? generateQueryStringFilter(query) // if the url contain filter string
+        ? generateQueryStringFilter(query) // if the uri contain filter rule string
         : "";
 
     await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS(1, filterQueryString),
+        queryKeys.PRODUCTS_OFFERS(1, filterQueryString),
         () => fetchProductsOffers(1, filterQueryString));
 
     return {
@@ -78,7 +79,7 @@ const ProductsOffers = () => {
                                     ? <ProductsList
                                         productsData={productsoffers.data}
                                         setPageNumber={setPageNumber}
-                                        isFetching={productsoffers.isFetching} />
+                                        isFetchingProducts={productsoffers.isFetching} />
 
                                     : <p>ليس متوفر عروض في الوقت الحالي</p>
                                 }

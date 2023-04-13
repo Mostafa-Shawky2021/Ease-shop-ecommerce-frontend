@@ -10,14 +10,14 @@ import style from './products.module.scss';
 const ProductsList = ({
     productsData,
     setPageNumber,
-    isFetching
+    isFetchingProducts
 }) => {
 
     const { current_page, per_page, total } = productsData.meta_pagination;
 
     return (
         <div className={style.productsWrapper}>
-            {isFetching &&
+            {isFetchingProducts &&
                 <Loading isOpacity={true} >
                     <Seek color="#ffb700" size="medium" />
                 </Loading>}

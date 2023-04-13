@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { url } from 'data';
+
 import { SubMenuCategories } from '@root/components/submenucategories';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -14,7 +16,6 @@ const CategoryItem = ({ categoryData, subMenuCategories, ...props }) => {
 
     const [activeSubMenu, setActiveSubMenu] = useState(0);
 
-
     const handleMouseMoveSubMenu = (event) => {
 
         const activeSubMenu = event.currentTarget.getAttribute('data-active-submenu');
@@ -25,7 +26,11 @@ const CategoryItem = ({ categoryData, subMenuCategories, ...props }) => {
         ? `${style.activeSubMenu} ${style.display}`
         : style.hide;
 
+    const imageIcon = categoryData?.image_thumbnail
+        ? `${url}/${categoryData?.image_thumbnail?.url}`
+        : Icon;
 
+    console.log(imageIcon);
     return (
         <li
             className={style.itemCategory}
@@ -37,10 +42,10 @@ const CategoryItem = ({ categoryData, subMenuCategories, ...props }) => {
                 className={style.categoryLink}
                 href={`/categoryproducts/${categoryData.cat_slug}`}>
                 <Image
-                    width={17}
-                    height={17}
-                    src={Icon}
-                    alt="category-icon" />
+                    width={20}
+                    height={20}
+                    src={imageIcon}
+                    alt={categoryData.cat_slug} />
                 <span className="ms-2">{categoryData.cat_name}</span>
                 {!!categoryData.sub_categories.length &&
                     <span className="ms-auto">
