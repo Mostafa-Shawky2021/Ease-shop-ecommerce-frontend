@@ -30,7 +30,6 @@ const CategoryItem = ({ categoryData, subMenuCategories, ...props }) => {
         ? `${url}/${categoryData?.image_thumbnail?.url}`
         : Icon;
 
-    console.log(imageIcon);
     return (
         <li
             className={style.itemCategory}

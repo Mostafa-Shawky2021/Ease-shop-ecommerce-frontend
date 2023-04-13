@@ -11,11 +11,7 @@ import Icon from '@assets/images/categoriesmenu/icon.png';
 
 import style from './categoryitem.module.scss';
 
-const CategoryItem = (
-    {
-        categoryData,
-        ...props
-    }) => {
+const CategoryItem = ({ categoryData, ...props }) => {
 
     const subCategoryRef = useRef(null);
 
@@ -74,6 +70,7 @@ const CategoryItem = (
                         ref={subCategoryRef}>
 
                         <SubMenuCategories
+
                             className={style.listSubCategories}
                             subCateogiresData={categoryData.sub_categories} />
                     </div>

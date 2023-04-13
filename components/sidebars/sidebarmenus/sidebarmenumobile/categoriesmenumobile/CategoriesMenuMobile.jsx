@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useCategoriesData } from '@root/hooks';
 
@@ -7,6 +7,7 @@ import { Collapse } from 'react-bootstrap';
 import { BarIcon } from '@root/components/baricon';
 import { ListItem } from '@root/components/listitem';
 import { CategoryItem } from './categoryitem';
+
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import style from './categoriesmenumobile.module.scss';
@@ -16,6 +17,8 @@ const CategoriesMenuMobile = () => {
     const [categoryListIsOpen, setCategoryListIsOpen] = useState(false);
 
     const { data: categories } = useCategoriesData();
+
+    const mainCategories = categories.filter(category => category.parent_id === null);
 
     return (
         <div className={style.categoriesMenuMobileWrapper}>
@@ -37,9 +40,9 @@ const CategoriesMenuMobile = () => {
             </Button>
             <Collapse in={categoryListIsOpen}>
                 <ul className={`${style.listCategories} list-unstyled`}>
-                    {!!categories?.data?.length ?
+                    {!!categories?.length ?
                         <ListItem
-                            data={categories?.data}
+                            data={mainCategories}
                             renderItem={(category) => (
                                 <CategoryItem
                                     key={category.id}

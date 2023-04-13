@@ -1,3 +1,5 @@
+@use 'sass/var' as var;
+
 .defaultListSubCategories {
 
     background-color: #fff;
@@ -8,6 +10,8 @@
         margin-top: 5px;
         padding-right: 0.5rem;
         padding-left: 0.5rem;
+        font-size: 0.866rem;
+        color: var.$softblack;
     }
 
     .link {

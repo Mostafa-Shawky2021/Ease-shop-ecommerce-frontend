@@ -18,7 +18,9 @@ const CategoriesMenu = () => {
 
     const refCategoryMenu = useRef(null);
 
-    const { data: categories } = useCategoriesData();
+    const { data: categoriesData } = useCategoriesData();
+
+    const mainCategories = categoriesData?.filter(category => category.parent_id === null);
 
     useEffect(() => {
 
@@ -42,7 +44,7 @@ const CategoriesMenu = () => {
             document.removeEventListener('click', closeCategoryListMenuListOnMouseClick);
         }
 
-    }, []);
+    }, [setCategoryListIsOpen]);
 
     const CategoryListOpenClass = categoryListIsOpen ? style.openCategoryList : '';
 
@@ -64,14 +66,14 @@ const CategoriesMenu = () => {
 
             <ul className={`${style.listCategories} ${CategoryListOpenClass}  list-unstyled`}>
 
-                {!!categories?.data?.length ?
+                {!!categoriesData?.length ?
                     <ListItem
-                        data={categories.data}
+                        data={mainCategories}
                         renderItem={
                             (category) => (
                                 <CategoryItem
                                     key={category.id}
-                                    categoryData={category}
+                                    categoryData={category?.parent_id === null && category}
                                     onClick={() => setCategoryListIsOpen(false)}
                                 />)} />
 

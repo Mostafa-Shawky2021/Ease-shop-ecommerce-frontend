@@ -23,12 +23,12 @@ const Categories = () => {
 
     const [_, setSwiper] = useState();
 
-    const { data: categories } = useCategoriesData();
+    const { data: categoriesData } = useCategoriesData();
 
     return (
-        !!categories?.data && (
+        !!categoriesData && (
             <div className={style.categories}>
-                <SectionLayout title="الاقسام" isSwiper={true}>
+                <SectionLayout title="الاقسام" isSwiper={true} link="/categories">
                     {(nextElementRef, prevElementRef) => (
                         <Swiper
                             style={{ direction: 'rtl' }}
@@ -53,7 +53,7 @@ const Categories = () => {
                             loop={false}
                             spaceBetween={18}
                             onSwiper={setSwiper}>
-                            {categories?.data?.map(category => (
+                            {categoriesData?.map(category => (
                                 <SwiperSlide key={category.id}>
                                     <div className={style.catWrapper} style={{ marginTop: '1rem' }}>
                                         <div className={style.catImageWrapper}>
