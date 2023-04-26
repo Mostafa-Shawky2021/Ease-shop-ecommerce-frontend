@@ -1,19 +1,47 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Container } from "react-bootstrap";
+import { BreadCrumbLayout } from '@root/components/layout';
 
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-const CheckoutSuccess = () => {
+const CheckoutSuccessPage = () => {
+
+    const { query: { order_id }, push } = useRouter();
+
+    useEffect(() => {
+        if (!order_id) push('/store')
+    }, [order_id])
+    const breadCrumbData = [
+        { label: 'الصفحة الرئيسية', link: "/homepage" },
+        { label: 'نجاح الطلب', active: true }
+    ];
 
     return (
-        <Container style={{ marginTop: '2rem' }}>
-            <Link as='/dashboard' href="/homepage">teest</Link>
-            <p style={{ fontSize: '1.5rem' }}>!!تم ارسال طلبك بنجاح  </p>
-            <p>سوف يقوم احد موظفينا بالتواصل معكم في اقرب وقت</p>
-            <p>في حالة وجود استفسار يمكنك ارسال رسالة <Link href="#" style={{ color: 'var(--bs-primary)' }}>الي فريق عمل الموقع</Link></p>
-            <Link href="/homepage" style={{ color: 'var(--bs-primary)' }}>العودة الي الصفحة الرئيسية <KeyboardArrowLeftIcon size="small" /></Link>
-        </Container>
+
+        <>
+            <BreadCrumbLayout data={breadCrumbData} />
+            <Container style={{ marginTop: '2rem' }}>
+                <p style={{ fontSize: '1.2rem', color: '#222' }}>
+                    تم ارسال طلبك بنجاح رقم الاوردر: {order_id}
+                </p>
+                <p style={{ fontSize: '0.85rem' }}>
+                    سوف يقوم احد موظفينا بالتواصل معكم في اقرب وقت
+                </p>
+                <p>
+                    في حالة وجود استفسار يمكنك ارسال رسالة
+                    <Link href="/homepage" style={{ color: 'var(--bs-primary)' }}>
+                        الي فريق عمل الموقع
+                    </Link>
+                </p>
+                <Link href="/homepage" style={{ color: 'var(--bs-primary)' }}>
+                    العودة الي الصفحة الرئيسية <KeyboardArrowLeftIcon size="small" />
+                </Link>
+            </Container>
+        </>
+
     )
 }
-export default CheckoutSuccess;
+export default CheckoutSuccessPage;

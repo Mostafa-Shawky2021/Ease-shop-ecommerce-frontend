@@ -20,7 +20,7 @@ const SectionLayout = ({
 
     return (
         <div className={style.sectionLayout}>
-            <Container className={style.container} fluid="xl" style={{ position: 'relative' }}>
+            <Container className={style.container} fluid="xxl" style={{ position: 'relative' }}>
                 <header className={`${style.header} d-flex align-items-center justify-content-between`}>
                     <h4 className={style.title}>
                         {title}

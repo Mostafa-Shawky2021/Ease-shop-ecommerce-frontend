@@ -18,7 +18,7 @@ const CategoriesMenuMobile = () => {
 
     const { data: categories } = useCategoriesData();
 
-    const mainCategories = categories.filter(category => category.parent_id === null);
+    const mainCategories = categories?.filter(category => category.parent_id === null);
 
     return (
         <div className={style.categoriesMenuMobileWrapper}>

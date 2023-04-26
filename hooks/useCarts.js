@@ -61,7 +61,7 @@ const useCarts = (productDetails = null) => {
             console.log('should chose at least color');
             productVariantsStauts = false;
         }
-        if (productDetails?.colors?.length && !productVariants?.size?.trim()) {
+        if (productDetails?.sizes?.length && !productVariants?.size?.trim()) {
             console.log('should chose at least size');
             productVariantsStauts = false;
         }
@@ -121,7 +121,7 @@ const useCarts = (productDetails = null) => {
         } else {
 
             // check if cart has already been added
-            const cartExist = carts.find(cart => cart.product_id === cartData.product_id);
+            const cartExist = carts?.find(cart => cart.product_id === cartData.product_id);
             if (cartExist) {
                 incrementCart.mutate(
                     {
@@ -130,7 +130,7 @@ const useCarts = (productDetails = null) => {
                     });
                 return true
             }
-            addCart.mutate(cartData);
+            addCart.mutate(newCartData);
             return true;
 
         }

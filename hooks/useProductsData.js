@@ -13,6 +13,7 @@ const useProductsData = (pageNumber, queryUri) => {
     return useQuery(
         queryKeys.PRODUCTS(pageNumber, queryProductsUriFilter),
         () => fetchProducts(pageNumber, queryProductsUriFilter),
+        { keepPreviousData: true }
     );
 }
 

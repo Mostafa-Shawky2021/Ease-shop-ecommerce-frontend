@@ -130,7 +130,7 @@ const CheckOutForm = () => {
                     </Form.Label>
                     <Form.Control as="textarea" rows={3} name="order_notes" />
                 </Form.Group>
-                <Form.Group className="mt-4 d-flex align-items-center justify-content-between">
+                <Form.Group className="mt-5 d-flex align-items-center justify-content-between">
                     <Button className={style.checkOutbtn} type='submit'>
                         اتمام الاوردر
                     </Button>
@@ -140,7 +140,7 @@ const CheckOutForm = () => {
                     </Link>
                 </Form.Group>
             </Form>
-        </div >
+        </div>
     )
 }
 export default CheckOutForm

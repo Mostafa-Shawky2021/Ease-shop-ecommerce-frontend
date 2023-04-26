@@ -11,7 +11,7 @@ import { SectionLayout } from '@root/components/layout';
 
 import { url } from "data";
 
-import DefaultImage from "@assets/images/default/image.jpg"
+import DefaultImage from '@assets/images/default/default.jpg';
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -24,7 +24,7 @@ const Categories = () => {
     const [_, setSwiper] = useState();
 
     const { data: categoriesData } = useCategoriesData();
-
+    console.log(categoriesData);
     return (
         !!categoriesData && (
             <div className={style.categories}>

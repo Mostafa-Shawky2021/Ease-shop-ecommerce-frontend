@@ -18,7 +18,7 @@
 
     .header {
         position: relative;
-        height: 250px;
+        height: 346px;
         overflow: hidden;
         border-bottom: 1px solid #dedede;
     }
@@ -63,7 +63,7 @@
         padding-top: 0.8rem;
         padding-bottom: 0.8rem;
         position: absolute;
-        bottom: -74px;
+        bottom: -100%;
         left: 0px;
         width: 100%;
         display: flex;
@@ -71,7 +71,7 @@
         align-items: center;
         justify-content: center;
         gap: 5px;
-        background-color: #fff;
+        background-color: red;
         z-index: 99;
         transition: all 0.5s ease-in-out;
 

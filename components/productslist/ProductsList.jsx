@@ -3,7 +3,6 @@ import { GridList } from "@root/components/gridlist";
 import { ProductCard } from "@root/components/cards";
 import { PaginationWrapper } from "@root/components/paginationwrapper";
 import { Loading } from "@root/components/loading";
-import { Seek } from "react-loading-indicators";
 
 import style from './products.module.scss';
 
@@ -16,11 +15,8 @@ const ProductsList = ({
     const { current_page, per_page, total } = productsData.meta_pagination;
 
     return (
-        <div className={style.productsWrapper}>
-            {isFetchingProducts &&
-                <Loading isOpacity={true} >
-                    <Seek color="#ffb700" size="medium" />
-                </Loading>}
+        <div className={style.productsWrapper} style={{ position: 'relative' }}>
+
             <GridList
                 data={productsData?.products}
                 renderItem={(product) =>

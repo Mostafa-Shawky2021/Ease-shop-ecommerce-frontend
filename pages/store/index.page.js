@@ -57,7 +57,7 @@ const StorePage = () => {
         <>
             <BreadCrumbLayout data={breadCrumbData} />
             <Container fluid="xxl">
-                <Row className='g-0'>
+                <Row className='g-0' style={{ position: 'relative', minHeight: '70vh' }}>
                     {productsData.isLoading // for first time loading indicator
                         ? <Loading isOpacity={true}>
                             <Seek color="#ffb700" size="medium" />

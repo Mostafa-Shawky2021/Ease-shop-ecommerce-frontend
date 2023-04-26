@@ -3,6 +3,8 @@ import { useState, useRef } from 'react';
 
 import { url } from 'data';
 
+import DefaultImage from '@assets/images/default/default.jpg';
+
 import style from "./productvieweffect.module.scss";
 
 const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
@@ -12,6 +14,7 @@ const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
     const imageThumbnailWrapperRef = useRef(null);
 
     const handleimageThumbnail = (event) => {
+
         const activeIndex = Number(event.currentTarget.getAttribute('data-index'));
         setActiveImageIndex(activeIndex)
     }
@@ -23,7 +26,7 @@ const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
                     <Image
                         fill
                         style={{ paddingLeft: '15px', paddingRight: '15px' }}
-                        src={image ? `${url}/${image}` : ''}
+                        src={image ? `${image}` : DefaultImage}
                         alt={imageAlt} />
                 </div>
                 {imagesThumbnails?.map((thumbnail, index) => (

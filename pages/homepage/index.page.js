@@ -1,9 +1,7 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
+import { fetchCategories, fetchLayout, fetchProducts } from '@root/queries';
 import { fetchRandomCategoriesProducts } from './queries';
-import { fetchCategories } from '@root/queries';
-
-import { fetchProducts } from '@root/queries';
 
 import { Carousel } from './components/carousel'
 import { Services } from './components/services'
@@ -14,16 +12,18 @@ import { RandomCategoriesProducts } from './components/randomcategoriesproducts'
 import { Offer } from './components/offer';
 import { ProductsOffers } from './components/productsoffers';
 
-import { queryKeys } from './data'
+import { queryKeys } from './data';
 import { queryKeys as globalQueryKeys } from 'data';
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
     const queryClient = new QueryClient();
 
     await Promise.allSettled(
         [
             queryClient.prefetchQuery(
+                globalQueryKeys.LAYOUT,
+                fetchLayout,
                 globalQueryKeys.PRODUCTS(1, "latest=true&limit=8"),
                 () => fetchProducts(1, "latest=true&limit=8")),
             queryClient.prefetchQuery(

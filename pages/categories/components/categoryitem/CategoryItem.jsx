@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { url } from 'data';
 
-import DefaultImage from '@assets/images/default/default.png';
+import DefaultImage from '@assets/images/default/default.jpg';
 
 import style from './categoryitem.module.scss';
 

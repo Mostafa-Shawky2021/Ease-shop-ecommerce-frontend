@@ -13,7 +13,7 @@ import { url } from "data";
 
 import CircularProgress from '@mui/material/CircularProgress';
 
-import DefaultImage from '@assets/images/default/image.jpg';
+import DefaultImage from '@assets/images/default/default.jpg';
 
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
@@ -86,27 +86,30 @@ const ProductCard = ({ product, ...props }) => {
                         <FavoriteBorderIcon fontSize="small" />
                     </div>
                 </div>
-                <div className={style.variantsWrapper}>
+                {product?.sizes || product?.colors &&
+                    <div className={style.variantsWrapper}>
+                        <ColorsVariant
+                            style={{ marginLeft: '5px' }}
+                            className={`${style.colorsBtn}`}
+                            colors={product?.colors}
+                            choosenColor={productVariants.color}
+                            handleChooseColor={handleChooseColor} />
 
-                    <ColorsVariant
-                        style={{ marginLeft: '5px' }}
-                        className={`${style.colorsBtn}`}
-                        colors={product?.colors}
-                        choosenColor={productVariants.color}
-                        handleChooseColor={handleChooseColor} />
+                        <SizesVariant
+                            className={`${style.sizesBtn}`}
+                            sizes={product?.sizes}
+                            choosenSize={productVariants.size}
+                            handleChooseSize={handleChooseSize} />
 
-                    <SizesVariant
-                        className={`${style.sizesBtn}`}
-                        sizes={product?.sizes}
-                        choosenSize={productVariants.size}
-                        handleChooseSize={handleChooseSize} />
+                    </div>
+                }
 
-                </div>
                 <div className={style.productCardImageWrapper}>
                     <Link href={`/product/${product?.product_slug}`}>
                         <Image
                             fill
-                            src={product?.image ? `${url}/${product?.image}` : DefaultImage}
+                            src={product?.image ? `${product?.image}` : DefaultImage}
+                            // src={product?.image ? `${url}/${product?.image}` : DefaultImage}
                             className={style.productCardImage}
                             alt={product?.name || ''} />
                     </Link>

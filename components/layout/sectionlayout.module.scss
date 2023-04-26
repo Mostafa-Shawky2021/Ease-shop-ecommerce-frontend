@@ -10,6 +10,13 @@
         margin-top: 2rem;
     }
 
+    .container {
+        @include minmediaquery('md') {
+            padding-right: 2rem;
+            padding-left: 2rem;
+        }
+    }
+
     .header {
         margin-bottom: 0.3rem;
     }

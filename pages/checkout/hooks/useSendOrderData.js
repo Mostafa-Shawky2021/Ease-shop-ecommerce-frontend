@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { sendOrder } from "../queries";
 import { queryKeys } from "data";
 import { useGuest } from '@root/hooks';
+
 const useSendOrderData = (setIsLoading) => {
 
     const route = useRouter();
@@ -14,10 +15,15 @@ const useSendOrderData = (setIsLoading) => {
             onMutate: () => {
                 setIsLoading(true);
             },
-            onSuccess: (data) => {
+            onSuccess: (res) => {
                 setIsLoading(false);
                 queryClient.setQueryData(queryKeys.USER_CARTS(guestId), (carts) => []);
-                route.push('/checkout/success');
+                route.push({
+                    pathname: '/checkout/success',
+                    query: {
+                        order_id: res.data.invoice_number
+                    }
+                });
             },
             onError: (error) => {
                 setIsLoading(false);

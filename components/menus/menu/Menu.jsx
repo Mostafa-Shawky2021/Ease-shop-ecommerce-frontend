@@ -34,7 +34,7 @@ const Menu = ({ sidebarMenuMobileIsOpen, setSidebarMenuMobileIsOpen, }) => {
                         <Link href="/productsoffers">العروض المميزة</Link>
                     </li>
                     <li className={style.item}>
-                        <Link href="/cateogires">الاقسام</Link>
+                        <Link href="/categories">الاقسام</Link>
                     </li>
                     <li className={style.item}>
                         <Link href="#">الطلبات</Link>
