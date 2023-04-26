@@ -10,8 +10,8 @@ function Services() {
         <div className={style.services} >
             <Container className={style.container}>
                 <Row>
-                    <Col xs={6} md={4} className="my-3 my-lg-0">
-                        <div className="text-center">
+                    <Col xs={6} md={4} className={`${style.serviceBox} my-3 my-lg-0`}>
+                        <div>
                             <DeliveryDiningOutlinedIcon className={style.serviceIcon} />
                             <div className={style.serviceWrapper}>
                                 <p className={style.title}>اسرع خدمة توصيل</p>
@@ -19,8 +19,8 @@ function Services() {
                             </div>
                         </div>
                     </Col>
-                    <Col xs={6} md={4} className="my-3 my-lg-0">
-                        <div className="text-center">
+                    <Col xs={6} md={4} className={`${style.serviceBox} my-3 my-lg-0`}>
+                        <div>
                             <SupportAgentOutlinedIcon className={style.serviceIcon} />
                             <div className={style.serviceWrapper}>
                                 <p className={style.title}>خدمة عملاء مميزة</p>
@@ -28,8 +28,8 @@ function Services() {
                             </div>
                         </div>
                     </Col>
-                    <Col xs={6} md={4} className="my-3 my-lg-0">
-                        <div className="text-center">
+                    <Col xs={6} md={4} className={`${style.serviceBox} my-3 my-lg-0`}>
+                        <div>
                             <PublishedWithChangesOutlinedIcon className={style.serviceIcon} />
                             <div className={style.serviceWrapper}>
                                 <p className={style.title}>استبدال واسترجاع المنتج</p>

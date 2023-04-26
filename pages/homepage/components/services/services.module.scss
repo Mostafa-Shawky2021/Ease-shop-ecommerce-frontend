@@ -1,13 +1,15 @@
 @use 'sass/var' as var;
 
 .services {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
 
-    .container {
+    .serviceBox {
+        text-align: center;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        background: #fff;
+
+        &:not(:last-child) {
+            border-left: 1px solid #dedede
+        }
     }
 
     .serviceIcon {
@@ -20,11 +22,17 @@
         color: var.$hardblack;
         font-weight: 700;
         margin: 6px 0px 0px;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            color: var(--bs-primary)
+        }
     }
 
     .description {
         color: var.$softblack;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-weight: 500;
         margin-top: 5px
     }
