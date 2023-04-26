@@ -4,8 +4,8 @@
 
 .topcategories {
     z-index: 99;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
     user-select: none;
 
     .imageWrapper {
@@ -14,12 +14,12 @@
         overflow: hidden;
         position: relative;
         cursor: pointer;
-        @include overlay(#000, 0.5);
+        @include overlay(#000, 0.2);
 
     }
 
     .imageWrapper:hover img {
-        transform: scale(1.125, 1.125);
+        transform: scale(1.1);
     }
 
     img {

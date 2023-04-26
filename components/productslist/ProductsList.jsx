@@ -20,10 +20,10 @@ const ProductsList = ({
             <GridList
                 data={productsData?.products}
                 renderItem={(product) =>
-                    <Col xs={6} md={4} key={product.id}>
+                    <Col xs={6} md={3} key={product.id}>
                         <ProductCard
                             product={product}
-                            style={{ marginTop: '2rem' }} />
+                            style={{ marginTop: '3rem' }} />
                     </Col>} />
 
             <PaginationWrapper

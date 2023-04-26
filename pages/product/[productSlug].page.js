@@ -60,7 +60,7 @@ export default function ProductDetailsPage() {
                                     imageAlt={productDetails?.product_name}
                                     imagesThumbnails={productDetails?.images} />} />
                     </Col>
-                    <Col xs={12} md={7}>
+                    <Col xs={12} md={6}>
                         <ProductDetails productDetails={productDetails} />
                     </Col>
                 </Row>

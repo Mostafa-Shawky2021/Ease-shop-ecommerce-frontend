@@ -97,7 +97,8 @@ const Carousel = () => {
 
       <Swiper
         style={{ direction: 'ltr' }}
-        autoplay={{ delay: carouselTime() }}
+        // autoplay={{ delay: carouselTime() }}
+        autoplay={{ delay: 3000 }}
         pagination={{ clickable: true }}
         className={style.swiper}
         slidesPerView={1}

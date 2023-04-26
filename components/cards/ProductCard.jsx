@@ -122,13 +122,6 @@ const ProductCard = ({ product, ...props }) => {
                 <p className={style.productDescription}>
                     {truncateCharacter(product?.short_description, 50)}
                 </p>
-                <div className={`${style.productRatingWrapper} `}>
-                    <StarIcon className={style.productRating} />
-                    <StarIcon className={style.productRating} />
-                    <StarIcon className={style.productRating} />
-                    <StarOutlineIcon className={style.productRating} />
-                    <StarOutlineIcon className={style.productRating} />
-                </div>
                 <div className={style.priceWrapper}>
                     {renderPrice()}
                 </div>

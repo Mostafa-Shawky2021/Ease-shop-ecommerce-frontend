@@ -1,9 +1,9 @@
 @use "sass/var" as var;
 @use 'sass/mixins/animationbutton' as *;
 @use 'sass/mixins/mediaquery' as *;
+@use 'sass/mixins/overlay' as *;
 
 .offerWrapper {
-    margin-top: 3.5rem;
 
     .banner {
         width: 100%;
@@ -13,65 +13,69 @@
         background-position: center;
         display: flex;
         align-items: center;
-        justify-content: center;
         text-align: center;
+        padding: 0px 2rem;
+        overflow: hidden;
+        @include overlay(#000, 0.3);
 
         @include minmediaquery('lg') {
             text-align: right;
         }
     }
 
-    .banner.firstBanner {
-        background-image: url('/images/offer/img1.jpg');
+    .imageBox {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        transition: all 1s;
     }
 
-    .banner.secondBanner {
-        background-image: url('/images/offer/img2.jpg');
+    .banner:hover .imageBox {
+        transform: scale(1.1);
     }
 
     .intro {
-
-        @include minmediaquery('lg') {
-            position: absolute;
-            left: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-
+        position: relative;
+        z-index: 2;
+        width: 95%;
+        border: 1px solid #d3d3d3;
+        padding: 0.8rem 2rem;
     }
 
     .intro .title {
-        font-size: 1.3rem;
-        font-weight: 600;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #fff;
     }
 
     .intro .description {
-        color: var.$softblack;
-        font-weight: 600;
+        font-weight: 500;
+        font-size: 1.2rem;
+        color: #e3e3e3;
     }
 
     .intro .offer {
-        color: var.$accentcolor;
+        color: #000;
+        font-size: 1.3rem;
         font-weight: bold;
         font-family: var.$oswaldfont;
     }
 
     .intro .shopNow {
-        margin: auto;
-        width: 155px;
-        height: 42px;
+        margin: 1rem auto;
+        padding: 0.8rem 4rem;
         position: relative;
         isolation: isolate;
-        border: none;
+        border: 1px solid #fff;
         border-radius: 0px;
-        background: var.$secondarycolor;
-        color: #000;
+        background: transparent;
+        color: #fff;
         font-weight: 600;
-        display: block;
-        text-align: center;
-        line-height: 42px;
-        @include animationbutton(var.$accentcolor);
+
+        @include animationbutton(var.$secondarycolor);
 
         @include minmediaquery('lg') {
             margin-right: 0px;
@@ -84,6 +88,7 @@
 
         &:hover .text {
             color: #fff;
+
         }
     }
 
