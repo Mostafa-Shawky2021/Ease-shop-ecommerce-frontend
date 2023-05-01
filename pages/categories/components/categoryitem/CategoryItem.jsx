@@ -9,7 +9,7 @@ import style from './categoryitem.module.scss';
 
 const CategoryItem = ({ categoryData }) => {
     const categoryImage = categoryData?.image
-        ? `${url}/${categoryData.image}`
+        ? categoryData.image
         : DefaultImage
     return (
         <div className={`${style.categoryItemWrapper} text-center`}>

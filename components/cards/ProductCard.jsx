@@ -9,14 +9,10 @@ import { Button } from 'react-bootstrap';
 import { ColorsVariant } from '../productvariants/colorsvariant';
 import { SizesVariant } from '../productvariants/sizesvariant';
 
-import { url } from "data";
-
 import CircularProgress from '@mui/material/CircularProgress';
 
 import DefaultImage from '@assets/images/default/default.jpg';
 
-import StarIcon from '@mui/icons-material/Star';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
@@ -86,7 +82,7 @@ const ProductCard = ({ product, ...props }) => {
                         <FavoriteBorderIcon fontSize="small" />
                     </div>
                 </div>
-                {product?.sizes || product?.colors &&
+                {!!product?.sizes?.length || !!product?.colors?.length &&
                     <div className={style.variantsWrapper}>
                         <ColorsVariant
                             style={{ marginLeft: '5px' }}
@@ -108,14 +104,19 @@ const ProductCard = ({ product, ...props }) => {
                     <Link href={`/product/${product?.product_slug}`}>
                         <Image
                             fill
-                            src={product?.image ? `${product?.image}` : DefaultImage}
-                            // src={product?.image ? `${url}/${product?.image}` : DefaultImage}
-                            className={style.productCardImage}
+                            src={product?.image ? product?.image : DefaultImage}
+                            style={{ objectFit: 'contain' }}
+                            className={style.img}
                             alt={product?.name || ''} />
                     </Link>
                 </div>
             </header>
-            <div style={{ padding: '0px 10px' }}>
+            <div
+                style={{
+                    padding: '0px 10px',
+                    borderTop: '1px solid #dedede',
+                    marginTop: '1rem'
+                }}>
                 <Link className={style.productName} href={`/product/${product?.product_slug}`} >
                     {truncateCharacter(product?.product_name, 20)}
                 </Link>

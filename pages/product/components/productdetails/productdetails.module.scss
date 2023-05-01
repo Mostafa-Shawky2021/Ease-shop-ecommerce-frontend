@@ -54,7 +54,7 @@
     .listDetails {
         padding: 0px 0px 10px;
         margin-top: 0.5rem;
-        border-bottom: 1px solid #e3e3e3;
+
     }
 
     .listDetails .item {
@@ -62,6 +62,10 @@
         color: var.$softblack;
         font-weight: 500;
         font-size: 0.9rem;
+
+        &:last-child {
+            border-bottom: 1px solid #e3e3e3;
+        }
     }
 
     .listDetails .item span:first-child {

@@ -12,7 +12,6 @@ import { SizesVariant } from '@root/components/productvariants/sizesvariant';
 import { ModalFormOrder } from './modalformorder';
 
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CircularProgress from '@mui/material/CircularProgress';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 
@@ -116,12 +115,13 @@ const ProductDetails = ({ productDetails }) => {
                 </div>
             }
             <ul className={`${style.listDetails} list-unstyled`}>
-                <li className={style.item}>
-                    <span>القسم: </span>
-                    <Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>
-                        {productDetails?.category?.cat_name}
-                    </Link>
-                </li>
+                {!!productDetails?.category_id &&
+                    <li className={style.item}>
+                        <span>القسم: </span>
+                        <Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>
+                            {productDetails?.category?.cat_name}
+                        </Link>
+                    </li>}
                 {!!productDetails?.brand &&
                     <li className={style.item}>
                         <span>البراند: </span>

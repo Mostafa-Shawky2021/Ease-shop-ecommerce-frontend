@@ -13,13 +13,15 @@ const SectionLayout = ({
     title,
     children,
     link,
-    isSwiper }) => {
+    isSwiper,
+    ...props
+}) => {
 
     const nextElementRef = useRef(null);
     const prevElementRef = useRef(null);
 
     return (
-        <div className={style.sectionLayout}>
+        <div className={style.sectionLayout} {...props}>
             <Container className={style.container} fluid="xxl" style={{ position: 'relative' }}>
                 <header className={`${style.header} d-flex align-items-center justify-content-between`}>
                     <h4 className={style.title}>

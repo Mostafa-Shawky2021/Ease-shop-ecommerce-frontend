@@ -8,7 +8,7 @@ import { SubMenuCategories } from '@root/components/submenucategories';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
-import Icon from '@assets/images/categoriesmenu/icon.png';
+import DefaultImage from '@assets/images/default/default.jpg';
 
 import style from './categoryitem.module.scss';
 
@@ -27,8 +27,8 @@ const CategoryItem = ({ categoryData, subMenuCategories, ...props }) => {
         : style.hide;
 
     const imageIcon = categoryData?.image_thumbnail
-        ? `${url}/${categoryData?.image_thumbnail?.url}`
-        : Icon;
+        ? categoryData?.image_thumbnail
+        : DefaultImage;
 
     return (
         <li

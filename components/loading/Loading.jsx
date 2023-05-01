@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 
 import style from './loading.module.scss';
 
-const Loading = ({ children, isOpacity = true, scrollBar = true }) => {
+const Loading = ({
+    children,
+    isOpacity = true,
+    scrollBar = true,
+    isFixed = true }) => {
 
 
     useEffect(() => {
@@ -14,7 +18,9 @@ const Loading = ({ children, isOpacity = true, scrollBar = true }) => {
     }, [scrollBar]);
 
     return (
-        <div className={`${style.loading} ${isOpacity ? style.opacity : ''}`}>
+        <div
+            className={`${style.loading} ${isOpacity ? style.opacity : ''}`}
+            style={{ position: isFixed ? 'fixed' : 'absolute' }}>
             <div className={style.contentLoadingIndicator}>
                 {children}
             </div>

@@ -8,6 +8,7 @@
     transition: all 0.4s;
     border-radius: 4px;
     margin-top: 1.5rem;
+    padding-top: 1rem;
     padding-bottom: 1rem;
     border: 1px solid #dedede;
     min-height: 400px;
@@ -18,9 +19,16 @@
 
     .header {
         position: relative;
-        height: 346px;
+        height: 250px;
         overflow: hidden;
-        border-bottom: 1px solid #dedede;
+
+    }
+
+
+    .productCardImageWrapper .img {
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.5s ease-in-out;
     }
 
     .productDiscount {
@@ -71,7 +79,7 @@
         align-items: center;
         justify-content: center;
         gap: 5px;
-        background-color: red;
+        background-color: #fff;
         z-index: 99;
         transition: all 0.5s ease-in-out;
 
@@ -89,13 +97,6 @@
     .variantsWrapper .sizesBtn button {
         min-width: 27px;
         font-size: 0.8rem
-    }
-
-    .productCardImageWrapper .productCardImage {
-        cursor: pointer;
-        user-select: none;
-        transition: all 0.5s ease-in-out;
-
     }
 
     .productName {

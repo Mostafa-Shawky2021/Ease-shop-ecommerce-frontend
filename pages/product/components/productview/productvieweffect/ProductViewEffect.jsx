@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import { useState, useRef } from 'react';
 
-import { url } from 'data';
-
 import DefaultImage from '@assets/images/default/default.jpg';
 
 import style from "./productvieweffect.module.scss";
@@ -25,21 +23,24 @@ const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
                 <div className={`${style.image} ${activeImageIndex === 0 ? style.active : ''}`}>
                     <Image
                         fill
-                        style={{ paddingLeft: '15px', paddingRight: '15px' }}
+                        style={{ paddingLeft: '15px', paddingRight: '15px', objectFit: 'contain' }}
                         src={image ? `${image}` : DefaultImage}
                         alt={imageAlt} />
                 </div>
-                {imagesThumbnails?.map((thumbnail, index) => (
-                    <div
-                        className={`${style.image} ${activeImageIndex === index + 1 ? style.active : ''}`}
+                {imagesThumbnails?.map((thumbnail, index) => {
+                    const activeImageIndexClass = activeImageIndex === index + 1 ?
+                        style.active
+                        : '';
+                    return (<div
+                        className={`${style.image} ${activeImageIndexClass}`}
                         key={thumbnail.id}>
                         <Image
                             fill
                             style={{ paddingLeft: '15px', paddingRight: '15px' }}
-                            src={thumbnail?.url ? `${url}/${thumbnail?.url}` : ''}
+                            src={thumbnail?.url ? thumbnail?.url : ''}
                             alt={imageAlt} />
-                    </div>
-                ))}
+                    </div>)
+                })}
             </div>
             <div
                 className={style.imageThumbnailWrapper}
@@ -52,7 +53,7 @@ const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
                     <Image
                         fill
                         style={{ padding: '5px' }}
-                        src={image ? `${url}/${image}` : ''}
+                        src={image ? image : ''}
                         alt={imageAlt} />
                 </div>
 
@@ -65,7 +66,7 @@ const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
 
                         <Image
                             fill
-                            src={thumbnail?.url ? `${url}/${thumbnail?.url}` : ''}
+                            src={thumbnail?.url ? thumbnail?.url : ''}
                             style={{ padding: '5px' }}
                             alt={imageAlt} />
                     </div>

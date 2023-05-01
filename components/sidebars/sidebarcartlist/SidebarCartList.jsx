@@ -66,11 +66,13 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
     }
 
+    const isOpenCartListClass = isOpenCartList ? style.openCartList : '';
+
     return (
 
-        <div className={`${style.listWrapper} ${isOpenCartList ? style.openCartList : ''} `}>
+        <div className={`${style.listWrapper} ${isOpenCartListClass} `}>
             {isLoading &&
-                <Loading>
+                <Loading scrollBar={false} isFixed={false}>
                     <CircularProgress
                         size={33}
                         className={style.loadingIcon} />

@@ -121,7 +121,7 @@ const useCarts = (productDetails = null) => {
         } else {
 
             // check if cart has already been added
-            const cartExist = carts?.find(cart => cart.product_id === cartData.product_id);
+            const cartExist = carts?.find(cart => cart.product_id === newCartData.product_id);
             if (cartExist) {
                 incrementCart.mutate(
                     {

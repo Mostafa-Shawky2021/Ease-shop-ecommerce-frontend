@@ -20,7 +20,8 @@ const RelatedProduct = ({ relatedProductsData }) => {
         <div className={style.relatedProductWrapper}>
             <SectionLayout
                 title="المنتجات ذات صلة"
-                isSwiper={true}>
+                isSwiper={true}
+                style={{ marginTop: '3rem' }}>
                 {(nextElementRef, prevElementRef) => (
                     <Swiper
                         modules={[Pagination, Navigation]}

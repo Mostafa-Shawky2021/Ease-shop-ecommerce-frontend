@@ -10,15 +10,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Container } from 'react-bootstrap';
 import parse from 'html-react-parser';
 
-import { url } from 'data';
-
 import FirstImage from "@assets/images/homeslider/img1.jpg"
 import SecondImage from "@assets/images/homeslider/img2.jpg"
 import ThirdImage from "@assets/images/homeslider/img3.jpg"
 
 import "swiper/css/effect-fade";
 import style from './carousel.module.scss'
-
 
 const Carousel = () => {
 
@@ -51,15 +48,15 @@ const Carousel = () => {
 
     const carouselImages = carouselData?.data?.carousel_content?.images;
 
-    if (!!carouselImages.length) {
+    if (!!carouselImages?.length) {
 
       return carouselImages.map(image => (
-        <SwiperSlide className={style.sliderImage}>
+        <SwiperSlide key={image.id} className={style.sliderImage}>
           <Image
             fill
             className={style.image}
             style={{ objectFit: 'cover' }}
-            src={`${url}/${image.url}`}
+            src={image.url}
             alt="carousel-image" />
         </SwiperSlide>
       ))
@@ -97,8 +94,7 @@ const Carousel = () => {
 
       <Swiper
         style={{ direction: 'ltr' }}
-        // autoplay={{ delay: carouselTime() }}
-        autoplay={{ delay: 3000 }}
+        autoplay={{ delay: carouselTime() }}
         pagination={{ clickable: true }}
         className={style.swiper}
         slidesPerView={1}
