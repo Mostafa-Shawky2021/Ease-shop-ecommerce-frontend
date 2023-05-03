@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 import { useRouter } from "next/router";
-import { useCartsData, useGuest } from "@root/hooks";
+import { useCartsData, useGuest, useSearch } from "@root/hooks";
 
 import { calcCartsCount } from "@root/utils";
 
@@ -16,25 +16,11 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import style from "./header.module.scss";
 
 const Header = ({ setIsOpenCartList }) => {
-	const [searchInput, setSearchInput] = useState("");
-
-	const router = useRouter();
-
 	const { guestId } = useGuest();
 
 	const { data: carts } = useCartsData(guestId);
 
-	const handleSearchInput = () => {
-		const searchInputUrl = encodeURIComponent(searchInput);
-		router.push(`/products?productname=${searchInputUrl}`, undefined, { shallow: true });
-	};
-
-	const handleKeyPress = (event) => {
-		if (event.key === "Enter") {
-			const searchInputUrl = encodeURIComponent(searchInput);
-			router.push(`/products?productname=${searchInputUrl}`, undefined, { shallow: true });
-		}
-	};
+	const { handleOnInputChange, handleOnSubmitSearch } = useSearch();
 
 	const handleOpenCartList = () => setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
 
@@ -53,12 +39,12 @@ const Header = ({ setIsOpenCartList }) => {
 					<Col xs={12} md={5} lg={6}>
 						<div>
 							<InputWithIcon
-								onChange={(event) => setSearchInput(event.target.value)}
+								onChange={handleOnInputChange}
 								placeholder="عن ماذا تبحث؟"
 								className={style.searchInput}
-								onKeyPress={handleKeyPress}
+								onKeyPress={handleOnSubmitSearch}
 							>
-								<button className={style.btnSearch} onClick={handleSearchInput}>
+								<button className={style.btnSearch} onClick={handleOnSubmitSearch}>
 									<SearchOutlinedIcon fontSize="small" />
 								</button>
 							</InputWithIcon>

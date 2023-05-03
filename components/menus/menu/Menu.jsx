@@ -62,8 +62,8 @@ const Menu = ({ setIsOpenCartList }) => {
 						{!!carts?.length && <span className={style.count}>{calcCartsCount(carts)}</span>}
 					</button>
 					<SearchModal
-						renderBtn={(handleSearch) => (
-							<button onClick={handleSearch} className={style.searchBtn}>
+						renderBtn={(handleOpenModalSearch) => (
+							<button onClick={handleOpenModalSearch} className={style.searchBtn}>
 								<SearchOutlinedIcon fontSize="medium" />
 							</button>
 						)}
