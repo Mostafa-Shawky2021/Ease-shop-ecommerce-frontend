@@ -32,7 +32,7 @@ const Menu = ({ setIsOpenCartList }) => {
 
 	return (
 		<div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ""}`}>
-			<Container fluid="xl" className="d-flex align-items-center px-1">
+			<Container fluid="xl" className="d-flex align-items-center">
 				<div className={style.categoryWrapper}>
 					<CategoriesMenu />
 				</div>

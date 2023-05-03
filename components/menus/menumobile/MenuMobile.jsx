@@ -49,7 +49,7 @@ const MenuMobile = () => {
 					</li>
 
 					<li className={style.menuItem}>
-						<Link href="/carts">
+						<Link href="/carts" style={{ position: "relative" }}>
 							<span className={style.icon}>
 								<ShoppingCartIcon fontSize="small" />
 							</span>
