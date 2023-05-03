@@ -1,54 +1,54 @@
-@use 'sass/var' as var;
+@use "sass/var" as var;
 
 .sidebarListMenu {
-    width: 300px;
-    min-height: 100vh;
-    position: fixed;
-    right: -300px;
-    top: 0px;
-    background-color: #fff;
-    z-index: 20;
-    padding: 1.5rem 0.9rem;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    transition: all 0.4s;
+	width: 300px;
+	min-height: 100vh;
+	position: fixed;
+	right: -300px;
+	top: 0px;
+	background-color: #fff;
+	z-index: 20;
+	padding: 1.5rem 0.9rem;
+	box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+	transition: all 0.4s;
 
-    &.openSidebarMenuMobile {
-        right: 0px;
-    }
+	&.openSidebarMenuMobile {
+		right: 0px;
+	}
 
-    .listMenu {
-        margin-top: 2rem;
-    }
+	.listMenu {
+		margin-top: 2rem;
+	}
 
-    .listMenu .item {
-        margin-top: 0.3rem;
-        border-bottom: 1px solid #dedede;
-    }
+	.listMenu .item {
+		margin-top: 0.3rem;
+		border-bottom: 1px solid #dedede;
+	}
 
-    .listMenu .item a {
-        padding: 0.5rem 0px 0.7rem;
-        transition: all 0.3s;
-        width: 100%;
-        font-size: 0.866rem;
+	.listMenu .item a {
+		padding: 0.5rem 0px 0.7rem;
+		transition: all 0.3s;
+		width: 100%;
+		font-size: 0.866rem;
 
-        &:hover {
-            color: var(--bs-primary);
-        }
-    }
+		&:hover {
+			color: var(--bs-primary);
+		}
+	}
 
-    .iconMenuMobileCloseWrapper {
-        position: absolute;
-        left: 10px;
-        top: 5px;
-        color: var.$softblack;
-        cursor: pointer;
-        padding: 5px;
-        transition: all 0.4s;
+	.iconMenuMobileCloseWrapper {
+		position: absolute;
+		left: 10px;
+		top: 5px;
+		color: var.$softblack;
+		cursor: pointer;
+		padding: 5px;
+		transition: all 0.4s;
 
-        &:hover,
-        &:focus {
-            background-color: var(--bs-primary);
-            color: #fff;
-        }
-    }
+		&:hover,
+		&:focus {
+			background-color: var(--bs-primary);
+			color: #fff;
+		}
+	}
 }

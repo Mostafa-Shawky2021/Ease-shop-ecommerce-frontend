@@ -1,0 +1,25 @@
+@use "sass/var" as var;
+.searchModalWrapper {
+	.modalContent {
+		max-width: 70%;
+	}
+	.searchBtn {
+		position: absolute;
+		left: 8px;
+		top: 50%;
+		transform: translateY(-50%);
+		height: 100%;
+		background-color: transparent;
+		border: 0px;
+		border-right: 1px solid #c4bdbd;
+		transition: all 0.5s;
+		&:hover {
+			color: var(--bs-primary);
+		}
+	}
+}
+// .modalContent {
+
+// }
+// .searchModalWrapper {
+// }

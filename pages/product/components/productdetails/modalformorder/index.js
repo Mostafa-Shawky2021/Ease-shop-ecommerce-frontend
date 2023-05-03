@@ -1,1 +1,1 @@
-export { default as ModalFormOrder } from './ModalFormOrder';
+export { default as ModalformOrder } from "./ModalformOrder";
