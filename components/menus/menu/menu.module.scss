@@ -53,9 +53,11 @@
 		}
 	}
 	.leftContent {
-		display: flex;
-		@include maxmediaquery("lg") {
-			display: none;
+		display: none;
+		&.show {
+			@include minmediaquery("lg") {
+				display: block;
+			}
 		}
 	}
 	.leftContent .cartListBtn,

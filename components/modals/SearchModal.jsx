@@ -33,6 +33,7 @@ const SearchModal = ({ renderBtn }) => {
 							style={{ padding: "0.5rem", border: "1px solid #0075ff" }}
 							onChange={handleOnInputChange}
 							onKeyPress={handleOnSubmitSearch}
+							placeholder="عن ماذا تبحث"
 						>
 							<button className={style.searchBtn} onClick={handleOnSubmitSearch}>
 								<SearchOutlinedIcon fontSize="small" />

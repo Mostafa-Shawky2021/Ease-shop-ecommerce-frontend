@@ -56,7 +56,7 @@ const Menu = ({ setIsOpenCartList }) => {
 						<Link href="#">التواصل معنا</Link>
 					</li>
 				</ul>
-				<div className={style.leftContent} style={{ display: fixedMenu ? "flex" : "none" }}>
+				<div className={`${style.leftContent} ${fixedMenu ? style.show : ""}`}>
 					<button className={style.cartListBtn} onClick={handleOpenCartList}>
 						<LocalMallOutlinedIcon fontSize="medium" />
 						{!!carts?.length && <span className={style.count}>{calcCartsCount(carts)}</span>}
