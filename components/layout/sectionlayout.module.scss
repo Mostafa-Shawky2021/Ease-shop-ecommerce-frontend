@@ -1,99 +1,101 @@
-@use 'sass/var' as var;
-@use 'sass/mixins/mediaquery' as *;
+@use "sass/var" as var;
+@use "sass/mixins/mediaquery" as *;
 
 .sectionLayout {
-    margin-top: 1.5rem;
-    position: relative;
-    background-color: #fff;
+	margin-top: 1.5rem;
+	position: relative;
+	background-color: #fff;
 
-    @include minmediaquery('md') {
-        margin-top: 2rem;
-    }
+	@include minmediaquery("md") {
+		margin-top: 2rem;
+	}
 
-    .container {
-        @include minmediaquery('md') {
-            padding-right: 2rem;
-            padding-left: 2rem;
-        }
-    }
+	.container {
+		&.disableContainer {
+			padding-right: 0px;
+			padding-left: 0px;
+			width: 100%;
+		}
+		@include minmediaquery("md") {
+			padding-right: 2rem;
+			padding-left: 2rem;
+		}
+	}
 
-    .header {
-        margin-bottom: 0.3rem;
-    }
+	.header {
+		margin-bottom: 0.3rem;
+	}
 
-    .title {
-        margin-bottom: 0.5rem;
-        font-size: 1.125rem;
-        position: relative;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #e1e1e1;
+	.title {
+		margin-bottom: 0.5rem;
+		font-size: 1.125rem;
+		position: relative;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid #e1e1e1;
 
-        &::after {
-            content: "";
-            position: absolute;
-            right: 0px;
-            bottom: -1px;
-            background: var.$secondarycolor;
-            width: 135px;
-            height: 2px;
-        }
+		&::after {
+			content: "";
+			position: absolute;
+			right: 0px;
+			bottom: -1px;
+			background: var.$secondarycolor;
+			width: 135px;
+			height: 2px;
+		}
+	}
 
-    }
+	.viewMore {
+		color: var.$softblack;
+		font-weight: 600;
+		padding: 5px;
+		border-radius: 5px;
+		margin-top: -10px;
+		transition: 0.3s;
+		border: 1px solid #dede;
+		font-size: 0.8rem;
 
-    .viewMore {
-        color: var.$softblack;
-        font-weight: 600;
-        padding: 5px;
-        border-radius: 5px;
-        margin-top: -10px;
-        transition: 0.3s;
-        border: 1px solid #dede;
-        font-size: 0.8rem;
+		&:hover {
+			color: var.$secondarycolor;
+		}
+	}
 
-        &:hover {
-            color: var.$secondarycolor;
-        }
+	.arrowWrapper {
+		position: absolute;
+		left: 0px;
+		top: 50%;
+		width: 100%;
+		z-index: 20;
+		gap: 12px;
+		transform: translateY(-50%);
+		line-height: 46px;
+	}
 
+	.arrowWrapper .arrow {
+		border-radius: 50%;
+		text-align: center;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		transition: all 0.3s;
+		color: #000;
+		position: absolute;
+		background-color: #fff;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
-    }
+		&:first-of-type {
+			right: 0px;
+		}
 
-    .arrowWrapper {
-        position: absolute;
-        left: 0px;
-        top: 50%;
-        width: 100%;
-        z-index: 20;
-        gap: 12px;
-        transform: translateY(-50%);
-        line-height: 46px;
-    }
+		&:last-of-type {
+			left: 0px;
+		}
 
-    .arrowWrapper .arrow {
-        border-radius: 50%;
-        text-align: center;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        transition: all 0.3s;
-        color: #000;
-        position: absolute;
-        background-color: #fff;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		.arrowIcon {
+			margin-top: -7px;
+		}
 
-        &:first-of-type {
-            right: 0px;
-        }
-
-        &:last-of-type {
-            left: 0px;
-        }
-
-        .arrowIcon {
-            margin-top: -7px;
-        }
-
-        &:hover {
-            background-color: var.$secondarycolor;
-        }
-    }
+		&:hover {
+			background-color: var.$secondarycolor;
+		}
+	}
 }

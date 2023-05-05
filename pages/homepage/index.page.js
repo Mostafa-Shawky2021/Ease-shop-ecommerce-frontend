@@ -44,7 +44,7 @@ export default function HomePage() {
 			<Offer />
 			{/* <TopCategories /> */}
 			<Categories />
-			{/* <LatestProducts /> */}
+			<LatestProducts />
 			<ProductsOffers />
 			<RandomCategoriesProducts />
 		</>

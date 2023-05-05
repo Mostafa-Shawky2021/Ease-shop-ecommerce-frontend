@@ -19,9 +19,7 @@ const Footer = () => {
 							<h3 className={style.logo}>
 								Shop<span className={style.special}>Notify</span>
 							</h3>
-							<p className={style.description}>
-								نحن مجموعة من المستثمرين الاجانب الذي نهدف الي انشاء منصات الكترونيه
-							</p>
+							<p className={style.description}>نحن مجموعة من الشباب الذي نهدف الي انشاء منصات الكترونيه</p>
 							<div className={style.social}>
 								<Link href="#" className={style.link}>
 									<FacebookIcon fontSize="xs" />
@@ -59,13 +57,13 @@ const Footer = () => {
 									<Link href="">الاكثر مبيعاً</Link>
 								</li>
 								<li className={style.item}>
-									<Link href="">احدث المنتجات</Link>
+									<Link href="/latestproducts">احدث المنتجات</Link>
 								</li>
 								<li className={style.item}>
-									<Link href="#">المنتجات المميزة</Link>
+									<Link href="/store">المنتجات المميزة</Link>
 								</li>
 								<li className={style.item}>
-									<Link href="">عروض المنتجات</Link>
+									<Link href="/productsoffers">عروض المنتجات</Link>
 								</li>
 							</ul>
 						</div>

@@ -1,65 +1,64 @@
-@use 'sass/var' as var;
+@use "sass/var" as var;
 
 .checkoutWrapper {
+	.required {
+		color: #f00;
+		font-weight: bold;
+		font-size: 1.1rem;
+	}
 
-    .required {
-        color: #f00;
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
+	.formControl {
+		border-radius: 0px;
+		margin-top: 3px;
 
-    .formControl {
-        border-radius: 0px;
-        margin-top: 3px;
+		&:hover,
+		&:focus {
+			border: 1px solid var.$secondarycolor;
+			box-shadow: none;
+		}
+	}
 
-        &:hover,
-        &:focus {
-            border: 1px solid var.$secondarycolor;
-            box-shadow: none;
-        }
-    }
+	.formLabel {
+		color: var.$softblack;
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
 
-    .formLabel {
-        color: var.$softblack;
-        font-size: 0.85rem;
-        font-weight: 600;
-    }
+	.errorField {
+		border: 1px solid #f00 !important;
+	}
 
-    .errorField {
-        border: 1px solid #f00 !important;
-    }
+	.errMsg {
+		font-size: 0.9rem;
+		color: #f00;
+		margin-right: 5px;
+		margin-top: -3px;
+	}
 
-    .errMsg {
-        font-size: 0.9rem;
-        color: #f00;
-        margin-right: 5px;
-        margin-top: -3px;
-    }
+	.checkOutbtn {
+		background-color: var.$secondarycolor;
+		color: #000;
+		font-weight: 500;
+		padding: 0.5rem 1.8rem;
+		border: 1px solid var.$secondarycolor;
+		transition: all 0.3s;
+		border-radius: 0px;
+		font-size: 0.85rem;
 
-    .checkOutbtn {
-        background-color: var.$secondarycolor;
-        color: #000;
-        font-weight: 600;
-        padding: 0.5rem 1.8rem;
-        border: 1px solid var.$secondarycolor;
-        transition: all 0.3s;
-        border-radius: 0px;
-        font-size: 0.9rem;
+		&:hover {
+			background: #e5a400;
+			border: 1px solid #e5a400;
+		}
+	}
 
-        &:hover {
-            background: #e5a400;
-            border: 1px solid #e5a400;
-        }
-    }
+	.returnToCart {
+		color: var(--bs-primary);
+		font-weight: 500;
+		font-size: 0.8rem;
+		transition: all 0.3s;
 
-    .returnToCart {
-        color: var(--bs-primary);
-        font-weight: 500;
-        font-size: 0.85rem;
-        transition: all 0.3s;
-
-        &:hover {
-            color: var(--bs-btn-hover-bg);
-        }
-    }
+		&:hover {
+			color: var(--bs-btn-hover-bg);
+		}
+	}
 }
