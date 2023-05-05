@@ -1,24 +1,14 @@
 a {
-    text-decoration: none;
-    color: inherit;
-    display: inline-block;
+	text-decoration: none;
+	color: inherit;
+	display: inline-block;
 
-    &:hover,
-    &:focus {
-        color: inherit;
-    }
+	&:hover,
+	&:focus {
+		color: inherit;
+	}
 }
 
 span {
-    display: inline-block;
-}
-
-body::-webkit-scrollbar {
-    width: 9px;
-    background-color: #212224;
-}
-
-body::-webkit-scrollbar-thumb {
-    background: #666666;
-    border-radius: 5px;
+	display: inline-block;
 }

@@ -1,86 +1,113 @@
 @use "sass/var" as var;
 @use "sass/mixins/mediaquery" as *;
+@use "sass/mixins/badge" as *;
 
 .menuWrapper {
-    background-color: var.$secondarycolor;
-    padding: 0.625rem;
-    top: -86px;
-    transition: all 0.5s;
+	background-color: var.$secondarycolor;
+	padding: 0.625rem;
+	top: -100%;
+	transition: all 1.5s linear;
+	width: 100%;
+	z-index: 30;
+	&.fixed {
+		position: fixed;
+		top: 0px;
+	}
+	.categoryWrapper {
+		width: 260px;
+		position: relative;
+		margin-left: 10px;
+		display: none;
 
+		@include minmediaquery("lg") {
+			display: block;
+		}
+	}
 
-    .categoryWrapper {
-        width: 260px;
-        position: relative;
-        margin-left: 10px;
-        display: none;
+	.listMenu {
+		display: none;
 
-        @include minmediaquery('lg') {
-            display: block;
-        }
-    }
+		@include minmediaquery("lg") {
+			padding-right: 10px;
+			display: flex;
+			align-items: center;
+			margin: 0px;
+		}
+	}
 
-    .listMenu {
-        display: none;
+	.listMenu > .item {
+		color: #000;
+		font-weight: 400;
+		font-size: 0.86rem;
+		font-family: var.$cairofont;
+		margin-left: 2rem;
+		transition: all 0.3s;
+		padding: 1rem 0px;
 
-        @include minmediaquery('lg') {
-            padding-right: 10px;
-            display: flex;
-            align-items: center;
-            margin: 0px;
-        }
-    }
+		> &:hover {
+			color: var.$secondarycolor;
 
-    .listMenu>.item {
-        color: #000;
-        font-weight: 500;
-        font-size: 0.86rem;
-        font-family: var.$cairofont;
-        margin-left: 2rem;
-        transition: all 0.3s;
-        padding: 1rem 0px;
+			@include minmediaquery("lg") {
+				color: #fff;
+			}
+		}
+	}
+	.leftContent {
+		display: none;
+		&.show {
+			@include minmediaquery("lg") {
+				display: block;
+			}
+		}
+	}
+	.leftContent .cartListBtn,
+	.leftContent .searchBtn {
+		background-color: transparent;
+		color: #3f3f3f;
+		border: 0px;
+		position: relative;
+		outline: none;
+		padding: 0px 5px;
+		transition: all 0.5s;
+		&:hover {
+			color: #fff;
+		}
+	}
+	.cartListBtn .count {
+		@include badge(
+			(
+				width: 15,
+				height: 15,
+				line-height: 14,
+				top: -6,
+				left: 0,
+			)
+		);
+	}
+	.mobileWrapper {
+		width: 100%;
+		display: none;
 
-        >&:hover {
-            color: var.$secondarycolor;
+		@include maxmediaquery("lg") {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
 
-            @include minmediaquery('lg') {
-                color: #fff;
-            }
+	.mobileWrapper .logoMobileScreen .logo {
+		color: #ffffff;
+		font-weight: 600;
+		font-size: 1.4375rem;
+		font-family: var.$oswaldfont;
+		user-select: none;
 
-        }
-    }
+		.special {
+			color: var.$accentcolor;
+		}
+	}
 
-    .mobileWrapper {
-        width: 100%;
-        display: none;
-
-        @include maxmediaquery('lg') {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-    }
-
-
-    .mobileWrapper .logoMobileScreen .logo {
-
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 1.4375rem;
-        font-family: var.$oswaldfont;
-        user-select: none;
-
-        .special {
-            color: var.$accentcolor;
-        }
-
-    }
-
-    .mobileWrapper .barWrapper {
-        cursor: pointer
-    }
-
-    .mobileWrapper .barWrapper .barIcon {
-        background-color: #000;
-    }
-
+	.mobileWrapper .barWrapper {
+		cursor: pointer;
+	}
 }

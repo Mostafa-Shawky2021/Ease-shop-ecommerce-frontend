@@ -1,55 +1,65 @@
-@use 'sass/var' as var;
-@use 'sass/mixins/badge' as *;
-@use 'sass/mixins/mediaquery' as *;
+@use "sass/var" as var;
+@use "sass/mixins/badge" as *;
+@use "sass/mixins/mediaquery" as *;
 
 .menuMobileWrapper {
-    position: fixed;
-    background-color: #fff;
-    bottom: 0px;
-    left: 0px;
-    padding: 0.8rem 0px;
-    z-index: 20;
-    width: 100%;
-    border-top-left-radius: 0.8rem;
-    border-top-right-radius: 0.8rem;
-    display: none;
-    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+	position: fixed;
+	background-color: #fff;
+	bottom: 0px;
+	left: 0px;
+	padding: 0.8rem 0px;
+	z-index: 20;
+	width: 100%;
+	display: none;
+	box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
 
-    @include maxmediaquery('lg') {
-        display: block;
-    }
+	@include maxmediaquery("lg") {
+		display: block;
+	}
 
-    .menuList {
-        display: flex;
-        gap: 12px;
-        text-align: center;
-        margin: 0px;
-        padding: 0px;
-    }
+	.menuList {
+		display: flex;
+		gap: 12px;
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
 
-    .menuItem {
-        flex-grow: 1;
-        position: relative;
-        color: var.$hardblack;
-        font-weight: 600;
-        transition: all 0.3s;
+	.menuItem {
+		flex-grow: 1;
+		position: relative;
+		color: var.$hardblack;
+		font-weight: 600;
+		transition: all 0.3s;
+		.icon {
+			display: block;
+			color: #0b1729;
+			transition: all 0.3s;
+		}
+		&:hover,
+		&:hover .icon {
+			color: var(--bs-primary) !important;
+		}
+	}
 
-        &:hover {
-            color: var.$secondarycolor;
-        }
-    }
+	.text {
+		font-size: 0.7rem;
+		display: block;
+		margin-top: 0.3rem;
+	}
 
-    .icon {
-        display: block;
-    }
-
-    .text {
-        font-size: 0.7rem;
-        display: block;
-        margin-top: 0.3rem;
-    }
-
-    .count {
-        @include badge($offset: (left:10, top:-7));
-    }
+	.count {
+		@include badge(
+			$offset: (
+				left: 5,
+				top: -7,
+				width: 17,
+				height: 17,
+			)
+		);
+	}
+	.searchBtn {
+		background-color: transparent;
+		border: 0px;
+	}
 }

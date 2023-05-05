@@ -1,7 +1,7 @@
-@use './reset';
-@use './typo';
-
+@use "./reset";
+@use "./typo";
+@import "./fonts";
 
 .swiper-wrapper {
-    padding-bottom: 12px;
+	padding-bottom: 12px;
 }

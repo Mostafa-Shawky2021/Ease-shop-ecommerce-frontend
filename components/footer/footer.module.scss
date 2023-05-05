@@ -1,117 +1,90 @@
-@use 'sass/var' as var;
-@use 'sass/mixins/paragraph' as *;
-@use 'sass/mixins/mediaquery' as *;
+@use "sass/var" as var;
+@use "sass/mixins/paragraph" as *;
+@use "sass/mixins/mediaquery" as *;
 
 .footerWrapper {
-    margin-top: 3.5rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    background-color: #202325;
-    color: #fff;
-    overflow: hidden;
+	margin-top: 3.5rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	background-color: #0b1729;
+	color: #fff;
+	overflow: hidden;
+	@include maxmediaquery("lg") {
+		margin-bottom: 3rem;
+	}
+	.intro {
+		@include maxmediaquery("sm") {
+			border-bottom: 1px solid #5c5c5c;
+		}
+	}
+	.logo {
+		color: #fff;
+		font-size: 1.8rem;
+		font-weight: bold;
 
-    .logo {
-        color: #fff;
-        font-size: 2rem;
-        font-weight: bold;
+		.special {
+			color: var.$secondarycolor;
+		}
+	}
 
-        .special {
-            color: var.$secondarycolor;
-        }
-    }
+	.description {
+		@include paragraph(#8c8c8c);
+		line-height: 1.8;
+		font-size: 0.87rem;
+		margin-top: 1.1rem;
+	}
 
-    .description {
+	.social {
+		display: flex;
+		gap: 10px;
+		padding-bottom: 1rem;
+		margin-bottom: 10px;
+		margin-top: 1.1rem;
 
-        @include paragraph(#bfbfbf);
-        font-size: 0.9375rem;
-        margin-top: 5px;
-    }
+		.link {
+			transition: all 0.6s;
+			background-color: rgba(255, 255, 255, 0.08);
+			color: #fff;
+			border-radius: 50%;
+			width: 26px;
+			height: 26px;
+			text-align: center;
+			padding-top: 1px;
+		}
 
-    .social {
-        display: flex;
-        gap: 10px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #5c5c5c;
-        margin-bottom: 10px;
+		.link:hover {
+			color: var.$secondarycolor;
+		}
+	}
 
-        @include minmediaquery(sm) {
-            border-bottom: 0px;
-            margin-bottom: 0px;
-        }
+	.subtitle {
+		color: #d6d5d5;
+		font-size: 1rem;
+		margin-top: 10px;
+		font-weight: 400;
+	}
+	.colWrapper:not(:last-child) .usefullink {
+		@include maxmediaquery("sm") {
+			border-bottom: 1px solid #5c5c5c;
+		}
+	}
+	.usefullink {
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+	}
 
-        .link {
-            transition: all 0.6s;
-        }
+	.usefullink .linkslist .item {
+		padding: 0px;
+		@include paragraph(#8c8c8c);
+		font-size: 0.87rem;
+		transition: all 0.3s;
 
-        .link:hover {
-            color: var.$secondarycolor;
-        }
-    }
+		&:hover {
+			color: var.$secondarycolor;
+		}
+	}
 
-    .subtitle {
-        color: #fff;
-        font-size: 1.0625rem;
-        margin-top: 10px;
-    }
-
-    .usefullink {
-        padding-bottom: 10px;
-        border-bottom: 1px solid #5c5c5c;
-        margin-bottom: 10px;
-
-        @include minmediaquery('sm') {
-            border-bottom: 0px;
-            margin-bottom: 0px;
-        }
-    }
-
-    .usefullink .linkslist .item {
-        padding: 0px;
-        @include paragraph(#bfbfbf);
-        font-size: 0.9375rem;
-        transition: all 0.3s;
-
-        &:hover {
-            color: var.$secondarycolor;
-        }
-    }
-
-    .listProducts {
-        padding-bottom: 10px;
-        border-bottom: 1px solid #5c5c5c;
-        margin-bottom: 10px;
-
-        @include minmediaquery('sm') {
-            border-bottom: 0px;
-            margin-bottom: 0px;
-        }
-    }
-
-
-
-    .tProducts .item {
-        @include paragraph(#bfbfbf);
-        padding: 0px;
-        transition: all 0.3s;
-
-        &:hover {
-            color: var.$secondarycolor;
-        }
-    }
-
-    .contactList .item {
-        @include paragraph(#bfbfbf);
-        padding: 0px;
-        transition: all 0.3s;
-
-        &:hover {
-            color: var.$secondarycolor;
-        }
-
-        .link {
-            margin-right: 14px;
-        }
-    }
-
-
+	.contactList .item .link {
+		margin-right: 8px;
+	}
 }

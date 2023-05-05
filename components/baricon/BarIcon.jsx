@@ -1,4 +1,4 @@
-// import style from './baricon.module.scss';
+import style from "./baricon.module.scss";
 
 const BarIcon = ({ activeIcons, barIconStyle = null, ...props }) => {
 	return (
