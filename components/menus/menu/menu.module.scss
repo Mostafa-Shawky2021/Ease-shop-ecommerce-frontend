@@ -3,7 +3,7 @@
 @use "sass/mixins/badge" as *;
 
 .menuWrapper {
-	background-color: var.$secondarycolor;
+	background-color: #ffff;
 	padding: 0.625rem;
 	top: -100%;
 	transition: all 1.5s linear;
@@ -12,6 +12,7 @@
 	&.fixed {
 		position: fixed;
 		top: 0px;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	}
 	.categoryWrapper {
 		width: 260px;
@@ -45,11 +46,7 @@
 		padding: 1rem 0px;
 
 		> &:hover {
-			color: var.$secondarycolor;
-
-			@include minmediaquery("lg") {
-				color: #fff;
-			}
+			color: var(--bs-primary);
 		}
 	}
 	.leftContent {

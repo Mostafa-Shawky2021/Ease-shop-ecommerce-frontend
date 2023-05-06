@@ -50,8 +50,8 @@
 	}
 
 	.listDetails {
-		padding: 0px 0px 10px;
-		margin-top: 0.5rem;
+		padding: 0px;
+		margin-top: 0.9rem;
 	}
 
 	.listDetails .item {
@@ -59,10 +59,6 @@
 		color: var.$softblack;
 		font-weight: 500;
 		font-size: 0.9rem;
-
-		&:not(:last-child) {
-			border-bottom: 1px solid #e3e3e3;
-		}
 	}
 
 	.listDetails .item span:first-child {
@@ -96,7 +92,10 @@
 		padding: 5px;
 		min-width: 45px;
 	}
-
+	.addCartDetails {
+		padding-top: 1rem;
+		border-top: 1px solid #dedede;
+	}
 	.addCartbtn {
 		background: var.$secondarycolor;
 		color: #000;

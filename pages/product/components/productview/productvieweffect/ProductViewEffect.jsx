@@ -30,9 +30,10 @@ const ProductViewEffect = ({ image, imagesThumbnails, imageAlt }) => {
 					);
 				})}
 			</div>
+			{/* image thumbnails */}
 			<div className={style.imageThumbnailWrapper} ref={imageThumbnailWrapperRef}>
 				<div className={`${style.thumbnail} ${0 === activeImageIndex ? style.active : ""}`} onClick={handleimageThumbnail} data-index={0}>
-					<Image fill style={{ padding: "5px" }} src={image ? image : ""} alt={imageAlt} />
+					<Image fill style={{ padding: "5px" }} src={image ? image : DefaultImage} alt={imageAlt} />
 				</div>
 
 				{imagesThumbnails?.map((thumbnail, index) => (

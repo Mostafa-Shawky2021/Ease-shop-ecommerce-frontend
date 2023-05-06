@@ -1,59 +1,57 @@
 @use "sass/var" as var;
 
 @keyframes animate {
-    from {
-        top: 30px;
-        opacity: 0;
-    }
+	from {
+		top: 30px;
+		opacity: 0;
+	}
 
-    to {
-        top: 0px;
-        opacity: 1;
-    }
-
+	to {
+		top: 0px;
+		opacity: 1;
+	}
 }
 
 .itemCategory {
-    margin-bottom: 5px;
-    margin-top: 5px;
-    position: relative;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0px 0.8rem;
-    cursor: pointer;
+	position: relative;
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 0px 0.8rem;
+	cursor: pointer;
+	&:hover {
+		background-color: #eee;
+	}
+	.listSubCategories {
+		box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+		position: absolute;
+		top: 10px;
+		right: 101%;
+		margin-right: -1px;
+		width: 300px;
+		display: none;
+		opacity: 0;
 
-    .listSubCategories {
-        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-        position: absolute;
-        top: 10px;
-        right: 101%;
-        margin-right: -1px;
-        width: 300px;
-        display: none;
-        opacity: 0;
+		&.activeSubMenu {
+			display: block;
+			animation: animate 0.5s forwards;
+		}
+	}
 
-        &.activeSubMenu {
-            display: block;
-            animation: animate 0.5s forwards;
-        }
-    }
+	.categoryLink {
+		cursor: pointer;
+		background-color: transparent;
+		color: var.$softblack;
+		font-weight: 500;
+		border: none;
+		padding: 0.8rem 0.2rem;
+		width: 100%;
+		display: flex;
+		align-items: center;
+	}
 
-    .categoryLink {
-        cursor: pointer;
-        background-color: transparent;
-        color: var.$softblack;
-        font-weight: 500;
-        border: none;
-        padding: 0.5rem 0.2rem;
-        width: 100%;
-        display: flex;
-        align-items: center;
-
-    }
-
-    .itemCategory:not(:last-child) {
-        border-bottom: 1px solid #dedede;
-    }
+	.itemCategory:not(:last-child) {
+		border-bottom: 1px solid #dedede;
+	}
 }

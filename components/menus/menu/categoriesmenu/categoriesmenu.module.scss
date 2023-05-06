@@ -1,67 +1,64 @@
-@use 'sass/var' as var;
-@use 'sass/mixins/mediaquery' as *;
+@use "sass/var" as var;
+@use "sass/mixins/mediaquery" as *;
 
 .categoryWrapperMenu {
+	.buttonCategories {
+		width: 100%;
+		padding: 0.7rem 0.75rem;
+		background-color: #fff;
+		border: none;
+		font-weight: 500;
+		position: relative;
+		border-radius: 0px;
+		color: #000;
+		display: flex;
+		align-items: center;
+		outline: 0px;
+		box-shadow: none;
+		margin-left: 10px;
+		font-size: 0.9rem;
+		border: 1px solid #dedede;
+		&:hover {
+			border: 1px solid var.$secondarycolor;
+		}
+	}
 
-    .buttonCategories {
-        width: 100%;
-        padding: 0.7rem 0.75rem;
-        background-color: #fff;
-        border: none;
-        font-weight: 500;
-        position: relative;
-        border-radius: 0px;
-        color: #000;
-        display: flex;
-        align-items: center;
-        outline: 0px;
-        box-shadow: none;
-        margin-left: 10px;
-        font-size: 0.9rem;
-    }
+	.buttonCategories:focus,
+	.buttonCategories:hover {
+		background-color: #fff !important;
+		color: #000 !important;
+	}
 
-    .buttonCategories:focus,
-    .buttonCategories:hover {
-        background-color: #fff !important;
-        color: #000 !important;
+	.text {
+		color: var.$softblack;
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
 
-    }
+	.listCategories {
+		position: absolute;
+		background-color: #fff;
+		width: 100%;
+		z-index: 999;
+		top: 47px;
+		transform: scale(1, 0);
+		transition: all 0.3s;
+		transform-origin: 50% 0%;
+		box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
-    .text {
-        color: var.$softblack;
-        font-size: 0.85rem;
-        font-weight: 600;
-    }
+		&.openCategoryList {
+			transform: scale(1);
+		}
 
-    .listCategories {
-        position: absolute;
-        background-color: #fff;
-        width: 100%;
-        z-index: 999;
-        top: 47px;
-        padding-bottom: 10px;
-        transform: scale(1, 0);
-        transition: all 0.3s;
-        transform-origin: 50% 0%;
-        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+		&::-webkit-scrollbar {
+			background-color: transparent;
+			width: 3px;
+			opacity: 0;
+		}
 
-        &.openCategoryList {
-            transform: scale(1)
-        }
-
-        &::-webkit-scrollbar {
-            background-color: transparent;
-            width: 3px;
-            opacity: 0;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: var.$ternarycolor;
-            border-radius: 8px;
-
-        }
-
-
-    }
-
+		&::-webkit-scrollbar-thumb {
+			background-color: var.$ternarycolor;
+			border-radius: 8px;
+		}
+	}
 }

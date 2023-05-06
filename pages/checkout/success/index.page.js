@@ -15,7 +15,7 @@ const CheckoutSuccessPage = () => {
 
 	useEffect(() => {
 		if (!order_id) push("/store");
-	}, [order_id]);
+	}, [order_id, push]);
 
 	const breadCrumbData = [
 		{ label: "الصفحة الرئيسية", link: "/homepage" },
@@ -26,9 +26,7 @@ const CheckoutSuccessPage = () => {
 		<>
 			<BreadCrumbLayout data={breadCrumbData} />
 			<Container style={{ marginTop: "2rem", minHeight: "200px" }}>
-				<p style={{ fontSize: "1.2rem", color: "#222" }}>
-					تم ارسال طلبك بنجاح رقم الاوردر: {order_id}
-				</p>
+				<p style={{ fontSize: "1.2rem", color: "#222" }}>تم ارسال طلبك بنجاح رقم الاوردر: {order_id}</p>
 				<p style={{ fontSize: "0.85rem" }}>سوف يقوم احد موظفينا بالتواصل معكم في اقرب وقت</p>
 				<p>
 					في حالة وجود استفسار يمكنك ارسال رسالة

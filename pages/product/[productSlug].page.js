@@ -54,7 +54,7 @@ export default function ProductDetailsPage() {
 						<ProductDetails productDetails={productDetails} />
 					</Col>
 				</Row>
-				<ProductDescription productDescription={productDetails?.long_description} />
+				{productDetails?.long_description && <ProductDescription productDescription={productDetails.long_description} />}
 				<RelatedProduct relatedProductsData={relatedProducts} />
 			</Container>
 		</>

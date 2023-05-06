@@ -1,32 +1,31 @@
-@use 'sass/var' as var;
+@use "sass/var" as var;
 
 .defaultListSubCategories {
+	background-color: #fff;
+	padding: 0.2rem 0.6rem;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	.itemCategory {
+		margin-bottom: 5px;
+		margin-top: 5px;
+		padding-right: 0.5rem;
+		padding-left: 0.5rem;
+		font-size: 0.866rem;
+		color: var.$softblack;
+	}
 
-    background-color: #fff;
-    padding: 0.2rem 0.6rem;
+	.link {
+		padding: 0.5rem 0px;
+		display: inline-block;
+		width: 100%;
+		font-weight: 500;
+		border: none;
 
-    .itemCategory {
-        margin-bottom: 5px;
-        margin-top: 5px;
-        padding-right: 0.5rem;
-        padding-left: 0.5rem;
-        font-size: 0.866rem;
-        color: var.$softblack;
-    }
+		&:hover {
+			color: var(--bs-primary);
+		}
+	}
 
-    .link {
-        padding: 0.5rem 0px;
-        display: inline-block;
-        width: 100%;
-        font-weight: 500;
-        border: none;
-
-        &:hover {
-            color: var(--bs-primary)
-        }
-    }
-
-    .itemCategory:not(:last-child) .link {
-        border-bottom: 1px solid #dedede;
-    }
+	.itemCategory:not(:last-child) .link {
+		border-bottom: 1px solid #dedede;
+	}
 }

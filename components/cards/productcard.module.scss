@@ -21,7 +21,9 @@
 		height: 250px;
 		overflow: hidden;
 	}
-
+	.productCardImageWrapper {
+		overflow: hidden;
+	}
 	.productCardImageWrapper .img {
 		cursor: pointer;
 		user-select: none;

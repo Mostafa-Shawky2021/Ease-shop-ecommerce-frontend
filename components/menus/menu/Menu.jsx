@@ -24,7 +24,7 @@ const Menu = ({ setIsOpenCartList }) => {
 	useEffect(() => {
 		window.addEventListener("scroll", () => {
 			let scrollValue = document.documentElement.scrollTop;
-			scrollValue > 500 ? setFixedMenu(true) : setFixedMenu(false);
+			scrollValue > 600 ? setFixedMenu(true) : setFixedMenu(false);
 		});
 	}, [setFixedMenu]);
 

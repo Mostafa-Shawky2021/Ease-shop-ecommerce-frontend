@@ -1,0 +1,39 @@
+@use "sass/var" as var;
+.contactFormWrapper {
+	.title {
+		margin: 0px;
+		font-size: 0.9rem;
+	}
+	.required {
+		color: #f00;
+		font-weight: bold;
+		font-size: 1.1rem;
+	}
+
+	.formControl {
+		border-radius: 0px;
+		margin-top: 3px;
+
+		&:hover,
+		&:focus {
+			border: 1px solid var.$secondarycolor;
+			box-shadow: none;
+		}
+	}
+
+	.formLabel {
+		color: var.$softblack;
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+	.errorField {
+		border: 1px solid #f00 !important;
+	}
+
+	.errMsg {
+		font-size: 0.9rem;
+		color: #f00;
+		margin-right: 5px;
+		margin-top: -3px;
+	}
+}
