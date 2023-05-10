@@ -1,15 +1,50 @@
 import Link from "next/link";
 import { Container, Row, Col } from "react-bootstrap";
+import { useLayoutData } from "@root/hooks";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import EmailIcon from "@mui/icons-material/Email";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import style from "./footer.module.scss";
 
 const Footer = () => {
+	const { data: footer, isLoading } = useLayoutData();
+	const footerData = footer?.data?.footer_data;
+
+	const renderAboutus = () => {
+		const renderTextApi = footerData?.aboutus || "نحن مجموعة من الشباب الذي نهدف الي انشاء منصات الكترونيه";
+		if (isLoading) return <CircularProgress size={18} style={{ color: "#fff", marginTop: "5px" }} />;
+		return renderTextApi;
+	};
+	const renderFacebookLink = () => footerData?.facebook_link || "#";
+	const renderWhatsappLink = () => {
+		const link = footerData?.whatsapp_number ? `https://wa.me/${footerData?.whatsapp_number}` : "#";
+		return link;
+	};
+	const renderTwitterLink = () => footerData?.twitter_link || "#";
+
+	const renderAddress = () => {
+		if (isLoading) return <CircularProgress size={11} style={{ color: "#fff", marginTop: "5px" }} />;
+
+		return footerData?.address || "القاهرة الجديدة";
+	};
+
+	const renderPhone = () => {
+		if (isLoading) return <CircularProgress size={11} style={{ color: "#fff", marginTop: "5px" }} />;
+
+		return footerData?.phone || "+20101511235";
+	};
+
+	const renderEmail = () => {
+		if (isLoading) return <CircularProgress size={11} style={{ color: "#fff", marginTop: "5px" }} />;
+
+		return footerData?.gmail_link || "example@gmail.com";
+	};
+
 	return (
 		<div className={style.footerWrapper}>
 			<Container fluid="md">
@@ -19,16 +54,16 @@ const Footer = () => {
 							<h3 className={style.logo}>
 								Shop<span className={style.special}>Notify</span>
 							</h3>
-							<p className={style.description}>نحن مجموعة من الشباب الذي نهدف الي انشاء منصات الكترونيه</p>
+							<p className={style.description}>{renderAboutus()}</p>
 							<div className={style.social}>
-								<Link href="#" className={style.link}>
+								<Link target="_blank" href={renderFacebookLink()} className={style.link}>
 									<FacebookIcon fontSize="xs" />
 								</Link>
-								<Link href="#" className={style.link}>
+								<Link target="_blank" href={renderWhatsappLink()} className={style.link}>
 									<WhatsAppIcon fontSize="xs" />
 								</Link>
-								<Link href="#" className={style.link}>
-									<GoogleIcon fontSize="xs" />
+								<Link href={renderTwitterLink()} target="_blank" className={style.link}>
+									<TwitterIcon fontSize="xs" />
 								</Link>
 							</div>
 						</div>
@@ -74,20 +109,20 @@ const Footer = () => {
 							<ul className={`${style.linkslist} ${style.contactList} list-unstyled px-0`}>
 								<li className={style.item}>
 									<LocationOnIcon fontSize="small" />
-									<Link href="" className={style.link}>
-										القاهرة القديدة
+									<Link href="#" className={style.link}>
+										{renderAddress()}
 									</Link>
 								</li>
 								<li className={style.item}>
 									<WhatsAppIcon fontSize="small" />
 									<Link href="" className={style.link}>
-										+201552508982
+										{renderPhone()}
 									</Link>
 								</li>
 								<li className={style.item}>
 									<EmailIcon fontSize="small" />
-									<Link href="" className={style.link}>
-										mostafashawky20177@gmail.com
+									<Link href={`mailto:${renderEmail}`} className={style.link}>
+										{renderEmail()}
 									</Link>
 								</li>
 							</ul>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import Link from "next/link";
 
 import { useCartsData, useGuest } from "@root/hooks";
@@ -14,6 +14,7 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 import style from "./menu.module.scss";
+import { debounce } from "lodash";
 
 const Menu = ({ setIsOpenCartList }) => {
 	const [fixedMenu, setFixedMenu] = useState(false);
@@ -21,17 +22,23 @@ const Menu = ({ setIsOpenCartList }) => {
 	const { guestId } = useGuest();
 	const { data: carts } = useCartsData(guestId);
 
-	useEffect(() => {
+	const menuRef = useRef(null);
+
+	useLayoutEffect(() => {
 		window.addEventListener("scroll", () => {
-			let scrollValue = document.documentElement.scrollTop;
-			scrollValue > 680 ? setFixedMenu(true) : setFixedMenu(false);
+			const elementOffsetTop = menuRef?.current?.offsetTop;
+			const bodyScrollTop = document.documentElement.scrollTop;
+			bodyScrollTop >= elementOffsetTop ? setFixedMenu(true) : setFixedMenu(false);
 		});
 	}, [setFixedMenu]);
 
-	const handleOpenCartList = () => setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
+	const handleOpenCartList = (event) => {
+		event.stopPropagation();
+		setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
+	};
 
 	return (
-		<div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ""}`}>
+		<div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ""}`} ref={menuRef}>
 			<Container fluid="xl" className="d-flex align-items-center">
 				<div className={style.categoryWrapper}>
 					<CategoriesMenu />
