@@ -17,67 +17,54 @@ import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 import { queryKeys } from "./data";
 
 export async function getServerSideProps({ query }) {
+	const queryClient = new QueryClient();
 
-    const queryClient = new QueryClient();
+	let filterQueryString = "";
+	filterQueryString =
+		Object.keys(query).length > 0
+			? generateQueryStringFilter(query) // extract query object data to make reqeust with filter rule
+			: "";
 
-    let filterQueryString = ""
-    filterQueryString = Object.keys(query).length > 0
-        ? generateQueryStringFilter(query) // extract query object data to make reqeust with filter rule
-        : '';
+	await queryClient.prefetchQuery(queryKeys.PRODUCTS_LATEST(1, filterQueryString), () => fetchLatestProducts(1, filterQueryString));
 
-    await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS_LATEST(1, filterQueryString),
-        () => fetchLatestProducts(1, filterQueryString));
-
-    return {
-        props: {
-            dehydratedState: dehydrate(queryClient)
-        },
-    }
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient),
+		},
+	};
 }
 
 const LatestProdutsPage = () => {
+	const [pageNumber, setPageNumber] = useState(1);
 
-    const [pageNumber, setPageNumber] = useState(1);
+	const router = useRouter();
 
-    const router = useRouter();
+	const latestProducts = useLatestProductsData(pageNumber, router.query);
 
-    const latestProducts = useLatestProductsData(pageNumber, router.query);
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pageNumber]);
 
-    useEffect(() => {
+	const breadCrumbData = [
+		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "احدث المنتجات", active: true },
+	];
 
-        window.scrollTo(0, 0);
-
-    }, [pageNumber]);
-
-    const breadCrumbData = [
-        { label: 'الصفحة الرئيسية', link: "/homepage" },
-        { label: 'احدث المنتجات', active: true }
-    ]
-
-    return (
-        <>
-
-            <BreadCrumbLayout data={breadCrumbData} />
-            <Container fluid="xxl">
-                <Row className='g-0'>
-                    <Col xs={3} className='d-none d-lg-block' >
-                        <SidebarFilter pageNumber={pageNumber} />
-                    </Col>
-                    <Col xs={12} lg={9} style={{ position: 'relative' }}>
-                        {latestProducts.data?.products ?
-                            <ProductsList
-                                productsData={latestProducts.data}
-                                isFetchingProducts={latestProducts.isFetching}
-                                setPageNumber={setPageNumber} />
-                            : <p>ليس متوفر منتجات في الوقت الحالي</p>
-                        }
-                    </Col>
-                </Row>
-            </Container>
-        </>
-
-    )
-}
+	return (
+		<>
+			<BreadCrumbLayout data={breadCrumbData} />
+			<Container fluid="xxl">
+				<Row className="g-0">
+					<Col xs={12} md={4} lg={3}>
+						<SidebarFilter pageNumber={pageNumber} />
+					</Col>
+					<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
+						{latestProducts.data?.products ? <ProductsList productsData={latestProducts.data} isFetchingProducts={latestProducts.isFetching} setPageNumber={setPageNumber} /> : <p>ليس متوفر منتجات في الوقت الحالي</p>}
+					</Col>
+				</Row>
+			</Container>
+		</>
+	);
+};
 
 export default LatestProdutsPage;

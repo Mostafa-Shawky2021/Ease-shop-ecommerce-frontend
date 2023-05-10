@@ -24,7 +24,7 @@ const Menu = ({ setIsOpenCartList }) => {
 	useEffect(() => {
 		window.addEventListener("scroll", () => {
 			let scrollValue = document.documentElement.scrollTop;
-			scrollValue > 600 ? setFixedMenu(true) : setFixedMenu(false);
+			scrollValue > 680 ? setFixedMenu(true) : setFixedMenu(false);
 		});
 	}, [setFixedMenu]);
 
@@ -53,7 +53,7 @@ const Menu = ({ setIsOpenCartList }) => {
 						<Link href="/store">المتجر</Link>
 					</li>
 					<li className={style.item}>
-						<Link href="#">التواصل معنا</Link>
+						<Link href="/contact">التواصل معنا</Link>
 					</li>
 				</ul>
 				<div className={`${style.leftContent} ${fixedMenu ? style.show : ""}`}>

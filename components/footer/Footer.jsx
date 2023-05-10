@@ -44,7 +44,7 @@ const Footer = () => {
 									<Link href="#">من نحن</Link>
 								</li>
 								<li className={style.item}>
-									<Link href="#">التواصل معنا</Link>
+									<Link href="/contact">التواصل معنا</Link>
 								</li>
 							</ul>
 						</div>

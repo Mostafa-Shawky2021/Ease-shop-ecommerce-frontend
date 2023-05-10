@@ -71,14 +71,15 @@ const ProductCard = ({ product, ...props }) => {
 						<FavoriteBorderIcon fontSize="small" />
 					</div>
 				</div>
-				{!!product?.sizes?.length ||
-					(!!product?.colors?.length && (
-						<div className={style.variantsWrapper}>
-							<ColorsVariant style={{ marginLeft: "5px" }} className={`${style.colorsBtn}`} colors={product?.colors} choosenColor={productVariants.color} handleChooseColor={handleChooseColor} />
+				{!!product?.sizes?.length || !!product?.colors?.length ? (
+					<div className={style.variantsWrapper}>
+						{!!product?.colors?.length && <ColorsVariant style={{ marginLeft: "5px" }} className={`${style.colorsBtn}`} colors={product?.colors} choosenColor={productVariants.color} handleChooseColor={handleChooseColor} />}
 
-							<SizesVariant className={`${style.sizesBtn}`} sizes={product?.sizes} choosenSize={productVariants.size} handleChooseSize={handleChooseSize} />
-						</div>
-					))}
+						{!!product?.sizes?.length && <SizesVariant className={`${style.sizesBtn}`} sizes={product?.sizes} choosenSize={productVariants.size} handleChooseSize={handleChooseSize} />}
+					</div>
+				) : (
+					""
+				)}
 
 				<div className={style.productCardImageWrapper}>
 					<Link href={`/product/${product?.product_slug}`}>
@@ -86,17 +87,20 @@ const ProductCard = ({ product, ...props }) => {
 					</Link>
 				</div>
 			</header>
-			<div
-				style={{
-					padding: "0px 10px",
-					borderTop: "1px solid #dedede",
-					marginTop: "1rem",
-				}}
-			>
+			<div style={{ padding: "0px 10px" }}>
 				<Link className={style.productName} href={`/product/${product?.product_slug}`}>
 					{truncateCharacter(product?.product_name, 20)}
 				</Link>
 				<p className={style.productDescription}>{truncateCharacter(product?.short_description, 50)}</p>
+				{!!product?.sizes?.length || !!product?.colors?.length ? (
+					<div className={`${style.productVariantMobile}`}>
+						{!!product?.colors?.length && <ColorsVariant style={{ marginLeft: "5px" }} className={`${style.colorsBtn}`} colors={product?.colors} choosenColor={productVariants.color} handleChooseColor={handleChooseColor} />}
+
+						{!!product?.sizes?.length && <SizesVariant className={`${style.sizesBtn}`} sizes={product?.sizes} choosenSize={productVariants.size} handleChooseSize={handleChooseSize} />}
+					</div>
+				) : (
+					""
+				)}
 				<div className={style.priceWrapper}>{renderPrice()}</div>
 
 				<Button className={style.addProduct} onClick={handleAddProduct}>

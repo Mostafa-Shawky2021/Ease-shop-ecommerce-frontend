@@ -19,7 +19,7 @@ const CategoryItem = ({ categoryData, subMenuCategories, ...props }) => {
 	};
 
 	const activeSubMenuClass = categoryData.id === Number(activeSubMenu) ? `${style.activeSubMenu} ${style.display}` : style.hide;
-
+	``;
 	const imageIcon = categoryData?.image_thumbnail ? categoryData?.image_thumbnail : DefaultImage;
 
 	return (

@@ -13,3 +13,4 @@ export { default as useProductsData } from "./useProductsData";
 export { default as useProductVariantsData } from "./useProductVariantsData";
 export { default as useFilter } from "./useFilter";
 export { default as useSearch } from "./useSearch";
+export { default as useCloseMenuAction } from "./useCloseMenuAction";

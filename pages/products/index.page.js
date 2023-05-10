@@ -22,18 +22,11 @@ export async function getServerSideProps({ query }) {
 	const urlSearchParams = new URLSearchParams();
 
 	//exclude page number from query paramters
-	Object.entries(query).forEach(
-		([key, value]) => key !== "page" && urlSearchParams.set(key, encodeURIComponent(value))
-	);
+	Object.entries(query).forEach(([key, value]) => key !== "page" && urlSearchParams.set(key, encodeURIComponent(value)));
 
 	const urlSearchParamsToString = urlSearchParams.toString();
 
-	await Promise.all([
-		queryClient.prefetchQuery(queryKeys.PRODUCTS(1, urlSearchParamsToString), () =>
-			fetchProducts(1, urlSearchParamsToString)
-		),
-		queryClient.prefetchQuery(queryKeys.PRODUCT_VARIANTS, fetchProductVariants),
-	]);
+	await Promise.all([queryClient.prefetchQuery(queryKeys.PRODUCTS(1, urlSearchParamsToString), () => fetchProducts(1, urlSearchParamsToString)), queryClient.prefetchQuery(queryKeys.PRODUCT_VARIANTS, fetchProductVariants)]);
 
 	return {
 		props: {
@@ -53,9 +46,7 @@ const ProductsPageSearch = () => {
 		Object.entries(router.query).length < 1 ? router.push("/homepage") : null;
 	}, [router]);
 
-	const productNameQueryString = router.query.productname
-		? { productname: router.query.productname }
-		: null;
+	const productNameQueryString = router.query.productname ? { productname: router.query.productname } : null;
 
 	const breadCrumbData = [
 		{ label: "الصفحة الرئيسية", link: "/homepage" },
@@ -67,10 +58,10 @@ const ProductsPageSearch = () => {
 			<BreadCrumbLayout data={breadCrumbData} />
 			<Container fluid="xxl" style={{ marginTop: "2.8rem" }}>
 				<Row className="g-0">
-					<Col xs={3} className="d-none d-lg-block">
+					<Col xs={12} md={4} lg={3}>
 						<SidebarFilter pageNumber={pageNumber} additionalQuery={productNameQueryString} />
 					</Col>
-					<Col xs={12} lg={9} style={{ position: "relative" }}>
+					<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
 						{productsSearchResult.isLoading ? (
 							<Loading isOpacity={true} isLoading={productsSearchResult.isLoading}>
 								<Seek

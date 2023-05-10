@@ -1,6 +1,10 @@
 import { useState } from "react";
 
+import { useSendMessage } from "../../hooks";
 import { Form, Button } from "react-bootstrap";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import SendIcon from "@mui/icons-material/Send";
 
 import style from "./contactform.module.scss";
 
@@ -10,6 +14,9 @@ const ContactForm = () => {
 		phoneErr: "",
 		messageErr: "",
 	});
+
+	const { mutate: sendMessage, isLoading } = useSendMessage();
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
@@ -42,8 +49,10 @@ const ContactForm = () => {
 		}
 
 		setErrMsg({ ...errorMsg, ...errMsg });
-		if (!formIsValid) console.log(errorMsg);
+
+		if (formIsValid) sendMessage(formData);
 	};
+
 	return (
 		<div className={style.contactFormWrapper}>
 			<Form onSubmit={handleSubmit}>
@@ -87,7 +96,10 @@ const ContactForm = () => {
 					</div>
 					<Form.Control style={{ minHeight: "160px" }} as="textarea" className={`${style.formControl} ${errorMsg.messageErr ? style.errorField : ""}`} rows={3} name="message" />
 				</Form.Group>
-				<Button type="submit">Send</Button>
+				<Button type="submit" className={style.btnSend} style={{ marginTop: "1.2rem" }}>
+					<span className={style.text}>ارسال</span>
+					{isLoading ? <CircularProgress className={style.iconLoading} size={14} /> : <SendIcon fontSize="xs" style={{ transform: "rotate(180deg)", marginTop: "4px" }} />}
+				</Button>
 			</Form>
 		</div>
 	);

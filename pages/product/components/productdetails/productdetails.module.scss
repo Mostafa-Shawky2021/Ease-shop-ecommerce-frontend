@@ -3,14 +3,14 @@
 @use "sass/mixins/mediaquery" as *;
 
 .productDetailsWrapper {
-	padding: 1.1rem;
+	padding: 1.1rem 0px;
 
 	.productName {
 		color: #222;
 		font-size: 1.2rem;
-
-		a {
-			width: 100%;
+		transition: all 0.3s;
+		&:hover {
+			color: var(--bs-primary);
 		}
 	}
 
@@ -94,7 +94,6 @@
 	}
 	.addCartDetails {
 		padding-top: 1rem;
-		border-top: 1px solid #dedede;
 	}
 	.addCartbtn {
 		background: var.$secondarycolor;

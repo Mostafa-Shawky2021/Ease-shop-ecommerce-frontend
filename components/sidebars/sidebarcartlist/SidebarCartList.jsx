@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 
 import Link from "next/link";
 
-import { useCarts, useGuest, useCartsData } from "hooks";
+import { useCarts, useGuest, useCartsData, useCloseMenuAction } from "hooks";
 
 import { calcTotalPrice } from "@root/utils";
 
@@ -13,9 +13,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Button } from "react-bootstrap";
 import { ProductQuantity } from "@root/components/productquantity";
 import { SidebarCartItem } from "./sidebarcartitem";
+import { Loading } from "@root/components/loading";
 
 import style from "./sidebarcartlist.module.scss";
-import { Loading } from "@root/components/loading";
 
 const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 	const [currentCart, setCurrentCart] = useState(0);
@@ -25,13 +25,10 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
 	const { data: carts } = useCartsData(guestId);
 
-	useEffect(() => {
-		const closeCartList = (event) => {
-			if (event.key === "Escape") setIsOpenCartList(false);
-		};
-		document.body.addEventListener("keydown", closeCartList);
-		return () => document.body.removeEventListener("keydown", closeCartList);
-	}, [setIsOpenCartList]);
+	const sidebarCartListRef = useRef(null);
+
+	// close mobile fitler menu on mouse click, and on esacpe key down
+	useCloseMenuAction(setIsOpenCartList, sidebarCartListRef);
 
 	const handleProductIncrement = (event) => {
 		const cartId = Number(event.currentTarget.getAttribute("data-cart-id"));
@@ -56,7 +53,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 	const isOpenCartListClass = isOpenCartList ? style.openCartList : "";
 
 	return (
-		<div className={`${style.listWrapper} ${isOpenCartListClass} `}>
+		<div className={`${style.listWrapper} ${isOpenCartListClass} `} ref={sidebarCartListRef}>
 			{isLoading && (
 				<Loading scrollBar={false} isFixed={false}>
 					<CircularProgress size={33} className={style.loadingIcon} />
@@ -69,13 +66,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
 			<div className={`${style.cartList}`}>
 				{carts?.map((cart) => (
-					<SidebarCartItem
-						key={cart.id}
-						cart={cart}
-						productQuantity={
-							<ProductQuantity handleProductIncrement={handleProductIncrement} handleProductDecrement={handleProductDecrement} quantity={cart?.quantity} cartId={cart?.id} currentCart={currentCart} />
-						}
-					>
+					<SidebarCartItem key={cart.id} cart={cart} productQuantity={<ProductQuantity handleProductIncrement={handleProductIncrement} handleProductDecrement={handleProductDecrement} quantity={cart?.quantity} cartId={cart?.id} currentCart={currentCart} />}>
 						<Button className={style.btnDelete} onClick={handleProductDelete} data-cart-id={cart.id}>
 							<DeleteOutlineIcon fontSize="small" className={style.icon} />
 						</Button>

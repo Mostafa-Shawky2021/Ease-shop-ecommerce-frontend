@@ -36,4 +36,20 @@
 		margin-right: 5px;
 		margin-top: -3px;
 	}
+	.btnSend {
+		padding: 8px 1.8rem;
+		border-radius: 1px;
+		width: 120px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 5px;
+		font-size: 0.85rem;
+		font-weight: 500;
+	}
+	.iconLoading {
+		color: #fff;
+		position: relative;
+		top: 2px;
+	}
 }

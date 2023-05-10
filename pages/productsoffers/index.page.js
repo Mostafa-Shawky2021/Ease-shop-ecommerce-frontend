@@ -18,80 +18,63 @@ import { ProductsList } from "@root/components/productslist";
 
 import { queryKeys } from "./data";
 
-
 export async function getServerSideProps({ query }) {
+	const queryClient = new QueryClient();
 
-    const queryClient = new QueryClient();
+	let filterQueryString = "";
+	filterQueryString =
+		Object.keys(query).length > 0
+			? generateQueryStringFilter(query) // if the uri contain filter rule string
+			: "";
 
-    let filterQueryString = ""
-    filterQueryString = Object.keys(query).length > 0
-        ? generateQueryStringFilter(query) // if the uri contain filter rule string
-        : "";
+	await queryClient.prefetchQuery(queryKeys.PRODUCTS_OFFERS(1, filterQueryString), () => fetchProductsOffers(1, filterQueryString));
 
-    await queryClient.prefetchQuery(
-        queryKeys.PRODUCTS_OFFERS(1, filterQueryString),
-        () => fetchProductsOffers(1, filterQueryString));
-
-    return {
-        props: {
-            dehydratedState: dehydrate(queryClient)
-        },
-    }
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient),
+		},
+	};
 }
 
 const ProductsOffers = () => {
+	const [pageNumber, setPageNumber] = useState(1);
 
-    const [pageNumber, setPageNumber] = useState(1);
+	const router = useRouter();
 
-    const router = useRouter();
+	const productsoffers = useProductsOffersData(pageNumber, router.query);
 
-    const productsoffers = useProductsOffersData(pageNumber, router.query);
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pageNumber]);
 
-    useEffect(() => {
+	const breadCrumbData = [
+		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الخصومات", active: true },
+	];
 
-        window.scrollTo(0, 0);
-
-    }, [pageNumber]);
-
-    const breadCrumbData = [
-        { label: 'الصفحة الرئيسية', link: "/homepage" },
-        { label: 'الخصومات', active: true }
-    ]
-
-    return (
-        <>
-            <BreadCrumbLayout data={breadCrumbData} />
-            <Container fluid="xxl">
-                <Row className='g-0' style={{ position: 'relative', minHeight: '300px' }}>
-                    {productsoffers.isLoading // for first time loading indicator
-                        ? <Loading isOpacity={true}>
-                            <Seek color="#ffb700" size="medium" />
-                        </Loading>
-
-                        : <>
-                            <Col xs={3} className='d-none d-lg-block' >
-                                <SidebarFilter pageNumber={pageNumber} />
-                            </Col>
-                            <Col xs={12} lg={9} style={{ position: 'relative' }}>
-
-                                {!!productsoffers.data?.products
-
-                                    ? <ProductsList
-                                        productsData={productsoffers.data}
-                                        setPageNumber={setPageNumber}
-                                        isFetchingProducts={productsoffers.isFetching} />
-
-                                    : <p>ليس متوفر عروض في الوقت الحالي</p>
-                                }
-                            </Col>
-                        </>
-                    }
-
-                </Row>
-            </Container>
-        </>
-
-    )
-}
+	return (
+		<>
+			<BreadCrumbLayout data={breadCrumbData} />
+			<Container fluid="xxl">
+				<Row className="g-0" style={{ position: "relative", minHeight: "300px" }}>
+					{productsoffers.isLoading ? ( // for first time loading indicator
+						<Loading isOpacity={true}>
+							<Seek color="#ffb700" size="medium" />
+						</Loading>
+					) : (
+						<>
+							<Col xs={12} md={4} lg={3}>
+								<SidebarFilter pageNumber={pageNumber} />
+							</Col>
+							<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
+								{!!productsoffers.data?.products ? <ProductsList productsData={productsoffers.data} setPageNumber={setPageNumber} isFetchingProducts={productsoffers.isFetching} /> : <p>ليس متوفر عروض في الوقت الحالي</p>}
+							</Col>
+						</>
+					)}
+				</Row>
+			</Container>
+		</>
+	);
+};
 
 export default ProductsOffers;

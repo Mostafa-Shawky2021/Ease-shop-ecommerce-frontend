@@ -19,10 +19,7 @@ export const getServerSideProps = async ({ query }) => {
 	const queryClient = new QueryClient();
 	const productSlug = query.productSlug;
 
-	await Promise.all([
-		queryClient.prefetchQuery(queryKeys.PRODUCT_DETAILS(productSlug), () => fetchProductDetails(productSlug)),
-		queryClient.prefetchQuery(queryKeys.PRODUCT_RELATED(productSlug), () => fetchProductsRelated(productSlug)),
-	]);
+	await Promise.allSettled([queryClient.prefetchQuery(queryKeys.PRODUCT_DETAILS(productSlug), () => fetchProductDetails(productSlug)), queryClient.prefetchQuery(queryKeys.PRODUCT_RELATED(productSlug), () => fetchProductsRelated(productSlug))]);
 
 	return {
 		props: {

@@ -22,7 +22,10 @@ const Header = ({ setIsOpenCartList }) => {
 
 	const { handleOnInputChange, handleOnSubmitSearch } = useSearch();
 
-	const handleOpenCartList = () => setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
+	const handleOpenCartList = (event) => {
+		event.stopPropagation();
+		setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
+	};
 
 	return (
 		<div className={`${style.header} align-items-center`}>
@@ -38,12 +41,7 @@ const Header = ({ setIsOpenCartList }) => {
 					</Col>
 					<Col xs={12} md={5} lg={6}>
 						<div>
-							<InputWithIcon
-								onChange={handleOnInputChange}
-								placeholder="عن ماذا تبحث؟"
-								className={style.searchInput}
-								onKeyPress={handleOnSubmitSearch}
-							>
+							<InputWithIcon onChange={handleOnInputChange} placeholder="عن ماذا تبحث؟" className={style.searchInput} onKeyPress={handleOnSubmitSearch}>
 								<button className={style.btnSearch} onClick={handleOnSubmitSearch}>
 									<SearchOutlinedIcon fontSize="small" />
 								</button>

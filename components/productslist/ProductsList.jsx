@@ -14,7 +14,7 @@ const ProductsList = ({ productsData, setPageNumber, isFetchingProducts }) => {
 			<GridList
 				data={productsData?.products}
 				renderItem={(product) => (
-					<Col xs={12} md={3} key={product.id}>
+					<Col xs={12} md={6} lg={4} xxl={3} key={product.id}>
 						<ProductCard product={product} style={{ marginTop: "3rem" }} />
 					</Col>
 				)}
