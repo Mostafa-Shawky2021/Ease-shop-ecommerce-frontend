@@ -11,6 +11,7 @@ import { TopCategories } from "./components/topcategories";
 import { RandomCategoriesProducts } from "./components/randomcategoriesproducts";
 import { Offer } from "./components/offer";
 import { ProductsOffers } from "./components/productsoffers";
+import { BestSeller } from "./components/bestseller";
 
 import { queryKeys } from "./data";
 import { queryKeys as globalQueryKeys } from "data";
@@ -20,14 +21,10 @@ export async function getStaticProps() {
 
 	await Promise.allSettled([
 		queryClient.prefetchQuery(globalQueryKeys.LAYOUT, fetchLayout),
-		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "latest=true&limit=8"), () =>
-			fetchProducts(1, "latest=true&limit=8")
-		),
+		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "latest=true&limit=8"), () => fetchProducts(1, "latest=true&limit=8")),
 		queryClient.prefetchQuery(queryKeys.RANDOM_CATEGORIES_PRODUCTS, fetchRandomCategoriesProducts),
 		queryClient.prefetchQuery(queryKeys.CATEGORIES, fetchCategories),
-		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "offers=true&latest=true&limit=8"), () =>
-			fetchProducts(1, "offers=true&latest=true&limit=8")
-		),
+		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "offers=true&latest=true&limit=8"), () => fetchProducts(1, "offers=true&latest=true&limit=8")),
 	]);
 
 	return {
@@ -42,8 +39,9 @@ export default function HomePage() {
 			<Carousel />
 			<Services />
 			<Offer />
-			{/* <TopCategories /> */}
+			<BestSeller />
 			<Categories />
+			{/* <TopCategories /> */}
 			<LatestProducts />
 			<ProductsOffers />
 			<RandomCategoriesProducts />

@@ -50,13 +50,13 @@ const Header = ({ setIsOpenCartList }) => {
 					</Col>
 					<Col xs={12} md={4} lg={4}>
 						<div className="d-flex flex-wrap align-items-center my-3 my-lg-0">
-							<Link href="#" className={`${style.actionWrapper} d-flex align-items-center `}>
+							<Link href="/store" className={`${style.actionWrapper} d-flex align-items-center `}>
 								<FavoriteBorderIcon fontSize="large" />
 								<div className={style.actionName}>
 									<span className={style.title}>القائمة البيضاء</span>
 									<span className={style.subTitle}>منتجاتي المفضلة</span>
 								</div>
-								<span className={style.count}>5</span>
+								{/* <span className={style.count}>5</span> */}
 							</Link>
 							<Button className={style.actionWrapper} onClick={handleOpenCartList}>
 								<LocalMallOutlinedIcon fontSize="large" />

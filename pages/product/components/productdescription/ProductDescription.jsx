@@ -10,6 +10,7 @@ import style from "./productdescription.module.scss";
 const ProductDescription = ({ productDescription }) => {
 	const [productDescriptionParsed, setProductDescriptionParsed] = useState("");
 	const [isLoadingLongDescription, setIsLoadingLongDescription] = useState(true);
+
 	useEffect(() => {
 		setIsLoadingLongDescription(false);
 		setProductDescriptionParsed(productDescription);

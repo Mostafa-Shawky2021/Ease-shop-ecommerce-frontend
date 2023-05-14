@@ -66,11 +66,7 @@ const ProductCard = ({ product, ...props }) => {
 		<div className={`${style.productCard} text-center`} {...props}>
 			<header className={style.header}>
 				{renderDicountPrecentage()}
-				<div className={style.productAction}>
-					<div className={style.favourite}>
-						<FavoriteBorderIcon fontSize="small" />
-					</div>
-				</div>
+
 				{!!product?.sizes?.length || !!product?.colors?.length ? (
 					<div className={style.variantsWrapper}>
 						{!!product?.colors?.length && <ColorsVariant style={{ marginLeft: "5px" }} className={`${style.colorsBtn}`} colors={product?.colors} choosenColor={productVariants.color} handleChooseColor={handleChooseColor} />}

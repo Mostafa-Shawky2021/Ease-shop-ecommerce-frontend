@@ -40,7 +40,6 @@ const ProductsOffers = () => {
 	const [pageNumber, setPageNumber] = useState(1);
 
 	const router = useRouter();
-
 	const productsoffers = useProductsOffersData(pageNumber, router.query);
 
 	useEffect(() => {
@@ -49,7 +48,7 @@ const ProductsOffers = () => {
 
 	const breadCrumbData = [
 		{ label: "الصفحة الرئيسية", link: "/homepage" },
-		{ label: "الخصومات", active: true },
+		{ label: "الاكثر مبيعاً", active: true },
 	];
 
 	return (
