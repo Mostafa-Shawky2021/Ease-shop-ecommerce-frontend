@@ -77,7 +77,7 @@ const Carousel = () => {
 				</div>
 			</Container>
 
-			<Swiper style={{ direction: "ltr" }} autoplay={{ delay: carouselTime() }} pagination={{ clickable: true }} className={style.swiper} slidesPerView={1} loop={true} modules={[Autoplay, EffectFade, Navigation]} effect={"fade"}>
+			<Swiper autoplay={{ delay: carouselTime() }} pagination={{ clickable: false }} className={style.swiper} slidesPerView={1} loop={false} modules={[Autoplay, EffectFade, Navigation]} effect={"fade"}>
 				{renderCarouselImages()}
 			</Swiper>
 		</div>

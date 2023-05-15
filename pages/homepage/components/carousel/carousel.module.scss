@@ -1,124 +1,120 @@
-@use 'sass/mixins/overlay' as *;
-@use 'sass/mixins/mediaquery' as *;
-@use 'sass/mixins/paragraph' as *;
-@use 'sass/mixins/animationbutton' as *;
-@use 'sass/var' as var;
+@use "sass/mixins/overlay" as *;
+@use "sass/mixins/mediaquery" as *;
+@use "sass/mixins/paragraph" as *;
+@use "sass/mixins/animationbutton" as *;
+@use "sass/var" as var;
 
 .carouselWrapper {
-    position: relative;
-    transition: all 1s;
-    height: 680px;
-    isolation: isolate;
-    @include overlay(#000, 0.3);
+	position: relative;
+	transition: all 1s;
+	height: 680px;
+	isolation: isolate;
+	@include overlay(#000, 0.3);
 
-    .intro {
-        position: absolute;
-        z-index: 99;
-        top: 50%;
-        transform: translate(50%, -50%);
-        right: 50%;
-        padding-right: 10px;
-        padding-left: 10px;
-        text-align: center;
-        width: 98%;
+	.intro {
+		position: absolute;
+		z-index: 99;
+		top: 50%;
+		transform: translate(50%, -50%);
+		right: 50%;
+		padding-right: 10px;
+		padding-left: 10px;
+		text-align: center;
+		width: 98%;
 
-        @include minmediaquery('sm') {
-            text-align: right;
-            padding: 0px;
-            right: 30px;
-            top: 24%;
-            transform: none;
-            width: auto;
-        }
+		@include minmediaquery("sm") {
+			text-align: right;
+			padding: 0px;
+			right: 30px;
+			top: 24%;
+			transform: none;
+			width: auto;
+		}
 
-        @include minmediaquery('xl') {
-            right: 0px;
-        }
+		@include minmediaquery("xl") {
+			right: 0px;
+		}
 
-        .title {
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.7rem;
+		.title {
+			color: #fff;
+			font-weight: bold;
+			font-size: 1.7rem;
 
-            .discount {
-                color: #f00;
-            }
+			.discount {
+				color: #f00;
+			}
 
-            @include minmediaquery('sm') {
-                font-size: 2.7rem;
-            }
+			@include minmediaquery("sm") {
+				font-size: 2.7rem;
+			}
 
-            @include minmediaquery('md') {
-                font-size: 3.5rem;
-            }
-        }
+			@include minmediaquery("md") {
+				font-size: 3.5rem;
+			}
+		}
 
-        .description {
+		.description {
+			@include paragraph(#fdfdfd);
+			font-size: 1rem;
 
-            @include paragraph(#fdfdfd);
-            font-size: 1rem;
+			@include minmediaquery("md") {
+				max-width: 640px;
+				font-size: 1.1rem;
+			}
+		}
 
-            @include minmediaquery('md') {
-                max-width: 640px;
-                font-size: 1.1rem
-            }
-        }
+		.buttonShopNow {
+			background-color: var.$secondarycolor;
+			border: none;
+			width: 200px;
+			height: 45px;
+			font-size: 1.3rem;
+			color: #000;
+			margin: 1.5rem auto;
+			position: relative;
+			isolation: isolate;
+			border-radius: 0px;
+			display: block;
+			text-align: center;
+			line-height: 45px;
 
-        .buttonShopNow {
-            background-color: var.$secondarycolor;
-            border: none;
-            width: 200px;
-            height: 45px;
-            font-size: 1.3rem;
-            color: #000;
-            margin: 1.5rem auto;
-            position: relative;
-            isolation: isolate;
-            border-radius: 0px;
-            display: block;
-            text-align: center;
-            line-height: 45px;
+			@include minmediaquery("sm") {
+				height: 65px;
+				line-height: 65px;
+				margin-right: 0px;
+			}
 
-            @include minmediaquery('sm') {
-                height: 65px;
-                line-height: 65px;
-                margin-right: 0px;
-            }
+			@include animationbutton();
+		}
 
-            @include animationbutton();
+		.buttonShopNow .text {
+			position: relative;
+			z-index: 2;
+			transition: all 0.3s;
+			font-size: 1.2rem;
+			font-weight: 600;
 
-        }
+			@include minmediaquery("sm") {
+				font-size: 1.4rem;
+			}
+		}
 
-        .buttonShopNow .text {
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s;
-            font-size: 1.2rem;
-            font-weight: 600;
+		.buttonShopNow:hover .text {
+			color: #fff;
+		}
+	}
 
-            @include minmediaquery('sm') {
-                font-size: 1.4rem;
-            }
-        }
+	.swiper {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+	}
 
-        .buttonShopNow:hover .text {
-            color: #fff;
-        }
-    }
-
-    .swiper {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-    }
-
-    .image {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-
-    }
-
+	.image {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
 }
