@@ -5,7 +5,7 @@ import { ContactForm } from "./components/contactform";
 
 const ContactPage = () => {
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: "التواصل معنا", active: true },
 	];
 

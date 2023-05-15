@@ -8,7 +8,7 @@ const useMessage = () => {
 	return useMutation(sendMessage, {
 		onSuccess: () => {
 			toast.success("تم الارسال بنجاح!");
-			setTimeout(() => push("/homepage"), 1000);
+			setTimeout(() => push("/"), 1000);
 		},
 		onError: (error) => {
 			console.log(error);

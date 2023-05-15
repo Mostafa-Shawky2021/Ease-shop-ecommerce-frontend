@@ -39,14 +39,14 @@ const LatestProdutsPage = () => {
 
 	const router = useRouter();
 
-	const latestProducts = useProductsBestSeller(pageNumber, router.query);
+	const bestseller = useProductsBestSeller(pageNumber, router.query);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pageNumber]);
 
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: "الأكثر مبيعاً", active: true },
 	];
 
@@ -59,7 +59,7 @@ const LatestProdutsPage = () => {
 						<SidebarFilter pageNumber={pageNumber} />
 					</Col>
 					<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
-						{latestProducts.data?.products ? <ProductsList productsData={latestProducts.data} isFetchingProducts={latestProducts.isFetching} setPageNumber={setPageNumber} /> : <p>ليس متوفر منتجات في الوقت الحالي</p>}
+						{bestseller?.data?.products ? <ProductsList productsData={bestseller.data} isFetchingProducts={latestProducts.isFetching} setPageNumber={setPageNumber} /> : <p>ليس متوفر منتجات في الوقت الحالي</p>}
 					</Col>
 				</Row>
 			</Container>

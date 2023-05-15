@@ -47,7 +47,7 @@ const ProductsOffers = () => {
 	}, [pageNumber]);
 
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: "الاكثر مبيعاً", active: true },
 	];
 

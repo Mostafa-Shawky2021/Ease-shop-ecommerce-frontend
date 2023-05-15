@@ -36,7 +36,7 @@ export default function ProductDetailsPage() {
 	const { data: relatedProducts } = useRelatedProductsData(productSlug);
 
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: productDetails?.product_name, active: true },
 	];
 	return (

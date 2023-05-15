@@ -18,7 +18,7 @@ const CheckoutSuccessPage = () => {
 	}, [order_id, push]);
 
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: "نجاح الطلب", active: true },
 	];
 
@@ -30,11 +30,11 @@ const CheckoutSuccessPage = () => {
 				<p style={{ fontSize: "0.85rem" }}>سوف يقوم احد موظفينا بالتواصل معكم في اقرب وقت</p>
 				<p>
 					في حالة وجود استفسار يمكنك ارسال رسالة
-					<Link href="/homepage" style={{ color: "var(--bs-primary)" }}>
+					<Link href="/" style={{ color: "var(--bs-primary)" }}>
 						الي فريق عمل الموقع
 					</Link>
 				</p>
-				<Link href="/homepage" style={{ color: "var(--bs-primary)" }}>
+				<Link href="/" style={{ color: "var(--bs-primary)" }}>
 					العودة الي الصفحة الرئيسية <KeyboardArrowLeftIcon size="small" />
 				</Link>
 			</Container>

@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
 import { useCartsData, useGuest } from "@root/hooks";
@@ -14,7 +14,6 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 import style from "./menu.module.scss";
-import { debounce } from "lodash";
 
 const Menu = ({ setIsOpenCartList }) => {
 	const [fixedMenu, setFixedMenu] = useState(false);
@@ -24,7 +23,7 @@ const Menu = ({ setIsOpenCartList }) => {
 
 	const menuRef = useRef(null);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		window.addEventListener("scroll", () => {
 			const elementOffsetTop = menuRef?.current?.offsetTop;
 			const bodyScrollTop = document.documentElement.scrollTop;
@@ -45,7 +44,7 @@ const Menu = ({ setIsOpenCartList }) => {
 				</div>
 				<ul className={`${style.listMenu} list-unstyled`}>
 					<li className={style.item}>
-						<Link href="/homepage">الصفحة الرئيسية</Link>
+						<Link href="/">الصفحة الرئيسية</Link>
 					</li>
 					<li className={style.item}>
 						<Link href="/productsoffers">العروض المميزة</Link>
@@ -79,9 +78,8 @@ const Menu = ({ setIsOpenCartList }) => {
 				{/* display in mobile screen  */}
 				<div className={style.mobileWrapper}>
 					<div className={`${style.logoMobileScreen}`}>
-						<Link href="/homepage" className={style.logo}>
-							Notify
-							<span className={style.special}>Shop</span>
+						<Link href="/" className={style.logo}>
+							Ease Shop
 						</Link>
 					</div>
 					<div className={style.barWrapper}>

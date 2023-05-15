@@ -42,7 +42,7 @@ const StorePage = () => {
 	}, [pageNumber]);
 
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: "المتجر", active: true },
 	];
 

@@ -2,11 +2,14 @@
 @use "sass/mixins/mediaquery" as *;
 .sidebarWrapper {
 	margin-top: 2rem;
-	padding: 1.5rem 1rem;
 	margin-left: 1.1rem;
-	box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
 	background-color: #fff;
 	position: relative;
+
+	@include minmediaquery("md") {
+		box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+		padding: 1.5rem 1rem;
+	}
 	//display only in mobile, tablets and medium screen
 	.applyFilterMobile {
 		display: none;

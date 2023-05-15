@@ -3,106 +3,103 @@
 @use "sass/mixins/badge" as *;
 
 .header {
-    background: var.$primarycolor;
-    z-index: 999;
-    width: 100%;
-    transition: all 1s;
-    top: -170px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+	background: var.$primarycolor;
+	z-index: 999;
+	width: 100%;
+	transition: all 1s;
+	top: -170px;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
 
-    @include maxmediaquery('lg') {
-        display: none;
-    }
+	@include maxmediaquery("lg") {
+		display: none;
+	}
 
-    @include minmediaquery('lg') {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
+	@include minmediaquery("lg") {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
 
-    &.fixed {
-        position: fixed;
-        top: 0px;
-        transition: all 1s;
-    }
+	&.fixed {
+		position: fixed;
+		top: 0px;
+		transition: all 1s;
+	}
 
-    .logo {
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 1.9rem;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-family: var.$oswaldfont;
-        user-select: none;
+	.logo {
+		color: #fff;
+		font-weight: 600;
+		font-size: 1.9rem;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		font-family: var.$oswaldfont;
+		user-select: none;
 
-        .special {
-            color: var.$accentcolor;
-        }
-    }
+		.special {
+			color: var.$secondarycolor;
+		}
+	}
 
-    .searchInput {
-        height: 37px;
-        border: 1px solid transparent;
-        margin-top: 0.5rem;
-    }
+	.searchInput {
+		height: 37px;
+		border: 1px solid transparent;
+		margin-top: 0.5rem;
+	}
 
-    .btnSearch {
-        position: absolute;
-        width: 41px;
-        height: 79%;
-        top: 8px;
-        left: 0px;
-        color: #212224;
-        border: none;
-        background-color: transparent;
-        border-right: 1px solid #cfcfcf
-    }
+	.btnSearch {
+		position: absolute;
+		width: 41px;
+		height: 79%;
+		top: 8px;
+		left: 0px;
+		color: #212224;
+		border: none;
+		background-color: transparent;
+		border-right: 1px solid #cfcfcf;
+	}
 
-    .actionWrapper {
-        position: relative;
-        color: #f3e1e1;
-        background-color: transparent !important;
-        border: none;
-        box-shadow: none !important;
-        cursor: pointer;
-        padding: 0px;
-        display: flex;
-        align-items: center;
-        text-align: right;
-        margin-top: 0.5rem;
+	.actionWrapper {
+		position: relative;
+		color: #f3e1e1;
+		background-color: transparent !important;
+		border: none;
+		box-shadow: none !important;
+		cursor: pointer;
+		padding: 0px;
+		display: flex;
+		align-items: center;
+		text-align: right;
+		margin-top: 0.5rem;
 
-        &:last-child {
-            @include maxmediaquery('md') {
-                margin-right: 10px;
-            }
+		&:last-child {
+			@include maxmediaquery("md") {
+				margin-right: 10px;
+			}
 
-            @include minmediaquery('lg') {
-                margin-right: 10px;
-            }
-        }
-    }
+			@include minmediaquery("lg") {
+				margin-right: 10px;
+			}
+		}
+	}
 
-    .actionName {
-        width: 100px;
-    }
+	.actionName {
+		width: 100px;
+	}
 
-    .actionName .title {
-        font-size: 12px;
-        color: #c4c4c4;
-        display: block;
-    }
+	.actionName .title {
+		font-size: 12px;
+		color: #c4c4c4;
+		display: block;
+	}
 
-    .actionName .subTitle {
-        font-size: 14px;
-        margin-top: -3px;
-        display: block;
-        color: #fff;
-    }
+	.actionName .subTitle {
+		font-size: 14px;
+		margin-top: -3px;
+		display: block;
+		color: #fff;
+	}
 
-    .count {
-        @include badge;
-
-    }
-
-
+	.count {
+		@include badge;
+	}
 }

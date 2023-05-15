@@ -1,19 +1,19 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { fetchCategories, fetchLayout, fetchProducts } from "@root/queries";
-import { fetchRandomCategoriesProducts } from "./queries";
+import { fetchRandomCategoriesProducts } from "./homepage/queries";
 
-import { Carousel } from "./components/carousel";
-import { Services } from "./components/services";
-import { Categories } from "./components/categories";
-import { LatestProducts } from "./components/latestproducts";
-import { TopCategories } from "./components/topcategories";
-import { RandomCategoriesProducts } from "./components/randomcategoriesproducts";
-import { Offer } from "./components/offer";
-import { ProductsOffers } from "./components/productsoffers";
-import { BestSeller } from "./components/bestseller";
+import { Carousel } from "./homepage/components/carousel";
+import { Services } from "./homepage/components/services";
+import { Categories } from "./homepage/components/categories";
+import { LatestProducts } from "./homepage/components/latestproducts";
+import { TopCategories } from "./homepage/components/topcategories";
+import { RandomCategoriesProducts } from "./homepage/components/randomcategoriesproducts";
+import { Offer } from "./homepage/components/offer";
+import { ProductsOffers } from "./homepage//components/productsoffers";
+import { BestSeller } from "./homepage/components/bestseller";
 
-import { queryKeys } from "./data";
+import { queryKeys } from "./homepage/data";
 import { queryKeys as globalQueryKeys } from "data";
 
 export async function getStaticProps() {
@@ -33,6 +33,7 @@ export async function getStaticProps() {
 		},
 	};
 }
+
 export default function HomePage() {
 	return (
 		<>

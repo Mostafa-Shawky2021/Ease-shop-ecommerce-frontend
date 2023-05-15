@@ -91,12 +91,12 @@
 	}
 
 	.mobileWrapper .logoMobileScreen .logo {
-		color: #ffffff;
+		color: #000;
 		font-weight: 600;
 		font-size: 1.4375rem;
 		font-family: var.$oswaldfont;
 		user-select: none;
-
+		letter-spacing: 1px;
 		.special {
 			color: var.$accentcolor;
 		}

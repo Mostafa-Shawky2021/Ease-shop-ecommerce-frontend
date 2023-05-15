@@ -1,42 +1,39 @@
-@use 'sass/var' as var;
+@use "sass/var" as var;
 
 .categoryItemWrapper {
-    border: 1px solid #dedede;
-    padding: 1rem;
-    overflow: hidden;
+	border: 1px solid #dedede;
+	padding: 1rem;
+	overflow: hidden;
+	margin-bottom: 1.5rem;
 
+	.imageWrapper {
+		height: 220px;
+		position: relative;
+	}
 
-    .imageWrapper {
-        height: 220px;
-        position: relative;
-    }
+	.imageWrapper img {
+		transition: all 1s;
+	}
 
-    .imageWrapper img {
-        transition: all 1s;
+	&:hover img {
+		transform: scale(1.1);
+	}
 
-    }
+	.catName {
+		color: var.$hardblack;
+		font-weight: 500;
+		margin-top: 1.3rem;
+		font-size: 0.933rem;
+		transition: all 0.3s;
 
-    &:hover img {
-        transform: scale(1.1);
-    }
+		&:hover {
+			color: var(--bs-primary);
+		}
+	}
 
-    .catName {
-        color: var.$hardblack;
-        font-weight: 500;
-        margin-top: 1.3rem;
-        font-size: 0.933rem;
-        transition: all 0.3s;
-
-        &:hover {
-            color: var(--bs-primary);
-
-        }
-    }
-
-    .productsCount {
-        color: var.$softblack;
-        font-weight: 500;
-        font-size: 0.8rem;
-
-    }
+	.productsCount {
+		color: var.$softblack;
+		font-weight: 500;
+		font-size: 0.8rem;
+	}
 }

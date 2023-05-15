@@ -43,13 +43,13 @@ const ProductsPageSearch = () => {
 	const productsSearchResult = useProductsData(pageNumber, router.query);
 
 	useEffect(() => {
-		Object.entries(router.query).length < 1 ? router.push("/homepage") : null;
+		Object.entries(router.query).length < 1 ? router.push("/") : null;
 	}, [router]);
 
 	const productNameQueryString = router.query.productname ? { productname: router.query.productname } : null;
 
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: router.query.productname, active: true },
 	];
 

@@ -30,7 +30,7 @@ const SideBarMenuMobile = () => {
 				</div>
 				<ul className={`${style.listMenu} list-unstyled`}>
 					<li className={style.item}>
-						<Link href="/homepage">الصفحة الرئيسية</Link>
+						<Link href="/">الصفحة الرئيسية</Link>
 					</li>
 					<li className={style.item}>
 						<Link href="/productsoffers">العروض المميزة</Link>

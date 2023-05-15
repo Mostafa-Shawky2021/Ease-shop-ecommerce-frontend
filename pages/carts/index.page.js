@@ -11,7 +11,7 @@ const CartsPage = () => {
 	const { data: carts, isLoading: isCartsLoading } = useCartsData(guestId);
 
 	const breadCrumbData = [
-		{ label: "الصفحة الرئيسية", link: "/homepage" },
+		{ label: "الصفحة الرئيسية", link: "/" },
 		{ label: "سلة المشتريات", active: true },
 	];
 

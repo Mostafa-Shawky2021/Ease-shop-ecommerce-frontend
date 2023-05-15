@@ -16,7 +16,7 @@ const Footer = () => {
 	const footerData = footer?.data?.footer_data;
 
 	const renderAboutus = () => {
-		const renderTextApi = footerData?.aboutus || "نحن مجموعة من الشباب الذي نهدف الي انشاء منصات الكترونيه";
+		const renderTextApi = footerData?.aboutus || "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ex culpa deleniti sapiente nisi voluptatem nemo reiciendis quibusdam sequi eveniet. Labore soluta dolore quae quidem, beatae nostrum autem esse veritatis.";
 		if (isLoading) return <CircularProgress size={18} style={{ color: "#fff", marginTop: "5px" }} />;
 		return renderTextApi;
 	};
@@ -52,7 +52,10 @@ const Footer = () => {
 					<Col xs={12} sm={6} md={6} lg={4} className={style.colWrapper}>
 						<div className={style.intro}>
 							<h3 className={style.logo}>
-								Shop<span className={style.special}>Notify</span>
+								<Link href="/">
+									<span className={style.special}>Ease</span>
+									Shop
+								</Link>
 							</h3>
 							<p className={style.description}>{renderAboutus()}</p>
 							<div className={style.social}>
