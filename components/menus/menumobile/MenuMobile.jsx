@@ -24,7 +24,7 @@ const MenuMobile = () => {
 			<Container fluid>
 				<ul className={`${style.menuList} list-unstyled`}>
 					<li className={style.menuItem}>
-						<Link href="/homepage">
+						<Link href="/">
 							<span className={style.icon}>
 								<HomeIcon fontSize="small" />
 							</span>

@@ -96,9 +96,8 @@
 		font-size: 1.4375rem;
 		font-family: var.$oswaldfont;
 		user-select: none;
-		letter-spacing: 1px;
 		.special {
-			color: var.$accentcolor;
+			color: var(--bs-primary);
 		}
 	}
 

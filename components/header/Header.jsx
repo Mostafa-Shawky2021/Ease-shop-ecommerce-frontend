@@ -34,8 +34,8 @@ const Header = ({ setIsOpenCartList }) => {
 					<Col xs={12} md={3} lg={2}>
 						<div className={`${style.logo} text-center text-md-start`}>
 							<Link href="/">
-								<span className={style.special}>Ease</span>
 								Shop
+								<span className={style.special}>Ease</span>
 							</Link>
 						</div>
 					</Col>

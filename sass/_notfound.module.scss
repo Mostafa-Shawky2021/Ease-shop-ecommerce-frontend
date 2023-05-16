@@ -1,0 +1,19 @@
+@use "sass/mixins/overlay" as *;
+@use "sass/var" as var;
+.notfoundPageWrapper {
+	text-align: center;
+	padding: 2rem 0px;
+	.notFoundContent {
+		margin-top: 1rem;
+		color: var.$softblack;
+	}
+	.action {
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+		a {
+			font-size: 0.83rem;
+			width: 180px;
+		}
+	}
+}

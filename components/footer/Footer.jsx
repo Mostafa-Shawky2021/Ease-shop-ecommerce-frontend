@@ -53,8 +53,8 @@ const Footer = () => {
 						<div className={style.intro}>
 							<h3 className={style.logo}>
 								<Link href="/">
-									<span className={style.special}>Ease</span>
 									Shop
+									<span className={style.special}>Ease</span>
 								</Link>
 							</h3>
 							<p className={style.description}>{renderAboutus()}</p>

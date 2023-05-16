@@ -79,7 +79,7 @@ const Menu = ({ setIsOpenCartList }) => {
 				<div className={style.mobileWrapper}>
 					<div className={`${style.logoMobileScreen}`}>
 						<Link href="/" className={style.logo}>
-							Ease Shop
+							Shop<span className={style.special}>Ease</span>
 						</Link>
 					</div>
 					<div className={style.barWrapper}>

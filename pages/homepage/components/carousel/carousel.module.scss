@@ -9,6 +9,9 @@
 	transition: all 1s;
 	height: 680px;
 	isolation: isolate;
+	@include maxmediaquery("sm") {
+		height: 550px;
+	}
 	@include overlay(#000, 0.3);
 
 	.intro {
