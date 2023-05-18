@@ -11,7 +11,6 @@ export default function Document() {
 				<link rel="icon" href="/icons/icon-4-128.png" />
 				<link rel="manifest" href="/manifest.json" />
 				<meta name="theme-color" content="#0d6efd" />
-				<title>Ease Shop</title>
 			</Head>
 			<body>
 				<Main />

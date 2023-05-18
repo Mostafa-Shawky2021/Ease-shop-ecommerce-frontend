@@ -14,10 +14,7 @@ const LayoutWrapper = ({ children }) => {
 				renderCartListCollapse={(isOpenCartList, setIsOpenCartList) => (
 					<>
 						<Header setIsOpenCartList={setIsOpenCartList} />
-						<SidebarCartList
-							isOpenCartList={isOpenCartList}
-							setIsOpenCartList={setIsOpenCartList}
-						/>
+						<SidebarCartList isOpenCartList={isOpenCartList} setIsOpenCartList={setIsOpenCartList} />
 						<Menu setIsOpenCartList={setIsOpenCartList} />
 					</>
 				)}
@@ -25,19 +22,7 @@ const LayoutWrapper = ({ children }) => {
 
 			<MenuMobile />
 			{children}
-			<ToastContainer
-				position="top-center"
-				autoClose={500}
-				limit={1}
-				hideProgressBar
-				newestOnTop={false}
-				closeOnClick
-				rtl
-				pauseOnFocusLoss={false}
-				draggable
-				pauseOnHover
-				theme="colored"
-			/>
+			<ToastContainer position="top-center" autoClose={500} limit={1} hideProgressBar newestOnTop={false} closeOnClick rtl pauseOnFocusLoss={false} draggable pauseOnHover theme="colored" />
 			<Footer />
 		</>
 	);

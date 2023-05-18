@@ -21,10 +21,10 @@ export default function NotFoundPage() {
 					<h5 className={style.title}>الصفحة غير موجودة</h5>
 					<p className={style.description}>نأسف الصفحة التي تبحث عنها غير موجودة او تم نقلها</p>
 					<div className={style.action}>
-						<Link href="/" class="btn btn-primary btn-sm">
+						<Link href="/" className="btn btn-primary btn-sm">
 							العودة الي الصفحة الرئيسية
 						</Link>
-						<Link href="/contact" class="btn btn-primary btn-sm">
+						<Link href="/contact" className="btn btn-primary btn-sm">
 							التواصل معنا
 						</Link>
 					</div>

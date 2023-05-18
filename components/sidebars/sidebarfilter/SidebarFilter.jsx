@@ -89,7 +89,7 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 										{categoriesData.map((category) => {
 											return (
 												<li key={category.id} className={`${style.filterItem}`}>
-													<Link href={`categoryproducts/${category.cat_slug}`} className="w-100 d-flex align-items-center justify-content-between">
+													<Link href={`/categoryproducts/${category.cat_slug}`} className="w-100 d-flex align-items-center justify-content-between">
 														<span>{category.cat_name}</span>
 														<span>{category.products_count}</span>
 													</Link>

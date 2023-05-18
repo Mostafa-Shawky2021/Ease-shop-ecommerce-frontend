@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import { useState } from "react";
 
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -23,15 +25,20 @@ export default function App({ Component, pageProps }) {
 	);
 
 	return (
-		<QueryClientProvider client={queryClient}>
-			<Hydrate state={pageProps.dehydratedState}>
-				<ThemeProvider dir="rtl">
-					<LayoutWrapper>
-						<Component {...pageProps} />
-					</LayoutWrapper>
-				</ThemeProvider>
-				<ReactQueryDevtools />
-			</Hydrate>
-		</QueryClientProvider>
+		<>
+			<QueryClientProvider client={queryClient}>
+				<Hydrate state={pageProps.dehydratedState}>
+					<ThemeProvider dir="rtl">
+						<Head>
+							<title>Ease Shop</title>
+						</Head>
+						<LayoutWrapper>
+							<Component {...pageProps} />
+						</LayoutWrapper>
+					</ThemeProvider>
+					<ReactQueryDevtools />
+				</Hydrate>
+			</QueryClientProvider>
+		</>
 	);
 }
