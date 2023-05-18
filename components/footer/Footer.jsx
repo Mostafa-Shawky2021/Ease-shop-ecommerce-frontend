@@ -76,10 +76,10 @@ const Footer = () => {
 							<h4 className={style.subtitle}>روابط مفيدة</h4>
 							<ul className={`${style.linkslist} list-unstyled px-0`}>
 								<li className={style.item}>
-									<Link href="#">خريطة الموقع</Link>
+									<Link href="/">خريطة الموقع</Link>
 								</li>
 								<li className={style.item}>
-									<Link href="#">من نحن</Link>
+									<Link href="/">من نحن</Link>
 								</li>
 								<li className={style.item}>
 									<Link href="/contact">التواصل معنا</Link>
@@ -92,7 +92,7 @@ const Footer = () => {
 							<h4 className={style.subtitle}>منتجات متنوعة</h4>
 							<ul className={`${style.linkslist} list-unstyled px-0`}>
 								<li className={style.item}>
-									<Link href="">الاكثر مبيعاً</Link>
+									<Link href="/bestseller">الاكثر مبيعاً</Link>
 								</li>
 								<li className={style.item}>
 									<Link href="/latestproducts">احدث المنتجات</Link>
