@@ -28,23 +28,24 @@ const SideBarMenuMobile = () => {
 				<div className={`${style.categoriesWrapper} ${style.item}`}>
 					<CategoriesMenuMobile />
 				</div>
+				{/* Todo:: add event listener to parent element  */}
 				<ul className={`${style.listMenu} list-unstyled`}>
-					<li className={style.item}>
+					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 						<Link href="/">الصفحة الرئيسية</Link>
 					</li>
-					<li className={style.item}>
+					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 						<Link href="/productsoffers">العروض المميزة</Link>
 					</li>
-					<li className={style.item}>
+					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 						<Link href="/categories">الاقسام</Link>
 					</li>
-					<li className={style.item}>
+					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 						<Link href="#">الطلبات</Link>
 					</li>
-					<li className={style.item}>
+					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 						<Link href="/store">المتجر</Link>
 					</li>
-					<li className={style.item}>
+					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 						<Link href="#">التواصل معنا</Link>
 					</li>
 				</ul>

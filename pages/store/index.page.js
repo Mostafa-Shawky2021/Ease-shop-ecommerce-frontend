@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import { useRouter } from "next/router";
@@ -11,11 +12,12 @@ import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { ProductsList } from "@root/components/productslist";
 import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";
 import { BreadCrumbLayout } from "@root/components/layout";
+import { Loading } from "@root/components/loading";
 
 import { queryKeys } from "data";
 import generateQueryStringFilter from "utils/generateQueryStringFilter";
 import { Seek } from "react-loading-indicators";
-import { Loading } from "@root/components/loading";
+import HomeIcon from "@mui/icons-material/Home";
 
 export async function getServerSideProps({ query }) {
 	const queryClient = new QueryClient();
@@ -49,23 +51,31 @@ const StorePage = () => {
 	return (
 		<>
 			<BreadCrumbLayout data={breadCrumbData} />
-			<Container fluid="xxl">
-				<Row className="g-0" style={{ position: "relative", minHeight: "70vh" }}>
-					{productsData.isLoading ? ( // for first time loading indicator
-						<Loading isOpacity={true}>
-							<Seek color="#ffb700" size="medium" />
-						</Loading>
-					) : (
-						<>
-							<Col xs={12} md={4} lg={3}>
-								<SidebarFilter pageNumber={pageNumber} />
-							</Col>
-							<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
-								{!!productsData.data?.products ? <ProductsList productsData={productsData.data} isFetchingProducts={productsData.isFetching} setPageNumber={setPageNumber} /> : <p>لا توجد منتجات للعرض</p>}
-							</Col>
-						</>
-					)}
-				</Row>
+			<Container fluid="xxl" style={{ minHeight: "300px", position: "relative" }}>
+				{productsData.isLoading ? (
+					<Loading isOpacity={false}>
+						<Seek color="#0d6efd" size="small" style={{ marginTop: "3rem" }} />
+					</Loading>
+				) : (
+					<Row className="g-0">
+						<Col xs={12} md={4} lg={3}>
+							<SidebarFilter pageNumber={pageNumber} />
+						</Col>
+						<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
+							{!!productsData.data?.products ? (
+								<ProductsList productsData={productsData.data} setPageNumber={setPageNumber} />
+							) : (
+								<div style={{ fontSize: "0.85rem", marginTop: "2.3rem" }}>
+									<p>لا يوجد منتحات للعرض</p>
+									<Link href="/" style={{ color: "var(--bs-primary)" }}>
+										العودة الي الصفحة الرئيسية
+										<HomeIcon fontSize="small" style={{ marginRight: "5px" }} />
+									</Link>
+								</div>
+							)}
+						</Col>
+					</Row>
+				)}
 			</Container>
 		</>
 	);

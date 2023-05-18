@@ -1,7 +1,5 @@
-import { useState } from "react";
 import Link from "next/link";
 
-import { useRouter } from "next/router";
 import { useCartsData, useGuest, useSearch } from "@root/hooks";
 
 import { calcCartsCount } from "@root/utils";

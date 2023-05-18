@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-import { useProductVariantsData, useFilter, useCloseMenuAction } from "@root/hooks";
+import { useProductVariantsData, useFilter, useCloseMenuAction, useCategoriesData } from "@root/hooks";
 
 import { CircularProgress } from "@mui/material";
 import Slider from "@mui/material/Slider";
@@ -10,12 +10,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 import style from "./sidebarfilter.module.scss";
+import Link from "next/link";
 
 const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 	const [sideBarFilterMobile, setSideBarFilterMobile] = useState(false);
 	const { filterRules, applyFilter, resetFilter, handleOnChangeInputFilter } = useFilter(pageNumber, dynamicRoute, additionalQuery);
 
 	const { data: productVariants, isLoading: isLoadingProductsVariants } = useProductVariantsData();
+	const { data: categoriesData } = useCategoriesData();
 
 	const sideBarFilterMObileRef = useRef(null);
 
@@ -29,12 +31,6 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 		setSideBarFilterMobile(!sideBarFilterMobile);
 	};
 
-	const loadingIconStyle = {
-		position: "absolute",
-		top: "50%",
-		left: "50%",
-		transform: "translate(-50%)",
-	};
 	return (
 		<div className={style.sidebarWrapper}>
 			<Button onClick={handleToggleSidebarMobileFilter} className={style.applyFilterMobile}>
@@ -66,6 +62,7 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 						</div>
 					) : (
 						<div>
+							{/* brands */}
 							{!!productVariants?.brands?.length && (
 								<div className={style.filter}>
 									<h4 className={style.title}>البراندات</h4>
@@ -73,11 +70,29 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 										{productVariants.brands.map((brand) => {
 											const activeFilterRule = filterRules.brands?.includes(brand.brand_name) ? "checked" : "";
 											return (
-												<li key={brand.id} className={`${style.filterItem} d-flex align-items-center`}>
-													<input className={style.checkBox} type="checkbox" value={brand.brand_name} id={brand.brand_name} onChange={handleOnChangeInputFilter("brands")} checked={activeFilterRule} />
-													<label htmlFor={brand.brand_name} className="ms-2">
+												<li key={brand.id} className={`${style.filterItem} `}>
+													<label className="d-flex align-items-center gap-2">
+														<input className={style.checkBox} type="checkbox" value={brand.brand_name} onChange={handleOnChangeInputFilter("brands")} checked={activeFilterRule} />
 														{brand.brand_name}
 													</label>
+												</li>
+											);
+										})}
+									</ul>
+								</div>
+							)}
+							{/* categories */}
+							{!!categoriesData?.length && (
+								<div className={style.filter}>
+									<h4 className={style.title}>الاقسام</h4>
+									<ul className={`list-unstyled ${style.filterList}`}>
+										{categoriesData.map((category) => {
+											return (
+												<li key={category.id} className={`${style.filterItem}`}>
+													<Link href={`categoryproducts/${category.cat_slug}`} className="w-100 d-flex align-items-center justify-content-between">
+														<span>{category.cat_name}</span>
+														<span>{category.products_count}</span>
+													</Link>
 												</li>
 											);
 										})}
@@ -92,8 +107,8 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 											const activeFilterRule = filterRules.sizes.includes(size.size_name) ? "checked" : "";
 											return (
 												<li key={size.id} className={`${style.filterItem} d-flex align-items-center`}>
-													<input className={style.checkBox} type="checkbox" value={size.size_name} id={size.size_name} onChange={handleOnChangeInputFilter("sizes")} checked={activeFilterRule} />
-													<label htmlFor={size.size_name} className="ms-2">
+													<label className="w-100 d-flex align-items-center gap-2">
+														<input className={style.checkBox} type="checkbox" value={size.size_name} onChange={handleOnChangeInputFilter("sizes")} checked={activeFilterRule} />
 														{size.size_name}
 													</label>
 												</li>
@@ -111,8 +126,8 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 											const activeLabelColorClass = filterRules.colors.includes(color.color_name) ? style.activeColor : "";
 											return (
 												<li key={color.id} className={`${style.filterItem} d-flex align-items-center`}>
-													<input className={style.checkBox} type="checkbox" value={color.color_name} id={color.color_name} onChange={handleOnChangeInputFilter("colors")} checked={activeFilterColorChecked} />
-													<label htmlFor={color?.color_name} className="ms-2 d-flex align-items-center w-100">
+													<label htmlFor={color?.id} className="w-100 d-flex align-items-center gap-2">
+														<input className={style.checkBox} type="checkbox" value={color.color_name} id={color.id} onChange={handleOnChangeInputFilter("colors")} checked={activeFilterColorChecked} />
 														<span>{color?.color_name}</span>
 														<span style={{ background: color?.color_value, marginLeft: "3px" }} className={`${style.boxColor} ${activeLabelColorClass} ms-auto`} />
 													</label>
@@ -127,7 +142,7 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 				</div>
 
 				<div className={style.applyFilter}>
-					<Button className={style.applyFilterBtn} onClick={() => applyFilter()}>
+					<Button className="btn btn-primary btn-sm mt-3" style={{ fontSize: "0.83rem" }} onClick={() => applyFilter()}>
 						تطبيق الفلتر
 					</Button>
 				</div>

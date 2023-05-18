@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { useCategoriesData } from "@root/hooks";
@@ -12,6 +14,8 @@ import { queryKeys } from "data";
 import { Loading } from "@root/components/loading";
 import { Seek } from "react-loading-indicators";
 import { CategoryItem } from "./components/categoryitem";
+
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 
 export async function getServerSideProps() {
 	const queryClient = new QueryClient();
@@ -37,10 +41,10 @@ export default function CategoriesPage() {
 			<BreadCrumbLayout data={breadCrumbData} />
 			<Container fluid="lg" style={{ marginTop: "2.5rem", minHeight: "300px", position: "relative" }}>
 				{categoriesData.isLoading ? (
-					<Loading isOpacity={true}>
-						<Seek color="#ffb700" size="medium" />
+					<Loading isOpacity={false}>
+						<Seek color="#0d6efd" size="small" style={{ marginTop: "3rem" }} />
 					</Loading>
-				) : (
+				) : !!categoriesData.data?.length ? (
 					<GridList
 						data={categoriesData.data}
 						renderItem={(category) => (
@@ -49,6 +53,15 @@ export default function CategoriesPage() {
 							</Col>
 						)}
 					/>
+				) : (
+					//  categories is empty
+					<div style={{ fontSize: "0.85rem" }}>
+						<p>لا يوجد اقسام للعرض</p>
+						<Link href="/" style={{ color: "var(--bs-primary)" }}>
+							العودة الي الصفحة الرئيسية
+							<HomeIcon fontSize="small" style={{ marginRight: "5px" }} />
+						</Link>
+					</div>
 				)}
 			</Container>
 		</>

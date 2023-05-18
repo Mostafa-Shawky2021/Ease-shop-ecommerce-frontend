@@ -8,7 +8,10 @@ export default function Document() {
 				<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,700&display=swap" />
 				<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" />
 				<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" />
+				<link rel="icon" href="/icons/icon-4-128.png" />
 				<link rel="manifest" href="/manifest.json" />
+				<meta name="theme-color" content="#0d6efd" />
+				<title>Ease Shop</title>
 			</Head>
 			<body>
 				<Main />

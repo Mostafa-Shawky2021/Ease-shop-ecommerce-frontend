@@ -27,7 +27,7 @@
 		box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 		position: absolute;
 		top: 10px;
-		right: 101%;
+		right: 100%;
 		margin-right: -1px;
 		width: 300px;
 		display: none;
@@ -45,10 +45,14 @@
 		color: var.$softblack;
 		font-weight: 500;
 		border: none;
-		padding: 0.8rem 0.2rem;
+		padding: 0.5rem 0.2rem;
 		width: 100%;
 		display: flex;
 		align-items: center;
+		transition: all 0.5s;
+		&:hover {
+			color: var(--bs-primary);
+		}
 	}
 
 	.itemCategory:not(:last-child) {

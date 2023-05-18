@@ -27,7 +27,7 @@ const SidebarCartList = ({ isOpenCartList, setIsOpenCartList }) => {
 
 	const sidebarCartListRef = useRef(null);
 
-	// close mobile fitler menu on mouse click, and on esacpe key down
+	// close  on mouse click, and on esacpe key down
 	useCloseMenuAction(setIsOpenCartList, sidebarCartListRef);
 
 	const handleProductIncrement = (event) => {

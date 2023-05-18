@@ -6,7 +6,7 @@ import { Loading } from "@root/components/loading";
 
 import style from "./products.module.scss";
 
-const ProductsList = ({ productsData, setPageNumber, isFetchingProducts }) => {
+const ProductsList = ({ productsData, setPageNumber }) => {
 	const { current_page, per_page, total } = productsData.meta_pagination;
 
 	return (
@@ -19,7 +19,6 @@ const ProductsList = ({ productsData, setPageNumber, isFetchingProducts }) => {
 					</Col>
 				)}
 			/>
-
 			<PaginationWrapper activePage={current_page} itemsCountPerPage={per_page} totalItemsCount={total} pageRangeDisplayed={5} onChange={(page) => setPageNumber(page)} />
 		</div>
 	);

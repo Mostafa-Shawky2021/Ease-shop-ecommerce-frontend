@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -17,6 +18,8 @@ import { BreadCrumbLayout } from "@root/components/layout";
 import { ProductsList } from "@root/components/productslist";
 
 import { queryKeys } from "./data";
+
+import HomeIcon from "@mui/icons-material/Home";
 
 export async function getServerSideProps({ query }) {
 	const queryClient = new QueryClient();
@@ -48,29 +51,37 @@ const ProductsOffers = () => {
 
 	const breadCrumbData = [
 		{ label: "الصفحة الرئيسية", link: "/" },
-		{ label: "الاكثر مبيعاً", active: true },
+		{ label: "العروض", active: true },
 	];
 
 	return (
 		<>
 			<BreadCrumbLayout data={breadCrumbData} />
-			<Container fluid="xxl">
-				<Row className="g-0" style={{ position: "relative", minHeight: "300px" }}>
-					{productsoffers.isLoading ? ( // for first time loading indicator
-						<Loading isOpacity={true}>
-							<Seek color="#ffb700" size="medium" />
-						</Loading>
-					) : (
-						<>
-							<Col xs={12} md={4} lg={3}>
-								<SidebarFilter pageNumber={pageNumber} />
-							</Col>
-							<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
-								{!!productsoffers.data?.products ? <ProductsList productsData={productsoffers.data} setPageNumber={setPageNumber} isFetchingProducts={productsoffers.isFetching} /> : <p>ليس متوفر عروض في الوقت الحالي</p>}
-							</Col>
-						</>
-					)}
-				</Row>
+			<Container fluid="xxl" style={{ minHeight: "300px", position: "relative" }}>
+				{productsoffers.isLoading ? (
+					<Loading isOpacity={false}>
+						<Seek color="#0d6efd" size="small" style={{ marginTop: "3rem" }} />
+					</Loading>
+				) : (
+					<Row className="g-0">
+						<Col xs={12} md={4} lg={3}>
+							<SidebarFilter pageNumber={pageNumber} />
+						</Col>
+						<Col xs={12} md={8} lg={9} style={{ position: "relative" }}>
+							{!!productsoffers?.data?.products ? (
+								<ProductsList productsData={productsoffers.data} setPageNumber={setPageNumber} />
+							) : (
+								<div style={{ fontSize: "0.85rem", marginTop: "3rem" }}>
+									<p>ليس متوفر عروض </p>
+									<Link href="/" style={{ color: "var(--bs-primary)" }}>
+										العودة الي الصفحة الرئيسية
+										<HomeIcon fontSize="small" style={{ marginRight: "5px" }} />
+									</Link>
+								</div>
+							)}
+						</Col>
+					</Row>
+				)}
 			</Container>
 		</>
 	);

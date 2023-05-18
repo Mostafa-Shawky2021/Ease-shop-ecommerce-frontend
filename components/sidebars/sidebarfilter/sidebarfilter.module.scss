@@ -8,7 +8,7 @@
 
 	@include minmediaquery("md") {
 		box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
-		padding: 1.5rem 1rem;
+		padding: 1.5rem 1rem 1.9rem;
 	}
 	//display only in mobile, tablets and medium screen
 	.applyFilterMobile {
@@ -106,9 +106,9 @@
 
 	.filter {
 		margin-top: 1rem;
-		padding-bottom: 0.3rem;
+		padding-bottom: 0.5rem;
 		border-bottom: 1px solid #dedede;
-		max-height: 250px;
+		max-height: 560px;
 		overflow: auto;
 
 		&::-webkit-scrollbar {
@@ -120,6 +120,9 @@
 		margin-bottom: 0.4rem;
 		margin-top: 0.7rem;
 		color: #767373;
+		&:hover {
+			color: var(--bs-primary);
+		}
 	}
 
 	.checkBox {
@@ -136,21 +139,6 @@
 		&.activeColor {
 			outline: 1px solid #979797;
 			outline-offset: 2px;
-		}
-	}
-
-	.applyFilterBtn {
-		background-color: var.$secondarycolor;
-		color: #000;
-		border: 0px;
-		border-radius: 0px;
-		margin-top: 1rem;
-		font-size: 0.9rem;
-
-		&:hover,
-		&:focus {
-			background-color: #efad06;
-			color: #000;
 		}
 	}
 }

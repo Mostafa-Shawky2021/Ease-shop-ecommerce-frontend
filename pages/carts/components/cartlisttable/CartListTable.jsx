@@ -45,7 +45,6 @@ const CartListTable = ({ cartsData, isCartsLoading }) => {
 		<div className={style.cartListWrapper}>
 			<div className={style.countinueShopping}>
 				<Link href="/store">
-					{" "}
 					العودة الي التسوق <ArrowBackIcon fontSize="xs" />
 				</Link>
 			</div>
@@ -81,41 +80,23 @@ const CartListTable = ({ cartsData, isCartsLoading }) => {
 								<tr key={cart?.id}>
 									<td style={{ width: "120px" }}>
 										<Link href={`/product/${cart?.product.product_slug}`}>
-											<Image
-												src={cart?.product?.image ? cart?.product?.image : DefaultImage}
-												alt={cart?.product?.product_name}
-												width={100}
-												height={80}
-											/>
+											<Image src={cart?.product?.image ? cart?.product?.image : DefaultImage} alt={cart?.product?.product_name} width={100} height={80} />
 										</Link>
 									</td>
 									<td>
 										<p className={style.productName}>
-											<Link href={`/product/${cart?.product.product_slug}`}>
-												{cart?.product?.product_name}
-											</Link>
+											<Link href={`/product/${cart?.product.product_slug}`}>{cart?.product?.product_name}</Link>
 										</p>
 									</td>
 									<td>{cart?.color || "--"}</td>
 									<td>{cart?.size || "--"}</td>
 									<td>{Number(cart?.unit_price).toLocaleString()}</td>
 									<td>
-										<ProductQuantity
-											quantity={cart.quantity}
-											handleProductIncrement={handleProductIncrement}
-											handleProductDecrement={handleProductDecrement}
-											cartId={cart?.id}
-											currentCart={currentCart}
-											style={{ justifyContent: "center" }}
-										/>
+										<ProductQuantity quantity={cart.quantity} handleProductIncrement={handleProductIncrement} handleProductDecrement={handleProductDecrement} cartId={cart?.id} currentCart={currentCart} style={{ justifyContent: "center" }} />
 									</td>
 									<td>{Number(cart?.total_price).toLocaleString()}</td>
 									<td>
-										<Button
-											className={style.deleteProduct}
-											data-cart-id={cart.id}
-											onClick={handleProductDelete}
-										>
+										<Button className={style.deleteProduct} data-cart-id={cart.id} onClick={handleProductDelete}>
 											<DeleteIcon fontSize="small" />
 										</Button>
 									</td>

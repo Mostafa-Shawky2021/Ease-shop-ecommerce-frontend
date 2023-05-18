@@ -19,22 +19,11 @@ const CheckOutPage = () => {
 	return (
 		<>
 			<BreadCrumbLayout data={breadCrumbData} />
-			<Container fluid="lg" style={{ marginTop: "2.5rem", paddingTop: "2rem", position: "relative", background: "#fff" }}>
+			<Container fluid="lg" style={{ marginTop: "2rem", position: "relative", background: "#fff" }}>
 				{isLoading ? (
 					<div style={{ height: "700px", position: "relative" }}>
 						<Loading isOpacity={false}>
-							<Seek
-								style={{
-									position: "fixed",
-									top: "50%",
-									left: "50%",
-									transform: "translate(-50%)",
-								}}
-								color="#ffb700"
-								size="medium"
-								text=""
-								textColor=""
-							/>
+							<Seek color="#0d6efd" size="small" style={{ marginTop: "3rem" }} />
 						</Loading>
 					</div>
 				) : !!carts.length ? (
