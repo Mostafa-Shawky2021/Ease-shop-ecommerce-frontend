@@ -15,7 +15,7 @@ import { Loading } from "@root/components/loading";
 import { Seek } from "react-loading-indicators";
 import { CategoryItem } from "./components/categoryitem";
 
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
+import HomeIcon from "@mui/icons-material/Home";
 
 export async function getServerSideProps() {
 	const queryClient = new QueryClient();
