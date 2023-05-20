@@ -27,7 +27,7 @@ export async function getStaticProps() {
 		queryClient.prefetchQuery(queryKeys.RANDOM_CATEGORIES_PRODUCTS, fetchRandomCategoriesProducts),
 		queryClient.prefetchQuery(queryKeys.CATEGORIES, fetchCategories),
 		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "offers=true&latest=true&limit=8"), () => fetchProducts(1, "offers=true&latest=true&limit=8")),
-		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "best-seller=true&limit=8"), () => fetchProducts(1, "offers=true&latest=true&limit=8")),
+		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "best-seller=true&limit=8"), () => fetchProducts(1, "best-seller=true&limit=8")),
 	]);
 
 	return {
