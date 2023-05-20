@@ -1,5 +1,4 @@
 import Head from "next/head";
-
 import { useState } from "react";
 
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";

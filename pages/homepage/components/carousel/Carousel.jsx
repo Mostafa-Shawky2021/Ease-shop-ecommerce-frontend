@@ -33,12 +33,12 @@ const Carousel = () => {
 				<h1 className={style.title}>
 					خصومات تصل لاكثر من <span className={style.discount}>40%</span>
 				</h1>
-				<p className={style.description}>تسوق معنا الأن حيث نقدم افضل المنتجات باسعار تنافسية مع وخصومات تصل الي 40%واكثر مما يجعلنا متميزين في مجالنا فراحة العميل هي من اهم اولاوياتنا</p>
+				<p className={style.description}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero ratione voluptatum possimus similique dolore obcaecati omnis numquam repudiandae repellendus, quis dignissimos quasi mollitia minus molestias? Illum fuga sint perspiciatis vel?</p>
 			</>
 		);
 	};
 
-	const carouselTime = () => (carouselData?.data?.carousel_content?.carousel_time || 10) * 1000;
+	const carouselTime = () => (carouselData?.data?.carousel_content?.carousel_time || 15) * 1000;
 
 	const renderCarouselImages = () => {
 		const carouselImages = carouselData?.data?.carousel_content?.images;

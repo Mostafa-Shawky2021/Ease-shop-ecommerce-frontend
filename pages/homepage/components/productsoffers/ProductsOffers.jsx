@@ -25,14 +25,14 @@ const ProductsOffers = () => {
 						<Swiper
 							modules={[Navigation, Autoplay]}
 							className={style.swiperWrapper}
-							slidesPerView="auto"
 							autoplay={{ delay: 4000 }}
 							navigation={{
 								prevEl: nextElementRef.current,
 								nextEl: prevElementRef.current,
 							}}
 							breakpoints={{
-								0: { slidesPerView: 2 },
+								1: { slidesPerView: 1 },
+								576: { slidesPerView: 2 },
 								768: { slidesPerView: 3 },
 								992: { slidesPerView: 4 },
 								1400: { slidesPerView: 5 },

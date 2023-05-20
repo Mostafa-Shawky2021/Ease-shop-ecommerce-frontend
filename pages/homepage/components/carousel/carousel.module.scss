@@ -12,7 +12,7 @@
 	@include maxmediaquery("sm") {
 		height: 550px;
 	}
-	@include overlay(#000, 0.3);
+	@include overlay(#000, 0.4);
 
 	.intro {
 		position: absolute;

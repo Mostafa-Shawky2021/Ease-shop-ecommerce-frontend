@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { fetchCategories, fetchLayout, fetchProducts } from "@root/queries";
@@ -15,6 +16,7 @@ import { BestSeller } from "./homepage/components/bestseller";
 
 import { queryKeys } from "./homepage/data";
 import { queryKeys as globalQueryKeys } from "data";
+import { ThemeProvider } from "react-bootstrap";
 
 export async function getStaticProps() {
 	const queryClient = new QueryClient();
@@ -25,6 +27,7 @@ export async function getStaticProps() {
 		queryClient.prefetchQuery(queryKeys.RANDOM_CATEGORIES_PRODUCTS, fetchRandomCategoriesProducts),
 		queryClient.prefetchQuery(queryKeys.CATEGORIES, fetchCategories),
 		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "offers=true&latest=true&limit=8"), () => fetchProducts(1, "offers=true&latest=true&limit=8")),
+		queryClient.prefetchQuery(globalQueryKeys.PRODUCTS(1, "best-seller=true&limit=8"), () => fetchProducts(1, "offers=true&latest=true&limit=8")),
 	]);
 
 	return {

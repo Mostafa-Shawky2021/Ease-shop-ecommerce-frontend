@@ -66,7 +66,8 @@ const ProductDetails = ({ productDetails }) => {
 				{renderPrice()}
 				{productDetails?.price_discount && <div className={style.discountPercentage}>خصم {calcPriceDiscount(productDetails?.price, productDetails?.price_discount)}%</div>}
 			</div>
-			<div className={style.shortDescription}>{productDetails?.short_description}</div>
+			{!!productDetails.short_description && <div className={style.shortDescription}>{productDetails?.short_description}</div>}
+
 			{!!productDetails?.colors?.length && (
 				<div className={`${style.productVariantsWrapper} mb-3 mt-3`}>
 					<label className={style.labelText}>اختر لون المنتج</label>
