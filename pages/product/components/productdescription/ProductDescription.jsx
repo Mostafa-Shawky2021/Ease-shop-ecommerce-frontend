@@ -18,9 +18,7 @@ const ProductDescription = ({ productDescription }) => {
 	return (
 		productDescription && (
 			<SectionLayout title="وصف المنتج" isContainerDisable={true}>
-				<div className={style.productDescriptionWrapper}>
-					<p className={style.productDescription}>{isLoadingLongDescription ? <CircularProgress size={20} /> : parse(productDescriptionParsed)}</p>
-				</div>
+				<div className={style.productDescriptionWrapper}>{isLoadingLongDescription ? <CircularProgress size={20} /> : parse(productDescriptionParsed)}</div>
 			</SectionLayout>
 		)
 	);

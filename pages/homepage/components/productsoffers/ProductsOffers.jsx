@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import style from "./productsoffers.module.scss";
+import { Col, Row } from "react-bootstrap";
 
 const ProductsOffers = () => {
 	const [_, setSwiper] = useState(null);
@@ -30,19 +31,15 @@ const ProductsOffers = () => {
 								prevEl: nextElementRef.current,
 								nextEl: prevElementRef.current,
 							}}
-							breakpoints={{
-								1: { slidesPerView: 1 },
-								576: { slidesPerView: 2 },
-								768: { slidesPerView: 3 },
-								992: { slidesPerView: 4 },
-								1400: { slidesPerView: 5 },
-							}}
-							loop={false}
+							allowTouchMove={true}
+							slidesPerView={"auto"}
+							loop={true}
 							spaceBetween={22}
 							onSwiper={setSwiper}
+							grabCursor={true}
 						>
 							{productsOffers?.products?.map((product) => (
-								<SwiperSlide key={product.id}>
+								<SwiperSlide key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
 									<ProductCard product={product} />
 								</SwiperSlide>
 							))}

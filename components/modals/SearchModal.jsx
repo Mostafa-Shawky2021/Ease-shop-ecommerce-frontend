@@ -20,21 +20,10 @@ const SearchModal = ({ renderBtn }) => {
 		<>
 			{renderBtn(handleOpenModal)}
 
-			<Modal
-				show={searchOpenModal}
-				className={style.searchModalWrapper}
-				dialogClassName={style.modalContent}
-				onEscapeKeyDown={() => setSearchModal(false)}
-				onHide={() => setSearchModal(false)}
-			>
+			<Modal show={searchOpenModal} className={style.searchModalWrapper} dialogClassName={style.modalContent} onEscapeKeyDown={() => setSearchModal(false)} onHide={() => setSearchModal(false)}>
 				<Modal.Body>
 					<div>
-						<InputWithIcon
-							style={{ padding: "0.5rem", border: "1px solid #0075ff" }}
-							onChange={handleOnInputChange}
-							onKeyPress={handleOnSubmitSearch}
-							placeholder="عن ماذا تبحث"
-						>
+						<InputWithIcon style={{ padding: "0.5rem", border: "1px solid #0075ff" }} onChange={handleOnInputChange} onKeyPress={handleOnSubmitSearch} placeholder="عن ماذا تبحث">
 							<button className={style.searchBtn} onClick={handleOnSubmitSearch}>
 								<SearchOutlinedIcon fontSize="small" />
 							</button>

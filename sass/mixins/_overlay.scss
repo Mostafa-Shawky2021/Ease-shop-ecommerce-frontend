@@ -1,15 +1,13 @@
 @mixin overlay($background: #000, $opacity: 0.4) {
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        background-color: $background;
-        opacity: $opacity;
-        height: 100%;
-        z-index: 1;
-
-    }
-
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		background-color: $background;
+		opacity: $opacity;
+		height: 100%;
+		z-index: -1;
+	}
 }

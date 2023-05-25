@@ -1,63 +1,64 @@
-@use 'sass/var' as var;
-@use 'sass/mixins/animationbutton' as *;
-@use 'sass/mixins/mediaquery' as *;
+@use "sass/var" as var;
+@use "sass/mixins/animationbutton" as *;
+@use "sass/mixins/mediaquery" as *;
 
 .cartTotalWrapper {
-    border: 1px solid rgb(237 237 237);
-    border-radius: 5px;
-    background: #fff;
-    margin-top: 1rem;
-    padding: 1.5rem 1rem;
+	border: 1px solid rgb(237 237 237);
+	border-radius: 5px;
+	background: #fff;
+	margin-top: 1rem;
+	padding: 1.5rem 1rem;
 
-    .title {
-        color: #000;
-        font-weight: 500;
-        margin-bottom: 5px;
-        padding-right: 0.8rem;
-        padding-bottom: 0.8rem;
-        font-size: 1rem;
-        border-bottom: 1px solid rgb(237 237 237);
-    }
+	.title {
+		color: #000;
+		font-weight: 500;
+		margin-bottom: 5px;
+		padding-right: 0.8rem;
+		padding-bottom: 0.8rem;
+		font-size: 0.9rem;
+		border-bottom: 1px solid rgb(237 237 237);
+	}
 
-    .cartTotalBody {
-        padding: 0.8rem;
-    }
+	.cartTotalBody {
+		padding: 0.8rem;
+		font-size: 0.85rem;
+	}
 
-    .priceWrapper {
-        color: #f00;
-        font-weight: 600;
-    }
+	.priceWrapper {
+		color: #f00;
+		font-weight: 600;
+	}
 
-    .price {
-        font-size: 1rem;
-        margin: 0px 5px;
-        font-family: var.$oswaldfont;
-    }
+	.price {
+		font-size: 1rem;
+		margin: 0px 5px;
+		font-family: var.$oswaldfont;
+	}
 
-    .currency {
-        font-family: var.$cairofont;
-    }
+	.currency {
+		font-family: var.$cairofont;
+	}
 
-    .checkoutButton {
-        background-color: #212224;
-        color: #fff;
-        position: relative;
-        isolation: isolate;
-        display: block;
-        width: 100%;
-        height: 48px;
-        text-align: center;
-        line-height: 48px;
-        margin: 1.5rem auto 0px;
-        overflow: hidden;
-        @include animationbutton(var.$secondarycolor);
+	.checkoutButton {
+		background-color: #212224;
+		color: #fff;
+		position: relative;
+		isolation: isolate;
+		display: block;
+		width: 100%;
+		height: 48px;
+		text-align: center;
+		line-height: 48px;
+		margin: 1.5rem auto 0px;
+		overflow: hidden;
+		@include animationbutton(var.$secondarycolor);
 
-        .text {
-            transition: all 0.3s;
-        }
+		.text {
+			transition: all 0.3s;
+		}
 
-        &:hover .text {
-            color: #000;
-        }
-    }
+		&:hover .text {
+			color: #000;
+		}
+	}
 }

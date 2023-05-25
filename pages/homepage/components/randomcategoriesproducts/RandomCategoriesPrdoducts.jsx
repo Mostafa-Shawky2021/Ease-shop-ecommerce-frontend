@@ -25,6 +25,7 @@ const RandomCategoriesProducts = () => {
 					<SectionLayout key={randomCat.id} title={randomCat?.cat_name} link={`/categoryproducts/${randomCat.cat_slug}`} isSwiper={true}>
 						{(nextElementRef, prevElementRef) => (
 							<Swiper
+								style={{ direction: "rtl" }}
 								modules={[Navigation, Autoplay]}
 								className={style.swiperWrapper}
 								navigation={{
@@ -32,19 +33,14 @@ const RandomCategoriesProducts = () => {
 									nextEl: prevElementRef.current,
 								}}
 								autoplay={{ delay: 4000 }}
-								breakpoints={{
-									1: { slidesPerView: 1 },
-									576: { slidesPerView: 2 },
-									768: { slidesPerView: 3 },
-									992: { slidesPerView: 4 },
-									1400: { slidesPerView: 5 },
-								}}
-								loop={false}
+								allowTouchMove={true}
+								slidesPerView={"auto"}
+								loop={true}
 								spaceBetween={18}
 								onSwiper={setSwiper}
 							>
 								{randomCat?.products?.map((product) => (
-									<SwiperSlide key={product.id}>
+									<SwiperSlide key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
 										<ProductCard product={product} />
 									</SwiperSlide>
 								))}

@@ -27,7 +27,7 @@ const Header = ({ setIsOpenCartList }) => {
 
 	return (
 		<div className={`${style.header} align-items-center`}>
-			<Container fluid="xl" className={style.container}>
+			<Container fluid="xl">
 				<Row className="align-items-center">
 					<Col xs={12} md={3} lg={2}>
 						<div className={`${style.logo} text-center text-md-start`}>

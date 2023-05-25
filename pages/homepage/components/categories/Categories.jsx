@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { useCategoriesData } from "../../hooks";
+import { useCategoriesData } from "@root/hooks";
 
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -32,29 +32,27 @@ const Categories = () => {
 							pagination={{ clickable: true }}
 							className={style.swiperWrapper}
 							autoplay={{ delay: 4000 }}
-							// allowTouchMove={false}
+							allowTouchMove={true}
 							navigation={{
 								prevEl: prevElementRef.current,
 								nextEl: nextElementRef.current,
 							}}
-							breakpoints={{
-								0: { slidesPerView: 2 },
-								480: { slidesPerView: 3 },
-								670: { slidesPerView: 4 },
-								768: { slidesPerView: 5 },
-								992: { slidesPerView: 6 },
-								1400: { slidesPerView: 7 },
-							}}
-							loop={false}
+							slidesPerView={"auto"}
+							loop={true}
 							spaceBetween={18}
 							onSwiper={setSwiper}
 						>
 							{categoriesData?.map((category) => (
-								<SwiperSlide key={category.id}>
+								<SwiperSlide key={category.id} className="col-6 col-sm-4 col-md-3 col-lg-2">
 									<div className={style.catWrapper} style={{ marginTop: "1rem" }}>
 										<div className={style.catImageWrapper}>
 											<Link href={`categoryproducts/${category.cat_slug}`}>
-												<Image src={category?.image ? `${category?.image}` : DefaultImage} className={style.catImage} fill alt={category.cat_name} />
+												<Image
+													src={category?.image ? `${category?.image}` : DefaultImage}
+													className={style.catImage}
+													fill
+													alt={category.cat_name}
+												/>
 											</Link>
 										</div>
 										<Link href={`categoryproducts/${category.cat_slug}`} className={style.catName}>

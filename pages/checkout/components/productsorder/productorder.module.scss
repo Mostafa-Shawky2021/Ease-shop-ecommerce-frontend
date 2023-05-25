@@ -1,9 +1,13 @@
 @use "sass/var" as var;
-
+@use "sass/mixins/mediaquery" as *;
 .productsOrderWrapper {
 	height: 100%;
 	width: 100%;
 	padding: 1rem 1.3rem;
+	@include maxmediaquery("md") {
+		border-top: 1px solid #dedede;
+		margin-top: 1.3rem;
+	}
 
 	.title {
 		font-size: 0.9rem;

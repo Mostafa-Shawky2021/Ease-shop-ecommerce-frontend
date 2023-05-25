@@ -1,95 +1,116 @@
 @use "sass/var" as var;
-@use 'sass/mixins/animationbutton' as *;
-@use 'sass/mixins/mediaquery' as *;
-@use 'sass/mixins/overlay' as *;
+@use "sass/mixins/animationbutton" as *;
+@use "sass/mixins/mediaquery" as *;
+@use "sass/mixins/overlay" as *;
 
 .offerWrapper {
+	.bannerWrapper {
+		overflow: hidden;
+		position: relative;
+		isolation: isolate;
+		height: 400px;
+		@include overlay(#000, 0.7);
+	}
+	.banner {
+		position: relative;
+		z-index: -2;
+		width: 100%;
+		height: 100%;
+		padding: 0px 1rem;
+		background-size: cover;
+		transition: all 1.2s;
 
-    .banner {
-        width: 100%;
-        height: 300px;
-        background-size: cover;
-        position: relative;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        padding: 0px 2rem;
-        overflow: hidden;
-        @include overlay(#000, 0.3);
+		@include minmediaquery("lg") {
+			text-align: right;
+		}
+	}
 
-        @include minmediaquery('lg') {
-            text-align: right;
-        }
-    }
+	.bannerWrapper:hover .banner {
+		transform: scale(1.1);
+	}
 
-    .imageBox {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        transition: all 1s;
-    }
+	.intro {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 2;
+		width: 95%;
+		height: 60%;
+		border: 1px solid #d3d3d3;
+		padding: 2rem;
+		z-index: 3;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		@include minmediaquery("lg") {
+			text-align: right;
+		}
+	}
 
-    .banner:hover .imageBox {
-        transform: scale(1.1);
-    }
+	.intro .title {
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		justify-content: center;
+		@include minmediaquery("sm") {
+			font-size: 1.4rem;
+		}
+		@include minmediaquery("lg") {
+			font-size: 1.8rem;
+			justify-content: flex-start;
+		}
+		.discount {
+			font-family: var.$oswaldfont;
+			color: var.$accentcolor;
+			font-weight: bold;
+		}
+	}
 
-    .intro {
-        position: relative;
-        z-index: 2;
-        width: 95%;
-        border: 1px solid #d3d3d3;
-        padding: 0.8rem 2rem;
-    }
+	.intro .description {
+		font-weight: 500;
+		font-size: 0.9rem;
+		margin-top: 1.2 rem;
+		@include minmediaquery("sm") {
+			font-size: 1rem;
+		}
+		color: #e3e3e3;
+	}
 
-    .intro .title {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: #fff;
-    }
+	.intro .offer {
+		color: #000;
+		font-size: 1.3rem;
+		font-weight: bold;
+		font-family: var.$oswaldfont;
+	}
 
-    .intro .description {
-        font-weight: 500;
-        font-size: 1.2rem;
-        color: #e3e3e3;
-    }
+	.intro .shopNow {
+		margin: 0.5rem auto;
+		padding: 0.5rem 4rem;
+		position: relative;
+		isolation: isolate;
+		border: 1px solid #fff;
+		border-radius: 0px;
+		background: transparent;
+		color: #fff;
+		font-weight: 600;
 
-    .intro .offer {
-        color: #000;
-        font-size: 1.3rem;
-        font-weight: bold;
-        font-family: var.$oswaldfont;
-    }
+		@include animationbutton(var.$secondarycolor);
 
-    .intro .shopNow {
-        margin: 1rem auto;
-        padding: 0.8rem 4rem;
-        position: relative;
-        isolation: isolate;
-        border: 1px solid #fff;
-        border-radius: 0px;
-        background: transparent;
-        color: #fff;
-        font-weight: 600;
+		@include minmediaquery("lg") {
+			margin-right: 0px;
+		}
 
-        @include animationbutton(var.$secondarycolor);
+		.text {
+			transition: all 0.3s;
+		}
 
-        @include minmediaquery('lg') {
-            margin-right: 0px;
-
-        }
-
-        .text {
-            transition: all 0.3s;
-        }
-
-        &:hover .text {
-            color: #fff;
-
-        }
-    }
-
+		&:hover .text {
+			color: #fff;
+		}
+	}
 }

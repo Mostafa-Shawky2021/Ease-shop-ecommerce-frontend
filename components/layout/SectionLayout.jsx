@@ -15,7 +15,7 @@ const SectionLayout = ({ title, children, link, isSwiper, isContainerDisable = f
 
 	return (
 		<div className={style.sectionLayout} {...props}>
-			<Container className={`${style.container} ${isContainerDisable ? style.disableContainer : ""}`} fluid="xxl" style={{ position: "relative" }}>
+			<Container className={`${style.container} ${isContainerDisable ? style.disableContainer : ""}`} fluid="xl" style={{ position: "relative" }}>
 				<header className={`${style.header} d-flex align-items-center justify-content-between`}>
 					<h4 className={style.title}>{title}</h4>
 					{link && (

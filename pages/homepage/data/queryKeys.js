@@ -1,7 +1,5 @@
-
 const queryKeys = {
-    RANDOM_CATEGORIES_PRODUCTS: ['categories', 'products', 'random'],
-    CATEGORIES: ['categories'],
-}
+	RANDOM_CATEGORIES_PRODUCTS: ["categories", "products", "random"],
+};
 
 export default queryKeys;

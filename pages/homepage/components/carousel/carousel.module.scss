@@ -8,15 +8,13 @@
 	position: relative;
 	transition: all 1s;
 	height: 680px;
-	isolation: isolate;
 	@include maxmediaquery("sm") {
 		height: 550px;
 	}
-	@include overlay(#000, 0.4);
 
 	.intro {
 		position: absolute;
-		z-index: 99;
+		z-index: 2;
 		top: 50%;
 		transform: translate(50%, -50%);
 		right: 50%;
@@ -24,11 +22,11 @@
 		padding-left: 10px;
 		text-align: center;
 		width: 98%;
-
+		user-select: none;
 		@include minmediaquery("sm") {
 			text-align: right;
 			padding: 0px;
-			right: 30px;
+			right: 50px;
 			top: 24%;
 			transform: none;
 			width: auto;
@@ -58,11 +56,12 @@
 
 		.description {
 			@include paragraph(#fdfdfd);
-			font-size: 1rem;
+			font-weight: 600;
 
-			@include minmediaquery("md") {
+			@include minmediaquery("sm") {
 				max-width: 640px;
 				font-size: 1.1rem;
+				margin-top: 1.7rem;
 			}
 		}
 
@@ -114,10 +113,9 @@
 		left: 0px;
 		top: 0px;
 	}
-
-	.image {
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
+	.sliderImage {
+		position: relative;
+		z-index: 2;
+		@include overlay(#000, 0.6);
 	}
 }

@@ -20,32 +20,37 @@ const SideBarMenuMobile = () => {
 
 	return (
 		<div className={style.sidebarMenuMobileWrapper} ref={sidebarMenuMobileRef}>
-			<BarIcon activeIcons={sidebarMenuMobileIsOpen ? true : false} style={{ width: "20px", color: "#000" }} onClick={() => setSidebarMenuMobileIsOpen(!sidebarMenuMobileIsOpen)} barIconStyle={style.barIcon} />
+			<BarIcon
+				activeIcons={sidebarMenuMobileIsOpen ? true : false}
+				style={{ width: "20px", color: "#000" }}
+				onClick={() => setSidebarMenuMobileIsOpen(!sidebarMenuMobileIsOpen)}
+				barIconStyle={style.barIcon}
+			/>
 			<div className={`${style.sidebarListMenu} ${sideBarMenuMobileIsOpenClass}`}>
 				<div className={style.iconMenuMobileCloseWrapper} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 					<CloseIcon fontSize="small" className={style.icon} />
 				</div>
-				<div className={`${style.categoriesWrapper} ${style.item}`}>
+				<div className={`${style.categoriesWrapper} ${style.item}`} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 					<CategoriesMenuMobile />
 				</div>
 				{/* Todo:: add event listener to parent element  */}
-				<ul className={`${style.listMenu} list-unstyled`}>
-					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
+				<ul className={`${style.listMenu} list-unstyled`} onClick={() => setSidebarMenuMobileIsOpen(false)}>
+					<li className={style.item}>
 						<Link href="/">الصفحة الرئيسية</Link>
 					</li>
-					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
+					<li className={style.item}>
 						<Link href="/productsoffers">العروض المميزة</Link>
 					</li>
-					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
+					<li className={style.item}>
 						<Link href="/categories">الاقسام</Link>
 					</li>
-					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
+					<li className={style.item}>
 						<Link href="#">الطلبات</Link>
 					</li>
-					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
+					<li className={style.item}>
 						<Link href="/store">المتجر</Link>
 					</li>
-					<li className={style.item} onClick={() => setSidebarMenuMobileIsOpen(false)}>
+					<li className={style.item}>
 						<Link href="#">التواصل معنا</Link>
 					</li>
 				</ul>

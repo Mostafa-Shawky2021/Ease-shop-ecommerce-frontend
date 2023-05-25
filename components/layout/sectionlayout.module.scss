@@ -16,10 +16,6 @@
 			padding-left: 0px;
 			width: 100%;
 		}
-		@include minmediaquery("md") {
-			padding-right: 2rem;
-			padding-left: 2rem;
-		}
 	}
 
 	.header {

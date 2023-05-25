@@ -45,7 +45,7 @@
 		transition: all 0.3s;
 		transform-origin: 50% 0%;
 		box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-
+		padding-bottom: 12px;
 		&.openCategoryList {
 			transform: scale(1);
 		}
@@ -60,5 +60,9 @@
 			background-color: var.$ternarycolor;
 			border-radius: 8px;
 		}
+	}
+	.viewMore {
+		font-size: 0.85rem;
+		color: var(--bs-primary);
 	}
 }
