@@ -12,7 +12,15 @@ const CategoryItem = ({ categoryData }) => {
 	return (
 		<div className={`${style.categoryItemWrapper} text-center`}>
 			<div className={style.imageWrapper}>
-				<Image fill style={{ objectFit: "contain" }} className="img-fluid" src={categoryImage} alt={categoryData.cat_name} />
+				<Link href={`/categoryproducts/${categoryData.cat_slug}`}>
+					<Image
+						fill
+						style={{ objectFit: "contain" }}
+						className="img-fluid"
+						src={categoryImage}
+						alt={categoryData.cat_name}
+					/>
+				</Link>
 			</div>
 			<div className={style.catName}>
 				<Link href={`/categoryproducts/${categoryData.cat_slug}`}>{categoryData.cat_name}</Link>

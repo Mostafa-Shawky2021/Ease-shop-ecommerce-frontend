@@ -33,7 +33,7 @@ const SideBarMenuMobile = () => {
 				<div className={`${style.categoriesWrapper} ${style.item}`} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 					<CategoriesMenuMobile />
 				</div>
-				{/* Todo:: add event listener to parent element  */}
+
 				<ul className={`${style.listMenu} list-unstyled`} onClick={() => setSidebarMenuMobileIsOpen(false)}>
 					<li className={style.item}>
 						<Link href="/">الصفحة الرئيسية</Link>
