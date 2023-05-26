@@ -13,7 +13,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import DefaultImage from "@assets/images/default/default.jpg";
 
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 import style from "./productcard.module.scss";
@@ -69,9 +68,24 @@ const ProductCard = ({ product, ...props }) => {
 
 				{!!product?.sizes?.length || !!product?.colors?.length ? (
 					<div className={style.variantsWrapper}>
-						{!!product?.colors?.length && <ColorsVariant style={{ marginLeft: "5px" }} className={`${style.colorsBtn}`} colors={product?.colors} choosenColor={productVariants.color} handleChooseColor={handleChooseColor} />}
+						{!!product?.colors?.length && (
+							<ColorsVariant
+								style={{ marginLeft: "5px" }}
+								className={`${style.colorsBtn}`}
+								colors={product?.colors}
+								choosenColor={productVariants.color}
+								handleChooseColor={handleChooseColor}
+							/>
+						)}
 
-						{!!product?.sizes?.length && <SizesVariant className={`${style.sizesBtn}`} sizes={product?.sizes} choosenSize={productVariants.size} handleChooseSize={handleChooseSize} />}
+						{!!product?.sizes?.length && (
+							<SizesVariant
+								className={`${style.sizesBtn}`}
+								sizes={product?.sizes}
+								choosenSize={productVariants.size}
+								handleChooseSize={handleChooseSize}
+							/>
+						)}
 					</div>
 				) : (
 					""
@@ -79,7 +93,13 @@ const ProductCard = ({ product, ...props }) => {
 
 				<div className={style.productCardImageWrapper}>
 					<Link href={`/product/${product?.product_slug}`}>
-						<Image fill src={product?.image ? product?.image : DefaultImage} style={{ objectFit: "contain" }} className={style.img} alt={product?.name || ""} />
+						<Image
+							fill
+							src={product?.image ? product?.image : DefaultImage}
+							style={{ objectFit: "contain" }}
+							className={style.img}
+							alt={product?.name || ""}
+						/>
 					</Link>
 				</div>
 			</header>
@@ -87,12 +107,27 @@ const ProductCard = ({ product, ...props }) => {
 				<Link className={style.productName} href={`/product/${product?.product_slug}`}>
 					{truncateCharacter(product?.product_name, 20)}
 				</Link>
-				<p className={style.productDescription}>{truncateCharacter(product?.short_description, 50)}</p>
+				<p className={style.productDescription}>{truncateCharacter(product?.short_description, 28)}</p>
 				{!!product?.sizes?.length || !!product?.colors?.length ? (
 					<div className={`${style.productVariantMobile}`}>
-						{!!product?.colors?.length && <ColorsVariant style={{ marginLeft: "5px" }} className={`${style.colorsBtn}`} colors={product?.colors} choosenColor={productVariants.color} handleChooseColor={handleChooseColor} />}
+						{!!product?.colors?.length && (
+							<ColorsVariant
+								style={{ marginLeft: "5px" }}
+								className={`${style.colorsBtn}`}
+								colors={product?.colors}
+								choosenColor={productVariants.color}
+								handleChooseColor={handleChooseColor}
+							/>
+						)}
 
-						{!!product?.sizes?.length && <SizesVariant className={`${style.sizesBtn}`} sizes={product?.sizes} choosenSize={productVariants.size} handleChooseSize={handleChooseSize} />}
+						{!!product?.sizes?.length && (
+							<SizesVariant
+								className={`${style.sizesBtn}`}
+								sizes={product?.sizes}
+								choosenSize={productVariants.size}
+								handleChooseSize={handleChooseSize}
+							/>
+						)}
 					</div>
 				) : (
 					""
@@ -102,7 +137,11 @@ const ProductCard = ({ product, ...props }) => {
 				<Button className={style.addProduct} onClick={handleAddProduct}>
 					<div className={style.contentWrapper}>
 						<span className={style.text}>اضافة الي سلة التسوق</span>
-						{isLoading ? <CircularProgress className={style.iconLoading} size={13} /> : <ShoppingBagOutlinedIcon className={style.icon} fontSize="small" />}
+						{isLoading ? (
+							<CircularProgress className={style.iconLoading} size={13} />
+						) : (
+							<ShoppingBagOutlinedIcon className={style.icon} fontSize="small" />
+						)}
 					</div>
 				</Button>
 			</div>

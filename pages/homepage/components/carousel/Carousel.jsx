@@ -35,7 +35,11 @@ const Carousel = () => {
 				<h1 className={style.title}>
 					خصومات تصل لاكثر من <span className={style.discount}>40%</span>
 				</h1>
-				<p className={style.description}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero ratione voluptatum possimus similique dolore obcaecati omnis numquam repudiandae repellendus, quis dignissimos quasi mollitia minus molestias? Illum fuga sint perspiciatis vel?</p>
+				<p className={style.description}>
+					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero ratione voluptatum possimus similique dolore
+					obcaecati omnis numquam repudiandae repellendus, quis dignissimos quasi mollitia minus molestias? Illum fuga
+					sint perspiciatis vel?
+				</p>
 			</>
 		);
 	};
@@ -57,7 +61,12 @@ const Carousel = () => {
 			<>
 				{defaultImages.map((imageSrc, index) => (
 					<SwiperSlide key={index} className={style.sliderImage}>
-						<Image fill style={{ objectFit: "cover", objectPosition: "center", zIndex: "-2" }} src={imageSrc} alt="slider" />
+						<Image
+							fill
+							style={{ objectFit: "cover", objectPosition: "center", zIndex: "-2" }}
+							src={imageSrc}
+							alt="slider"
+						/>
 					</SwiperSlide>
 				))}
 			</>
@@ -75,7 +84,17 @@ const Carousel = () => {
 				</div>
 			</Container>
 
-			<Swiper style={{ direction: "rtl" }} grabCursor={true} autoplay={{ delay: carouselTime() }} pagination={{ clickable: false }} className={style.swiper} slidesPerView={1} loop={true} modules={[Autoplay, EffectFade, Navigation]} effect={"fade"}>
+			<Swiper
+				style={{ direction: "rtl" }}
+				grabCursor={true}
+				autoplay={{ delay: carouselTime() }}
+				pagination={{ clickable: false }}
+				className={style.swiper}
+				slidesPerView={1}
+				loop={true}
+				modules={[Autoplay, EffectFade, Navigation]}
+				effect={"fade"}
+			>
 				{renderCarouselImages()}
 			</Swiper>
 		</div>

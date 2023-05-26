@@ -33,7 +33,7 @@ const ProductsOffers = () => {
 							}}
 							allowTouchMove={true}
 							slidesPerView={"auto"}
-							loop={true}
+							loop={false}
 							spaceBetween={22}
 							onSwiper={setSwiper}
 							grabCursor={true}

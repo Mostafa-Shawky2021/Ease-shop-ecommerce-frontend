@@ -22,7 +22,12 @@ const RandomCategoriesProducts = () => {
 		!!randomCategoriesProducts?.data && (
 			<div className={style.randomCategoriesProductsWrapper}>
 				{randomCategoriesProducts?.data?.map((randomCat) => (
-					<SectionLayout key={randomCat.id} title={randomCat?.cat_name} link={`/categoryproducts/${randomCat.cat_slug}`} isSwiper={true}>
+					<SectionLayout
+						key={randomCat.id}
+						title={randomCat?.cat_name}
+						link={`/categoryproducts/${randomCat.cat_slug}`}
+						isSwiper={true}
+					>
 						{(nextElementRef, prevElementRef) => (
 							<Swiper
 								style={{ direction: "rtl" }}
@@ -35,7 +40,7 @@ const RandomCategoriesProducts = () => {
 								autoplay={{ delay: 4000 }}
 								allowTouchMove={true}
 								slidesPerView={"auto"}
-								loop={true}
+								loop={false}
 								spaceBetween={18}
 								onSwiper={setSwiper}
 							>

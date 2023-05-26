@@ -38,7 +38,7 @@ const Categories = () => {
 								nextEl: nextElementRef.current,
 							}}
 							slidesPerView={"auto"}
-							loop={true}
+							loop={false}
 							spaceBetween={18}
 							onSwiper={setSwiper}
 						>

@@ -21,14 +21,14 @@ const Menu = ({ setIsOpenCartList }) => {
 	const { guestId } = useGuest();
 	const { data: carts } = useCartsData(guestId);
 
-	const menuRef = useRef(null);
-
 	useEffect(() => {
-		window.addEventListener("scroll", () => {
-			const elementOffsetTop = menuRef?.current?.offsetTop;
+		const activeMenuOnScroll = () => {
 			const bodyScrollTop = document.documentElement.scrollTop;
-			bodyScrollTop >= elementOffsetTop ? setFixedMenu(true) : setFixedMenu(false);
-		});
+
+			bodyScrollTop >= 100 ? setFixedMenu(true) : setFixedMenu(false);
+		};
+		window.addEventListener("scroll", activeMenuOnScroll);
+		return () => window.removeEventListener("scroll", activeMenuOnScroll);
 	}, [setFixedMenu]);
 
 	const handleOpenCartList = (event) => {
@@ -37,7 +37,7 @@ const Menu = ({ setIsOpenCartList }) => {
 	};
 
 	return (
-		<div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ""}`} ref={menuRef}>
+		<div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ""}`}>
 			<Container fluid="xl" className="d-flex align-items-center ">
 				<div className={style.categoryWrapper}>
 					<CategoriesMenu />

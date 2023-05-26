@@ -12,7 +12,7 @@ function Services() {
 		<div className={style.services}>
 			<Container className={style.container} fluid="xxl">
 				<Row>
-					<Col xs={12} sm={4} className={`${style.serviceBox} my-3 my-lg-0`}>
+					<Col xs={12} sm={4} className={`${style.serviceBox} my-2 my-lg-0`}>
 						<div>
 							<DeliveryDiningOutlinedIcon className={style.serviceIcon} />
 							<div className={style.serviceWrapper}>
@@ -21,7 +21,7 @@ function Services() {
 							</div>
 						</div>
 					</Col>
-					<Col xs={12} sm={4} className={`${style.serviceBox} my-3 my-lg-0`}>
+					<Col xs={12} sm={4} className={`${style.serviceBox} my-2 my-lg-0`}>
 						<div>
 							<SupportAgentOutlinedIcon className={style.serviceIcon} />
 							<div className={style.serviceWrapper}>
@@ -30,7 +30,7 @@ function Services() {
 							</div>
 						</div>
 					</Col>
-					<Col xs={12} sm={4} className={`${style.serviceBox} my-3 my-lg-0`}>
+					<Col xs={12} sm={4} className={`${style.serviceBox} my-2 my-lg-0`}>
 						<div>
 							<PublishedWithChangesOutlinedIcon className={style.serviceIcon} />
 							<div className={style.serviceWrapper}>
