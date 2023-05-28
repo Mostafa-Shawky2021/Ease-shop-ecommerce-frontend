@@ -24,7 +24,11 @@ const SidebarCartItem = ({ cart, productQuantity, children }) => {
 
 				{(cart?.color || cart?.size) && (
 					<div className={style.productVariantWrapper}>
-						{cart?.color && <span className={style.productVariant}>{cart?.color}</span>}
+						{cart?.color && (
+							<span className={`${style.productVariant} ${cart.color && cart.size ? style.seperator : ""}`}>
+								{cart?.color}
+							</span>
+						)}
 
 						{cart.size && <span className={style.productVariant}>{cart.size}</span>}
 					</div>

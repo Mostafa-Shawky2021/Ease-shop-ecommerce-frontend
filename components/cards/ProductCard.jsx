@@ -49,7 +49,10 @@ const ProductCard = ({ product, ...props }) => {
 		}
 	};
 
-	const handleAddProduct = () => addCartData();
+	const handleAddProduct = (event) => {
+		event.stopPropagation();
+		addCartData();
+	};
 
 	const handleChooseColor = (event) => {
 		const chossenColorValue = event.target.getAttribute("value");
