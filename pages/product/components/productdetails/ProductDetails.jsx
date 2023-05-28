@@ -21,25 +21,33 @@ const ProductDetails = ({ productDetails }) => {
 	const { addCartData, setProductVariants, productVariants, isLoading } = useCarts(productDetails);
 
 	const handleChooseColor = (event) => {
+		event.stopPropagation();
 		const chossenColorValue = event.target.getAttribute("value");
 		setProductVariants({ ...productVariants, color: chossenColorValue });
 	};
 
 	const handleChooseSize = (event) => {
+		event.stopPropagation();
 		const chossenSizeValue = event.target.getAttribute("value");
 		setProductVariants({ ...productVariants, size: chossenSizeValue });
 	};
 
-	const handleAddtoCart = () => addCartData();
+	const handleAddtoCart = (event) => {
+		event.stopPropagation();
+		setProductVariants((prevState) => ({ ...prevState, quantity: 1 }));
+		addCartData();
+	};
 
-	const handleProductIncrement = () => {
+	const handleProductIncrement = (event) => {
+		event.stopPropagation();
 		setProductVariants({
 			...productVariants,
 			quantity: productVariants.quantity + 1,
 		});
 	};
 
-	const handleProductDecrement = () => {
+	const handleProductDecrement = (event) => {
+		event.stopPropagation();
 		productVariants.quantity > 1 &&
 			setProductVariants({
 				...productVariants,
@@ -64,15 +72,26 @@ const ProductDetails = ({ productDetails }) => {
 			<div className={style.productName}>{productDetails?.product_name}</div>
 			<div className={`${style.priceWrapper} d-flex align-items-center`}>
 				{renderPrice()}
-				{productDetails?.price_discount && <div className={style.discountPercentage}>خصم {calcPriceDiscount(productDetails?.price, productDetails?.price_discount)}%</div>}
+				{productDetails?.price_discount && (
+					<div className={style.discountPercentage}>
+						خصم {calcPriceDiscount(productDetails?.price, productDetails?.price_discount)}%
+					</div>
+				)}
 			</div>
-			{!!productDetails.short_description && <div className={style.shortDescription}>{productDetails?.short_description}</div>}
+			{!!productDetails.short_description && (
+				<div className={style.shortDescription}>{productDetails?.short_description}</div>
+			)}
 
 			{!!productDetails?.colors?.length && (
 				<div className={`${style.productVariantsWrapper} mb-3 mt-3`}>
 					<label className={style.labelText}>اختر لون المنتج</label>
 					<div>
-						<ColorsVariant className={style.variants} colors={productDetails?.colors} handleChooseColor={handleChooseColor} choosenColor={productVariants?.color} />
+						<ColorsVariant
+							className={style.variants}
+							colors={productDetails?.colors}
+							handleChooseColor={handleChooseColor}
+							choosenColor={productVariants?.color}
+						/>
 					</div>
 				</div>
 			)}
@@ -80,7 +99,12 @@ const ProductDetails = ({ productDetails }) => {
 				<div className={`${style.productVariantsWrapper} mb-3 mt-3`}>
 					<label className={style.labelText}>اختر مقاس المنتج</label>
 					<div>
-						<SizesVariant className={`${style.variants} ${style.sizeVariant}`} sizes={productDetails?.sizes} handleChooseSize={handleChooseSize} choosenSize={productVariants?.size} />
+						<SizesVariant
+							className={`${style.variants} ${style.sizeVariant}`}
+							sizes={productDetails?.sizes}
+							handleChooseSize={handleChooseSize}
+							choosenSize={productVariants?.size}
+						/>
 					</div>
 				</div>
 			)}
@@ -88,7 +112,9 @@ const ProductDetails = ({ productDetails }) => {
 				{!!productDetails?.category_id && (
 					<li className={style.item}>
 						<span>القسم: </span>
-						<Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>{productDetails?.category?.cat_name}</Link>
+						<Link href={`/categoryproducts/${productDetails?.category?.cat_slug}`}>
+							{productDetails?.category?.cat_name}
+						</Link>
 					</li>
 				)}
 				{!!productDetails?.brand && (
@@ -100,12 +126,20 @@ const ProductDetails = ({ productDetails }) => {
 			</ul>
 			<div className={`${style.addCartDetails} d-flex flex-wrap gap-3 mt-3`}>
 				<div>
-					<ProductQuantity quantity={productVariants.quantity} handleProductIncrement={handleProductIncrement} handleProductDecrement={handleProductDecrement} />
+					<ProductQuantity
+						quantity={productVariants.quantity}
+						handleProductIncrement={handleProductIncrement}
+						handleProductDecrement={handleProductDecrement}
+					/>
 				</div>
 				<div className="flex-grow-1" style={{ position: "relative" }}>
 					<Button className={`${style.addCartbtn}`} onClick={handleAddtoCart}>
 						اضافة الي السلة
-						{isLoading ? <CircularProgress className={style.iconLoading} size={14} /> : <ShoppingCartOutlinedIcon fontSize="small" style={{ fontSize: "16px" }} />}
+						{isLoading ? (
+							<CircularProgress className={style.iconLoading} size={14} />
+						) : (
+							<ShoppingCartOutlinedIcon fontSize="small" style={{ fontSize: "16px" }} />
+						)}
 					</Button>
 				</div>
 				<div className="flex-grow-1">
