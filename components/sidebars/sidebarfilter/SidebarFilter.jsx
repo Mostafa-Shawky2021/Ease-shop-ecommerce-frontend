@@ -14,7 +14,11 @@ import Link from "next/link";
 
 const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 	const [sideBarFilterMobile, setSideBarFilterMobile] = useState(false);
-	const { filterRules, applyFilter, resetFilter, handleOnChangeInputFilter } = useFilter(pageNumber, dynamicRoute, additionalQuery);
+	const { filterRules, applyFilter, resetFilter, handleOnChangeInputFilter } = useFilter(
+		pageNumber,
+		dynamicRoute,
+		additionalQuery
+	);
 
 	const { data: productVariants, isLoading: isLoadingProductsVariants } = useProductVariantsData();
 	const { data: categoriesData } = useCategoriesData();
@@ -30,13 +34,20 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 		event.stopPropagation();
 		setSideBarFilterMobile(!sideBarFilterMobile);
 	};
-
+	const handleFilter = () => {
+		if (window.innerWidth <= 768) setSideBarFilterMobile(false);
+		window.scrollTo(0, 0);
+		applyFilter();
+	};
 	return (
 		<div className={style.sidebarWrapper}>
 			<Button onClick={handleToggleSidebarMobileFilter} className={style.applyFilterMobile}>
 				<FilterAltIcon fontSize="small" />
 			</Button>
-			<div className={`${style.sidebarWrapperMobile} ${sideBarFilterMobile ? style.openSideBarFitlerMobile : ""}`} ref={sideBarFilterMObileRef}>
+			<div
+				className={`${style.sidebarWrapperMobile} ${sideBarFilterMobile ? style.openSideBarFitlerMobile : ""}`}
+				ref={sideBarFilterMObileRef}
+			>
 				<Button className={style.closeFilterIcon}>
 					<CloseIcon className={style.coloricon} fontSize="xs" onClick={() => setSideBarFilterMobile(false)} />
 				</Button>
@@ -50,9 +61,22 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 							<CloseIcon className={style.coloricon} fontSize="xs" />
 						</Button>
 					</div>
-					<Slider size="large" min={50} max={10000} step={80} getAriaValueText={valueLabelFormat} valueLabelFormat={valueLabelFormat} value={filterRules.price} onChange={handleOnChangeInputFilter("price")} valueLabelDisplay="auto" disableSwap style={{ padding: "1rem 0px", marginTop: "10px" }} />
+					<Slider
+						size="large"
+						min={50}
+						max={10000}
+						step={80}
+						getAriaValueText={valueLabelFormat}
+						valueLabelFormat={valueLabelFormat}
+						value={filterRules.price}
+						onChange={handleOnChangeInputFilter("price")}
+						valueLabelDisplay="auto"
+						disableSwap
+						style={{ padding: "1rem 0px", marginTop: "10px" }}
+					/>
 					<p className={style.priceRange}>
-						رينج السعر : {Number(filterRules.price[1]).toLocaleString()}- {Number(filterRules.price[0]).toLocaleString()}
+						رينج السعر : {Number(filterRules.price[1]).toLocaleString()}-{" "}
+						{Number(filterRules.price[0]).toLocaleString()}
 					</p>
 				</div>
 				<div style={{ position: "relative" }}>
@@ -72,7 +96,13 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 											return (
 												<li key={brand.id} className={`${style.filterItem} `}>
 													<label className="d-flex align-items-center gap-2">
-														<input className={style.checkBox} type="checkbox" value={brand.brand_name} onChange={handleOnChangeInputFilter("brands")} checked={activeFilterRule} />
+														<input
+															className={style.checkBox}
+															type="checkbox"
+															value={brand.brand_name}
+															onChange={handleOnChangeInputFilter("brands")}
+															checked={activeFilterRule}
+														/>
 														{brand.brand_name}
 													</label>
 												</li>
@@ -89,7 +119,10 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 										{categoriesData.map((category) => {
 											return (
 												<li key={category.id} className={`${style.filterItem}`}>
-													<Link href={`/categoryproducts/${category.cat_slug}`} className="w-100 d-flex align-items-center justify-content-between">
+													<Link
+														href={`/categoryproducts/${category.cat_slug}`}
+														className="w-100 d-flex align-items-center justify-content-between"
+													>
 														<span>{category.cat_name}</span>
 														<span>{category.products_count}</span>
 													</Link>
@@ -108,7 +141,13 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 											return (
 												<li key={size.id} className={`${style.filterItem} d-flex align-items-center`}>
 													<label className="w-100 d-flex align-items-center gap-2">
-														<input className={style.checkBox} type="checkbox" value={size.size_name} onChange={handleOnChangeInputFilter("sizes")} checked={activeFilterRule} />
+														<input
+															className={style.checkBox}
+															type="checkbox"
+															value={size.size_name}
+															onChange={handleOnChangeInputFilter("sizes")}
+															checked={activeFilterRule}
+														/>
 														{size.size_name}
 													</label>
 												</li>
@@ -123,13 +162,25 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 									<ul className={`list-unstyled ${style.filterList}`}>
 										{productVariants.colors.map((color) => {
 											const activeFilterColorChecked = filterRules.colors.includes(color.color_name) ? "checked" : "";
-											const activeLabelColorClass = filterRules.colors.includes(color.color_name) ? style.activeColor : "";
+											const activeLabelColorClass = filterRules.colors.includes(color.color_name)
+												? style.activeColor
+												: "";
 											return (
 												<li key={color.id} className={`${style.filterItem} d-flex align-items-center`}>
 													<label htmlFor={color?.id} className="w-100 d-flex align-items-center gap-2">
-														<input className={style.checkBox} type="checkbox" value={color.color_name} id={color.id} onChange={handleOnChangeInputFilter("colors")} checked={activeFilterColorChecked} />
+														<input
+															className={style.checkBox}
+															type="checkbox"
+															value={color.color_name}
+															id={color.id}
+															onChange={handleOnChangeInputFilter("colors")}
+															checked={activeFilterColorChecked}
+														/>
 														<span>{color?.color_name}</span>
-														<span style={{ background: color?.color_value, marginLeft: "3px" }} className={`${style.boxColor} ${activeLabelColorClass} ms-auto`} />
+														<span
+															style={{ background: color?.color_value, marginLeft: "3px" }}
+															className={`${style.boxColor} ${activeLabelColorClass} ms-auto`}
+														/>
 													</label>
 												</li>
 											);
@@ -142,7 +193,7 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 				</div>
 
 				<div className={style.applyFilter}>
-					<Button className="btn btn-primary btn-sm mt-3" style={{ fontSize: "0.83rem" }} onClick={() => applyFilter()}>
+					<Button className="btn btn-primary btn-sm mt-3" style={{ fontSize: "0.83rem" }} onClick={handleFilter}>
 						تطبيق الفلتر
 					</Button>
 				</div>
