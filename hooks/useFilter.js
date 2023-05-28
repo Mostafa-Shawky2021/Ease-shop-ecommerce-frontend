@@ -48,7 +48,7 @@ const useFilter = (pageNumber, dynamicRoute = null, additionalQuery = null) => {
 
 	const applyFilter = () => {
 		let FilterRuleQueryParam = { page: pageNumber };
-
+		window.scrollTo(0, 0);
 		dynamicRoute && Object.assign(FilterRuleQueryParam, dynamicRoute);
 
 		//Additional query if we need to build additional query string paramater beside state data
