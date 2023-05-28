@@ -55,11 +55,13 @@ const ProductCard = ({ product, ...props }) => {
 	};
 
 	const handleChooseColor = (event) => {
+		event.stopPropagation();
 		const chossenColorValue = event.target.getAttribute("value");
 		setProductVariants({ ...productVariants, color: chossenColorValue });
 	};
 
 	const handleChooseSize = (event) => {
+		event.stopPropagation();
 		const chossenSizeValue = event.target.getAttribute("value");
 		setProductVariants({ ...productVariants, size: chossenSizeValue });
 	};
