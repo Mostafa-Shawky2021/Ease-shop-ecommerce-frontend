@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 const useFilter = (pageNumber, dynamicRoute = null, additionalQuery = null) => {
 	const [filterRules, setFilterRules] = useState({
-		price: [50, 10000],
+		price: [50, 50000],
 		sizes: [],
 		colors: [],
 		brands: [],

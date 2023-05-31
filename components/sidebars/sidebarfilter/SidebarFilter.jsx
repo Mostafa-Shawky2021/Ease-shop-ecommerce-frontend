@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, useRef } from "react";
 
 import { useProductVariantsData, useFilter, useCloseMenuAction, useCategoriesData } from "@root/hooks";
@@ -10,7 +11,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 import style from "./sidebarfilter.module.scss";
-import Link from "next/link";
 
 const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 	const [sideBarFilterMobile, setSideBarFilterMobile] = useState(false);
@@ -39,6 +39,7 @@ const SidebarFilter = ({ pageNumber, dynamicRoute, additionalQuery }) => {
 		window.scrollTo(0, 0);
 		applyFilter();
 	};
+
 	return (
 		<div className={style.sidebarWrapper}>
 			<Button onClick={handleToggleSidebarMobileFilter} className={style.applyFilterMobile}>
