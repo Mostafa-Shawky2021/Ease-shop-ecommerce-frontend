@@ -20,6 +20,7 @@ import { Seek } from "react-loading-indicators";
 import HomeIcon from "@mui/icons-material/Home";
 
 export async function getServerSideProps({ query }) {
+		
 	const queryClient = new QueryClient();
 
 	const urlSearchParams = new URLSearchParams();
