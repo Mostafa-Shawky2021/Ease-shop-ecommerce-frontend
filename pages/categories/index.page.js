@@ -17,7 +17,7 @@ import { CategoryItem } from "./components/categoryitem";
 
 import HomeIcon from "@mui/icons-material/Home";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	const queryClient = new QueryClient();
 	await queryClient.prefetchQuery(queryKeys.CATEGORIES, fetchCategories);
 
@@ -25,6 +25,8 @@ export async function getServerSideProps() {
 		props: {
 			dehydratedState: dehydrate(queryClient),
 		},
+	
+	
 	};
 }
 

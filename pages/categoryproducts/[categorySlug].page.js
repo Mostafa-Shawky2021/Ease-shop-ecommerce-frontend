@@ -11,7 +11,7 @@ import { fetchCategoryProducts } from "./queries";
 
 import { generateQueryStringFilter } from "@root/utils";
 
-import { Container, Col, Row, Breadcrumb } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import { CategoryProductsList } from "./components/categoryproductslist";
 import { BreadCrumbLayout } from "@root/components/layout";
 import { SidebarFilter } from "@root/components/sidebars/sidebarfilter";

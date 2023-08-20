@@ -38,8 +38,7 @@ export async function getServerSideProps({ query }) {
 
 const StorePage = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  // const [test,setTest] = useState(window?.localStorage.getItem('name'));
-
+  
   const { query } = useRouter();
   const productsData = useProductsData(pageNumber, query);
 
