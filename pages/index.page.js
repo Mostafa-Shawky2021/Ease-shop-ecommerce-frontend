@@ -7,7 +7,6 @@ import { Carousel } from "./homepage/components/carousel";
 import { Services } from "./homepage/components/services";
 import { Categories } from "./homepage/components/categories";
 import { LatestProducts } from "./homepage/components/latestproducts";
-import { TopCategories } from "./homepage/components/topcategories";
 import { RandomCategoriesProducts } from "./homepage/components/randomcategoriesproducts";
 import { Offer } from "./homepage/components/offer";
 import { ProductsOffers } from "./homepage//components/productsoffers";
@@ -49,7 +48,6 @@ export default function HomePage() {
 			<Offer />
 			<BestSeller />
 			<Categories />
-			{/* <TopCategories /> */}
 			<LatestProducts />
 			<ProductsOffers />
 			<RandomCategoriesProducts />

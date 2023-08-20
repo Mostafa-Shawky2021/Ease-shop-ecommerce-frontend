@@ -23,7 +23,7 @@ const CartsPage = () => {
 					<Col xs={12}>
 						<CartListTable cartsData={carts} isCartsLoading={isCartsLoading} />
 					</Col>
-					<Col xs={12} sm={4}>
+					<Col xs={12} sm={7} lg={4}>
 						{!!carts?.length && <CartTotal cartsData={carts} />}
 					</Col>
 				</Row>
