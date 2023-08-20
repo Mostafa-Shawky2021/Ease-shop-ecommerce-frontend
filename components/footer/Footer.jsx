@@ -12,129 +12,185 @@ import CircularProgress from "@mui/material/CircularProgress";
 import style from "./footer.module.scss";
 
 const Footer = () => {
-	const { data: footer, isLoading } = useLayoutData();
-	const footerData = footer?.data?.footer_data;
+  const { data: footer, isLoading } = useLayoutData();
+  const footerData = footer?.data?.footer_data;
 
-	const renderAboutus = () => {
-		const renderTextApi = footerData?.aboutus || "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ex culpa deleniti sapiente nisi voluptatem nemo reiciendis quibusdam sequi eveniet. Labore soluta dolore quae quidem, beatae nostrum autem esse veritatis.";
-		if (isLoading) return <CircularProgress size={18} style={{ color: "#fff", marginTop: "5px" }} />;
-		return renderTextApi;
-	};
-	const renderFacebookLink = () => footerData?.facebook_link || "#";
-	const renderWhatsappLink = () => {
-		const link = footerData?.whatsapp_number ? `https://wa.me/${footerData?.whatsapp_number}` : "#";
-		return link;
-	};
-	const renderTwitterLink = () => footerData?.twitter_link || "#";
+  const renderAboutus = () => {
+    const renderTextApi =
+      footerData?.aboutus ||
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ex culpa deleniti sapiente nisi voluptatem nemo reiciendis quibusdam sequi eveniet. Labore soluta dolore quae quidem, beatae nostrum autem esse veritatis.";
+    if (isLoading)
+      return (
+        <CircularProgress
+          size={18}
+          style={{ color: "#fff", marginTop: "5px" }}
+        />
+      );
+    return renderTextApi;
+  };
+  const renderFacebookLink = () => footerData?.facebook_link || "#";
+  const renderWhatsappLink = () => {
+    const link = footerData?.whatsapp_number
+      ? `https://wa.me/${footerData?.whatsapp_number}`
+      : "https://wa.me/01017118755";
+    return link;
+  };
+  const renderTwitterLink = () => footerData?.twitter_link || "#s";
 
-	const renderAddress = () => {
-		if (isLoading) return <CircularProgress size={11} style={{ color: "#fff", marginTop: "5px" }} />;
+  const renderAddress = () => {
+    if (isLoading)
+      return (
+        <CircularProgress
+          size={11}
+          style={{ color: "#fff", marginTop: "5px" }}
+        />
+      );
 
-		return footerData?.address || "القاهرة الجديدة";
-	};
+    return footerData?.address || "القاهرة الجديدة";
+  };
 
-	const renderPhone = () => {
-		if (isLoading) return <CircularProgress size={11} style={{ color: "#fff", marginTop: "5px" }} />;
+  const renderPhone = () => {
+    if (isLoading)
+      return (
+        <CircularProgress
+          size={11}
+          style={{ color: "#fff", marginTop: "5px" }}
+        />
+      );
 
-		return footerData?.phone || "+20101511235";
-	};
+    return footerData?.phone || "+20101511235";
+  };
 
-	const renderEmail = () => {
-		if (isLoading) return <CircularProgress size={11} style={{ color: "#fff", marginTop: "5px" }} />;
+  const renderEmail = () => {
+    if (isLoading)
+      return (
+        <CircularProgress
+          size={11}
+          style={{ color: "#fff", marginTop: "5px" }}
+        />
+      );
 
-		return footerData?.gmail_link || "example@gmail.com";
-	};
+    return footerData?.gmail_link || "mostafashawky20177@gmail.com";
+  };
 
-	return (
-		<div className={style.footerWrapper}>
-			<Container fluid="md">
-				<Row>
-					<Col xs={12} sm={6} md={6} lg={4} className={style.colWrapper}>
-						<div className={style.intro}>
-							<h3 className={style.logo}>
-								<Link href="/">
-									Shop
-									<span className={style.special}>Ease</span>
-								</Link>
-							</h3>
-							<p className={style.description}>{renderAboutus()}</p>
-							<div className={style.social}>
-								<Link target="_blank" href={renderFacebookLink()} className={style.link}>
-									<FacebookIcon fontSize="xs" />
-								</Link>
-								<Link target="_blank" href={renderWhatsappLink()} className={style.link}>
-									<WhatsAppIcon fontSize="xs" />
-								</Link>
-								<Link href={renderTwitterLink()} target="_blank" className={style.link}>
-									<TwitterIcon fontSize="xs" />
-								</Link>
-							</div>
-						</div>
-					</Col>
-					<Col xs={12} sm={6} md={3} lg={2} className={style.colWrapper}>
-						<div className={style.usefullink}>
-							<h4 className={style.subtitle}>روابط مفيدة</h4>
-							<ul className={`${style.linkslist} list-unstyled px-0`}>
-								<li className={style.item}>
-									<Link href="/">خريطة الموقع</Link>
-								</li>
-								<li className={style.item}>
-									<Link href="/">من نحن</Link>
-								</li>
-								<li className={style.item}>
-									<Link href="/contact">التواصل معنا</Link>
-								</li>
-							</ul>
-						</div>
-					</Col>
-					<Col xs={12} sm={6} md={3} lg={2} className={style.colWrapper}>
-						<div className={style.usefullink}>
-							<h4 className={style.subtitle}>منتجات متنوعة</h4>
-							<ul className={`${style.linkslist} list-unstyled px-0`}>
-								<li className={style.item}>
-									<Link href="/bestseller">الاكثر مبيعاً</Link>
-								</li>
-								<li className={style.item}>
-									<Link href="/latestproducts">احدث المنتجات</Link>
-								</li>
-								<li className={style.item}>
-									<Link href="/store">المنتجات المميزة</Link>
-								</li>
-								<li className={style.item}>
-									<Link href="/productsoffers">عروض المنتجات</Link>
-								</li>
-							</ul>
-						</div>
-					</Col>
-					<Col xs={12} sm={6} md={12} lg={4} className={style.colWrapper}>
-						<div className={style.usefullink}>
-							<h4 className={style.subtitle}>معلومات المتجر</h4>
-							<ul className={`${style.linkslist} ${style.contactList} list-unstyled px-0`}>
-								<li className={style.item}>
-									<LocationOnIcon fontSize="small" />
-									<Link href="#" className={style.link}>
-										{renderAddress()}
-									</Link>
-								</li>
-								<li className={style.item}>
-									<WhatsAppIcon fontSize="small" />
-									<Link href="" className={style.link}>
-										{renderPhone()}
-									</Link>
-								</li>
-								<li className={style.item}>
-									<EmailIcon fontSize="small" />
-									<Link href={`mailto:${renderEmail}`} className={style.link}>
-										{renderEmail()}
-									</Link>
-								</li>
-							</ul>
-						</div>
-					</Col>
-				</Row>
-			</Container>
-		</div>
-	);
+  return (
+    <div className={style.footerWrapper}>
+      <Container fluid="md">
+        <Row>
+          <Col xs={12} sm={8} md={6} lg={5} className={style.colWrapper}>
+            <div className={style.intro}>
+              <h3 className={style.logo}>
+                <Link href="/">
+                  Shop
+                  <span className={style.special}>Ease</span>
+                </Link>
+              </h3>
+              <p className={style.description}>{renderAboutus()}</p>
+              <div className={style.social}>
+                <Link
+                  target="_blank"
+                  href={renderFacebookLink()}
+                  className={style.link}
+                >
+                  <FacebookIcon fontSize="xs" />
+                </Link>
+                <Link
+                  target="_blank"
+                  href={renderWhatsappLink()}
+                  className={style.link}
+                >
+                  <WhatsAppIcon fontSize="xs" />
+                </Link>
+                <Link
+                  href={renderTwitterLink()}
+                  target="_blank"
+                  className={style.link}
+                >
+                  <TwitterIcon fontSize="xs" />
+                </Link>
+              </div>
+            </div>
+          </Col>
+          <Col xs={12} sm={4} md={3} lg={2} className={style.colWrapper}>
+            <div className={style.usefullink}>
+              <h4 className={style.subtitle}>روابط مفيدة</h4>
+              <ul className={`${style.linkslist} list-unstyled px-0`}>
+                <li className={style.item}>
+                  <Link href="/">خريطة الموقع</Link>
+                </li>
+                <li className={style.item}>
+                  <Link href="/">من نحن</Link>
+                </li>
+                <li className={style.item}>
+                  <Link href="/contact">التواصل معنا</Link>
+                </li>
+              </ul>
+            </div>
+          </Col>
+          <Col xs={12} sm={8} md={3} lg={2} className={style.colWrapper}>
+            <div className={style.usefullink}>
+              <h4 className={style.subtitle}>منتجات متنوعة</h4>
+              <ul className={`${style.linkslist} list-unstyled px-0`}>
+                <li className={style.item}>
+                  <Link href="/bestseller">الاكثر مبيعاً</Link>
+                </li>
+                <li className={style.item}>
+                  <Link href="/latestproducts">احدث المنتجات</Link>
+                </li>
+                <li className={style.item}>
+                  <Link href="/store">المنتجات المميزة</Link>
+                </li>
+                <li className={style.item}>
+                  <Link href="/productsoffers">عروض المنتجات</Link>
+                </li>
+              </ul>
+            </div>
+          </Col>
+          <Col xs={12} sm={4} md={12} lg={3} className={style.colWrapper}>
+            <div className={style.usefullink}>
+              <h4 className={style.subtitle}>معلومات المتجر</h4>
+              <ul
+                className={`${style.linkslist} ${style.contactList} list-unstyled px-0`}
+              >
+                <li className={style.item}>
+                  <LocationOnIcon fontSize="small" />
+                  <Link href="#" className={style.link}>
+                    {renderAddress()}
+                  </Link>
+                </li>
+                <li className={style.item}>
+                  <WhatsAppIcon fontSize="small" />
+                  <Link href="" className={style.link}>
+                    {renderPhone()}
+                  </Link>
+                </li>
+                <li className={style.item}>
+                  <EmailIcon fontSize="small" />
+                  <Link
+                    href={`mailto:${footer?.gmail_link}`}
+                    className={style.link}
+                  >
+                    {renderEmail()}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+      <p
+        className="text-center bg-black py-2 m-0 mt-3 mb-4 mb-lg-0"
+        style={{ direction: "ltr" }}
+      >
+        Developed By{" "}
+        <span className="text-danger">
+          <Link href="https://www.linkedin.com/in/mostafa-ibrahim1/">
+            Mostafa Shawky
+          </Link>
+        </span>
+      </p>
+    </div>
+  );
 };
 
 export default Footer;

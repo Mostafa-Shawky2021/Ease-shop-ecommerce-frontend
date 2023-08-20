@@ -16,78 +16,83 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import style from "./menu.module.scss";
 
 const Menu = ({ setIsOpenCartList }) => {
-	const [fixedMenu, setFixedMenu] = useState(false);
+  const [fixedMenu, setFixedMenu] = useState(false);
 
-	const { guestId } = useGuest();
-	const { data: carts } = useCartsData(guestId);
+  const { guestId } = useGuest();
+  const { data: carts } = useCartsData(guestId);
 
-	useEffect(() => {
-		const activeMenuOnScroll = () => {
-			const bodyScrollTop = document.documentElement.scrollTop;
+  useEffect(() => {
+    const activeMenuOnScroll = () => {
+      const bodyScrollTop = document.documentElement.scrollTop;
 
-			bodyScrollTop >= 100 ? setFixedMenu(true) : setFixedMenu(false);
-		};
-		window.addEventListener("scroll", activeMenuOnScroll);
-		return () => window.removeEventListener("scroll", activeMenuOnScroll);
-	}, [setFixedMenu]);
+      bodyScrollTop >= 100 ? setFixedMenu(true) : setFixedMenu(false);
+    };
+    window.addEventListener("scroll", activeMenuOnScroll);
+    return () => window.removeEventListener("scroll", activeMenuOnScroll);
+  }, [setFixedMenu]);
 
-	const handleOpenCartList = (event) => {
-		event.stopPropagation();
-		setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
-	};
+  const handleOpenCartList = (event) => {
+    event.stopPropagation();
+    setIsOpenCartList((prevIsOpenCartList) => !prevIsOpenCartList);
+  };
 
-	return (
-		<div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ""}`}>
-			<Container fluid="xl" className="d-flex align-items-center ">
-				<div className={style.categoryWrapper}>
-					<CategoriesMenu />
-				</div>
-				<ul className={`${style.listMenu} list-unstyled`}>
-					<li className={style.item}>
-						<Link href="/">الصفحة الرئيسية</Link>
-					</li>
-					<li className={style.item}>
-						<Link href="/productsoffers">العروض المميزة</Link>
-					</li>
-					<li className={style.item}>
-						<Link href="/categories">الاقسام</Link>
-					</li>
-					<li className={style.item}>
-						<Link href="#">الطلبات</Link>
-					</li>
-					<li className={style.item}>
-						<Link href="/store">المتجر</Link>
-					</li>
-					<li className={style.item}>
-						<Link href="/contact">التواصل معنا</Link>
-					</li>
-				</ul>
-				<div className={`${style.leftContent} ${fixedMenu ? style.show : ""}`}>
-					<button className={style.cartListBtn} onClick={handleOpenCartList}>
-						<LocalMallOutlinedIcon fontSize="medium" />
-						{!!carts?.length && <span className={style.count}>{calcCartsCount(carts)}</span>}
-					</button>
-					<SearchModal
-						renderBtn={(handleOpenModalSearch) => (
-							<button onClick={handleOpenModalSearch} className={style.searchBtn}>
-								<SearchOutlinedIcon fontSize="medium" />
-							</button>
-						)}
-					/>
-				</div>
-				{/* display in mobile screen  */}
-				<div className={style.mobileWrapper}>
-					<div className={`${style.logoMobileScreen}`}>
-						<Link href="/" className={style.logo}>
-							Shop<span className={style.special}>Ease</span>
-						</Link>
-					</div>
-					<div className={style.barWrapper}>
-						<SideBarMenuMobile />
-					</div>
-				</div>
-			</Container>
-		</div>
-	);
+  return (
+    <div className={`${style.menuWrapper} ${fixedMenu ? style.fixed : ""}`}>
+      <Container fluid="xl" className="d-flex align-items-center ">
+        <div className={style.categoryWrapper}>
+          <CategoriesMenu />
+        </div>
+        <ul className={`${style.listMenu} list-unstyled`}>
+          <li className={style.item}>
+            <Link href="/">الصفحة الرئيسية</Link>
+          </li>
+          <li className={style.item}>
+            <Link href="/latestproducts">احدث المنتجات</Link>
+          </li>
+          <li className={style.item}>
+            <Link href="/productsoffers">العروض المميزة</Link>
+          </li>
+          <li className={style.item}>
+            <Link href="/categories">الاقسام</Link>
+          </li>
+          <li className={style.item}>
+            <Link href="/store">المتجر</Link>
+          </li>
+          <li className={style.item}>
+            <Link href="/contact">التواصل معنا</Link>
+          </li>
+        </ul>
+        <div className={`${style.leftContent} ${fixedMenu ? style.show : ""}`}>
+          <button className={style.cartListBtn} onClick={handleOpenCartList}>
+            <LocalMallOutlinedIcon fontSize="medium" />
+            {!!carts?.length && (
+              <span className={style.count}>{calcCartsCount(carts)}</span>
+            )}
+          </button>
+          <SearchModal
+            renderBtn={(handleOpenModalSearch) => (
+              <button
+                onClick={handleOpenModalSearch}
+                className={style.searchBtn}
+              >
+                <SearchOutlinedIcon fontSize="medium" />
+              </button>
+            )}
+          />
+        </div>
+        {/* display in mobile screen  */}
+        <div className={style.mobileWrapper}>
+          <div className={`${style.logoMobileScreen}`}>
+            <Link href="/" className={style.logo}>
+              Shop<span className={style.special}>Ease</span>
+            </Link>
+          </div>
+          <div className={style.barWrapper}>
+            <SideBarMenuMobile />
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
 };
 export default Menu;

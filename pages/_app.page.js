@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
 		() =>
 			new QueryClient({
 				defaultOptions: {
-					queries: { retry: false, refetchOnWindowFocus: true },
+					queries: { retry: false, refetchOnWindowFocus: false },
 				},
 			})
 	);
