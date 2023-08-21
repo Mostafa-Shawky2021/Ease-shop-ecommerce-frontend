@@ -38,7 +38,7 @@ export async function getServerSideProps({ query }) {
 
 const StorePage = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  
+
   const { query } = useRouter();
   const productsData = useProductsData(pageNumber, query);
 
@@ -50,7 +50,6 @@ const StorePage = () => {
     { label: "الصفحة الرئيسية", link: "/" },
     { label: "المتجر", active: true },
   ];
-	
 
   return (
     <>
